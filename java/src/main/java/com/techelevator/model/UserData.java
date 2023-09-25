@@ -4,6 +4,16 @@ public class UserData {
     private String email;
     private String phone;
     private String cardNumber;
+    private String address;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     private int userId;
 
     public String getEmail() {
