@@ -10,4 +10,16 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
+CREATE TABLE pizzas (
+    pizza_id SERIAL,
+    size varchar(40) NOT NULL,
+    crust varchar(40) NOT NULL,
+    sauce varchar(40) NOT NULL,
+    cheese boolean NOT NULL,
+    pepperoni boolean NOT NULL,
+    mushrooms boolean NOT NULL,
+
+    CONSTRAINT PK_pizzas PRIMARY KEY (pizza_id)
+);
+
 COMMIT TRANSACTION;
