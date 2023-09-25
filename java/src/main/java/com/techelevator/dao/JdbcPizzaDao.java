@@ -19,7 +19,7 @@ public class JdbcPizzaDao implements PizzaDao{
 
     @Override
     public int create(Pizza pizza) {
-        String sql = "INSERT INTO pizzas (size, crust, sauce, cheese, pepperoni, mushroom)" +
+        String sql = "INSERT INTO pizzas (size, crust, sauce, cheese, pepperoni, mushrooms)" +
                 "VALUES (?,?,?,?,?,?) RETURNING pizza_id;";
         int newId = -1;
         try{
@@ -59,7 +59,7 @@ public class JdbcPizzaDao implements PizzaDao{
         pizza.setSauce(row.getString("sauce"));
         pizza.setHasCheese(row.getBoolean("cheese"));
         pizza.setHasPepperoni(row.getBoolean("pepperoni"));
-        pizza.setHasMushroom(row.getBoolean("mushroom"));
+        pizza.setHasMushroom(row.getBoolean("mushrooms"));
 
         return pizza;
     }

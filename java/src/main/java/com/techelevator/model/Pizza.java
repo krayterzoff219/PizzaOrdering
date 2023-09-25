@@ -11,7 +11,7 @@ public class Pizza {
     private boolean hasCheese;
     @JsonProperty("pepperoni")
     private boolean hasPepperoni;
-    @JsonProperty("mushroom")
+    @JsonProperty("mushrooms")
     private boolean hasMushroom;
 
 

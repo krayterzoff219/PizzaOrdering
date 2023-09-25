@@ -1,6 +1,7 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS users, pizzas, user_data;
+
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -20,6 +21,16 @@ CREATE TABLE pizzas (
     mushrooms boolean NOT NULL,
 
     CONSTRAINT PK_pizzas PRIMARY KEY (pizza_id)
+);
+
+CREATE TABLE user_data (
+    user_id integer NOT NULL UNIQUE,
+    email varchar(200),
+    address varchar(200),
+    phone varchar(15),
+    credit_card varchar(16),
+    CONSTRAINT pk_user_data PRIMARY KEY (user_id),
+    CONSTRAINT fk_user_data_user FOREIGN Key (user_id) REFERENCES users(user_id)
 );
 
 COMMIT TRANSACTION;
