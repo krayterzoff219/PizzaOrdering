@@ -1,0 +1,10 @@
+html {
+	--dark-color: #124948;
+	--primary-color: #ef373e;
+	--secondary-color: #abddd9;
+	--white-color: #ffffff;
+	--loud-font-family: "Rowdies", "Lucida Sans", "Lucida Sans Regular",
+		"Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+	--main-font-family: "Raleway", "Rowdies", "Lucida Sans", "Lucida Sans Regular",
+		"Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
