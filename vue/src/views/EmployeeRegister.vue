@@ -6,28 +6,43 @@
         {{ registrationErrorMsg }}
       </div>
       <div class="form-input-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" v-model="user.username" required autofocus />
+
+        <!-- <label for="username">Username</label>
+        <input type="text" id="username" v-model="user.username" required autofocus /> -->
+        <user-input label="Username: " inputId="CreatedUserNameInput" required autofocus></user-input>
+      
+
       </div>
       <div class="form-input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" v-model="user.password" required />
+
+        <user-input label="Password: " inputId="CreatedPasswordInput" required></user-input>
+        <!-- <label for="password">Password</label>
+        <input type="password" id="password" v-model="user.password" required /> -->
+
       </div>
       <div class="form-input-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" v-model="user.confirmPassword" required />
+
+        <user-input label="Confirm Password: " inputId="ConfirmCreatedPasswordInput" required></user-input>
+        <!-- <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" v-model="user.confirmPassword" required /> -->
       </div>
       <button type="submit">Create Account</button>
-      <p><router-link :to="{ name: 'login' }">Already have an account? Log in.</router-link></p>
+      <p><router-link :to="{ name: 'Employee-Login' }">Already have an account? Log in.</router-link></p>
     </form>
+
+
+
   </div>
 </template>
 
 <script>
+import UserInput from '../components/UserInput.vue';
 import authService from '../services/AuthService';
+
 
 export default {
   name: 'register',
+  components: {UserInput},
   data() {
     return {
       user: {

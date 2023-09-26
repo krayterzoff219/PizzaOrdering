@@ -18,19 +18,24 @@
       </div>
       <button type="submit">Sign in</button>
       <p>
-      <router-link :to="{ name: 'register' }">Need an account? Sign up.</router-link></p>
+      <router-link :to="{ name: 'Employee-Register' }">Need an account? Sign up.</router-link></p>
     </form>
+    
+    <user-input label="Employee Name:" inputId="EmployeeNameInput"></user-input>
+    <user-input label="Employee Password:" inputId="EmployeePasswordInput"></user-input>
   </div>
 </template>
 
 <script>
+import UserInput from '../components/UserInput.vue';
 import authService from "../services/AuthService";
 
 export default {
   name: "login",
-  components: {},
+  components: {UserInput},
   data() {
-    return {
+ 
+      return {
       user: {
         username: "",
         password: ""
