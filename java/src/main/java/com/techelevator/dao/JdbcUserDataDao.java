@@ -1,9 +1,12 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.UserData;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.sql.RowSet;
 
@@ -27,7 +30,20 @@ public class JdbcUserDataDao implements UserDataDao{
 
     @Override
     public UserData updateUserData(UserData updatedUserData) {
-        return null;
+        String sql = "UPDATE user_data SET email = ?, phone = ?, credit_card = ?, address = ? WHERE user_id = ?;";
+        int numOfRows = -1;
+
+        try{
+            numOfRows = jdbcTemplate.update(sql, updatedUserData.getEmail(), updatedUserData.getPhone(), updatedUserData.getCardNumber(),
+                    updatedUserData.getAddress(), updatedUserData.getUserId());
+
+            if(numOfRows == -1){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            }
+        } catch (DataAccessException e){
+            System.out.println(e.getMessage());
+        }
+        return getUserData(updatedUserData.getUserId());
     }
 
     private UserData mapRowToUserData(SqlRowSet rowSet){

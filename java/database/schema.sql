@@ -25,10 +25,10 @@ CREATE TABLE pizzas (
 
 CREATE TABLE user_data (
     user_id integer NOT NULL UNIQUE,
-    email varchar(200),
-    address varchar(200),
-    phone varchar(15),
-    credit_card varchar(16),
+    email varchar(200) DEFAULT '',
+    address varchar(200) DEFAULT '',
+    phone varchar(15) DEFAULT '',
+    credit_card varchar(16) DEFAULT '',
     CONSTRAINT pk_user_data PRIMARY KEY (user_id),
     CONSTRAINT fk_user_data_user FOREIGN Key (user_id) REFERENCES users(user_id)
 );
