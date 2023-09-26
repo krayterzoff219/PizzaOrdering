@@ -7,4 +7,6 @@ html {
 		"Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 	--main-font-family: "Raleway", "Rowdies", "Lucida Sans", "Lucida Sans Regular",
 		"Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+	--section-border-radius: 25px;
+	--header-footer-inside-margin: 20px;
 }

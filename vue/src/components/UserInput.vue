@@ -4,13 +4,15 @@
 		<input
 			:type="inputType"
 			:id="inputId"
-			v-model="localValue" />
+			v-model="localValue"
+			:autofocus="isAutofocus"
+			:required="isRequired" />
 	</div>
 </template>
 
 <script>
 export default {
-	props: ["label", "inputId", "inputType"],
+	props: ["label", "inputId", "inputType", "isAutofocus", "isRequired"],
 	data() {
 		return {
 			localValue: "",
@@ -24,3 +26,12 @@ export default {
 	},
 };
 </script>
+
+<style scoped>
+.form-input-group {
+	margin-bottom: 1rem;
+}
+label {
+	margin-right: 0.5rem;
+}
+</style>

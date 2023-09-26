@@ -1,6 +1,6 @@
 <template>
-	<div
-		id="register"
+	<section
+		id="employee-register"
 		class="text-center">
 		<form @submit.prevent="register">
 			<h1>Create Account</h1>
@@ -12,45 +12,47 @@
 
 			<user-input
 				label="Username: "
-				inputId="register-username-input"
+				inputId="employee-register-username-input"
 				inputType="text"
 				v-model="user.username"
-				required
-				autofocus></user-input>
+				:isAutofocus="true"
+				:isRequired="true"></user-input>
 
 			<user-input
 				label="Password: "
-				inputId="register-password-input"
+				inputId="employee-register-password-input"
 				inputType="password"
 				v-model="user.password"
-				required></user-input>
+				:isRequired="true"></user-input>
 
 			<user-input
 				label="Confirm Password: "
-				inputId="register-confirm-password-input"
+				inputId="employee-register-confirm-password-input"
 				inputType="password"
 				v-model="user.confirmPassword"
-				required></user-input>
+				:isRequired="true"></user-input>
 
-			<submit-button buttonText="Create Account"></submit-button>
+			<small-button
+				buttonText="Create Account"
+				buttonType="submit"></small-button>
 
-			<p>
-				<router-link :to="{ name: 'Employee-Login' }"
+			<!-- <p>
+				<router-link :to="{ name: 'employee-login' }"
 					>Already have an account? Log in.</router-link
 				>
-			</p>
+			</p> -->
 		</form>
-	</div>
+	</section>
 </template>
 
 <script>
 import UserInput from "../components/UserInput.vue";
-import SubmitButton from "../components/SubmitButton.vue";
+import SmallButton from "../components/SmallButton.vue";
 import authService from "../services/AuthService";
 
 export default {
 	name: "register",
-	components: { SubmitButton, UserInput },
+	components: { SmallButton, UserInput },
 	data() {
 		return {
 			user: {
@@ -96,11 +98,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.form-input-group {
-	margin-bottom: 1rem;
-}
-label {
-	margin-right: 0.5rem;
-}
-</style>
+<style></style>

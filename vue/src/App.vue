@@ -10,32 +10,18 @@
 			>
 		</div> -->
 		<router-view />
+		<the-footer></the-footer>
 	</div>
 </template>
 
 <script>
+import TheFooter from "./components/TheFooter.vue";
 import NavBar from "./components/NavBar.vue";
 export default {
-	components: { NavBar },
+	components: { NavBar, TheFooter },
 };
 </script>
 
 <style>
 @import url(css/styles.css);
-
-body,
-#app {
-	background-color: var(--dark-color);
-}
-
-#app {
-	margin: 0;
-	padding-top: 5px;
-	height: 100%;
-	width: 100%;
-}
-
-#login {
-	background-color: var(--white-color);
-}
 </style>
