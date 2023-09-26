@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="submitStyle">
         <button type="submit">{{buttonText}}</button>
     </div>
 </template>
@@ -12,3 +12,13 @@ export default{
     ]
 }
 </script>
+
+<style scoped>
+    
+.submitStyle{
+    
+    
+
+}
+
+</style>

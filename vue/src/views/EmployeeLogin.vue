@@ -16,7 +16,9 @@
         <label for="password">Password</label>
         <input type="password" id="password" v-model="user.password" required />
       </div>
-      <button type="submit">Sign in</button>
+      
+      <!-- <button type="submit">Sign in</button> -->
+      <submit-button buttonText="Sign in"></submit-button>
       <p>
       <router-link :to="{ name: 'Employee-Register' }">Need an account? Sign up.</router-link></p>
     </form>
@@ -27,12 +29,14 @@
 </template>
 
 <script>
+import SubmitButton from '../components/SubmitButton.vue';
 import UserInput from '../components/UserInput.vue';
 import authService from "../services/AuthService";
 
+
 export default {
   name: "login",
-  components: {UserInput},
+  components: {UserInput, SubmitButton},
   data() {
  
       return {
