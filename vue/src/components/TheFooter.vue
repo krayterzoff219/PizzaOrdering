@@ -27,14 +27,14 @@ export default {};
 
 footer {
 	width: 100%;
-	border-radius: var(--section-border-radius);
+	border-top-left-radius: var(--section-border-radius);
+	border-top-right-radius: var(--section-border-radius);
 	background-color: var(--white-color);
 	margin-top: auto;
 	display: flex;
 	align-items: center;
 	font-size: 0.75rem;
 	padding: 0 15px;
-	margin-bottom: 15px; 	 
 	width: 97%;
 }
 

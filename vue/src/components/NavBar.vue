@@ -96,8 +96,8 @@ nav {
 	display: flex;
 	align-items: center;
 	background-color: var(--white-color);
-	border-bottom-left-radius: 25px;
-	border-bottom-right-radius: 25px;
+	border-bottom-left-radius: var(--section-border-radius);
+	border-bottom-right-radius: var(--section-border-radius);
 }
 
 nav a {

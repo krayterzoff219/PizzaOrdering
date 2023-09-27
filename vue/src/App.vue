@@ -24,9 +24,4 @@ export default {
 
 <style>
 @import url(css/styles.css);
-
-/* #app {
-	padding: 0px;
-} */
-
 </style>
