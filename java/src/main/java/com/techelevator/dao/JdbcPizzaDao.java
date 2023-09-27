@@ -8,6 +8,8 @@ import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 
+import java.util.List;
+
 @Component
 public class JdbcPizzaDao implements PizzaDao{
 
@@ -19,12 +21,11 @@ public class JdbcPizzaDao implements PizzaDao{
 
     @Override
     public int create(Pizza pizza) {
-        String sql = "INSERT INTO pizzas (size, crust, sauce, cheese, pepperoni, mushrooms)" +
-                "VALUES (?,?,?,?,?,?) RETURNING pizza_id;";
+        String sql = "INSERT INTO pizzas (size, crust, sauce)" +
+                "VALUES (?,?,?) RETURNING pizza_id;";
         int newId = -1;
         try{
-            newId = jdbcTemplate.queryForObject(sql, Integer.class, pizza.getSize(), pizza.getCrust(), pizza.getSauce(), pizza.isHasCheese(),
-                    pizza.isHasPepperoni(), pizza.isHasMushroom());
+            newId = jdbcTemplate.queryForObject(sql, Integer.class, pizza.getSize(), pizza.getCrust(), pizza.getSauce());
             // throw exception if newId still -1
         } catch (ResourceAccessException | DataAccessException e){
             System.out.println(e.getMessage());
@@ -50,6 +51,14 @@ public class JdbcPizzaDao implements PizzaDao{
 
 
 
+    private boolean addToppingsToPizza(Pizza pizza){
+
+        String sql = "INSERT INTO pizza_toppings (pizza_id, topping_id) VALUES (?, ?);";
+
+        return false;
+    }
+
+
 
 
     private Pizza mapRowToPizza(SqlRowSet row){
@@ -57,9 +66,7 @@ public class JdbcPizzaDao implements PizzaDao{
         pizza.setSize(row.getString("size"));
         pizza.setCrust(row.getString("crust"));
         pizza.setSauce(row.getString("sauce"));
-        pizza.setHasCheese(row.getBoolean("cheese"));
-        pizza.setHasPepperoni(row.getBoolean("pepperoni"));
-        pizza.setHasMushroom(row.getBoolean("mushrooms"));
+
 
         return pizza;
     }
