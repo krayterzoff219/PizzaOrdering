@@ -99,4 +99,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+div[role="alert"] {
+	margin-bottom: 1.5rem;
+	color: var(--primary-color);
+}
+</style>
