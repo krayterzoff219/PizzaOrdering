@@ -35,12 +35,6 @@
 			<small-button
 				buttonText="Create Account"
 				buttonType="submit"></small-button>
-
-			<!-- <p>
-				<router-link :to="{ name: 'employee-login' }"
-					>Already have an account? Log in.</router-link
-				>
-			</p> -->
 		</form>
 	</section>
 </template>
@@ -76,7 +70,7 @@ export default {
 					.then((response) => {
 						if (response.status == 201) {
 							this.$router.push({
-								path: "/login",
+								path: "/employees/login",
 								query: { registration: "success" },
 							});
 						}

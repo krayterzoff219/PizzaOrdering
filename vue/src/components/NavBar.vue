@@ -19,16 +19,6 @@
 				v-if="!isEmployeePage"
 				>Menu</router-link
 			>
-			<!-- <router-link
-			:to="{ name: 'about' }"
-			v-if="!isEmployeePage"
-			>About</router-link
-		>
-		<router-link
-			:to="{ name: 'contact' }"
-			v-if="!isEmployeePage"
-			>Contact</router-link
-		> -->
 			<router-link
 				:to="{ name: 'my-order' }"
 				v-if="!isEmployeePage"

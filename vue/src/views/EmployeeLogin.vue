@@ -12,14 +12,7 @@
 				v-if="this.$route.query.registration">
 				Thank you for registering, please sign in.
 			</div>
-			<!-- <div class="form-input-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" v-model="user.username" required autofocus />
-      </div>
-      <div class="form-input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" v-model="user.password" required />
-      </div> -->
+
 			<user-input
 				label="Username: "
 				inputId="employee-login-username-input"
@@ -35,16 +28,9 @@
 				v-model="user.password"
 				:isRequired="true"></user-input>
 
-			<!-- <button type="submit">Sign in</button> -->
 			<small-button
 				buttonText="Sign in"
 				buttonType="submit"></small-button>
-
-			<!-- <p>
-				<router-link :to="{ name: 'employee-register' }"
-					>Need an account? Sign up.</router-link
-				>
-			</p> -->
 		</form>
 	</section>
 </template>
@@ -74,7 +60,7 @@ export default {
 					if (response.status == 200) {
 						this.$store.commit("SET_AUTH_TOKEN", response.data.token);
 						this.$store.commit("SET_USER", response.data.user);
-						this.$router.push("/");
+						this.$router.push({ name: "pending-orders" });
 					}
 				})
 				.catch((error) => {
