@@ -1,12 +1,5 @@
 <template>
 	<div class="home">
-		<div class="login-section">
-			<small-button buttonText="Login"></small-button>
-			<p>
-				Don't have an account yet?
-				<router-link :to="{ name: 'Employee-Register' }">Register</router-link>
-			</p>
-		</div>
 		<div class="home-body">
 			<img
 				src="https://cdn.pixabay.com/photo/2017/08/06/06/43/pizza-2589575_1280.jpg"
@@ -25,9 +18,9 @@
 </template>
 
 <script>
-import SmallButton from "../components/SmallButton.vue";
+// import SmallButton from "../components/SmallButton.vue";
 export default {
-	components: { SmallButton },
+	// components: { SmallButton },
 	name: "home",
 };
 </script>
