@@ -32,6 +32,30 @@ const router = new Router({
 			},
 		},
 		{
+			path: "/my-order",
+			name: "my-order",
+			component: Home,
+			meta: {
+				requiresAuth: false,
+			},
+		},
+		{
+			path: "/menu",
+			name: "menu",
+			component: Home,
+			meta: {
+				requiresAuth: false,
+			},
+		},
+		{
+			path: "/checkout",
+			name: "checkout",
+			component: Home,
+			meta: {
+				requiresAuth: false,
+			},
+		},
+		{
 			path: "/employees/login",
 			name: "employee-login",
 			component: EmployeeLogin,

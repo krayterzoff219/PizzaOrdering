@@ -1,6 +1,10 @@
 @import url(variables.css);
 @import url(css-reset.css);
 
+* {
+	font-family: var(--main-font-family);
+}
+
 body,
 #app {
 	background-color: var(--dark-color);
@@ -23,10 +27,29 @@ section {
 
 section#employee-login,
 section#employee-register {
-	flex-grow: 1;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	/* flex-grow: 1; */
 	width: fit-content;
 	padding: var(--section-border-radius);
+	margin-bottom: var(--header-footer-inside-margin);
+}
+
+section#employee-login h1,
+section#employee-register h1 {
+	font-size: 2rem;
+	text-align: center;
+	margin-bottom: 1.5rem;
+	font-family: var(--loud-font-family);
+}
+
+section#employee-login form,
+section#employee-register form {
+	margin-top: 1rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+section#employee-login form button,
+section#employee-register form button {
+	margin-top: 0.5rem;
 }

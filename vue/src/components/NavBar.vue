@@ -107,6 +107,15 @@ nav a {
 	font-family: var(--loud-font-family);
 }
 
+nav a.router-link-exact-active {
+	color: var(--primary-color);
+	text-decoration: underline;
+}
+
+nav a.router-link-exact-active button {
+	color: var(--secondary-color);
+}
+
 nav a:first-child {
 	padding-left: var(--edge-padding);
 	height: 100%;

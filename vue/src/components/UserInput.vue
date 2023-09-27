@@ -29,9 +29,15 @@ export default {
 
 <style scoped>
 .form-input-group {
-	margin-bottom: 1rem;
+	margin-bottom: 1.5rem;
+	width: 100%;
 }
-label {
-	margin-right: 0.5rem;
+
+.form-input-group input {
+	display: block;
+	width: 100%;
+	max-width: 30em;
+	margin-top: 2px;
+	padding: 5px;
 }
 </style>
