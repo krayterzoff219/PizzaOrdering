@@ -1,15 +1,13 @@
 <template>
 	<section
 		id="employee-register"
-		class="text-center">
+		class="employee-section">
 		<horizontal-hero></horizontal-hero>
 		<form @submit.prevent="register">
 			<h1>Create Account</h1>
-			<div
-				role="alert"
-				v-if="registrationErrors">
-				{{ registrationErrorMsg }}
-			</div>
+			<an-alert
+				v-if="registrationErrors"
+				:message="registrationErrorMsg"></an-alert>
 
 			<user-input
 				label="Username: "
@@ -45,10 +43,11 @@ import UserInput from "../components/UserInput.vue";
 import SmallButton from "../components/SmallButton.vue";
 import authService from "../services/AuthService";
 import HorizontalHero from "../components/HorizontalHero.vue";
+import AnAlert from "../components/AnAlert.vue";
 
 export default {
 	name: "register",
-	components: { SmallButton, UserInput, HorizontalHero },
+	components: { SmallButton, UserInput, HorizontalHero, AnAlert },
 	data() {
 		return {
 			user: {
@@ -99,9 +98,4 @@ export default {
 };
 </script>
 
-<style scoped>
-div[role="alert"] {
-	margin-bottom: 1.5rem;
-	color: var(--primary-color);
-}
-</style>
+<style scoped></style>

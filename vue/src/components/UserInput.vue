@@ -36,6 +36,7 @@ export default {
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
+	max-width: 24rem;
 }
 
 .form-input-group input,

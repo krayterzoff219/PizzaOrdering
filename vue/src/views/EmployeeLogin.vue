@@ -1,9 +1,17 @@
 <template>
-	<section id="employee-login">
+	<section
+		id="employee-login"
+		class="employee-section">
 		<horizontal-hero></horizontal-hero>
 		<form @submit.prevent="login">
 			<h1>Please Sign In</h1>
-			<div
+			<an-alert
+				v-if="invalidCredentials"
+				message="Invalid username and password!"></an-alert>
+			<an-alert
+				v-if="this.$route.query.registration"
+				message="Thank you for registering, please sign in."></an-alert>
+			<!-- <div
 				role="alert"
 				v-if="invalidCredentials">
 				Invalid username and password!
@@ -12,7 +20,7 @@
 				role="alert"
 				v-if="this.$route.query.registration">
 				Thank you for registering, please sign in.
-			</div>
+			</div> -->
 
 			<user-input
 				label="Username: "
@@ -37,6 +45,7 @@
 </template>
 
 <script>
+import AnAlert from "../components/AnAlert.vue";
 import HorizontalHero from "../components/HorizontalHero.vue";
 import SmallButton from "../components/SmallButton.vue";
 import UserInput from "../components/UserInput.vue";
@@ -44,7 +53,7 @@ import authService from "../services/AuthService";
 
 export default {
 	name: "login",
-	components: { UserInput, SmallButton, HorizontalHero },
+	components: { UserInput, SmallButton, HorizontalHero, AnAlert },
 	data() {
 		return {
 			user: {
@@ -82,9 +91,4 @@ export default {
 };
 </script>
 
-<style scoped>
-div[role="alert"] {
-	margin-bottom: 1.5rem;
-	color: var(--primary-color);
-}
-</style>
+<style scoped></style>
