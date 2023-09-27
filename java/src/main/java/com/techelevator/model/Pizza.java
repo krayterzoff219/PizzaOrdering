@@ -2,18 +2,32 @@ package com.techelevator.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 public class Pizza {
 
+    private int id;
     private String size;
     private String crust;
     private String sauce;
-    @JsonProperty("cheese")
-    private boolean hasCheese;
-    @JsonProperty("pepperoni")
-    private boolean hasPepperoni;
-    @JsonProperty("mushrooms")
-    private boolean hasMushroom;
+    private List<String> toppings;
 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public List<String> getToppings() {
+        return toppings;
+    }
+
+    public void setToppings(List<String> toppings) {
+        this.toppings = toppings;
+    }
 
     public String getSize() {
         return size;
@@ -39,27 +53,5 @@ public class Pizza {
         this.sauce = sauce;
     }
 
-    public boolean isHasCheese() {
-        return hasCheese;
-    }
 
-    public void setHasCheese(boolean hasCheese) {
-        this.hasCheese = hasCheese;
-    }
-
-    public boolean isHasPepperoni() {
-        return hasPepperoni;
-    }
-
-    public void setHasPepperoni(boolean hasPepperoni) {
-        this.hasPepperoni = hasPepperoni;
-    }
-
-    public boolean isHasMushroom() {
-        return hasMushroom;
-    }
-
-    public void setHasMushroom(boolean hasMushroom) {
-        this.hasMushroom = hasMushroom;
-    }
 }
