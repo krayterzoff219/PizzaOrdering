@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, pizzas, user_data;
+DROP TABLE IF EXISTS users, pizzas, user_data, toppings, orders, menu_items, orders_to_menu_items CASCADE;
 
 
 CREATE TABLE users (
@@ -12,7 +12,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE pizzas (
-    pizza_id SERIAL,
+    pizza_id int,
     size varchar(40) NOT NULL,
     crust varchar(40) NOT NULL,
     sauce varchar(40) NOT NULL,
@@ -21,6 +21,42 @@ CREATE TABLE pizzas (
     mushrooms boolean NOT NULL,
 
     CONSTRAINT PK_pizzas PRIMARY KEY (pizza_id)
+);
+
+CREATE TABLE toppings (
+    topping_id SERIAL,
+    name varchar(40) NOT NULL UNIQUE,
+    available boolean NOT NULL,
+    price numeric(10,2) NOT NULL,
+
+    CONSTRAINT PK_topping_id PRIMARY KEY (topping_id)
+);
+
+CREATE TABLE orders (
+    order_id SERIAL,
+    status varchar(40) NOT NULL,
+    user_id int NOT NULL,
+
+    CONSTRAINT PK_order_id PRIMARY KEY (order_id)
+);
+
+CREATE TABLE menu_items (
+    item_id SERIAL,
+    name varchar(40) NOT NULL UNIQUE,
+    available boolean NOT NULL,
+    price numeric(10,2) NOT NULL,
+    pizza_id int DEFAULT -1,
+
+    CONSTRAINT PK_item_id PRIMARY KEY (item_id)
+);
+
+CREATE TABLE orders_to_menu_items (
+    order_id int NOT NULL,
+    item_id int NOT NULL,
+
+    CONSTRAINT ck_order_item_id PRIMARY KEY (order_id, item_id),
+    CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    CONSTRAINT fk_item_id FOREIGN KEY (item_id) REFERENCES menu_items(item_id)
 );
 
 CREATE TABLE user_data (
