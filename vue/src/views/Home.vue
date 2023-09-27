@@ -4,38 +4,59 @@
 			<img
 				src="https://cdn.pixabay.com/photo/2017/08/06/06/43/pizza-2589575_1280.jpg"
 				alt="HeroPic1" />
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-				veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-				commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-				velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-				occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-				mollit anim id est laborum.
-			</p>
+			<section class="testimonial-carousel">
+
+        <div class="social-links"></div>
+       
+        <div class="carousel-inner1">
+          <p >
+          
+          </p>
+
+          <testimonial-carousel/>
+
+          
+        </div>
+         
+
+        
+
+			</section>
 		</div>
 	</div>
 </template>
 
 <script>
+import TestimonialCarousel from '../components/TestimonialCarousel.vue';
 // import SmallButton from "../components/SmallButton.vue";
 export default {
 	// components: { SmallButton },
+  components: {TestimonialCarousel},
 	name: "home",
+TestimonialCarousel
 };
 </script>
 
 <style>
 .home {
-	display: inline;
+	display: block;
+  width: 97%;
 	background-color: white;
 	border-radius: 25px;
 	margin-bottom: 10px;
 	margin-left: auto;
 	margin-right: auto;
+  
 }
 
-.login-section {
+.testimonial-carousel{
+  padding-top: 50px;
+  margin-right: 100px;
+  text-align: center;
+}
+
+
+/* .login-section {
 	display: flex;
 	background-color: white;
 	width: 99%;
@@ -43,10 +64,11 @@ export default {
 	margin-bottom: 10px;
 	margin-right: auto;
 	margin-left: auto;
-}
+} */
 
 .home-body {
 	background-color: white;
+  border-radius: 25px 25px;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: repeat(6 1fr);
@@ -58,9 +80,17 @@ export default {
 .home-body > img {
 	grid-area: heroPic;
 	height: 800px;
+  margin: 5px;
+  border-radius: 25px;
+  width: 90%;
+  ;
 }
 
-.home-body > p :nth-child(1) {
+.social-links{
+  grid-area: socials;
+}
+
+.home-body .testimonial-carousel {
 	grid-area: description1;
 }
 </style>

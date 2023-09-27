@@ -34,6 +34,8 @@ footer {
 	align-items: center;
 	font-size: 0.75rem;
 	padding: 0 15px;
+	margin-bottom: 15px; 	 
+	width: 97%;
 }
 
 footer div#footer-text {

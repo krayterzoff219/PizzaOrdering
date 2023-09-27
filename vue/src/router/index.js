@@ -8,6 +8,7 @@ import PendingOrders from "../views/PendingOrders.vue";
 import PizzaOptions from "../views/PizzaOptions.vue";
 import store from "../store/index";
 
+
 Vue.use(Router);
 
 /**

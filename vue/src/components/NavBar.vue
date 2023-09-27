@@ -86,7 +86,7 @@ nav {
 	--between-padding: 30px;
 	--top-bottom-padding: 15px;
 
-	width: 100%;
+	width: 97%;
 	height: 10%;
 	margin-right: auto;
 	margin-left: auto;
@@ -95,9 +95,9 @@ nav {
 	position: sticky;
 	display: flex;
 	align-items: center;
-
 	background-color: var(--white-color);
-	border-radius: var(--section-border-radius);
+	border-bottom-left-radius: 25px;
+	border-bottom-right-radius: 25px;
 }
 
 nav a {
