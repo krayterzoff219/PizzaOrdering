@@ -31,9 +31,14 @@
 				>Orders</router-link
 			>
 			<router-link
-				:to="{ name: 'pizza-options' }"
+				:to="{ name: 'specialty-pizzas' }"
 				v-if="isEmployeePage && isLoggedIn"
 				>Pizzas</router-link
+			>
+			<router-link
+				:to="{ name: 'pizza-options' }"
+				v-if="isEmployeePage && isLoggedIn"
+				>Options</router-link
 			>
 			<router-link
 				:to="{ name: 'employee-login' }"

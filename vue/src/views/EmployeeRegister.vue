@@ -2,6 +2,7 @@
 	<section
 		id="employee-register"
 		class="text-center">
+		<horizontal-hero></horizontal-hero>
 		<form @submit.prevent="register">
 			<h1>Create Account</h1>
 			<div
@@ -43,10 +44,11 @@
 import UserInput from "../components/UserInput.vue";
 import SmallButton from "../components/SmallButton.vue";
 import authService from "../services/AuthService";
+import HorizontalHero from "../components/HorizontalHero.vue";
 
 export default {
 	name: "register",
-	components: { SmallButton, UserInput },
+	components: { SmallButton, UserInput, HorizontalHero },
 	data() {
 		return {
 			user: {
@@ -88,6 +90,11 @@ export default {
 			this.registrationErrors = false;
 			this.registrationErrorMsg = "There were problems registering this user.";
 		},
+	},
+	beforeCreate() {
+		if (this.$store.state.token) {
+			this.$router.push({ name: "pending-orders" });
+		}
 	},
 };
 </script>

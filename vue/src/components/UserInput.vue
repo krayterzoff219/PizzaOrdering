@@ -1,6 +1,8 @@
 <template>
 	<div class="form-input-group">
-		<label :for="inputId">{{ label }}</label>
+		<div class="form-input-label-wrapper">
+			<label :for="inputId">{{ label }}</label>
+		</div>
 		<input
 			:type="inputType"
 			:id="inputId"
@@ -30,13 +32,20 @@ export default {
 <style scoped>
 .form-input-group {
 	margin-bottom: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	width: 100%;
+}
+
+.form-input-group input,
+.form-input-group .form-input-label-wrapper {
+	width: 100%;
+	max-width: 24rem;
 }
 
 .form-input-group input {
 	display: block;
-	width: 100%;
-	max-width: 30em;
 	margin-top: 2px;
 	padding: 5px;
 }

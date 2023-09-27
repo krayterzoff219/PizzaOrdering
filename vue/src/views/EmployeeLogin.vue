@@ -1,5 +1,6 @@
 <template>
 	<section id="employee-login">
+		<horizontal-hero></horizontal-hero>
 		<form @submit.prevent="login">
 			<h1>Please Sign In</h1>
 			<div
@@ -36,13 +37,14 @@
 </template>
 
 <script>
+import HorizontalHero from "../components/HorizontalHero.vue";
 import SmallButton from "../components/SmallButton.vue";
 import UserInput from "../components/UserInput.vue";
 import authService from "../services/AuthService";
 
 export default {
 	name: "login",
-	components: { UserInput, SmallButton },
+	components: { UserInput, SmallButton, HorizontalHero },
 	data() {
 		return {
 			user: {
@@ -71,6 +73,11 @@ export default {
 					}
 				});
 		},
+	},
+	beforeCreate() {
+		if (this.$store.state.token) {
+			this.$router.push({ name: "pending-orders" });
+		}
 	},
 };
 </script>

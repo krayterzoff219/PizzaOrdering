@@ -6,8 +6,8 @@ import Logout from "../views/Logout.vue";
 import EmployeeRegister from "../views/EmployeeRegister.vue";
 import PendingOrders from "../views/PendingOrders.vue";
 import PizzaOptions from "../views/PizzaOptions.vue";
+import SpecialtyPizzas from "../views/SpecialtyPizzas.vue";
 import store from "../store/index";
-
 
 Vue.use(Router);
 
@@ -76,6 +76,14 @@ const router = new Router({
 			path: "/employees/pending-orders",
 			name: "pending-orders",
 			component: PendingOrders,
+			meta: {
+				requiresAuth: true,
+			},
+		},
+		{
+			path: "/employees/specialty-pizzas",
+			name: "specialty-pizzas",
+			component: SpecialtyPizzas,
 			meta: {
 				requiresAuth: true,
 			},

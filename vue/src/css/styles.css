@@ -26,10 +26,10 @@ section {
 
 section#employee-login,
 section#employee-register {
-	/* flex-grow: 1; */
-	width: fit-content;
-	padding: var(--section-border-radius);
 	margin-bottom: var(--header-footer-inside-margin);
+	min-width: fit-content;
+	width: 50%;
+	max-width: 40rem;
 }
 
 section#employee-login h1,
@@ -42,10 +42,10 @@ section#employee-register h1 {
 
 section#employee-login form,
 section#employee-register form {
-	margin-top: 1rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	padding: var(--section-border-radius);
 }
 
 section#employee-login form button,
