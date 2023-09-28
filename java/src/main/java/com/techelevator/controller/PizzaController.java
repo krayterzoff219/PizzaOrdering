@@ -12,8 +12,10 @@ import com.techelevator.model.pizzaOptions.Sauce;
 import com.techelevator.model.pizzaOptions.Size;
 import com.techelevator.model.pizzaOptions.Topping;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -63,7 +65,11 @@ public class PizzaController {
 
     @RequestMapping(path = "/toppings", method = RequestMethod.POST)
     public Topping addToppingToTable(@RequestBody Topping topping){
-        return toppingDao.addToppingToTable(topping);
+        Topping newTopping = toppingDao.addToppingToTable(topping);
+        if(newTopping.getId() == 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Topping already exists");
+        }
+        return newTopping;
     }
 
     @RequestMapping(path = "/toppings", method = RequestMethod.GET)
@@ -78,7 +84,11 @@ public class PizzaController {
 
     @RequestMapping(path = "/sizes", method = RequestMethod.POST)
     public Size addSizeToTable(@RequestBody Size size){
-        return sizeDao.addSizeToTable(size);
+        Size newSize = sizeDao.addSizeToTable(size);
+        if(newSize.getId() == 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Size already exists");
+        }
+        return newSize;
     }
 
     @RequestMapping(path = "/sizes", method = RequestMethod.GET)
@@ -92,7 +102,11 @@ public class PizzaController {
 
     @RequestMapping(path = "/crusts", method = RequestMethod.POST)
     public Crust addCrustToTable(@RequestBody Crust crust){
-        return crustDao.addCrustToTable(crust);
+        Crust newCrust = crustDao.addCrustToTable(crust);
+        if(newCrust.getId() == 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Crust already exists");
+        }
+        return newCrust;
     }
 
     @RequestMapping(path = "/crusts", method = RequestMethod.GET)
@@ -106,7 +120,11 @@ public class PizzaController {
 
     @RequestMapping(path = "/sauces", method = RequestMethod.POST)
     public Sauce addSauceToTable(@RequestBody Sauce sauce){
-        return sauceDao.addSauceToTable(sauce);
+        Sauce newSauce = sauceDao.addSauceToTable(sauce);
+        if(newSauce.getId() == 0){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Sauce already exists");
+        }
+        return newSauce;
     }
 
     @RequestMapping(path = "/sauces", method = RequestMethod.GET)
