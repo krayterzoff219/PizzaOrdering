@@ -4,13 +4,13 @@
         <font-awesome-icon :icon="instagramIcon" />
         <font-awesome-icon :icon="facebookIcon" /> -->
 		<i
-			class="fa fa-twitter fa-inverse"
+			class="fa-brands fa-x-twitter"
 			style="color: black"></i
 		><i
-			class="fa fa-instagram fa-inverse"
+			class="fa-brands fa-instagram"
 			style="color: black"></i
 		><i
-			class="fa fa-facebook fa-inverse"
+			class="fa-brands fa-facebook"
 			style="color: black"></i>
 	</div>
 </template>
@@ -33,15 +33,10 @@ export default {
 };
 </script>
 <style>
-
-.social-icons{
-
-display: flex;
-justify-content: center;
-align-items: center;
+.social-icons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-
-
-
 </style>
 ;
