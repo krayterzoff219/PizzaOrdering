@@ -25,9 +25,10 @@
 </template>
 
 <script>
+import optionService from "../services/OptionService.js";
 export default {
 	name: "pizza-option-row",
-	props: ["option"],
+	props: ["option", "optionsCategory"],
 	data() {
 		return { id: -1, name: "", price: "", isAvailable: true };
 	},
@@ -55,7 +56,57 @@ export default {
 			}
 		},
 		saveChanges() {},
-		addNewOption() {},
+		addNewOption() {
+			const { name, price, isAvailable, areInputsValid, optionsCategory } =
+				this;
+			if (areInputsValid()) {
+				optionService
+					.createOption(optionsCategory, {
+						name,
+						price,
+						available: isAvailable,
+					})
+					.then((res) => {
+						if (res.status === 200) {
+							// TODO: change status to 201
+							const { id, name, price, available } = res.data;
+							this.$store.commit(
+								`ADD_${optionsCategory.toUpperCase().slice(0, -1)}`,
+								{ id, name, price, isAvailable: available }
+							);
+							this.resetRow();
+						}
+					})
+					.catch((error) => {
+						console.log(error);
+						alert(
+							`There was an error saving the new ${optionsCategory
+								.toUpperCase()
+								.slice(0, -1)}. Please try again later.`
+						);
+					});
+			}
+		},
+		areInputsValid() {
+			const { name, price, optionsCategory } = this;
+			if (!name) {
+				alert(`New ${optionsCategory} must have a name.`);
+				return false;
+			}
+			if (name.length > 40) {
+				alert(
+					`New ${optionsCategory} must have a name that is 40 characters or less.`
+				);
+				return false;
+			}
+			if (price < 0.01) {
+				alert(
+					`New ${optionsCategory} must have a price that is greater than $0.00.`
+				);
+				return false;
+			}
+			return true;
+		},
 	},
 };
 </script>
@@ -102,9 +153,6 @@ i {
 	padding: 4px;
 	border-radius: 5px;
 	color: var(--white-color);
-}
-
-i.icon-hide {
 }
 
 i:not(.icon-hide) {

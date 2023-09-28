@@ -6,9 +6,10 @@
 		<pizza-option-row
 			v-for="option of $store.state[optionsCategory]"
 			:key="option.id"
-			:option="option"></pizza-option-row>
+			:option="option"
+			:optionsCategory="optionsCategory"></pizza-option-row>
 		<!-- new option row--><pizza-option-row
-		></pizza-option-row>
+			:optionsCategory="optionsCategory"></pizza-option-row>
 	</div>
 </template>
 

@@ -32,7 +32,7 @@ export default new Vuex.Store({
 			state.toppings.push(payload);
 		},
 		ADD_SAUCE(state, payload) {
-			state.sizes.push(payload);
+			state.sauces.push(payload);
 		},
 		ADD_CRUST(state, payload) {
 			state.crusts.push(payload);
