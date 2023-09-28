@@ -1,8 +1,8 @@
 package com.techelevator.controller;
 
-import com.techelevator.dao.UserDao;
-import com.techelevator.dao.UserDataDao;
-import com.techelevator.model.UserData;
+import com.techelevator.dao.login.UserDao;
+import com.techelevator.dao.login.UserDataDao;
+import com.techelevator.model.login.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

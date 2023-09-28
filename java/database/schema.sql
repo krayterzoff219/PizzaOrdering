@@ -11,8 +11,8 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
-CREATE TABLE pizza_size (
-    size_id int NOT NULL,
+CREATE TABLE sizes (
+    size_id SERIAL,
     name varchar(40) NOT NULL UNIQUE,
     available boolean NOT NULL,
     price numeric(10,2) NOT NULL,
@@ -20,8 +20,8 @@ CREATE TABLE pizza_size (
     CONSTRAINT PK_pizza_size PRIMARY KEY (size_id)
 );
 
-CREATE TABLE pizza_crust (
-    crust_id int NOT NULL,
+CREATE TABLE crusts (
+    crust_id SERIAL,
     name varchar(40) NOT NULL UNIQUE,
     available boolean NOT NULL,
     price numeric(10,2) NOT NULL,
@@ -29,8 +29,8 @@ CREATE TABLE pizza_crust (
     CONSTRAINT PK_pizza_crust PRIMARY KEY (crust_id)
 );
 
-CREATE TABLE pizza_sauce (
-    sauce_id int NOT NULL,
+CREATE TABLE sauces (
+    sauce_id SERIAL,
     name varchar(40) NOT NULL UNIQUE,
     available boolean NOT NULL,
     price numeric(10,2) NOT NULL,
@@ -54,9 +54,9 @@ CREATE TABLE pizzas (
     sauce_id int NOT NULL,
 
     CONSTRAINT PK_pizzas PRIMARY KEY (pizza_id),
-    CONSTRAINT fk_size FOREIGN Key (size_id) REFERENCES pizza_size(size_id),
-    CONSTRAINT fk_crust FOREIGN Key (crust_id) REFERENCES pizza_crust(crust_id),
-    CONSTRAINT fk_sauce FOREIGN Key (sauce_id) REFERENCES pizza_sauce(sauce_id)
+    CONSTRAINT fk_size FOREIGN Key (size_id) REFERENCES sizes(size_id),
+    CONSTRAINT fk_crust FOREIGN Key (crust_id) REFERENCES crusts(crust_id),
+    CONSTRAINT fk_sauce FOREIGN Key (sauce_id) REFERENCES sauces(sauce_id)
 );
 
 CREATE TABLE pizza_toppings (

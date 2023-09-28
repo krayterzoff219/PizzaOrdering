@@ -1,14 +1,12 @@
-package com.techelevator.dao;
+package com.techelevator.dao.login;
 
-import com.techelevator.model.UserData;
+import com.techelevator.model.login.UserData;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
-
-import javax.sql.RowSet;
 
 @Component
 public class JdbcUserDataDao implements UserDataDao{
