@@ -129,4 +129,7 @@ INSERT INTO pizzas (size_id, crust_id, sauce_id) VALUES (1,1,1);
 INSERT INTO pizzas_toppings (pizza_id, topping_id) VALUES (1001,1);
 INSERT INTO pizzas_toppings (pizza_id, topping_id) VALUES (1001,2);
 
+INSERT INTO menu_items (name, available, price, pizza_id) VALUES ('Pepperoni Pizza', true, 14.50, 1001);
+INSERT INTO menu_items (name, available, price) VALUES ('Breadsticks', true, 5.00);
+
 COMMIT TRANSACTION;
