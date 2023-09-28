@@ -1,7 +1,13 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users, pizzas, user_data, toppings, orders, menu_items, orders_to_menu_items CASCADE;
+DROP SEQUENCE IF EXISTS seq_pizza_id;
 
+
+CREATE SEQUENCE seq_pizza_id
+INCREMENT BY 1
+START WITH 1001
+NO MAXVALUE;
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -48,7 +54,7 @@ CREATE TABLE toppings (
 );
 
 CREATE TABLE pizzas (
-    pizza_id int,
+    pizza_id int NOT NULL DEFAULT nextval('seq_pizza_id'),
     size_id int NOT NULL,
     crust_id int NOT NULL,
     sauce_id int NOT NULL,
@@ -59,7 +65,7 @@ CREATE TABLE pizzas (
     CONSTRAINT fk_sauce FOREIGN Key (sauce_id) REFERENCES sauces(sauce_id)
 );
 
-CREATE TABLE pizza_toppings (
+CREATE TABLE pizzas_toppings (
     pizza_id int NOT NULL,
     topping_id int NOT NULL,
 
@@ -104,5 +110,23 @@ CREATE TABLE user_data (
     CONSTRAINT pk_user_data PRIMARY KEY (user_id),
     CONSTRAINT fk_user_data_user FOREIGN Key (user_id) REFERENCES users(user_id)
 );
+
+
+INSERT INTO toppings (name, available, price) VALUES ('cheese', true, 0.50);
+INSERT INTO toppings (name, available, price) VALUES ('pepperoni', true, 0.75);
+
+INSERT INTO sauces (name, available, price) VALUES ('marinara', true, 0.50);
+INSERT INTO sauces (name, available, price) VALUES ('alfredo', true, 1.00);
+
+INSERT INTO crusts (name, available, price) VALUES ('regular', true, 0.50);
+INSERT INTO crusts (name, available, price) VALUES ('cheesy', true, 1.50);
+
+INSERT INTO sizes (name, available, price) VALUES ('Large', true, 14.00);
+INSERT INTO sizes (name, available, price) VALUES ('Regular', true, 8.00);
+
+INSERT INTO pizzas (size_id, crust_id, sauce_id) VALUES (1,1,1);
+
+INSERT INTO pizzas_toppings (pizza_id, topping_id) VALUES (1001,1);
+INSERT INTO pizzas_toppings (pizza_id, topping_id) VALUES (1001,2);
 
 COMMIT TRANSACTION;

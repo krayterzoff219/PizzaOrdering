@@ -1,16 +1,20 @@
 package com.techelevator.model.menu;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.techelevator.model.pizzaOptions.Crust;
+import com.techelevator.model.pizzaOptions.Sauce;
+import com.techelevator.model.pizzaOptions.Size;
+import com.techelevator.model.pizzaOptions.Topping;
 
 import java.util.List;
 
 public class Pizza {
 
     private int id;
-    private String size;
-    private String crust;
-    private String sauce;
-    private List<String> toppings;
+    private Size size;
+    private Crust crust;
+    private Sauce sauce;
+    private List<Topping> toppings;
 
 
     public int getId() {
@@ -21,37 +25,35 @@ public class Pizza {
         this.id = id;
     }
 
-    public List<String> getToppings() {
-        return toppings;
-    }
-
-    public void setToppings(List<String> toppings) {
-        this.toppings = toppings;
-    }
-
-    public String getSize() {
+    public Size getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(Size size) {
         this.size = size;
     }
 
-    public String getCrust() {
+    public Crust getCrust() {
         return crust;
     }
 
-    public void setCrust(String crust) {
+    public void setCrust(Crust crust) {
         this.crust = crust;
     }
 
-    public String getSauce() {
+    public Sauce getSauce() {
         return sauce;
     }
 
-    public void setSauce(String sauce) {
+    public void setSauce(Sauce sauce) {
         this.sauce = sauce;
     }
 
+    public List<Topping> getToppings() {
+        return toppings;
+    }
 
+    public void setToppings(List<Topping> toppings) {
+        this.toppings = toppings;
+    }
 }
