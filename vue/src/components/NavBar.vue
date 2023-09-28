@@ -88,7 +88,7 @@ div#nav-wrapper {
 	width: 97%;
 	padding-bottom: var(--header-footer-inside-margin);
 	background-color: var(--dark-color);
-	position: sticky;
+	position: fixed;
 	top: 0;
 }
 

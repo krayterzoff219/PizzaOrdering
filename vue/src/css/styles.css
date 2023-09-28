@@ -22,6 +22,7 @@ body,
 section {
 	background-color: var(--white-color);
 	border-radius: var(--section-border-radius);
+	margin-top: calc(10vh + var(--header-footer-inside-margin));
 }
 
 section.employee-section:not(#specialty-pizzas) {
