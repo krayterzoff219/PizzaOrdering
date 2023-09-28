@@ -1,7 +1,7 @@
 <template>
 
      <div class="social-icons">
-        <font-awesome-icon :icon="twitterIcon" />
+        <font-awesome-icon icon="fa-twitter" />
         <font-awesome-icon :icon="instagramIcon" />
         <font-awesome-icon :icon="facebookIcon" />
     </div> 
@@ -25,6 +25,12 @@ export default{
     },
 
 };
+
+<style>
+
+
+
+</style>
 
 
  </script>

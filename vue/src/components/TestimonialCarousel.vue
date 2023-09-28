@@ -8,8 +8,14 @@
 			<p>{{ testimonial.text }}</p>
 			<p class="author">{{ testimonial.author }}</p>
 		</div>
+        <div class="carousel-buttons">
+            <button @click="prev">Previous</button>
+            <button @click="next">Next</button>
+        </div>
+        <!-- <section id="carousel-button">
 		<button @click="prev">Previous</button>
 		<button @click="next">Next</button>
+        </section> -->
 	</div>
 </template>
 
@@ -57,9 +63,16 @@ export default {
 
 <style scoped>
 .testimonial-carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 100px;
 	margin: 0 auto;
 	text-align: center;
 	max-width: 600px;
+    min-height: 250px;
+    
 }
 
 .testimoial {
@@ -73,8 +86,36 @@ export default {
 .author {
 	font-style: italic;
 }
-
-button {
-	margin: 0 10px;
+.carousel-buttons {
+	margin: 10px 10px 5px;
+    display: flex;
+    
 }
+
+button{
+    display: flex;
+    margin-left: 20px;
+    margin-right: 30px;
+    width: 80px;
+    justify-content: center;
+    
+}
+
+@media screen and (max-width: 820px){
+    
+.testimonial-carousel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.carousel{
+    display: flex;
+    justify-content: center;
+}
+
+
+}
+
 </style>
