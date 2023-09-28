@@ -42,8 +42,7 @@ section.employee-section#pizza-options div.table-wrapper {
 	margin: var(--section-border-radius) auto;
 	background-color: var(--white-color);
 	border-radius: var(--section-border-radius);
-	padding-left: 0.5rem;
-	padding-right: 0.5rem;
+	padding: 0.5rem;
 }
 
 section.employee-section#employee-login form,

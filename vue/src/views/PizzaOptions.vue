@@ -11,14 +11,14 @@
 			<table>
 				<thead>
 					<tr>
-						<td>Specialty Pizza Name</td>
-						<td>Price</td>
-						<td>Size</td>
-						<td>Crust</td>
-						<td>Toppings</td>
-						<td>Sauces</td>
-						<td>Availability</td>
-						<td></td>
+						<td class="table-cell-pizza-name">Specialty Pizza Name</td>
+						<td class="table-cell-pizza-price">Price</td>
+						<td class="table-cell-pizza-size">Size</td>
+						<td class="table-cell-pizza-crust">Crust</td>
+						<td class="table-cell-pizza-toppings">Toppings</td>
+						<td class="table-cell-pizza-sauce">Sauce</td>
+						<td class="table-cell-pizza-available">Availability</td>
+						<td class="table-cell-buttons"></td>
 					</tr>
 				</thead>
 				<tbody>
@@ -68,12 +68,36 @@ export default {
 				sauce: { id: 10 },
 				isAvailable: false,
 			},
+			{
+				id: 35,
+				name: "Meat and Veggie Lovers",
+				price: 77.77,
+				size: { id: 8 },
+				crust: { id: 5 },
+				toppings: [1, 2, 4, 3],
+				sauce: { id: 10 },
+				isAvailable: false,
+			},
+			{
+				id: 36,
+				name: "Meat and Veggie Lovers",
+				price: 77.77,
+				size: { id: 8 },
+				crust: { id: 5 },
+				toppings: [1, 2, 4, 3],
+				sauce: { id: 10 },
+				isAvailable: false,
+			},
 		]);
 		this.$store.commit("LOAD_TOPPINGS", [
 			{ name: "peppers", id: 1 },
 			{ name: "olives", id: 2 },
 			{ name: "pepperoni", id: 3 },
 			{ name: "sausage", id: 4 },
+			{ name: "onions", id: 5 },
+			{ name: "anchoives", id: 6 },
+			{ name: "chicken", id: 7 },
+			{ name: "mushrooms", id: 8 },
 		]);
 		this.$store.commit("LOAD_CRUSTS", [
 			{ name: "thin", id: 5 },
@@ -106,10 +130,15 @@ export default {
 <style scoped>
 section.employee-section#pizza-options {
 	width: 97%;
+	margin-bottom: var(--header-footer-inside-margin);
 }
 
 table {
 	width: 100%;
+	max-width: 100rem;
 	text-align: left;
+	margin-right: auto;
+	margin-left: auto;
+	padding: 0 var(--section-border-radius);
 }
 </style>
