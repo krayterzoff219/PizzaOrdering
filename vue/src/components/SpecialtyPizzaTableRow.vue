@@ -168,8 +168,7 @@ thead tr {
 	text-align: center;
 }
 
-td.table-cell-pizza-price,
-td.table-cell-pizza-size {
+td.table-cell-pizza-price {
 	flex-basis: 4rem;
 	flex-grow: 0;
 	flex-shrink: 0;
@@ -177,7 +176,8 @@ td.table-cell-pizza-size {
 
 td.table-cell-pizza-available,
 td.table-cell-pizza-crust,
-td.table-cell-pizza-sauce {
+td.table-cell-pizza-sauce,
+td.table-cell-pizza-size {
 	flex-basis: 6rem;
 	flex-grow: 1;
 	flex-shrink: 1;
