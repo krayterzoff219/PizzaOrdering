@@ -41,7 +41,7 @@ export default new Vuex.Store({
 			state.sizes.push(payload);
 		},
 		ADD_SPECIALTY_PIZZA(state, payload) {
-			state.sizes.specialtyPizzas(payload);
+			state.specialtyPizzas.push(payload);
 		},
 		ADD_PENDING_ORDER(state, payload) {
 			state.sizes.pendingOrders(payload);

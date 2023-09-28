@@ -1,13 +1,16 @@
 import axios from "axios";
 
 export default {
-	getSpecialtyPizzas() {
-		return axios.get("/specialty-pizzas");
-	},
+	// getSpecialtyPizzas() {
+	// 	return axios.get("/menuitems/specialty");
+	// },
 	createSpecialtyPizza(specialtyPizza) {
-		return axios.post("/specialty-pizzas", specialtyPizza);
+		return axios.post("/menuitems/specialty", specialtyPizza);
 	},
 	updateSpecialtyPizza(specialtyPizza) {
-		return axios.put(`/specialty-pizzas/${specialtyPizza.id}`, specialtyPizza);
+		return axios.put(
+			`/menuitems/specialty/${specialtyPizza.id}`,
+			specialtyPizza
+		);
 	},
 };

@@ -84,6 +84,8 @@
 
 <script>
 import SmallButton from "./SmallButton.vue";
+import specialtyPizzaService from "../services/SpecialtyPizzaService.js";
+
 export default {
 	name: "specialty-pizza-table-row",
 	components: { SmallButton },
@@ -134,6 +136,16 @@ export default {
 		}
 	},
 	methods: {
+		resetRow() {
+			this.pizzaId = -1;
+			this.name = "";
+			this.price = "";
+			this.sizeId = -1;
+			this.crustId = -1;
+			this.toppingIds = [];
+			this.sauceId = -1;
+			this.isAvailable = true;
+		},
 		initializeRow() {
 			const { id, name, price, size, crust, toppings, sauce, isAvailable } =
 				this.pizza;
@@ -157,9 +169,53 @@ export default {
 		},
 		saveChanges() {},
 		addNewSpecialtyPizza() {
-			const { areInputsValid } = this;
+			const {
+				areInputsValid,
+				name,
+				price,
+				sizeId,
+				crustId,
+				toppingIds,
+				sauceId,
+				isAvailable,
+				resetRow,
+			} = this;
 			if (areInputsValid()) {
-				//
+				// ***** BUILD THE SPECIALTY PIZZA THAT WILL BE USED IN THE REQUEST IN CORRECT FORMAT *****
+				const specialtyPizza = { name, price };
+				const pizza = {};
+				pizza.size = { id: sizeId };
+				pizza.crust = { id: crustId };
+				pizza.sauce = { id: sauceId };
+				pizza.toppings = toppingIds.map((id) => ({ id }));
+				specialtyPizza.available = isAvailable;
+				specialtyPizza.pizza = pizza;
+				// ****************************************************************************************
+
+				specialtyPizzaService
+					.createSpecialtyPizza(specialtyPizza)
+					.then((res) => {
+						if (res.status === 200) {
+							// TODO: change status to 201
+							this.$store.commit("ADD_SPECIALTY_PIZZA", {
+								id: res.data,
+								name,
+								price,
+								isAvailable,
+								size: pizza.size,
+								crust: pizza.crust,
+								sauce: pizza.sauce,
+								toppings: toppingIds,
+							});
+							resetRow();
+						}
+					})
+					.catch((error) => {
+						console.log(error);
+						alert(
+							"There was an error saving the new specialty pizza. Please try again later."
+						);
+					});
 			}
 		},
 		areInputsValid() {
