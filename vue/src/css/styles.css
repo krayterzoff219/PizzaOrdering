@@ -26,7 +26,7 @@ section {
 
 section.employee-section:not(#specialty-pizzas) {
 	margin-bottom: var(--header-footer-inside-margin);
-	background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826");
+	/* background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826"); */
 	min-width: fit-content;
 	width: 50%;
 }
