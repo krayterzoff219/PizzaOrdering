@@ -105,4 +105,17 @@ CREATE TABLE user_data (
     CONSTRAINT fk_user_data_user FOREIGN Key (user_id) REFERENCES users(user_id)
 );
 
+
+INSERT INTO toppings (name, available, price) VALUES ('cheese', true, 0.50);
+INSERT INTO toppings (name, available, price) VALUES ('pepperoni', true, 0.75);
+
+INSERT INTO sauces (name, available, price) VALUES ('marinara', true, 0.50);
+INSERT INTO sauces (name, available, price) VALUES ('alfredo', true, 1.00);
+
+INSERT INTO crusts (name, available, price) VALUES ('regular', true, 0.50);
+INSERT INTO crusts (name, available, price) VALUES ('cheesy', true, 1.50);
+
+INSERT INTO sizes (name, available, price) VALUES ('Large', true, 14.00);
+INSERT INTO sizes (name, available, price) VALUES ('Regular', true, 8.00);
+
 COMMIT TRANSACTION;
