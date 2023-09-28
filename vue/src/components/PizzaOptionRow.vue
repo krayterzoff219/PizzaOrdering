@@ -14,6 +14,13 @@
 			<option value="true">Available</option>
 			<option value="false">Not Available</option>
 		</select>
+		<i
+			v-if="option"
+			class="fa-floppy-disk fa-solid icon-hide"></i>
+		<i
+			v-else
+			class="fa-floppy-disk fa-solid grow"
+			@click="addNewOption"></i>
 	</div>
 </template>
 
@@ -22,10 +29,12 @@ export default {
 	name: "pizza-option-row",
 	props: ["option"],
 	data() {
-		return { id: -1, name: "", price: -1, isAvailable: false };
+		return { id: -1, name: "", price: "", isAvailable: true };
 	},
 	created() {
-		this.initializeRow();
+		if (this.option) {
+			this.initializeRow();
+		}
 	},
 	methods: {
 		initializeRow() {
@@ -35,6 +44,18 @@ export default {
 			this.price = price;
 			this.isAvailable = isAvailable;
 		},
+		resetRow() {
+			this.name = "";
+			this.price = "";
+			this.isAvailable = true;
+		},
+		handleChange() {
+			if (this.option) {
+				this.saveChanges();
+			}
+		},
+		saveChanges() {},
+		addNewOption() {},
 	},
 };
 </script>
@@ -44,6 +65,7 @@ section.employee-section div.pizza-option-row {
 	display: flex;
 	width: 100%;
 	justify-content: center;
+	align-items: center;
 	gap: 5px;
 }
 
@@ -74,6 +96,20 @@ div.pizza-option-row input {
 	width: 100%;
 
 	padding: 3px;
+}
+
+i {
+	padding: 4px;
+	border-radius: 5px;
+	color: var(--white-color);
+}
+
+i.icon-hide {
+}
+
+i:not(.icon-hide) {
+	background-color: var(--dark-color);
+	cursor: pointer;
 }
 
 /************************* PRICE CELL STYLE *************************/

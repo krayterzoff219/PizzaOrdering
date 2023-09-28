@@ -1,5 +1,6 @@
 <template>
 	<button
+		class="grow"
 		:type="buttonType ? buttonType : 'button'"
 		@click="handleClick">
 		{{ buttonText }}

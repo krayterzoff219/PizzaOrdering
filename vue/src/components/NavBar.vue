@@ -12,11 +12,13 @@
 			<router-link
 				:to="{ name: 'home' }"
 				v-if="!isEmployeePage"
+				class="jump"
 				>Home</router-link
 			>
 			<router-link
 				:to="{ name: 'menu' }"
 				v-if="!isEmployeePage"
+				class="jump"
 				>Menu</router-link
 			>
 			<router-link
@@ -28,16 +30,19 @@
 			<router-link
 				:to="{ name: 'pending-orders' }"
 				v-if="isEmployeePage && isLoggedIn"
+				class="jump"
 				>Orders</router-link
 			>
 			<router-link
 				:to="{ name: 'specialty-pizzas' }"
 				v-if="isEmployeePage && isLoggedIn"
+				class="jump"
 				>Pizzas</router-link
 			>
 			<router-link
 				:to="{ name: 'pizza-options' }"
 				v-if="isEmployeePage && isLoggedIn"
+				class="jump"
 				>Options</router-link
 			>
 			<router-link

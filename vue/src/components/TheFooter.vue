@@ -35,6 +35,7 @@ footer {
 	font-size: 0.75rem;
 	padding: 0 15px;
 	width: 97%;
+	font-weight: bold;
 }
 
 footer div#footer-text {

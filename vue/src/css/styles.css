@@ -58,3 +58,22 @@ section.employee-section h1 {
 section.employee-section form button {
 	margin-top: 0.5rem;
 }
+
+/* from tachyons.io */
+.grow {
+	transition: transform 0.125s ease-out;
+}
+
+.grow:hover,
+.grow:focus {
+	transform: scale(1.05);
+}
+
+.grow:active {
+	transform: scale(0.9);
+}
+
+.jump:hover {
+	transform: translateY(-2px);
+	transition: transform 0.125s ease-out;
+}

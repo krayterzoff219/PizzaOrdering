@@ -7,6 +7,8 @@
 			v-for="option of $store.state[optionsCategory]"
 			:key="option.id"
 			:option="option"></pizza-option-row>
+		<!-- new option row--><pizza-option-row
+		></pizza-option-row>
 	</div>
 </template>
 
