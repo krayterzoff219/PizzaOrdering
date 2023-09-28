@@ -34,9 +34,9 @@
 
 <script>
 import AnAlert from "../components/AnAlert.vue";
-// import menuService from "../services/MenuService.js";
 import HorizontalHero from "../components/HorizontalHero.vue";
 import SpecialtyPizzaTableRow from "../components/SpecialtyPizzaTableRow.vue";
+import menuService from "../services/MenuService.js";
 
 export default {
 	components: { AnAlert, HorizontalHero, SpecialtyPizzaTableRow },
@@ -89,41 +89,8 @@ export default {
 				isAvailable: false,
 			},
 		]);
-		this.$store.commit("LOAD_TOPPINGS", [
-			{ name: "peppers", id: 1 },
-			{ name: "olives", id: 2 },
-			{ name: "pepperoni", id: 3 },
-			{ name: "sausage", id: 4 },
-			{ name: "onions", id: 5 },
-			{ name: "anchoives", id: 6 },
-			{ name: "chicken", id: 7 },
-			{ name: "mushrooms", id: 8 },
-		]);
-		this.$store.commit("LOAD_CRUSTS", [
-			{ name: "thin", id: 5 },
-			{ name: "thick", id: 6 },
-		]);
-		this.$store.commit("LOAD_SIZES", [
-			{ name: 12, id: 7 },
-			{ name: 10, id: 8 },
-		]);
-		this.$store.commit("LOAD_SAUCES", [
-			{ name: "red", id: 9 },
-			{ name: "white", id: 10 },
-		]);
+		menuService.getMenuItems();
 	},
-	// created() {
-	// 	menuService.getMenuItems().then((res) => {
-	// 		if (res.status === 200) {
-	// 			const { toppings, sauces, crusts, sizes, specialtyPizzas } = res.data;
-	// 			this.$store.commit("LOAD_TOPPINGS", toppings);
-	// 			this.$store.commit("LOAD_SAUCES", sauces);
-	// 			this.$store.commit("LOAD_CRUSTS", crusts);
-	// 			this.$store.commit("LOAD_SIZES", sizes);
-	// 			this.$store.commit("LOAD_SPECIALTY_PIZZAS", specialtyPizzas);
-	// 		}
-	// 	});
-	// },
 };
 </script>
 
