@@ -26,7 +26,6 @@ export default {};
 }
 
 footer {
-	width: 100%;
 	border-top-left-radius: var(--section-border-radius);
 	border-top-right-radius: var(--section-border-radius);
 	background-color: var(--white-color);

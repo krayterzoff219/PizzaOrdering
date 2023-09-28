@@ -26,19 +26,14 @@ section {
 
 section.employee-section:not(#specialty-pizzas) {
 	margin-bottom: var(--header-footer-inside-margin);
-	/* background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826"); */
-	min-width: fit-content;
 	width: 50%;
-}
-
-section.employee-section#employee-login,
-section.employee-section#employee-register {
 	max-width: 40rem;
 }
 
 section.employee-section#employee-login form,
 section.employee-section#employee-register form,
-section.employee-section#specialty-pizzas div.table-wrapper {
+section.employee-section#specialty-pizzas div.table-wrapper,
+section.employee-section#pizza-options div.pizza-options-wrapper {
 	margin: var(--section-border-radius) auto;
 	background-color: var(--white-color);
 	border-radius: var(--section-border-radius);
