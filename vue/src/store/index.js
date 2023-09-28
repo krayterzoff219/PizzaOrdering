@@ -2,6 +2,17 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 
+const sortArrayByName = (array) =>
+	array.sort((a, b) => {
+		if (a.name < b.name) {
+			return -1;
+		}
+		if (a.name > b.name) {
+			return 1;
+		}
+		return 0;
+	});
+
 Vue.use(Vuex);
 
 /*
@@ -47,19 +58,19 @@ export default new Vuex.Store({
 			state.sizes.pendingOrders(payload);
 		},
 		LOAD_TOPPINGS(state, payload) {
-			state.toppings = payload;
+			state.toppings = sortArrayByName(payload);
 		},
 		LOAD_SAUCES(state, payload) {
-			state.sauces = payload;
+			state.sauces = sortArrayByName(payload);
 		},
 		LOAD_CRUSTS(state, payload) {
-			state.crusts = payload;
+			state.crusts = sortArrayByName(payload);
 		},
 		LOAD_SIZES(state, payload) {
-			state.sizes = payload;
+			state.sizes = sortArrayByName(payload);
 		},
 		LOAD_SPECIALTY_PIZZAS(state, payload) {
-			state.specialtyPizzas = payload;
+			state.specialtyPizzas = sortArrayByName(payload);
 		},
 		LOAD_PENDING_ORDERS(state, payload) {
 			state.pendingOrders = payload;
