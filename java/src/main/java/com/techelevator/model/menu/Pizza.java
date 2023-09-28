@@ -56,4 +56,15 @@ public class Pizza {
     public void setToppings(List<Topping> toppings) {
         this.toppings = toppings;
     }
+
+    @Override
+    public String toString() {
+        return "Pizza{" +
+                "id=" + id +
+                ", size=" + size.getId() +
+                ", crust=" + crust.getId() +
+                ", sauce=" + sauce.getId() +
+                ", toppings=" + toppings +
+                '}';
+    }
 }

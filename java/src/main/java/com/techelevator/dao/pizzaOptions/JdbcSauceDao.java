@@ -59,6 +59,7 @@ public class JdbcSauceDao implements SauceDao{
             newSauce = getSauceById(newId);
         } catch (ResourceAccessException | DataAccessException e){
             System.out.println(e.getMessage());
+
         }
 
         return newSauce;
