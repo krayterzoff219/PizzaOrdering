@@ -1,4 +1,4 @@
-package com.techelevator.model;
+package com.techelevator.model.menu;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

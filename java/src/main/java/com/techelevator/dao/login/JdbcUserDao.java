@@ -1,4 +1,4 @@
-package com.techelevator.dao;
+package com.techelevator.dao.login;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.techelevator.model.User;
+import com.techelevator.model.login.User;
 
 @Component
 public class JdbcUserDao implements UserDao {

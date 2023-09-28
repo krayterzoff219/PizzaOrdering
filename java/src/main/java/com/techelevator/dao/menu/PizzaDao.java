@@ -1,6 +1,6 @@
-package com.techelevator.dao;
+package com.techelevator.dao.menu;
 
-import com.techelevator.model.Pizza;
+import com.techelevator.model.menu.Pizza;
 
 public interface PizzaDao {
 

@@ -1,7 +1,7 @@
-package com.techelevator.dao;
+package com.techelevator.dao.pizzaOptions;
 
 
-import com.techelevator.model.Topping;
+import com.techelevator.model.pizzaOptions.Topping;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -10,7 +10,6 @@ import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Component
 public class JdbcToppingDao implements ToppingDao{

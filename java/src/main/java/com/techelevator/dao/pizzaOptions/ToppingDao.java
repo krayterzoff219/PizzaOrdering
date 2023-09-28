@@ -1,7 +1,6 @@
-package com.techelevator.dao;
+package com.techelevator.dao.pizzaOptions;
 
-import com.techelevator.model.Topping;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
+import com.techelevator.model.pizzaOptions.Topping;
 
 import java.util.List;
 
