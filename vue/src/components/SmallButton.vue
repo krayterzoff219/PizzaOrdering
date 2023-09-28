@@ -1,10 +1,19 @@
 <template>
-	<button :type="buttonType ? buttonType : 'button'">{{ buttonText }}</button>
+	<button
+		:type="buttonType ? buttonType : 'button'"
+		@click="handleClick">
+		{{ buttonText }}
+	</button>
 </template>
 
 <script>
 export default {
-	props: ["buttonText", "buttonType"],
+	props: ["buttonText", "buttonType", "clickHandler"],
+	methods: {
+		handleClick() {
+			if (this.clickHandler) this.clickHandler();
+		},
+	},
 };
 </script>
 

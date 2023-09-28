@@ -59,8 +59,12 @@
 		<td
 			v-if="areUnsavedChanges"
 			class="table-cell-buttons table-button-wrapper">
-			<small-button buttonText="Save Changes"></small-button>
-			<small-button buttonText="Discard Changes"></small-button>
+			<small-button
+				buttonText="Save Changes"
+				:clickHandler="saveChanges"></small-button>
+			<small-button
+				buttonText="Discard Changes"
+				:clickHandler="discardChanges"></small-button>
 		</td>
 		<td
 			v-else
@@ -93,7 +97,7 @@ export default {
 			const { name, price, size, crust, toppings, sauce, isAvailable } =
 				this.pizza;
 
-			// Is each topping in the original topping list accounted for in the local topping list?
+			// Check that each topping in the original topping list accounted for in the local topping list
 			let areToppingsDifferent = false;
 			toppings.forEach((topping) => {
 				if (this.toppingIds.indexOf(topping) === -1) {
@@ -114,16 +118,31 @@ export default {
 		},
 	},
 	created() {
-		const { id, name, price, size, crust, toppings, sauce, isAvailable } =
-			this.pizza;
-		this.pizzaId = id;
-		this.name = name;
-		this.price = price;
-		this.sizeId = size.id;
-		this.crustId = crust.id;
-		this.toppingIds = toppings;
-		this.sauceId = sauce.id;
-		this.isAvailable = isAvailable;
+		this.initializeRow();
+	},
+	methods: {
+		initializeRow() {
+			const { id, name, price, size, crust, toppings, sauce, isAvailable } =
+				this.pizza;
+			this.pizzaId = id;
+			this.name = name;
+			this.price = price;
+			this.sizeId = size.id;
+			this.crustId = crust.id;
+			this.toppingIds = toppings;
+			this.sauceId = sauce.id;
+			this.isAvailable = isAvailable;
+		},
+		discardChanges() {
+			if (
+				confirm(
+					`Are you sure you want to discard the changes to ${this.pizza.name}`
+				)
+			) {
+				this.initializeRow();
+			}
+		},
+		saveChanges() {},
 	},
 };
 </script>
@@ -185,7 +204,6 @@ td select {
 
 td.table-cell-buttons {
 	min-width: 4rem;
-	/* width: 100%; */
 }
 
 td.table-button-wrapper button {
