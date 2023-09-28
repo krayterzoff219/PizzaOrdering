@@ -32,7 +32,7 @@ export default {
 		};
 	},
 	created() {
-		menuService.getMenuItems();
+		menuService.getPizzaOptions(); // TODO: .catch alert if error
 	},
 };
 </script>
