@@ -1,14 +1,11 @@
-package com.techelevator.dao;
+package com.techelevator.dao.menu;
 
-import com.techelevator.model.Pizza;
+import com.techelevator.model.menu.Pizza;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
-
-import java.util.List;
 
 @Component
 public class JdbcPizzaDao implements PizzaDao{

@@ -1,5 +1,7 @@
 package com.techelevator.model;
 
+import com.techelevator.model.menu.MenuItem;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;

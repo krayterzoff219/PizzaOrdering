@@ -2,7 +2,10 @@ package com.techelevator.controller;
 
 import javax.validation.Valid;
 
-import com.techelevator.model.*;
+import com.techelevator.model.login.LoginDto;
+import com.techelevator.model.login.LoginResponseDto;
+import com.techelevator.model.login.RegisterUserDto;
+import com.techelevator.model.login.User;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.techelevator.dao.UserDao;
+import com.techelevator.dao.login.UserDao;
 import com.techelevator.security.jwt.JWTFilter;
 import com.techelevator.security.jwt.TokenProvider;
 
