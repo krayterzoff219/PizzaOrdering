@@ -16,10 +16,10 @@
 		</select>
 		<i
 			v-if="option"
-			class="fa-floppy-disk fa-solid icon-hide"></i>
+			class="fa-floppy-disk fa-solid icon-hide employee-button-icon"></i>
 		<i
 			v-else
-			class="fa-floppy-disk fa-solid grow"
+			class="fa-floppy-disk fa-solid grow employee-button-icon"
 			@click="addNewOption"></i>
 	</div>
 </template>
@@ -147,17 +147,6 @@ div.pizza-option-row input {
 	width: 100%;
 
 	padding: 3px;
-}
-
-i {
-	padding: 4px;
-	border-radius: 5px;
-	color: var(--white-color);
-}
-
-i:not(.icon-hide) {
-	background-color: var(--dark-color);
-	cursor: pointer;
 }
 
 /************************* PRICE CELL STYLE *************************/

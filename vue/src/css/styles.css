@@ -59,6 +59,22 @@ section.employee-section form button {
 	margin-top: 0.5rem;
 }
 
+i.employee-button-icon {
+	padding: 5px;
+	border-radius: 5px;
+	color: var(--white-color);
+	font-size: 0.9rem;
+}
+
+i.employee-button-icon:not(.icon-hide) {
+	background-color: var(--dark-color);
+	cursor: pointer;
+}
+
+i.icon-hide {
+	background-color: var(--white-color) !important;
+}
+
 /* from tachyons.io */
 .grow {
 	transition: transform 0.125s ease-out;

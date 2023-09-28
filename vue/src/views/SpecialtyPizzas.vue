@@ -27,6 +27,10 @@
 						:key="pizza.id"
 						:pizza="pizza"></specialty-pizza-table-row>
 				</tbody>
+				<tfoot>
+					<!-- new option row--><specialty-pizza-table-row
+					></specialty-pizza-table-row>
+				</tfoot>
 			</table>
 		</div>
 	</section>

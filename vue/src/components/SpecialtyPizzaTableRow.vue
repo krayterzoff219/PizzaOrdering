@@ -57,7 +57,14 @@
 			</select>
 		</td>
 		<td
-			v-if="areUnsavedChanges"
+			v-if="!pizza"
+			class="table-cell-buttons table-icon-wrapper">
+			<i
+				class="fa-floppy-disk fa-solid grow employee-button-icon"
+				@click="addNewSpecialtyPizza"></i>
+		</td>
+		<td
+			v-else-if="areUnsavedChanges"
 			class="table-cell-buttons table-button-wrapper">
 			<small-button
 				buttonText="Save Changes"
@@ -68,8 +75,9 @@
 		</td>
 		<td
 			v-else
-			class="table-cell-buttons table-delete-wrapper">
-			<span class="row-delete-button">X</span>
+			class="table-cell-buttons table-icon-wrapper">
+			<i
+				class="fa-trash fa-solid grow employee-button-icon row-delete-button icon-hide"></i>
 		</td>
 	</tr>
 </template>
@@ -84,16 +92,19 @@ export default {
 		return {
 			pizzaId: -1,
 			name: "",
-			price: -1,
+			price: "",
 			sizeId: -1,
 			crustId: -1,
 			toppingIds: [],
 			sauceId: -1,
-			isAvailable: false,
+			isAvailable: true,
 		};
 	},
 	computed: {
 		areUnsavedChanges() {
+			if (!this.pizza) {
+				return false;
+			}
 			const { name, price, size, crust, toppings, sauce, isAvailable } =
 				this.pizza;
 
@@ -118,7 +129,9 @@ export default {
 		},
 	},
 	created() {
-		this.initializeRow();
+		if (this.pizza) {
+			this.initializeRow();
+		}
 	},
 	methods: {
 		initializeRow() {
@@ -143,6 +156,48 @@ export default {
 			}
 		},
 		saveChanges() {},
+		addNewSpecialtyPizza() {
+			const { areInputsValid } = this;
+			if (areInputsValid()) {
+				//
+			}
+		},
+		areInputsValid() {
+			const { name, price, sizeId, crustId, toppingIds, sauceId } = this;
+			if (!name) {
+				alert("New specialty pizza must have a name.");
+				return false;
+			}
+			if (name.length > 40) {
+				alert(
+					"New specialty pizza must have a name that is 40 characters or less."
+				);
+				return false;
+			}
+			if (price < 0.01) {
+				alert(
+					"New specialty pizza must have a price that is greater than $0.00."
+				);
+				return false;
+			}
+			if (sizeId <= 0) {
+				alert("New specialty pizza must have a size selected");
+				return false;
+			}
+			if (crustId <= 0) {
+				alert("New specialty pizza must have a crust selected");
+				return false;
+			}
+			if (sauceId <= 0) {
+				alert("New specialty pizza must have a sauce selected");
+				return false;
+			}
+			if (!toppingIds.length) {
+				alert("New specialty pizza must have at least 1 topping selected");
+				return false;
+			}
+			return true;
+		},
 	},
 };
 </script>
@@ -160,7 +215,8 @@ tbody tr:first-child {
 	margin-top: 10px;
 }
 
-tbody tr:not(:first-child) {
+tbody tr:not(:first-child),
+tfoot tr {
 	margin-top: 20px;
 }
 
@@ -233,11 +289,11 @@ td.table-button-wrapper button:last-child {
 	background-color: var(--primary-color);
 	border-color: var(--primary-color);
 }
-td.table-delete-wrapper {
+td.table-icon-wrapper {
 	color: var(--primary-color);
 	padding-left: 20px;
 }
-span.row-delete-button {
-	cursor: pointer;
+td:last-child i.row-delete-button {
+	background-color: var(--primary-color);
 }
 </style>
