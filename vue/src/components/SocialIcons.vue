@@ -32,5 +32,16 @@ export default {
 	},
 };
 </script>
-<style></style>
+<style>
+
+.social-icons{
+
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+
+
+</style>
 ;

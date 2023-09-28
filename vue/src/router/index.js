@@ -8,6 +8,7 @@ import PendingOrders from "../views/PendingOrders.vue";
 import PizzaOptions from "../views/PizzaOptions.vue";
 import SpecialtyPizzas from "../views/SpecialtyPizzas.vue";
 import store from "../store/index";
+import Menu from "../views/Menu.vue";
 
 Vue.use(Router);
 
@@ -43,7 +44,7 @@ const router = new Router({
 		{
 			path: "/menu",
 			name: "menu",
-			component: Home,
+			component: Menu,
 			meta: {
 				requiresAuth: false,
 			},

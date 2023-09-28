@@ -11,10 +11,7 @@
 
 			<div class="page-filler">
 				<div class="social-links">
-					<p>
-						This is where the social links for instagram, twitter, and facebook
-						will go.
-					</p>
+					
 					<social-icons></social-icons>
 				</div>
 
@@ -103,7 +100,12 @@ export default {
 	border-radius: 25px;
 	background-color: white;
 	margin: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;	
 }
+
 
 .home-body .testimonial-carousel {
 	grid-area: description1;
@@ -168,9 +170,9 @@ export default {
 		margin-right: auto;
 		margin-top: 15px;
 		/* border-top-left-radius: 25px;
-  border-top-right-radius: 25px; */
+border-top-right-radius: 25px; */
 		border-radius: 25px;
-		border-bottom: #124948 solid 5px;
+		border: #124948 solid 5px;
 		width: 92%;
 	}
 }
