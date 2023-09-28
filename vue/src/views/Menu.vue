@@ -1,4 +1,6 @@
 <template>
+
+    
 	<div class="menu-page-filler">
 		<div class="header">
 			<h1>
@@ -60,9 +62,30 @@
 				Crafted with the utmost care and precision, this pizza is a celebration
 				of minimalism, where the quality of ingredients takes center stage.
 			</p>
+            <div class="price-and-add3">
+				<p>$16.99</p>
+				<!-- <small-button>Add to order</small-button>      -->
+				<button type="submit">Add to Cart</button>
+			</div>
 		</div>
 
-		<div class="header-pic"></div>
+        <img
+			class="menu-pic-4"
+			src=""
+			alt="meat-lovers" />
+
+		<div class="menu-item-4">
+			<h3><em>Meat Feast Pizza</em></h3>
+			<p>
+				The Ultimate Meat Feast Pizza is an unapologetic celebration of all things carnivorous. Crafted for the meat lover in you, this pizza offers a carnivore's dream on a plate. Each bite is a flavorful adventure through a tantalizing assortment of premium meats, expertly prepared to perfection.
+			</p>
+			<div class="price-and-add4">
+				<p>$16.99</p>
+				<!-- <small-button>Add to order</small-button>      -->
+				<button type="submit">Add to Cart</button>
+			</div>
+		</div>
+
 	</div>
 </template>
 
@@ -80,6 +103,8 @@
 	/* background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826"); */
 
 	justify-content: center;
+    margin-right: auto;
+    margin-left: auto;
 	width: 97%;
 	margin-bottom: 20px;
 	display: grid;
@@ -88,13 +113,16 @@
 	grid-template:
 		"header header"
 		"peppiz desc1"
-		"desc2  vegpiz";
+		"desc2  vegpiz"
+        "chspiz desc3"
+        "desc4   mtpiz";
 }
 
 .header {
 	border-radius: 25px;
 	/* border: black solid 5px; */
 	width: 97%;
+    
 	margin-left: auto;
 	margin-right: auto;
 	margin-top: 50px;
@@ -130,8 +158,8 @@
 	padding: 10px;
 	height: 100%;
 	padding-top: 0px;
+    box-sizing: border-box;
 }
-
 button {
 	height: 30px;
 	color: white;
@@ -143,8 +171,8 @@ button {
 	display: flex;
 	align-items: center;
 	width: 70%;
-	margin: 120px;
-	margin-left: 140px;
+	margin: 80px;
+	margin-left: 120px;
 	border-radius: 10%;
 	border: black solid 10px;
 }
@@ -152,29 +180,29 @@ button {
 .menu-item-1 {
 	grid-area: desc1;
 	text-align: center;
-	padding-left: 5px;
-	border-radius: 10%;
+	/* padding-left: 5px; */
+	border-radius: 5%;
 	border: black solid 10px;
 	font-family: var(--loud-font-family);
 	background-color: white;
 	display: flex;
-	align-items: center;
+	/* align-items: center; */
 	flex-direction: column;
 	font-size: 25px;
-	width: 70%;
-	margin: 80px auto;
-
+	width: 90%;
+    height: 390px;
+	margin: 80px 80px 80px auto;
 	color: black;
 }
 
 .menu-pic-2 {
 	grid-area: vegpiz;
 	border-radius: 10%;
-	width: 500px;
-	margin-top: 50px;
+	margin-top: 20px;
 	margin-left: auto;
 	margin-right: auto;
 	border: black solid 10px;
+    width: 600px;
 }
 
 .menu-item-2 {
@@ -182,7 +210,7 @@ button {
 	text-align: center;
 	display: flex;
 	justify-content: center;
-	align-items: center;
+	/* align-items: center; */
 	flex-direction: column;
 	background-color: white;
 	width: 90%;
@@ -195,7 +223,53 @@ button {
 	border: black solid 10px;
 }
 
+.menu-pic-3{
+    grid-area: chspiz;
+    width: 600px;
+    border: black solid 10px;
+    border-radius: 20px;
+    margin-top: 65px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.menu-item-3{
+    grid-area: desc3;
+    background-color: white;
+    width: 90%;
+    border-radius: 5%;
+    border: black solid 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 50px auto;
+    font-size: 25px;
+}
+
+.price-and-add3 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-evenly;
+	width: auto;
+	padding: 10px;
+	height: 100%;
+	padding-top: 0px;
+    box-sizing: border-box;
+}
+
+.menu-item-4 {
+    grid-area: desc4;
+}
+
+.menu-pic-4{
+    grid-area: mtpiz;
+    
+}
+
 p {
 	padding: 0px 10px;
+    box-sizing: border-box;
 }
 </style>
