@@ -74,12 +74,26 @@ CREATE TABLE pizzas_toppings (
     CONSTRAINT fk_topping_id FOREIGN KEY (topping_id) REFERENCES toppings(topping_id)
 );
 
+CREATE TABLE user_data (
+    data_id SERIAL,
+    user_id integer DEFAULT -1,
+    email varchar(200) DEFAULT '',
+    address varchar(200) DEFAULT '',
+    phone varchar(15) DEFAULT '',
+    credit_card varchar(16) DEFAULT '',
+    CONSTRAINT pk_data_id PRIMARY KEY (data_id),
+    CONSTRAINT fk_user_data_user FOREIGN Key (user_id) REFERENCES users(user_id)
+);
+
 CREATE TABLE orders (
     order_id SERIAL,
     status varchar(40) NOT NULL,
-    user_id int NOT NULL,
+    data_id int NOT NULL,
+    delivery boolean NOT NULL,
+    total numeric(10,2) NOT NULL,
 
-    CONSTRAINT PK_order_id PRIMARY KEY (order_id)
+    CONSTRAINT PK_order_id PRIMARY KEY (order_id),
+    CONSTRAINT fk_user_data_orders FOREIGN Key (data_id) REFERENCES user_data(data_id)
 );
 
 CREATE TABLE menu_items (
@@ -104,15 +118,7 @@ CREATE TABLE orders_to_menu_items (
     CONSTRAINT fk_item_id FOREIGN KEY (item_id) REFERENCES menu_items(item_id)
 );
 
-CREATE TABLE user_data (
-    user_id integer NOT NULL UNIQUE,
-    email varchar(200) DEFAULT '',
-    address varchar(200) DEFAULT '',
-    phone varchar(15) DEFAULT '',
-    credit_card varchar(16) DEFAULT '',
-    CONSTRAINT pk_user_data PRIMARY KEY (user_id),
-    CONSTRAINT fk_user_data_user FOREIGN Key (user_id) REFERENCES users(user_id)
-);
+
 
 
 INSERT INTO toppings (name, available, price) VALUES ('cheese', true, 0.50);

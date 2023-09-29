@@ -1,11 +1,13 @@
 package com.techelevator.dao.login;
 
 import com.techelevator.model.login.UserData;
+import com.techelevator.model.orders.Order;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.server.ResponseStatusException;
 
 @Component
@@ -52,5 +54,16 @@ public class JdbcUserDataDao implements UserDataDao{
         userData.setAddress(rowSet.getString("address"));
         userData.setUserId(rowSet.getInt("user_id"));
         return userData;
+    }
+
+    public int createGuestData(Order order){
+        int id = -1;
+        try{
+            String insertUserSql = "insert into user_data (email, address, phone) values (?,?,?) RETURNING data_id;";
+            id = jdbcTemplate.queryForObject(insertUserSql, Integer.class, order.getEmail(), order.getAddress(), order.getPhone());
+        } catch (ResourceAccessException | DataAccessException e){
+            System.out.println(e.getMessage());
+        }
+        return id;
     }
 }

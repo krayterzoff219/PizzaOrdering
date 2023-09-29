@@ -19,7 +19,7 @@ public class JdbcMenuItemDao implements MenuItemDao {
 
     @Autowired
     private PizzaDao pizzaDao;
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public JdbcMenuItemDao(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;

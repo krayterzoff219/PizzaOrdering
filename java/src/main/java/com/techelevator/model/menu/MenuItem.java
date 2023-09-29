@@ -10,6 +10,7 @@ public class MenuItem {
     private String description;
     private String imageURL;
     private Pizza pizza;
+    private int quantity;
 
     public int getItemId() {
         return itemId;
@@ -65,5 +66,13 @@ public class MenuItem {
 
     public void setPizza(Pizza pizza) {
         this.pizza = pizza;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
