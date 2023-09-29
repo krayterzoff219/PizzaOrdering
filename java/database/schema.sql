@@ -97,6 +97,7 @@ CREATE TABLE menu_items (
 CREATE TABLE orders_to_menu_items (
     order_id int NOT NULL,
     item_id int NOT NULL,
+    quantity int NOT NULL,
 
     CONSTRAINT ck_order_item_id PRIMARY KEY (order_id, item_id),
     CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES orders(order_id),
