@@ -9,8 +9,9 @@
 				v-if="alertText"
 				:message="alertText"></an-alert>
 			<cart-item
-				v-for="item of $store.state.cart"
-				:key="item.id"></cart-item>
+				v-for="id in $store.state.cart"
+				:key="id"
+				:cartItem="$store.state.cart[id]"></cart-item>
 		</div>
 	</section>
 </template>
