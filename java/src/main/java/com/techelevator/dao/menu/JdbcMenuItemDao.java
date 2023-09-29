@@ -77,8 +77,20 @@ public class JdbcMenuItemDao implements MenuItemDao {
     }
 
     @Override
-    public MenuItem updateMenuItem(MenuItem menuItem) {
-        return null;
+    public boolean updateMenuItem(MenuItem menuItem) {
+        String sql = "UPDATE menu_items SET name = ?, available = ?, price = ?, description = ?, image_url = ? WHERE item_id = ?;";
+        int numOfRows = 0;
+        try {
+            numOfRows = jdbcTemplate.update(sql, menuItem.getName(), menuItem.isAvailable(), menuItem.getPrice(), menuItem.getDescription(),
+                    menuItem.getImageURL(), menuItem.getItemId());
+            if(numOfRows == 0){
+                return false;
+            }
+        } catch (ResourceAccessException | DataAccessException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
 
