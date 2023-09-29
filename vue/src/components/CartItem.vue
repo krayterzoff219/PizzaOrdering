@@ -17,6 +17,7 @@
 				</h3>
 			</div>
 			<div class="cart-details-container">
+				<!-- FOR EVERY DETAIL THAT IS NOT AN ARRAY (I.E., SAUCE, SIZE, AND CRUST) -->
 				<div
 					class="single-detail-container"
 					v-for="detail of Object.keys(details).filter(
@@ -24,26 +25,49 @@
 					)"
 					:key="detail">
 					<p :key="detail">
+						<!-- "Sauce:" "Crust:" "Size:" -->
 						<span
 							>{{ detail.charAt(0).toUpperCase() + detail.slice(1) }}:
 							&nbsp;</span
 						>
 					</p>
 					<p :key="details[detail].name">
+						<!-- "Small" "Medium" "Cheesy" "Regular" "Marinara" -->
 						{{ details[detail].name }}
 					</p>
 				</div>
-				<template
+
+				<!-- FOR EVERY DETAIL THAT IS AN ARRAY (I.E., TOPPINGS) -->
+				<div
+					:key="detail"
+					class="single-detail-container"
 					v-for="detail of Object.keys(details).filter((detail) =>
 						Array.isArray(details[detail])
 					)">
 					<p :key="detail">
+						<!-- "Topping(s):" -->
 						<span
-							>{{ detail.charAt(0).toUpperCase() + detail.slice(1) }}:
-							&nbsp;</span
+							>{{
+								detail.charAt(0).toUpperCase() +
+								(details[detail].length === 1
+									? detail.slice(1, -1)
+									: detail.slice(1))
+							}}: &nbsp;</span
 						>
 					</p>
-				</template>
+					<!-- prettier-ignore -->
+					<p
+						v-for="(itemId, index) of details[detail]"
+						:key="`${detail}-${itemId}`"
+						class="example" 
+                        >{{
+                            $store.state[detail].find((item) => item.id === itemId).name
+                        }}{{ 
+                            index !== details[detail].length - 1 ? ",&nbsp;" : "" 
+                        }}</p
+                    >
+					<!-- "bacon, ham, pineapple" -->
+				</div>
 			</div>
 		</div>
 	</div>
