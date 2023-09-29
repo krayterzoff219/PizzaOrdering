@@ -1,5 +1,5 @@
 <template>
-	<div class="home">
+	<section class="home">
 		<div class="home-body">
 			<img
 				class="hero-image1"
@@ -11,7 +11,6 @@
 
 			<div class="page-filler">
 				<div class="social-links">
-					
 					<social-icons></social-icons>
 				</div>
 
@@ -26,7 +25,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 </template>
 
 <script>
@@ -73,7 +72,7 @@ export default {
 	background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826");
 	border-radius: 25px 25px;
 	display: grid;
-	margin-top:120px;
+	/* margin-top: 120px; */
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: repeat(3 1fr);
 	grid-template-areas:
@@ -104,9 +103,8 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 10px;	
+	padding: 10px;
 }
-
 
 .home-body .testimonial-carousel {
 	grid-area: description1;

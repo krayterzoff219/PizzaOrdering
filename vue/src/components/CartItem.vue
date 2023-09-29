@@ -33,9 +33,17 @@
 						{{ details[detail].name }}
 					</p>
 				</div>
-				<!-- <template v-for="">
-					<p></p>
-				</template> -->
+				<template
+					v-for="detail of Object.keys(details).filter((detail) =>
+						Array.isArray(details[detail])
+					)">
+					<p :key="detail">
+						<span
+							>{{ detail.charAt(0).toUpperCase() + detail.slice(1) }}:
+							&nbsp;</span
+						>
+					</p>
+				</template>
 			</div>
 		</div>
 	</div>
