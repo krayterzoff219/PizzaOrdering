@@ -53,6 +53,7 @@ public class JdbcUserDataDao implements UserDataDao{
         userData.setCardNumber(rowSet.getString("credit_card"));
         userData.setAddress(rowSet.getString("address"));
         userData.setUserId(rowSet.getInt("user_id"));
+        userData.setDataId(rowSet.getInt("data_id"));
         return userData;
     }
 

@@ -5,6 +5,17 @@ public class UserData {
     private String phone;
     private String cardNumber;
     private String address;
+    private int userId;
+
+    private int dataId;
+
+    public int getDataId() {
+        return dataId;
+    }
+
+    public void setDataId(int dataId) {
+        this.dataId = dataId;
+    }
 
     public String getAddress() {
         return address;
@@ -13,8 +24,6 @@ public class UserData {
     public void setAddress(String address) {
         this.address = address;
     }
-
-    private int userId;
 
     public String getEmail() {
         return email;

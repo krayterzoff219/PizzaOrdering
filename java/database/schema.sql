@@ -114,12 +114,11 @@ CREATE TABLE orders_to_menu_items (
     quantity int NOT NULL,
 
     CONSTRAINT ck_order_item_id PRIMARY KEY (order_id, item_id),
-    CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES orders(order_id),
-    CONSTRAINT fk_item_id FOREIGN KEY (item_id) REFERENCES menu_items(item_id)
+    CONSTRAINT fk_order_id FOREIGN KEY (order_id) REFERENCES orders(order_id)
 );
 
 
-
+INSERT INTO users (user_id, username, password_hash, role) VALUES (-1,'Guest','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_GUEST');
 
 INSERT INTO toppings (name, available, price) VALUES ('cheese', true, 0.50);
 INSERT INTO toppings (name, available, price) VALUES ('pepperoni', true, 0.75);

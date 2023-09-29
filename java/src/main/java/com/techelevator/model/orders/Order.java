@@ -4,7 +4,6 @@ import com.techelevator.model.menu.MenuItem;
 import com.techelevator.model.menu.Pizza;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
@@ -17,8 +16,8 @@ public class Order {
     private boolean isDelivery;
 
     private BigDecimal total = new BigDecimal(0);
-    private List<MenuItem> orderItems = new ArrayList<>();
-    private List<Pizza> pizzas = new ArrayList<>();
+    private List<MenuItem> menuItems;
+    private List<Pizza> customPizzas;
 
     public int getOrderId() {
         return orderId;
@@ -84,19 +83,19 @@ public class Order {
         this.total = total;
     }
 
-    public List<MenuItem> getOrderItems() {
-        return orderItems;
+    public List<MenuItem> getMenuItems() {
+        return menuItems;
     }
 
-    public void setOrderItems(List<MenuItem> orderItems) {
-        this.orderItems = orderItems;
+    public void setMenuItems(List<MenuItem> menuItems) {
+        this.menuItems = menuItems;
     }
 
-    public List<Pizza> getPizzas() {
-        return pizzas;
+    public List<Pizza> getCustomPizzas() {
+        return customPizzas;
     }
 
-    public void setPizzas(List<Pizza> pizzas) {
-        this.pizzas = pizzas;
+    public void setCustomPizzas(List<Pizza> customPizzas) {
+        this.customPizzas = customPizzas;
     }
 }
