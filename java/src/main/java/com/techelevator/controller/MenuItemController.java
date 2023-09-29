@@ -44,4 +44,12 @@ public class MenuItemController {
         return menuId;
     }
 
+    @RequestMapping(path = "/menuitems", method = RequestMethod.PUT)
+    public void updateMenuItems(@RequestBody MenuItem menuItem){
+        boolean updated = menuItemDao.updateMenuItem(menuItem);
+        if(!updated){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not update");
+        }
+    }
+
 }

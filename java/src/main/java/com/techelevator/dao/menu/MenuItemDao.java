@@ -10,6 +10,6 @@ public interface MenuItemDao {
     MenuItem getMenuItemById(int id);
     int addMenuItem(MenuItem menuItem);
     int addSpecialtyPizza(MenuItem menuItem);
-    MenuItem updateMenuItem(MenuItem menuItem);
+    boolean updateMenuItem(MenuItem menuItem);
 
 }

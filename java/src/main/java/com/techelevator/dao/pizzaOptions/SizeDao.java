@@ -8,4 +8,5 @@ public interface SizeDao {
     Size getSizeById(int id);
     Size addSizeToTable (Size Size);
     List<Size> getAllSizes();
+    boolean updateSize (Size size);
 }

@@ -66,6 +66,22 @@ public class JdbcCrustDao implements CrustDao{
         return newCrust;
     }
 
+    @Override
+    public boolean updateCrust(Crust crust) {
+        String sql = "UPDATE crusts SET name = ?, available = ?, price = ? WHERE crust_id = ?;";
+        int numOfRows = 0;
+        try {
+            numOfRows = jdbcTemplate.update(sql, crust.getName(), crust.isAvailable(), crust.getPrice(), crust.getId());
+            if(numOfRows == 0){
+                return false;
+            }
+        } catch (ResourceAccessException | DataAccessException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
     private Crust mapRowToCrust(SqlRowSet rs) {
         Crust crust = new Crust();
         crust.setId(rs.getInt("crust_id"));
