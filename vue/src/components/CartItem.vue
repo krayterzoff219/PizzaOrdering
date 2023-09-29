@@ -3,11 +3,40 @@
 		<div class="cart-item-image-container"></div>
 		<div class="cart-item-description-container">
 			<h2>{{ name }}</h2>
-			<quantity-counter
-				:decrementHandler="decrementQuantity"
-				:incrementHandler="incrementQuantity"
-				:quantity="quantity"></quantity-counter>
-			<h3>$ {{ (price * quantity).toFixed(2) }}</h3>
+			<div class="quantity-price-container">
+				<quantity-counter
+					:decrementHandler="decrementQuantity"
+					:incrementHandler="incrementQuantity"
+					:quantity="quantity"></quantity-counter>
+				<h3 v-if="quantity === 1">
+					<span>{{ `$${price.toFixed(2)}` }}</span>
+				</h3>
+				<h3 v-else>
+					{{ `$${price.toFixed(2)} &nbsp;x&nbsp; ${quantity} &nbsp;=&nbsp;` }}
+					<span>{{ `$${(price * quantity).toFixed(2)}` }}</span>
+				</h3>
+			</div>
+			<div class="cart-details-container">
+				<div
+					class="single-detail-container"
+					v-for="detail of Object.keys(details).filter(
+						(detail) => !Array.isArray(details[detail])
+					)"
+					:key="detail">
+					<p :key="detail">
+						<span
+							>{{ detail.charAt(0).toUpperCase() + detail.slice(1) }}:
+							&nbsp;</span
+						>
+					</p>
+					<p :key="details[detail].name">
+						{{ details[detail].name }}
+					</p>
+				</div>
+				<!-- <template v-for="">
+					<p></p>
+				</template> -->
+			</div>
 		</div>
 	</div>
 </template>
@@ -23,7 +52,12 @@ export default {
 			id,
 			name,
 			price,
-			details: { size, sauce, crust, toppings },
+			details: {
+				size,
+				sauce,
+				crust,
+				toppings,
+			},
 		};
 	},
 	updated() {
@@ -44,11 +78,11 @@ export default {
 div.cart-item {
 	display: flex;
 	width: 100%;
-	margin-right: auto;
-	margin-left: auto;
+	justify-content: center;
 	padding: 15px 10px;
 }
 
+/* ********** image container ********** */
 div.cart-item-image-container {
 	background-image: url("https://img.freepik.com/free-photo/delicious-neapolitan-meat-pizza-pizzeria-delicious-food_78826-2833.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais");
 	background-position: center;
@@ -62,16 +96,40 @@ div.cart-item-image-container {
 	border-bottom-left-radius: var(--section-border-radius);
 }
 
+/* ********** text container ********** */
 div.cart-item-description-container {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-end;
 	max-width: 35em;
+	width: 100%;
 	padding: 15px;
 	border-bottom: 1px solid var(--dark-color);
+	gap: 15px;
 }
 
-div.cart-item:last-child div.cart-item-description-container {
-	border-bottom: none;
+/* **************************************************************************** */
+
+div.quantity-price-container {
+	display: flex;
+	align-items: center;
+	gap: 15px;
+	width: fit-content;
+}
+
+h3 span {
+	color: var(--primary-color);
+}
+
+h2 {
+	font-family: var(--loud-font-family);
+}
+
+div.single-detail-container {
+	display: flex;
+}
+
+p span {
+	font-weight: bold;
 }
 </style>

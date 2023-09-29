@@ -102,6 +102,7 @@ div#nav-wrapper {
 	background-color: var(--dark-color);
 	position: fixed;
 	top: 0;
+	z-index: 999;
 }
 
 nav {
