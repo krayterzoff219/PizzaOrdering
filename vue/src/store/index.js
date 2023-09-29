@@ -72,6 +72,7 @@ export default new Vuex.Store({
 			if ([payload.id] in state.cart) {
 				if (state.cart[payload.id].quantity === 1) {
 					delete state.cart[payload.id];
+					state.cart = { ...state.cart };
 				} else {
 					state.cart[payload.id].quantity--;
 				}

@@ -1,12 +1,47 @@
 <template>
 	<div class="cart-item">
 		<div class="cart-item-image-container"></div>
-		<div class="cart-item-description-container"></div>
+		<div class="cart-item-description-container">
+			{{ id }}
+			{{ name }}
+			{{ price }}
+			{{ quantity }}
+			<quantity-counter
+				:decrementHandler="decrementQuantity"
+				:incrementHandler="incrementQuantity"
+				:quantity="quantity"></quantity-counter>
+		</div>
 	</div>
 </template>
 
 <script>
-export default { props: ["cartItem"] };
+import QuantityCounter from "./QuantityCounter.vue";
+export default {
+	components: { QuantityCounter },
+	props: ["cartItem", "quantity"],
+	data() {
+		const { id, name, price, size, sauce, crust, toppings } = this.cartItem;
+		return {
+			id,
+			name,
+			price,
+			details: { size, sauce, crust, toppings },
+		};
+	},
+	updated() {
+		console.log(this.quantity);
+	},
+	methods: {
+		incrementQuantity() {
+			// console.log(this.cartItem);
+			this.$store.commit("ADD_SINGLE_ITEM_TO_CART", this.cartItem);
+		},
+		decrementQuantity() {
+			// console.log(this.cartItem);
+			this.$store.commit("REMOVE_SINGLE_ITEM_FROM_CART", this.cartItem);
+		},
+	},
+};
 </script>
 
 <style scoped>

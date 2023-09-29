@@ -9,9 +9,10 @@
 				v-if="alertText"
 				:message="alertText"></an-alert>
 			<cart-item
-				v-for="id in $store.state.cart"
-				:key="id"
-				:cartItem="$store.state.cart[id]"></cart-item>
+				v-for="item of cartItems"
+				:key="item.id"
+				:cartItem="item"
+				:quantity="item.quantity"></cart-item>
 		</div>
 	</section>
 </template>
@@ -32,6 +33,28 @@ export default {
 		return {
 			alertText: "",
 		};
+	},
+	computed: {
+		cartItems() {
+			return Object.values(this.$store.state.cart).filter(
+				(item) => item.quantity
+			);
+		},
+	},
+	updated() {
+		if (!this.cartItems.length) {
+			this.redirectToMenu();
+		}
+	},
+	created() {
+		if (!this.cartItems.length) {
+			this.redirectToMenu();
+		}
+	},
+	methods: {
+		redirectToMenu() {
+			this.$router.push({ name: "customer-menu" });
+		},
 	},
 };
 </script>

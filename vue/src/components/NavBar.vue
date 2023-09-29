@@ -23,12 +23,16 @@
 			>
 			<router-link
 				:to="{ name: 'my-order' }"
-				v-if="!isEmployeePage"
+				v-if="
+					!isEmployeePage &&
+					!isOrderPage &&
+					Object.keys($store.state.cart).length
+				"
 				><small-button buttonText="My Order"></small-button
 			></router-link>
 			<router-link
 				:to="{ name: 'checkout' }"
-				v-if="isOrderPage && Object.keys($store.state.cart).length"
+				v-if="isOrderPage"
 				><small-button buttonText="Checkout"></small-button
 			></router-link>
 			<!-- ********************************** ROUTES FOR EMPLOYEE PAGES ********************************** -->
