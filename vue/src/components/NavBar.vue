@@ -16,7 +16,7 @@
 				>Home</router-link
 			>
 			<router-link
-				:to="{ name: 'menu' }"
+				:to="{ name: 'customer-menu' }"
 				v-if="!isEmployeePage"
 				class="jump"
 				>Menu</router-link

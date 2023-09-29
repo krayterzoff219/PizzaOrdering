@@ -1,9 +1,11 @@
 <template>
-	<div id="horizontal-hero"></div>
+	<div
+		id="horizontal-hero"
+		:style="{ background: transparentBackground ? 'none' : '' }"></div>
 </template>
 
 <script>
-export default {};
+export default { props: ["transparentBackground"] };
 </script>
 
 <style scoped>

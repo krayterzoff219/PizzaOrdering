@@ -1,6 +1,4 @@
 <template>
-
-    
 	<div class="menu-page-filler">
 		<div class="header">
 			<h1>
@@ -62,14 +60,14 @@
 				Crafted with the utmost care and precision, this pizza is a celebration
 				of minimalism, where the quality of ingredients takes center stage.
 			</p>
-            <div class="price-and-add3">
+			<div class="price-and-add3">
 				<p>$16.99</p>
 				<!-- <small-button>Add to order</small-button>      -->
 				<button type="submit">Add to Order</button>
 			</div>
 		</div>
 
-        <img
+		<img
 			class="menu-pic-4"
 			src="https://img.freepik.com/premium-photo/pizza-fast-food-cooking_26791-161.jpg?size=626&ext=jpg&ga=GA1.2.481236351.1695826882&semt=ais"
 			alt="meat-lovers" />
@@ -77,7 +75,11 @@
 		<div class="menu-item-4">
 			<h3><em>Meat Feast Pizza</em></h3>
 			<p>
-				The Ultimate Meat Feast Pizza is an unapologetic celebration of all things carnivorous. Crafted for the meat lover in you, this pizza offers a carnivore's dream on a plate. Each bite is a flavorful adventure through a tantalizing assortment of premium meats, expertly prepared to perfection.
+				The Ultimate Meat Feast Pizza is an unapologetic celebration of all
+				things carnivorous. Crafted for the meat lover in you, this pizza offers
+				a carnivore's dream on a plate. Each bite is a flavorful adventure
+				through a tantalizing assortment of premium meats, expertly prepared to
+				perfection.
 			</p>
 			<div class="price-and-add4">
 				<p>$16.99</p>
@@ -86,7 +88,7 @@
 			</div>
 		</div>
 
-        <img
+		<img
 			class="menu-pic-5"
 			src="https://img.freepik.com/free-photo/meat-pizza-bell-pepper-basil-arugula-tomato-cheese-onion-top-view_141793-2772.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais"
 			alt="pepperoni" />
@@ -94,7 +96,11 @@
 		<div class="menu-item-5">
 			<h3><em>Philly Cheeza</em></h3>
 			<p>
-				Our Philly Cheesesteak Pizza is a culinary adventure that marries the best of two worlds: the bold, savory tradition of the Philly cheesesteak and the comforting, cheesy goodness of pizza. This delectable creation is a mouthwatering journey through flavor and texture, bringing the spirit of Philadelphia to your plate.
+				Our Philly Cheesesteak Pizza is a culinary adventure that marries the
+				best of two worlds: the bold, savory tradition of the Philly cheesesteak
+				and the comforting, cheesy goodness of pizza. This delectable creation
+				is a mouthwatering journey through flavor and texture, bringing the
+				spirit of Philadelphia to your plate.
 			</p>
 			<div class="price-and-add5">
 				<p>$16.99</p>
@@ -103,16 +109,18 @@
 			</div>
 		</div>
 
-
-        
-        <img
+		<img
 			class="menu-pic-6"
-			src="https://img.freepik.com/free-photo/side-view-chicken-pizza-tray-with-salad-table_141793-12982.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais">
+			src="https://img.freepik.com/free-photo/side-view-chicken-pizza-tray-with-salad-table_141793-12982.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais" />
 
 		<div class="menu-item-6">
 			<h3><em>Yard Bird</em></h3>
 			<p>
-				Our Yard Bird Pizza is a tantalizing fusion of flavors that will transport your taste buds to the heart of a backyard barbecue. This delectable creation combines succulent pieces of marinated chicken with the rich and tangy goodness of barbecue sauce, all atop a perfectly baked pizza crust.
+				Our Yard Bird Pizza is a tantalizing fusion of flavors that will
+				transport your taste buds to the heart of a backyard barbecue. This
+				delectable creation combines succulent pieces of marinated chicken with
+				the rich and tangy goodness of barbecue sauce, all atop a perfectly
+				baked pizza crust.
 			</p>
 			<div class="price-and-add6">
 				<p>$16.99</p>
@@ -120,8 +128,6 @@
 				<button type="submit">Add to Order</button>
 			</div>
 		</div>
-
-
 	</div>
 </template>
 
@@ -139,8 +145,8 @@
 	/* background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826"); */
 
 	justify-content: center;
-    margin-right: auto;
-    margin-left: auto;
+	margin-right: auto;
+	margin-left: auto;
 	width: 97%;
 	margin-bottom: 20px;
 	display: grid;
@@ -150,10 +156,10 @@
 		"header header"
 		"peppiz desc1"
 		"desc2  vegpiz"
-        "chspiz desc3"
-        "desc4   mtpiz"
-        "philpza desc5"
-        "desc6   yrdbrd";
+		"chspiz desc3"
+		"desc4   mtpiz"
+		"philpza desc5"
+		"desc6   yrdbrd";
 }
 
 .header {
@@ -195,7 +201,7 @@
 	padding: 10px;
 	height: 100%;
 	padding-top: 0px;
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 button {
 	height: 30px;
@@ -227,7 +233,7 @@ button {
 	flex-direction: column;
 	font-size: 25px;
 	width: 90%;
-    height: 390px;
+	height: 390px;
 	margin: 80px 80px 80px auto;
 	color: black;
 }
@@ -239,7 +245,7 @@ button {
 	margin-left: auto;
 	margin-right: auto;
 	border: black solid 10px;
-    width: 600px;
+	width: 600px;
 }
 
 .menu-item-2 {
@@ -260,28 +266,28 @@ button {
 	border: black solid 10px;
 }
 
-.menu-pic-3{
-    grid-area: chspiz;
-    width: 600px;
-    border: black solid 10px;
-    border-radius: 20px;
-    margin-top: 55px;
-    margin-right: auto;
-    margin-left: auto;
+.menu-pic-3 {
+	grid-area: chspiz;
+	width: 600px;
+	border: black solid 10px;
+	border-radius: 20px;
+	margin-top: 55px;
+	margin-right: auto;
+	margin-left: auto;
 }
 
-.menu-item-3{
-    grid-area: desc3;
-    background-color: white;
-    width: 90%;
-    border-radius: 5%;
-    border: black solid 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin: 55px auto;
-    font-size: 25px;
+.menu-item-3 {
+	grid-area: desc3;
+	background-color: white;
+	width: 90%;
+	border-radius: 5%;
+	border: black solid 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	margin: 55px auto;
+	font-size: 25px;
 }
 
 .price-and-add3 {
@@ -293,36 +299,35 @@ button {
 	padding: 10px;
 	height: 100%;
 	padding-top: 0px;
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .menu-item-4 {
-    grid-area: desc4;
-    background-color: white;
-    width: 90%;
-    border-radius: 5%;
-    border: black solid 10px;
-    margin: 50px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin: 50px auto;
-    font-size: 25px;
-
+	grid-area: desc4;
+	background-color: white;
+	width: 90%;
+	border-radius: 5%;
+	border: black solid 10px;
+	margin: 50px auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	margin: 50px auto;
+	font-size: 25px;
 }
 
-.menu-pic-4{
-    grid-area: mtpiz;
-    width: 600px;
-    height: 400px;
-    border: black solid 10px;
-    border-radius: 5%;
-    margin: 60px auto;
+.menu-pic-4 {
+	grid-area: mtpiz;
+	width: 600px;
+	height: 400px;
+	border: black solid 10px;
+	border-radius: 5%;
+	margin: 60px auto;
 }
 
 .price-and-add4 {
-    display: flex;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	justify-content: space-evenly;
@@ -330,72 +335,70 @@ button {
 	padding: 10px;
 	height: 100%;
 	padding-top: 0px;
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .menu-pic-5 {
-
-grid-area: philpza;
-height: 400px;
-width: 570px;
-border: black solid 10px;
-border-radius: 5%;
-margin: 60px auto;
-
+	grid-area: philpza;
+	height: 400px;
+	width: 570px;
+	border: black solid 10px;
+	border-radius: 5%;
+	margin: 60px auto;
 }
 
 .menu-item-5 {
-     grid-area: desc5;
-    background-color: white;
-    width: 90%;
-    border-radius: 5%;
-    border: black solid 10px;
-    margin: 50px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin: 50px auto;
-    font-size: 25px;
+	grid-area: desc5;
+	background-color: white;
+	width: 90%;
+	border-radius: 5%;
+	border: black solid 10px;
+	margin: 50px auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	margin: 50px auto;
+	font-size: 25px;
 }
 
-.price-and-add5{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-content: space-evenly;
+.price-and-add5 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-evenly;
 }
 
 .menu-item-6 {
-    grid-area: desc6;
-    background-color: white;
-    width: 90%;
-    border-radius: 5%;
-    border: black solid 10px;
-    margin: 50px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    font-size: 25px;
+	grid-area: desc6;
+	background-color: white;
+	width: 90%;
+	border-radius: 5%;
+	border: black solid 10px;
+	margin: 50px auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	font-size: 25px;
 }
 
 .menu-pic-6 {
-    grid-area: yrdbrd;
-    border-radius: 5%;
-    border: black solid 10px;
-    margin: 50px auto;
+	grid-area: yrdbrd;
+	border-radius: 5%;
+	border: black solid 10px;
+	margin: 50px auto;
 }
 
-.price-and-add6{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-content: space-evenly;
+.price-and-add6 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-evenly;
 }
 
 p {
 	padding: 0px 10px;
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 </style>

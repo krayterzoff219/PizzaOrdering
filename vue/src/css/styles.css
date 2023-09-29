@@ -25,7 +25,7 @@ section {
 	margin-top: calc(10vh + var(--header-footer-inside-margin));
 }
 
-section.employee-section:not(#specialty-pizzas) {
+section.employee-section:not(#specialty-pizzas):not(#menu-section) {
 	margin-bottom: var(--header-footer-inside-margin);
 	width: 50%;
 	max-width: 40rem;
@@ -34,7 +34,8 @@ section.employee-section:not(#specialty-pizzas) {
 section.employee-section#employee-login form,
 section.employee-section#employee-register form,
 section.employee-section#specialty-pizzas div.table-wrapper,
-section.employee-section#pizza-options div.pizza-options-wrapper {
+section.employee-section#pizza-options div.pizza-options-wrapper,
+section.customer-section#menu-section div.menu-wrapper {
 	margin: var(--section-border-radius) auto;
 	background-color: var(--white-color);
 	border-radius: var(--section-border-radius);
@@ -49,7 +50,7 @@ section.employee-section#employee-register form {
 	max-width: 24rem;
 }
 
-section.employee-section h1 {
+section h1 {
 	font-size: 2rem;
 	text-align: center;
 	margin-bottom: 1.5rem;
