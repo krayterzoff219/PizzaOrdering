@@ -34,12 +34,14 @@ export default {
 	created() {
 		menuService.getPizzaOptions(); // TODO: .catch alert if error
 	},
+	destroyed() {
+		this.$store.commit("UNLOAD_MENU");
+	},
 };
 </script>
 
 <style scoped>
 section.employee-section#pizza-options {
-	/* width: 97%; */
 	margin-bottom: var(--header-footer-inside-margin);
 }
 </style>

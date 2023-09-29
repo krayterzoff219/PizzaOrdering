@@ -54,6 +54,9 @@ export default {
 		menuService.getPizzaOptions(); // TODO: .catch alert if error
 		menuService.getMenuItems(); // TODO: .catch alert if error
 	},
+	destroyed() {
+		this.$store.commit("UNLOAD_MENU");
+	},
 };
 </script>
 

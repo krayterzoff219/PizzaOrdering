@@ -37,7 +37,7 @@ export default new Vuex.Store({
 		sizes: [],
 		specialtyPizzas: [],
 		pendingOrders: [],
-		cart: [],
+		cart: {},
 	},
 	mutations: {
 		ADD_TOPPING(state, payload) {
@@ -91,6 +91,13 @@ export default new Vuex.Store({
 		},
 		LOAD_SPECIALTY_PIZZAS(state, payload) {
 			state.specialtyPizzas = sortArrayByName(payload);
+		},
+		UNLOAD_MENU(state) {
+			state.specialtyPizzas = [];
+			state.sauces = [];
+			state.sizes = [];
+			state.crusts = [];
+			state.toppings = [];
 		},
 		LOAD_PENDING_ORDERS(state, payload) {
 			state.pendingOrders = payload;
