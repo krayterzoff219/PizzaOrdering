@@ -26,6 +26,11 @@
 				v-if="!isEmployeePage"
 				><small-button buttonText="My Order"></small-button
 			></router-link>
+			<router-link
+				:to="{ name: 'checkout' }"
+				v-if="isOrderPage && Object.keys($store.state.cart).length"
+				><small-button buttonText="Checkout"></small-button
+			></router-link>
 			<!-- ********************************** ROUTES FOR EMPLOYEE PAGES ********************************** -->
 			<router-link
 				:to="{ name: 'pending-orders' }"
@@ -74,6 +79,9 @@ export default {
 	computed: {
 		isEmployeePage() {
 			return this.$route.path.includes("employees");
+		},
+		isOrderPage() {
+			return this.$route.path.includes("my-order");
 		},
 		isLoggedIn() {
 			return this.$store.state.token != "";
