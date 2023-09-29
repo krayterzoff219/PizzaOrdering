@@ -24,7 +24,7 @@
 			<div class="price-and-add1">
 				<p>$16.99</p>
 				<!-- <small-button>Add to order</small-button>      -->
-				<button type="submit">Add to Cart</button>
+				<button type="submit">Add to Order</button>
 			</div>
 		</div>
 
@@ -45,7 +45,7 @@
 			<div class="price-and-add2">
 				<p>$16.99</p>
 				<!-- <small-button>Add to order</small-button>      -->
-				<button type="submit">Add to Cart</button>
+				<button type="submit">Add to Order</button>
 			</div>
 		</div>
 
@@ -65,13 +65,13 @@
             <div class="price-and-add3">
 				<p>$16.99</p>
 				<!-- <small-button>Add to order</small-button>      -->
-				<button type="submit">Add to Cart</button>
+				<button type="submit">Add to Order</button>
 			</div>
 		</div>
 
         <img
 			class="menu-pic-4"
-			src=""
+			src="https://img.freepik.com/premium-photo/pizza-fast-food-cooking_26791-161.jpg?size=626&ext=jpg&ga=GA1.2.481236351.1695826882&semt=ais"
 			alt="meat-lovers" />
 
 		<div class="menu-item-4">
@@ -82,9 +82,45 @@
 			<div class="price-and-add4">
 				<p>$16.99</p>
 				<!-- <small-button>Add to order</small-button>      -->
-				<button type="submit">Add to Cart</button>
+				<button type="submit">Add to Order</button>
 			</div>
 		</div>
+
+        <img
+			class="menu-pic-5"
+			src="https://img.freepik.com/free-photo/meat-pizza-bell-pepper-basil-arugula-tomato-cheese-onion-top-view_141793-2772.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais"
+			alt="pepperoni" />
+
+		<div class="menu-item-5">
+			<h3><em>Philly Cheeza</em></h3>
+			<p>
+				Our Philly Cheesesteak Pizza is a culinary adventure that marries the best of two worlds: the bold, savory tradition of the Philly cheesesteak and the comforting, cheesy goodness of pizza. This delectable creation is a mouthwatering journey through flavor and texture, bringing the spirit of Philadelphia to your plate.
+			</p>
+			<div class="price-and-add5">
+				<p>$16.99</p>
+				<!-- <small-button>Add to order</small-button>      -->
+				<button type="submit">Add to Order</button>
+			</div>
+		</div>
+
+
+        
+        <img
+			class="menu-pic-6"
+			src="https://img.freepik.com/free-photo/side-view-chicken-pizza-tray-with-salad-table_141793-12982.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais">
+
+		<div class="menu-item-6">
+			<h3><em>Yard Bird</em></h3>
+			<p>
+				Our Yard Bird Pizza is a tantalizing fusion of flavors that will transport your taste buds to the heart of a backyard barbecue. This delectable creation combines succulent pieces of marinated chicken with the rich and tangy goodness of barbecue sauce, all atop a perfectly baked pizza crust.
+			</p>
+			<div class="price-and-add6">
+				<p>$16.99</p>
+				<!-- <small-button>Add to order</small-button>      -->
+				<button type="submit">Add to Order</button>
+			</div>
+		</div>
+
 
 	</div>
 </template>
@@ -115,17 +151,18 @@
 		"peppiz desc1"
 		"desc2  vegpiz"
         "chspiz desc3"
-        "desc4   mtpiz";
+        "desc4   mtpiz"
+        "philpza desc5"
+        "desc6   yrdbrd";
 }
 
 .header {
 	border-radius: 25px;
 	/* border: black solid 5px; */
 	width: 97%;
-    
 	margin-left: auto;
 	margin-right: auto;
-	margin-top: 50px;
+	margin-top: 120px;
 	font-family: var(--loud-font-family);
 	/* background-color: black; */
 	/* background-image: url("https://img.freepik.com/free-photo/dark-concrete-texture-background_24837-659.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais"); */
@@ -197,8 +234,8 @@ button {
 
 .menu-pic-2 {
 	grid-area: vegpiz;
-	border-radius: 10%;
-	margin-top: 20px;
+	border-radius: 5%;
+	margin-top: 30px;
 	margin-left: auto;
 	margin-right: auto;
 	border: black solid 10px;
@@ -228,7 +265,7 @@ button {
     width: 600px;
     border: black solid 10px;
     border-radius: 20px;
-    margin-top: 65px;
+    margin-top: 55px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -243,7 +280,7 @@ button {
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    margin: 50px auto;
+    margin: 55px auto;
     font-size: 25px;
 }
 
@@ -261,11 +298,100 @@ button {
 
 .menu-item-4 {
     grid-area: desc4;
+    background-color: white;
+    width: 90%;
+    border-radius: 5%;
+    border: black solid 10px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 50px auto;
+    font-size: 25px;
+
 }
 
 .menu-pic-4{
     grid-area: mtpiz;
-    
+    width: 600px;
+    height: 400px;
+    border: black solid 10px;
+    border-radius: 5%;
+    margin: 60px auto;
+}
+
+.price-and-add4 {
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	justify-content: space-evenly;
+	width: auto;
+	padding: 10px;
+	height: 100%;
+	padding-top: 0px;
+    box-sizing: border-box;
+}
+
+.menu-pic-5 {
+
+grid-area: philpza;
+height: 400px;
+width: 570px;
+border: black solid 10px;
+border-radius: 5%;
+margin: 60px auto;
+
+}
+
+.menu-item-5 {
+     grid-area: desc5;
+    background-color: white;
+    width: 90%;
+    border-radius: 5%;
+    border: black solid 10px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 50px auto;
+    font-size: 25px;
+}
+
+.price-and-add5{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.menu-item-6 {
+    grid-area: desc6;
+    background-color: white;
+    width: 90%;
+    border-radius: 5%;
+    border: black solid 10px;
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 25px;
+}
+
+.menu-pic-6 {
+    grid-area: yrdbrd;
+    border-radius: 5%;
+    border: black solid 10px;
+    margin: 50px auto;
+}
+
+.price-and-add6{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 p {
