@@ -46,6 +46,8 @@ to api:
         "name": "Test Specialty",
         "available": true,
         "price": 14.50,
+        "description": "this is a pizza",
+        "imageURL": "/imgURL",
         "pizza": {
             "size": {
                 "id": 1
@@ -73,7 +75,9 @@ to api:
 {
         "name": "Test Other Item",
         "available": true,
-        "price": 4.50
+        "price": 4.50,
+        "description": "this is not a pizza",
+        "imageURL": "/imgURL"
     }
 
 to get a list of all menu items:
@@ -85,6 +89,8 @@ from api:
         "name": "Pepperoni Pizza",
         "available": true,
         "price": 14.50,
+        "description": "this is a pizza",
+        "imageURL": "/imgURL",
         "pizza": {
             "id": 1001,
             "size": {
@@ -126,6 +132,8 @@ from api:
         "name": "Breadsticks",
         "available": true,
         "price": 5.00,
+        "description": "this is not a pizza",
+        "imageURL": "/imgURL",
         "pizza": null
     },
     {
@@ -133,6 +141,8 @@ from api:
         "name": "Test Specialty",
         "available": true,
         "price": 14.50,
+        "description": "this is a test pizza",
+        "imageURL": "/imgURL",
         "pizza": {
             "id": 1002,
             "size": {
@@ -174,6 +184,8 @@ from api:
         "name": "Test Other Item",
         "available": true,
         "price": 4.50,
+        "description": "this is not a pizza",
+        "imageURL": "/imgURL",
         "pizza": null
     },
     {
@@ -181,6 +193,8 @@ from api:
         "name": "Test Specialty3",
         "available": true,
         "price": 14.50,
+        "description": "this is a pizza",
+        "imageURL": "/imgURL",
         "pizza": {
             "id": 1003,
             "size": {
