@@ -15,6 +15,7 @@ public class Pizza {
     private Crust crust;
     private Sauce sauce;
     private List<Topping> toppings;
+    private int quantity;
 
 
     public int getId() {
@@ -55,6 +56,14 @@ public class Pizza {
 
     public void setToppings(List<Topping> toppings) {
         this.toppings = toppings;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override

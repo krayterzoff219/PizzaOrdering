@@ -85,6 +85,7 @@ public class JdbcUserDao implements UserDao {
             if(newId == -1){
                 return false;
             }else{
+                //makes user data
                 if(!createUserData(newId)){
                     throw new RuntimeException();
                 }
