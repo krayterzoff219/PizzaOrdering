@@ -144,20 +144,12 @@ h3 {
 h2 {
 	flex-grow: 0;
 	flex-shrink: 1;
+	font-family: var(--loud-font-family);
 }
 
 h3 {
 	flex-grow: 1;
 	flex-shrink: 1;
-}
-
-h2 {
-	font-family: var(--loud-font-family);
-}
-
-h3 {
-	/* margin-top: 0.5rem;
-	margin-bottom: 1rem; */
 	color: var(--primary-color);
 }
 
@@ -169,6 +161,7 @@ button {
 	align-self: flex-start;
 	margin: 10px 0;
 }
+
 div.customer-menu-item:nth-child(2n-1) button {
 	align-self: flex-end;
 }

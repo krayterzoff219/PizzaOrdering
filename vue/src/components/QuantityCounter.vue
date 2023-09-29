@@ -1,14 +1,12 @@
 <template>
-	<div class="quanitity-counter-wrapper">
-		<!-- prettier-ignore -->
-		<div
-			class="quantity-decrement"
-			@click="decrementHandler">-</div>
-		<div class="quantity-count">{{ quantity }}</div>
-		<!--prettier-ignore -->
-		<div
-			class="quantity-increment"
-			@click="incrementHandler">+</div>
+	<div class="quantity-counter-wrapper">
+		<i
+			class="fa-solid fa-minus quantity-decrement jump"
+			@click="decrementHandler"></i>
+		<p class="quantity-count">{{ quantity }}</p>
+		<i
+			class="fa-solid fa-plus quantity-increment jump"
+			@click="incrementHandler"></i>
 	</div>
 </template>
 
@@ -20,18 +18,52 @@ export default {
 </script>
 
 <style scoped>
-div.quanitity-counter-wrapper {
+div.quantity-counter-wrapper {
 	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	height: 100%;
+	font-size: 1.5rem;
+	text-align: center;
+	max-height: 2.5rem;
+	max-width: 7.5rem;
 }
 
-div.quantity-counter-wrapper div {
-	flex-grow: 1;
-	flex-shrink: 1;
-	flex-basis: 2rem;
-}
-
-div.quantity-increment,
-div.quantity-decrement {
+i {
 	cursor: pointer;
+	color: var(--white-color);
+}
+
+p,
+i {
+	flex: 1;
+	padding: 0.5rem;
+	line-height: 1;
+	display: inline-block;
+	max-width: 2.5rem;
+	max-height: 2.5rem;
+}
+
+i::before {
+	vertical-align: middle;
+}
+
+i.quantity-decrement {
+	background-color: var(--primary-color);
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+i.quantity-increment {
+	background-color: var(--dark-color);
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+p {
+	border-bottom: 1px solid var(--dark-color);
+	border-right: 1px solid var(--dark-color);
+	border-top: 1px solid var(--dark-color);
+	border-left: 1px solid var(--primary-color);
 }
 </style>

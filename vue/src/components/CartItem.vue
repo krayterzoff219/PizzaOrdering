@@ -2,14 +2,12 @@
 	<div class="cart-item">
 		<div class="cart-item-image-container"></div>
 		<div class="cart-item-description-container">
-			{{ id }}
-			{{ name }}
-			{{ price }}
-			{{ quantity }}
+			<h2>{{ name }}</h2>
 			<quantity-counter
 				:decrementHandler="decrementQuantity"
 				:incrementHandler="incrementQuantity"
 				:quantity="quantity"></quantity-counter>
+			<h3>$ {{ (price * quantity).toFixed(2) }}</h3>
 		</div>
 	</div>
 </template>
@@ -33,11 +31,9 @@ export default {
 	},
 	methods: {
 		incrementQuantity() {
-			// console.log(this.cartItem);
 			this.$store.commit("ADD_SINGLE_ITEM_TO_CART", this.cartItem);
 		},
 		decrementQuantity() {
-			// console.log(this.cartItem);
 			this.$store.commit("REMOVE_SINGLE_ITEM_FROM_CART", this.cartItem);
 		},
 	},
@@ -67,11 +63,15 @@ div.cart-item-image-container {
 }
 
 div.cart-item-description-container {
-	/* display: flex;
+	display: flex;
 	flex-direction: column;
-	justify-content: center; */
+	justify-content: center;
 	max-width: 35em;
 	padding: 15px;
 	border-bottom: 1px solid var(--dark-color);
+}
+
+div.cart-item:last-child div.cart-item-description-container {
+	border-bottom: none;
 }
 </style>
