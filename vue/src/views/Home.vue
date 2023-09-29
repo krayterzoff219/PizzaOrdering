@@ -54,7 +54,7 @@ export default {
 }
 
 .page-filler {
-	padding-top: 50px;
+	padding-top: 10px;
 	margin-right: 100px;
 	text-align: center;
 }
@@ -73,6 +73,7 @@ export default {
 	background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826");
 	border-radius: 25px 25px;
 	display: grid;
+	margin-top:120px;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: repeat(3 1fr);
 	grid-template-areas:
@@ -110,7 +111,7 @@ export default {
 .home-body .testimonial-carousel {
 	grid-area: description1;
 	background-color: white;
-	margin: 50px auto;
+	margin: 100px auto;
 	padding: 15px;
 	border: #124948 solid 10px;
 	border-radius: 25px;

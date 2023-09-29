@@ -10,6 +10,7 @@ import SpecialtyPizzas from "../views/SpecialtyPizzas.vue";
 import store from "../store/index";
 import CustomerMenu from "../views/CustomerMenu.vue";
 import MyOrder from "../views/MyOrder.vue";
+import CustomerCheckout from "../views/CustomerCheckout.vue"
 
 Vue.use(Router);
 
@@ -53,7 +54,7 @@ const router = new Router({
 		{
 			path: "/checkout",
 			name: "checkout",
-			component: Home,
+			component: CustomerCheckout,
 			meta: {
 				requiresAuth: false,
 			},

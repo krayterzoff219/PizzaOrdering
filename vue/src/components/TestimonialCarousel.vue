@@ -91,7 +91,7 @@ export default {
 }
 
 .testimoial {
-	display: none;
+	display: flex;
 	transition: all 0.9s ease-in;
 }
 
