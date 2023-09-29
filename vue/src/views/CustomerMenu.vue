@@ -44,9 +44,9 @@ export default {
 			alertText: "",
 		};
 	},
-	created() {
-		menuService.getMenuItems(); // TODO: .catch alert if error
+	beforeCreate() {
 		menuService.getPizzaOptions(); // TODO: .catch alert if error
+		menuService.getMenuItems(); // TODO: .catch alert if error
 	},
 };
 </script>

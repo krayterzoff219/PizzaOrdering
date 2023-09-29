@@ -1,7 +1,7 @@
 <template>
 	<div
 		class="customer-menu-item"
-		v-show="isMenuItemAvailable">
+		v-if="isMenuItemAvailable">
 		<div class="customer-menu-item-image-container"></div>
 		<div class="customer-menu-item-description-container">
 			<div class="name-price-container">
