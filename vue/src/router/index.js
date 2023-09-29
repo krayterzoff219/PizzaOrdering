@@ -9,6 +9,7 @@ import PizzaOptions from "../views/PizzaOptions.vue";
 import SpecialtyPizzas from "../views/SpecialtyPizzas.vue";
 import store from "../store/index";
 import CustomerMenu from "../views/CustomerMenu.vue";
+import MyOrder from "../views/MyOrder.vue";
 
 Vue.use(Router);
 
@@ -36,7 +37,7 @@ const router = new Router({
 		{
 			path: "/my-order",
 			name: "my-order",
-			component: Home,
+			component: MyOrder,
 			meta: {
 				requiresAuth: false,
 			},

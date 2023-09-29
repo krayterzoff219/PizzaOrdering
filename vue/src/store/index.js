@@ -37,6 +37,7 @@ export default new Vuex.Store({
 		sizes: [],
 		specialtyPizzas: [],
 		pendingOrders: [],
+		cart: [],
 	},
 	mutations: {
 		ADD_TOPPING(state, payload) {
@@ -55,7 +56,26 @@ export default new Vuex.Store({
 			state.specialtyPizzas.push(payload);
 		},
 		ADD_PENDING_ORDER(state, payload) {
-			state.sizes.pendingOrders(payload);
+			state.sizes.pendingOrders.push(payload);
+		},
+		ADD_SINGLE_ITEM_TO_CART(state, payload) {
+			if (!([payload.id] in state.cart)) {
+				state.cart = {
+					...state.cart,
+					[payload.id]: { ...payload, quantity: 1 },
+				};
+			} else {
+				state.cart[payload.id].quantity++;
+			}
+		},
+		REMOVE_SINGLE_ITEM_FROM_CART(state, payload) {
+			if ([payload.id] in state.cart) {
+				if (state.cart[payload.id].quantity === 1) {
+					delete state.cart[payload.id];
+				} else {
+					state.cart[payload.id].quantity--;
+				}
+			}
 		},
 		LOAD_TOPPINGS(state, payload) {
 			state.toppings = sortArrayByName(payload);

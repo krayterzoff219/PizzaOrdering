@@ -6,7 +6,7 @@
 		<div class="menu-wrapper">
 			<h1>Menu</h1>
 			<p class="hero-text">
-				<span>The BEST Pizza Around -</span> Indulge in a taste sensation like
+				<span>The BEST Pizza in Town -</span> Indulge in a taste sensation like
 				no other. Our pizzas are expertly handcrafted with the finest, freshest
 				ingredients, creating a symphony of flavors that dance on your palate.
 				From our secret sauce to our meticulously sourced toppings, every bite

@@ -8,7 +8,9 @@
 				<h2>{{ name }}</h2>
 				<h3>$ {{ price.toFixed(2) }}</h3>
 			</div>
-			<small-button buttonText="Add to Order"></small-button>
+			<small-button
+				buttonText="Add to Order"
+				:clickHandler="addToOrder"></small-button>
 			<p>
 				"Savor the irresistible allure of our Pepperoni Perfection, a culinary
 				masterpiece that has stood the test of time. This iconic pizza is a
@@ -34,6 +36,11 @@ export default {
 			isAvailable,
 			details: { size, sauce, crust, toppings },
 		};
+	},
+	methods: {
+		addToOrder() {
+			this.$store.commit("ADD_SINGLE_ITEM_TO_CART", this.menuItem);
+		},
 	},
 	computed: {
 		isMenuItemAvailable() {
