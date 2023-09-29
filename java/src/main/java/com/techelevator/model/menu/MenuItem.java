@@ -7,6 +7,8 @@ public class MenuItem {
     private String name;
     private boolean available;
     private BigDecimal price;
+    private String description;
+    private String imageURL;
     private Pizza pizza;
 
     public int getItemId() {
@@ -39,6 +41,22 @@ public class MenuItem {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
     }
 
     public Pizza getPizza() {

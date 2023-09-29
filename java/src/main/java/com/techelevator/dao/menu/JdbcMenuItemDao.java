@@ -50,10 +50,11 @@ public class JdbcMenuItemDao implements MenuItemDao {
 
     @Override
     public int addMenuItem(MenuItem menuItem) {
-        String sql = "INSERT INTO menu_items (name, available, price) VALUES (?,?,?) RETURNING item_id;";
+        String sql = "INSERT INTO menu_items (name, available, price, description, image_url) VALUES (?,?,?,?,?) RETURNING item_id;";
         int itemId = -1;
         try {
-            itemId = jdbcTemplate.queryForObject(sql, Integer.class, menuItem.getName(), menuItem.isAvailable(), menuItem.getPrice());
+            itemId = jdbcTemplate.queryForObject(sql, Integer.class, menuItem.getName(), menuItem.isAvailable(), menuItem.getPrice(),
+                    menuItem.getDescription(), menuItem.getImageURL());
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -64,10 +65,11 @@ public class JdbcMenuItemDao implements MenuItemDao {
     public int addSpecialtyPizza(MenuItem menuItem) {
         Pizza newPizza = menuItem.getPizza();
         int pizzaId = pizzaDao.create(newPizza);
-        String sql = "INSERT INTO menu_items (name, available, price, pizza_id) VALUES (?,?,?,?) RETURNING item_id;";
+        String sql = "INSERT INTO menu_items (name, available, price, description, image_url, pizza_id) VALUES (?,?,?,?,?,?) RETURNING item_id;";
         int itemId = -1;
         try {
-            itemId = jdbcTemplate.queryForObject(sql, Integer.class, menuItem.getName(), menuItem.isAvailable(), menuItem.getPrice(), pizzaId);
+            itemId = jdbcTemplate.queryForObject(sql, Integer.class, menuItem.getName(), menuItem.isAvailable(), menuItem.getPrice(),
+                    menuItem.getDescription(), menuItem.getImageURL(), pizzaId);
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -75,8 +77,20 @@ public class JdbcMenuItemDao implements MenuItemDao {
     }
 
     @Override
-    public MenuItem updateMenuItem(MenuItem menuItem) {
-        return null;
+    public boolean updateMenuItem(MenuItem menuItem) {
+        String sql = "UPDATE menu_items SET name = ?, available = ?, price = ?, description = ?, image_url = ? WHERE item_id = ?;";
+        int numOfRows = 0;
+        try {
+            numOfRows = jdbcTemplate.update(sql, menuItem.getName(), menuItem.isAvailable(), menuItem.getPrice(), menuItem.getDescription(),
+                    menuItem.getImageURL(), menuItem.getItemId());
+            if(numOfRows == 0){
+                return false;
+            }
+        } catch (ResourceAccessException | DataAccessException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
 
@@ -89,6 +103,8 @@ public class JdbcMenuItemDao implements MenuItemDao {
         menuItem.setName(row.getString("name"));
         menuItem.setAvailable(row.getBoolean("available"));
         menuItem.setPrice(row.getBigDecimal("price"));
+        menuItem.setDescription(row.getString("description"));
+        menuItem.setImageURL(row.getString("image_url"));
 
         int pizzaId = row.getInt("pizza_id");
         if (pizzaId != -1){

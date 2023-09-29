@@ -1,6 +1,7 @@
 package com.techelevator.dao.pizzaOptions;
 
 
+import com.techelevator.model.pizzaOptions.Crust;
 import com.techelevator.model.pizzaOptions.Size;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -48,6 +49,22 @@ public class JdbcSizeDao implements SizeDao{
         }
 
         return sizeList;
+    }
+
+    @Override
+    public boolean updateSize(Size size) {
+        String sql = "UPDATE sizes SET name = ?, available = ?, price = ? WHERE size_id = ?;";
+        int numOfRows = 0;
+        try {
+            numOfRows = jdbcTemplate.update(sql, size.getName(), size.isAvailable(), size.getPrice(), size.getId());
+            if(numOfRows == 0){
+                return false;
+            }
+        } catch (ResourceAccessException | DataAccessException e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
     }
 
     public Size addSizeToTable(Size size){

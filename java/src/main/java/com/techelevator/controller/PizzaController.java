@@ -58,6 +58,9 @@ public class PizzaController {
         return menu;
     }
 
+
+
+
     @RequestMapping(path = "/toppings/{id}", method = RequestMethod.GET)
     public Topping getToppingById(@PathVariable int id){
         return toppingDao.getToppingById(id);
@@ -77,6 +80,17 @@ public class PizzaController {
         return toppingDao.getAllToppings();
     }
 
+    @RequestMapping(path = "/toppings", method = RequestMethod.PUT)
+    public void updateTopping(@RequestBody Topping topping){
+        boolean updated = toppingDao.updateTopping(topping);
+        if(!updated){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not update");
+        }
+    }
+
+
+
+
     @RequestMapping(path = "/sizes/{id}", method = RequestMethod.GET)
     public Size getSizeById(@PathVariable int id){
         return sizeDao.getSizeById(id);
@@ -95,6 +109,18 @@ public class PizzaController {
     public List<Size> getAllSizes(){
         return sizeDao.getAllSizes();
     }
+
+    @RequestMapping(path = "/sizes", method = RequestMethod.PUT)
+    public void updateSize(@RequestBody Size size){
+        boolean updated = sizeDao.updateSize(size);
+        if(!updated){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not update");
+        }
+    }
+    
+
+
+
     @RequestMapping(path = "/crusts/{id}", method = RequestMethod.GET)
     public Crust getCrustById(@PathVariable int id){
         return crustDao.getCrustById(id);
@@ -113,6 +139,19 @@ public class PizzaController {
     public List<Crust> getAllCrusts(){
         return crustDao.getAllCrusts();
     }
+
+    @RequestMapping(path = "/crusts", method = RequestMethod.PUT)
+    public void updateCrust(@RequestBody Crust crust){
+        boolean updated = crustDao.updateCrust(crust);
+        if(!updated){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not update");
+        }
+    }
+
+
+
+
+
     @RequestMapping(path = "/sauces/{id}", method = RequestMethod.GET)
     public Sauce getSauceById(@PathVariable int id){
         return sauceDao.getSauceById(id);
@@ -130,5 +169,13 @@ public class PizzaController {
     @RequestMapping(path = "/sauces", method = RequestMethod.GET)
     public List<Sauce> getAllSauces(){
         return sauceDao.getAllSauces();
+    }
+
+    @RequestMapping(path = "/sauces", method = RequestMethod.PUT)
+    public void updateSauce(@RequestBody Sauce sauce){
+        boolean updated = sauceDao.updateSauce(sauce);
+        if(!updated){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not update");
+        }
     }
 }

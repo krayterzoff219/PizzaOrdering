@@ -1,0 +1,234 @@
+Toppings, Sizes, Crust, and Sauces have identical endpoints
+path = "/toppings" method = RequestMethod.GET : returns list of all toppings
+[
+    {
+        "id": 1,
+        "name": "cheese",
+        "available": true,
+        "price": 0.50
+    },
+    {
+        "id": 2,
+        "name": "pepperoni",
+        "available": true,
+        "price": 0.75
+    }
+]
+
+path = "/toppings/{id}", method = RequestMethod.GET : returns topping with specific id
+{
+    "id": 1,
+    "name": "cheese",
+    "available": true,
+    "price": 0.50
+}
+
+path = "/toppings", method = RequestMethod.POST : takes in a topping adds it to the database and returns that topping with its new id
+
+to api:
+{
+    "name": "mushroom",
+    "available": true,
+    "price": 0.50
+}
+back from api:
+{
+    "id": 3,
+    "name": "mushroom",
+    "available": true,
+    "price": 0.50
+}
+
+to add new specialty pizza:
+path = "/menuitems/specialty", method = RequestMethod.POST : takes in menu item object with a pizza object inside and returns the added menu item's new id
+to api:
+{
+        "name": "Test Specialty",
+        "available": true,
+        "price": 14.50,
+        "description": "this is a pizza",
+        "imageURL": "/imgURL",
+        "pizza": {
+            "size": {
+                "id": 1
+            },
+            "crust": {
+                "id": 1
+            },
+            "sauce": {
+                "id": 1
+            },
+            "toppings": [
+                {
+                    "id": 1
+                },
+                {
+                    "id": 2
+                }
+            ]
+        }
+    }
+
+to add other menu item:
+path = "/menuitems/other", method = RequestMethod.POST : adds a non-pizza menu item takes in menu item object without pizza object inside returns the added menu item's new id
+to api:
+{
+        "name": "Test Other Item",
+        "available": true,
+        "price": 4.50,
+        "description": "this is not a pizza",
+        "imageURL": "/imgURL"
+    }
+
+to get a list of all menu items:
+path = "/menuitems", method = RequestMethod.GET : returns a list of all menu items
+from api:
+[
+    {
+        "itemId": 1,
+        "name": "Pepperoni Pizza",
+        "available": true,
+        "price": 14.50,
+        "description": "this is a pizza",
+        "imageURL": "/imgURL",
+        "pizza": {
+            "id": 1001,
+            "size": {
+                "id": 1,
+                "name": "Large",
+                "available": true,
+                "price": 14.00
+            },
+            "crust": {
+                "id": 1,
+                "name": "regular",
+                "available": true,
+                "price": 0.50
+            },
+            "sauce": {
+                "id": 1,
+                "name": "marinara",
+                "available": true,
+                "price": 0.50
+            },
+            "toppings": [
+                {
+                    "id": 1,
+                    "name": "cheese",
+                    "available": true,
+                    "price": 0.50
+                },
+                {
+                    "id": 2,
+                    "name": "pepperoni",
+                    "available": true,
+                    "price": 0.75
+                }
+            ]
+        }
+    },
+    {
+        "itemId": 2,
+        "name": "Breadsticks",
+        "available": true,
+        "price": 5.00,
+        "description": "this is not a pizza",
+        "imageURL": "/imgURL",
+        "pizza": null
+    },
+    {
+        "itemId": 3,
+        "name": "Test Specialty",
+        "available": true,
+        "price": 14.50,
+        "description": "this is a test pizza",
+        "imageURL": "/imgURL",
+        "pizza": {
+            "id": 1002,
+            "size": {
+                "id": 1,
+                "name": "Large",
+                "available": true,
+                "price": 14.00
+            },
+            "crust": {
+                "id": 1,
+                "name": "regular",
+                "available": true,
+                "price": 0.50
+            },
+            "sauce": {
+                "id": 1,
+                "name": "marinara",
+                "available": true,
+                "price": 0.50
+            },
+            "toppings": [
+                {
+                    "id": 1,
+                    "name": "cheese",
+                    "available": true,
+                    "price": 0.50
+                },
+                {
+                    "id": 2,
+                    "name": "pepperoni",
+                    "available": true,
+                    "price": 0.75
+                }
+            ]
+        }
+    },
+    {
+        "itemId": 4,
+        "name": "Test Other Item",
+        "available": true,
+        "price": 4.50,
+        "description": "this is not a pizza",
+        "imageURL": "/imgURL",
+        "pizza": null
+    },
+    {
+        "itemId": 5,
+        "name": "Test Specialty3",
+        "available": true,
+        "price": 14.50,
+        "description": "this is a pizza",
+        "imageURL": "/imgURL",
+        "pizza": {
+            "id": 1003,
+            "size": {
+                "id": 1,
+                "name": "Large",
+                "available": true,
+                "price": 14.00
+            },
+            "crust": {
+                "id": 1,
+                "name": "regular",
+                "available": true,
+                "price": 0.50
+            },
+            "sauce": {
+                "id": 1,
+                "name": "marinara",
+                "available": true,
+                "price": 0.50
+            },
+            "toppings": [
+                {
+                    "id": 1,
+                    "name": "cheese",
+                    "available": true,
+                    "price": 0.50
+                },
+                {
+                    "id": 2,
+                    "name": "pepperoni",
+                    "available": true,
+                    "price": 0.75
+                }
+            ]
+        }
+    }
+]

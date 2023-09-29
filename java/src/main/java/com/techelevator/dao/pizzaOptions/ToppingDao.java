@@ -8,4 +8,5 @@ public interface ToppingDao {
     Topping getToppingById(int id);
     Topping addToppingToTable (Topping topping);
     List<Topping> getAllToppings();
+    boolean updateTopping (Topping topping);
 }

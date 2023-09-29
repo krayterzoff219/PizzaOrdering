@@ -8,4 +8,5 @@ public interface CrustDao {
     Crust getCrustById(int id);
     Crust addCrustToTable (Crust topping);
     List<Crust> getAllCrusts();
+    boolean updateCrust (Crust crust);
 }

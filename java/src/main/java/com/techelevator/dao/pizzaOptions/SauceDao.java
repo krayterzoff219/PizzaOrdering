@@ -8,5 +8,6 @@ public interface SauceDao {
     Sauce getSauceById(int id);
     Sauce addSauceToTable (Sauce topping);
     List<Sauce> getAllSauces();
+    boolean updateSauce (Sauce sauce);
 
 }
