@@ -87,6 +87,8 @@ CREATE TABLE menu_items (
     name varchar(40) NOT NULL UNIQUE,
     available boolean NOT NULL,
     price numeric(10,2) NOT NULL,
+    description text DEFAULT '',
+    image_url varchar(200) DEFAULT '',
     pizza_id int DEFAULT -1,
 
     CONSTRAINT PK_item_id PRIMARY KEY (item_id)
