@@ -21,7 +21,11 @@
 
 <script>
 export default {
+
+	name: "Slider",
+
 	data() {
+		
 		return {
 			currentIndex: 0,
 			testimonials: [
@@ -38,10 +42,21 @@ export default {
 					author: "Daniel Commins",
 				},
 			],
+			timer: null,
+			
 		};
 	},
 
+	mounted: function(){
+		this.startSlide();
+	},
+
 	methods: {
+
+		startSlide: function(){
+			this.timer = setInterval(this.next, 4000)
+		},
+
 		prev() {
 			if (this.currentIndex === 0) {
 				this.currentIndex = this.testimonials.length - 1;
@@ -77,6 +92,7 @@ export default {
 
 .testimoial {
 	display: none;
+	transition: all 0.9s ease-in;
 }
 
 .testimonial.active {
@@ -89,7 +105,8 @@ export default {
 .carousel-buttons {
 	margin: 10px 10px 5px;
     display: flex;
-    
+    flex-grow: 1;
+	align-items: flex-end;
 }
 
 button{
