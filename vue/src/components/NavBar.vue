@@ -8,20 +8,24 @@
 					src="../assets/logo-transparent-no-slogan-red-black.png"
 					alt="UpperCrust Pizza Logo"
 			/></router-link>
-			<!-- ********************************** ROUTES FOR CUSTOMER PAGES ********************************** -->
+			<i
+				class="fa-solid fa-bars show-when-small-screen"
+				@click="showDropDownMenu"></i>
 			<router-link
 				:to="{ name: 'home' }"
 				v-if="!isEmployeePage"
-				class="jump"
+				class="jump hide-when-small-screen"
 				>Home</router-link
 			>
+			<!-- ********************************** ROUTES FOR CUSTOMER PAGES ********************************** -->
 			<router-link
 				:to="{ name: 'customer-menu' }"
 				v-if="!isEmployeePage"
-				class="jump"
+				class="jump hide-when-small-screen"
 				>Menu</router-link
 			>
 			<router-link
+				class="hide-when-small-screen"
 				:to="{ name: 'my-order' }"
 				v-if="
 					!isEmployeePage &&
@@ -31,6 +35,7 @@
 				><small-button buttonText="My Order"></small-button
 			></router-link>
 			<router-link
+				class="hide-when-small-screen"
 				:to="{ name: 'checkout' }"
 				v-if="isOrderPage"
 				><small-button buttonText="Checkout"></small-button
@@ -39,28 +44,30 @@
 			<router-link
 				:to="{ name: 'pending-orders' }"
 				v-if="isEmployeePage && isLoggedIn"
-				class="jump"
+				class="jump hide-when-small-screen"
 				>Orders</router-link
 			>
 			<router-link
 				:to="{ name: 'specialty-pizzas' }"
 				v-if="isEmployeePage && isLoggedIn"
-				class="jump"
+				class="jump hide-when-small-screen"
 				>Pizzas</router-link
 			>
 			<router-link
 				:to="{ name: 'pizza-options' }"
 				v-if="isEmployeePage && isLoggedIn"
-				class="jump"
+				class="jump hide-when-small-screen"
 				>Options</router-link
 			>
 			<router-link
 				:to="{ name: 'employee-login' }"
+				class="hide-when-small-screen"
 				v-if="isEmployeePage && !isLoggedIn && $route.path.includes('register')"
 				><small-button buttonText="Login"></small-button
 			></router-link>
 			<router-link
 				:to="{ name: 'employee-register' }"
+				class="hide-when-small-screen"
 				v-if="isEmployeePage && !isLoggedIn && $route.path.includes('login')"
 				><small-button buttonText="Register"></small-button
 			></router-link>
@@ -68,6 +75,7 @@
 			<router-link
 				v-bind:to="{ name: 'logout' }"
 				v-if="isLoggedIn"
+				class="hide-when-small-screen"
 				><small-button buttonText="Logout"></small-button
 			></router-link>
 		</nav>
@@ -89,6 +97,11 @@ export default {
 		},
 		isLoggedIn() {
 			return this.$store.state.token != "";
+		},
+	},
+	methods: {
+		showDropDownMenu() {
+			this.$store.commit("TOGGLE_DROP_DOWN_MENU");
 		},
 	},
 };
@@ -142,7 +155,8 @@ nav a:first-child {
 	height: 100%;
 }
 
-nav a:last-child {
+nav a:last-child,
+nav i {
 	padding-right: var(--edge-padding);
 }
 
@@ -153,5 +167,26 @@ nav a.push-left {
 nav img {
 	height: 100%;
 	display: block;
+}
+
+nav a.hide-when-small-screen {
+	display: none;
+}
+
+nav i.show-when-small-screen {
+	display: inline;
+}
+
+nav i {
+	cursor: pointer;
+}
+
+@media only screen and (min-width: 600px) {
+	nav a.hide-when-small-screen {
+		display: inline;
+	}
+	nav i.show-when-small-screen {
+		display: none;
+	}
 }
 </style>

@@ -38,6 +38,7 @@ export default new Vuex.Store({
 		specialtyPizzas: [],
 		pendingOrders: [],
 		cart: {},
+		isDropDownMenuVisible: false,
 	},
 	mutations: {
 		ADD_TOPPING(state, payload) {
@@ -105,6 +106,9 @@ export default new Vuex.Store({
 		},
 		LOAD_PENDING_ORDERS(state, payload) {
 			state.pendingOrders = payload;
+		},
+		TOGGLE_DROP_DOWN_MENU(state) {
+			state.isDropDownMenuVisible = !state.isDropDownMenuVisible;
 		},
 		SET_AUTH_TOKEN(state, token) {
 			state.token = token;
