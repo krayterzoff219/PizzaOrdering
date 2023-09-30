@@ -54,6 +54,23 @@
 					inputType="number"
 					v-model="zipCode" />
 
+                <user-input
+					label="Phone number:"
+					inputId="Phone-number"
+					inputType="number"
+					v-model="phoneNumber" />
+
+                    <user-input
+					label="Email"
+					inputId="email"
+					inputType="text"
+					v-model="email" />
+
+                    <small-button
+                    buttonText="place order"
+                    :clickHandler="placeOrder"
+                    />
+
 				<!-- <user-input label="Date:"
                                 inputId="Date"
                                 inputType="datetime-local"
@@ -89,9 +106,13 @@
 <script>
 import UserInput from "../components/UserInput.vue";
 import HorizontalHero from "../components/HorizontalHero.vue";
+import orderService from "../services/OrderService.js"
+import SmallButton from '../components/SmallButton.vue';
+
+
 
 export default {
-	components: { UserInput, HorizontalHero },
+	components: { UserInput, HorizontalHero, SmallButton },
 	data() {
 		return {
 			cardholderName: "",
@@ -103,8 +124,39 @@ export default {
 			state: "",
 			zipCode: "",
 			isDelivery: false,
-		};
-	},
+            email: "",
+            phoneNumber: ""
+        }
+    },
+
+    methods: {
+
+        placeOrder(){
+
+            const order = {}
+
+            order.isDelivery = this.isDelivery;
+            order.address = this.address;
+            order.phoneNumber = this.phoneNumber;
+            order.email = this.email;
+            order.menuItems = [];
+
+            order.customPizzas = [];
+
+            const pizzas = Object.values(this.$store.state.cart)
+            for(const pizza of pizzas){
+                order.menuItems.push({
+                    itemId: pizza.id, 
+                    quantity: pizza.quantity
+
+                })
+            }
+
+            orderService.createPendingOrder(order);
+
+        }
+    
+    },        
 
 	computed: {
 		total() {
