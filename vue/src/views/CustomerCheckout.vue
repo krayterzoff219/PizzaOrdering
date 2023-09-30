@@ -5,47 +5,54 @@
 			<h1>Checkout</h1>
 			<div class="checkout-wrapper">
 
-				<div class="card-info">
+				
 					
 					<user-input label="Cardholder name: "
                                 inputId="Cardholder-name"
-                                inputType="text"/>
+                                inputType="text"
+                                v-model="cardholderName"/>
 					
 					<user-input label="Card Number:"
                                 inputId="Card-Number"
-                                inputType="number"/>
+                                inputType="number"
+                                v-model="cardNumber"/>
 					
 					<user-input label="Exp Date:"
                                 inputId="CVC"
-                                inputType="number"/>
+                                inputType="number"
+                                v-model="expDate"/>
 					
 					<user-input label="CVC"
                                 inputId="CVC"
-                                inputType="number"/>
-				</div>
-				<div class="customer-info">
+                                inputType="number"
+                                v-model="cvc"/>				
 					
 					<user-input label="Address"
                                 inputId="Address"
-                                inputType="text"/>
+                                inputType="text"
+                                v-model="address"/>
 
 					<user-input label="City"
                                 inputId="City"
-                                inputType="text"/>
+                                inputType="text"
+                                v-model="city"/>
 
 					<user-input label="State:"
                                 inputId="State"
-                                inputType="text"/>
+                                inputType="text"
+                                v-model="state"/>
 
 					<user-input label="Zip-Code" 
                                 inputId="Zip-Code" 
-                                inputType="number"/>
+                                inputType="number"
+                                v-model="zipCode"/>
 
-					<user-input label="Date:"
+					<!-- <user-input label="Date:"
                                 inputId="Date"
-                                inputType="datetime-local"/>
+                                inputType="datetime-local"
+                                /> -->
 
-				</div>
+				
 				<div class="delivery">
 
                     <!-- <user-input label="Date:"
@@ -66,9 +73,9 @@
 				</div>
 			</div>
 			<div class="total-payment">
-				<p id="subtotal">Subtotal: {{ price }}</p>
-				<p id="tax">Tax: {{ Tax }}</p>
-				<p id="total">Total: {{ total }}</p>
+				<p id="subtotal">Subtotal: ${{ $store.state.subtotal.toFixed(2) }}</p>
+				<p id="tax">Tax: ${{ tax.toFixed(2) }}</p>
+				<p id="total">Total: ${{ total.toFixed(2) }}</p>
 			</div>
 		</div>
 	</section>
@@ -80,10 +87,36 @@ import HorizontalHero from "../components/HorizontalHero.vue";
 
 
 
+
 export default {
 	components: { UserInput, HorizontalHero },
+        data(){
+            return{
+            cardholderName: '',
+            cardNumber: '',
+            expDate: '',
+            cvc: '',
+            address: '',
+            city: '',
+            state: '',
+            zipCode: '',
+            isDelivery: false,
 
-};
+            }
+
+        },
+
+    computed: {
+        total(){
+            return this.$store.state.subtotal + this.tax;
+        },
+
+        tax(){
+            return this.$store.state.subtotal * 0.08;
+        }
+    }
+
+    }    
 
 
 
@@ -91,38 +124,20 @@ export default {
 
 <style>
 
+
+
 .delivery > form{
     text-align: center;
 }
 
-.card-info {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
-	width: 95%;
-}
-
-.customer-info {
-	/* display: flex;
-    margin: 50px auto;
-    justify-content: center;
-    justify-content: space-between;
-    flex-direction: column; */
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-evenly;
-	width: 95%;
-}
-
 .checkout-wrapper {
 	display: flex;
-	/* justify-content: center; */
+	justify-content: center;
+    gap: 20px;  
+    flex-wrap: wrap;
 	align-items: center;
-	flex-direction: column;
 	margin: 30px;
 }
-
-
 
 .instructions {
 	height: 100px;
@@ -141,6 +156,10 @@ export default {
 .delivery{
     display: flex;
     flex-direction: column;
+}
+
+.total-payment{
+    
 }
 
 </style>

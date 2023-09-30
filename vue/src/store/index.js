@@ -13,6 +13,8 @@ const sortArrayByName = (array) =>
 		return 0;
 	});
 
+
+
 Vue.use(Vuex);
 
 /*
@@ -38,6 +40,7 @@ export default new Vuex.Store({
 		specialtyPizzas: [],
 		pendingOrders: [],
 		cart: {},
+		subtotal: 0,
 		isDropDownMenuVisible: false,
 	},
 	mutations: {
@@ -79,6 +82,11 @@ export default new Vuex.Store({
 				}
 			}
 		},
+
+		UPDATE_SUBTOTAL (state, payload){
+			state.subtotal += payload;
+		},
+
 		LOAD_TOPPINGS(state, payload) {
 			state.toppings = sortArrayByName(payload);
 		},
@@ -127,4 +135,17 @@ export default new Vuex.Store({
 			axios.defaults.headers.common = {};
 		},
 	},
+
+	actions: {
+		addItemsToCart (context, item){
+			context.commit('ADD_SINGLE_ITEM_TO_CART', item)
+			context.commit('UPDATE_SUBTOTAL', item.price)
+		},
+
+		removeItemsFromCart (context, item){
+			context.commit('REMOVE_SINGLE_ITEM_FROM_CART', item)
+			context.commit('UPDATE_SUBTOTAL', -item.price)
+		},
+
+	}
 });

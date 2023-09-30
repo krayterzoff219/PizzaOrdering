@@ -39,8 +39,11 @@ export default {
 	},
 	methods: {
 		addToOrder() {
-			this.$store.commit("ADD_SINGLE_ITEM_TO_CART", this.menuItem);
+			this.$store.dispatch("addItemsToCart", this.menuItem);
+		
 		},
+
+
 	},
 	computed: {
 		isMenuItemAvailable() {
