@@ -1,61 +1,66 @@
 <template>
-	<section class="input-section">
+	<section
+		class="input-section"
+		id="checkout-section">
 		<horizontal-hero></horizontal-hero>
 		<div class="checkout-inputs">
 			<h1>Checkout</h1>
 			<div class="checkout-wrapper">
+				<user-input
+					label="Cardholder name: "
+					inputId="Cardholder-name"
+					inputType="text"
+					v-model="cardholderName" />
 
-				
-					
-					<user-input label="Cardholder name: "
-                                inputId="Cardholder-name"
-                                inputType="text"
-                                v-model="cardholderName"/>
-					
-					<user-input label="Card Number:"
-                                inputId="Card-Number"
-                                inputType="number"
-                                v-model="cardNumber"/>
-					
-					<user-input label="Exp Date:"
-                                inputId="CVC"
-                                inputType="number"
-                                v-model="expDate"/>
-					
-					<user-input label="CVC"
-                                inputId="CVC"
-                                inputType="number"
-                                v-model="cvc"/>				
-					
-					<user-input label="Address"
-                                inputId="Address"
-                                inputType="text"
-                                v-model="address"/>
+				<user-input
+					label="Card Number:"
+					inputId="Card-Number"
+					inputType="number"
+					v-model="cardNumber" />
 
-					<user-input label="City"
-                                inputId="City"
-                                inputType="text"
-                                v-model="city"/>
+				<user-input
+					label="Exp Date:"
+					inputId="exp-date"
+					inputType="number"
+					v-model="expDate" />
 
-					<user-input label="State:"
-                                inputId="State"
-                                inputType="text"
-                                v-model="state"/>
+				<user-input
+					label="CVC"
+					inputId="CVC"
+					inputType="number"
+					v-model="cvc" />
 
-					<user-input label="Zip-Code" 
-                                inputId="Zip-Code" 
-                                inputType="number"
-                                v-model="zipCode"/>
+				<user-input
+					label="Address"
+					inputId="Address"
+					inputType="text"
+					v-model="address" />
 
-					<!-- <user-input label="Date:"
+				<user-input
+					label="City"
+					inputId="City"
+					inputType="text"
+					v-model="city" />
+
+				<user-input
+					label="State:"
+					inputId="State"
+					inputType="text"
+					v-model="state" />
+
+				<user-input
+					label="Zip-Code"
+					inputId="Zip-Code"
+					inputType="number"
+					v-model="zipCode" />
+
+				<!-- <user-input label="Date:"
                                 inputId="Date"
                                 inputType="datetime-local"
                                 /> -->
 
-				
 				<div class="delivery">
-
-                    <!-- <user-input label="Date:"
+					<!-- <user-input label="Date:"
                                 inputId="Date"
                                 inputType="datetime-local"/> -->
 
@@ -85,58 +90,60 @@
 import UserInput from "../components/UserInput.vue";
 import HorizontalHero from "../components/HorizontalHero.vue";
 
-
-
-
 export default {
 	components: { UserInput, HorizontalHero },
-        data(){
-            return{
-            cardholderName: '',
-            cardNumber: '',
-            expDate: '',
-            cvc: '',
-            address: '',
-            city: '',
-            state: '',
-            zipCode: '',
-            isDelivery: false,
+	data() {
+		return {
+			cardholderName: "",
+			cardNumber: "",
+			expDate: "",
+			cvc: "",
+			address: "",
+			city: "",
+			state: "",
+			zipCode: "",
+			isDelivery: false,
+		};
+	},
 
-            }
+	computed: {
+		total() {
+			return this.$store.state.subtotal + this.tax;
+		},
 
-        },
-
-    computed: {
-        total(){
-            return this.$store.state.subtotal + this.tax;
-        },
-
-        tax(){
-            return this.$store.state.subtotal * 0.08;
-        }
-    }
-
-    }    
-
-
-
+		tax() {
+			return this.$store.state.subtotal * 0.08;
+		},
+	},
+};
 </script>
 
-<style>
+<style scoped>
+section.input-section#checkout-section {
+	width: 97%;
+	margin-bottom: var(--header-footer-inside-margin);
+}
 
+@media only screen and (min-width: 600px) {
+	section.input-section#checkout-section {
+		max-width: min(80%, 60rem);
+	}
+}
 
+.delivery > form {
+	text-align: center;
+}
 
-.delivery > form{
-    text-align: center;
+.checkout-wrapper .form-input-group {
+	padding-right: 20px;
+	padding-left: 20px;
 }
 
 .checkout-wrapper {
 	display: flex;
 	justify-content: center;
-    gap: 20px;  
-    flex-wrap: wrap;
 	align-items: center;
-	margin: 30px;
+	flex-wrap: wrap;
 }
 
 .instructions {
@@ -153,13 +160,10 @@ export default {
 	margin-bottom: 20px;
 }
 
-.delivery{
-    display: flex;
-    flex-direction: column;
+.delivery {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	text-align: center;
 }
-
-.total-payment{
-    
-}
-
 </style>
