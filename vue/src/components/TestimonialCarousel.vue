@@ -82,15 +82,16 @@ export default {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding-top: 100px;
+    padding-top: 200px;
 	margin: 0 auto;
 	text-align: center;
 	max-width: 600px;
-    min-height: 250px;
+    min-height: 200px;
     
 }
 
 .testimoial {
+	
 	display: flex;
 	transition: all 0.9s ease-in;
 }
@@ -101,6 +102,7 @@ export default {
 
 .author {
 	font-style: italic;
+	padding-top: 15px;
 }
 .carousel-buttons {
 	margin: 10px 10px 5px;

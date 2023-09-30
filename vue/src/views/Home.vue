@@ -83,8 +83,8 @@ export default {
 
 .hero-image1 {
 	grid-area: heroPic;
-	margin: 5px;
-	margin-bottom: 5px;
+	margin: 10px;
+	margin-bottom: 10px;
 	border-radius: 25px;
 	border: #124948 solid 5px;
 	width: 92%;
@@ -113,6 +113,7 @@ export default {
 	padding: 15px;
 	border: #124948 solid 10px;
 	border-radius: 25px;
+	
 }
 
 .carousel {
@@ -122,7 +123,7 @@ export default {
 }
 
 .maps-image > img {
-	margin: 25px;
+	/* margin: 25px; */ 
 	grid-area: mapsImg;
 	border-radius: 10%;
 	border: #124948 solid 10px;
@@ -174,5 +175,7 @@ border-top-right-radius: 25px; */
 		border: #124948 solid 5px;
 		width: 92%;
 	}
+
+	
 }
 </style>
