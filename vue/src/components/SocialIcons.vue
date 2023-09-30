@@ -3,15 +3,21 @@
 		<!-- <font-awesome-icon icon="fa-twitter" />
         <font-awesome-icon :icon="instagramIcon" />
         <font-awesome-icon :icon="facebookIcon" /> -->
-		<i
+
+		<a href="https://twitter.com/"><i
 			class="fa-brands fa-x-twitter"
-			style="color: black"></i
-		><i
+			style="color: black" ></i
+		></a>
+
+		<a href="https://www.instagram.com/"><i
 			class="fa-brands fa-instagram"
 			style="color: black"></i
-		><i
+		></a>
+		
+		<a href="https://www.facebook.com/"><i
 			class="fa-brands fa-facebook"
-			style="color: black"></i>
+			style="color: black"></i
+		></a>
 	</div>
 </template>
 
@@ -37,6 +43,14 @@ export default {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	
 }
+
+.fa-brands {
+	margin-left: 60px;
+	margin-right: 60px;
+	font-size: 30px;
+}
+
 </style>
 ;
