@@ -1,7 +1,7 @@
 <template>
 	<div id="app">
 		<nav-bar></nav-bar>
-		<dropdown-menu></dropdown-menu>
+		<dropdown-overlay></dropdown-overlay>
 		<router-view />
 		<the-footer></the-footer>
 	</div>
@@ -10,9 +10,9 @@
 <script>
 import TheFooter from "./components/TheFooter.vue";
 import NavBar from "./components/NavBar.vue";
-import DropdownMenu from "./components/DropdownMenu.vue";
+import DropdownOverlay from "./components/DropdownOverlay.vue";
 export default {
-	components: { NavBar, TheFooter, DropdownMenu },
+	components: { NavBar, TheFooter, DropdownOverlay },
 };
 </script>
 
