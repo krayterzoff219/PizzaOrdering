@@ -84,6 +84,9 @@ export default {
 		},
 	},
 	beforeCreate() {
+		if (Object.keys(this.$store.state.cart).length) {
+			this.$store.commit("CLEAR_CART");
+		}
 		if (this.$store.state.token) {
 			this.$router.push({ name: "pending-orders" });
 		}

@@ -12,8 +12,11 @@
 					<span>{{ `$${price.toFixed(2)}` }}</span>
 				</h3>
 				<h3 v-else>
-					{{ `$${price.toFixed(2)} &nbsp;x&nbsp; ${quantity} &nbsp;=&nbsp;` }}
-					<span>{{ `$${(price * quantity).toFixed(2)}` }}</span>
+					<div>{{ `$${price.toFixed(2)}` }}</div>
+					<div>{{ ` &nbsp;x&nbsp; ${quantity} &nbsp;=&nbsp;` }}</div>
+					<div>
+						<span>{{ `$${(price * quantity).toFixed(2)}` }}</span>
+					</div>
 				</h3>
 			</div>
 			<div class="cart-details-container">
@@ -92,9 +95,6 @@ export default {
 			},
 		};
 	},
-	updated() {
-		console.log(this.quantity);
-	},
 	methods: {
 		incrementQuantity() {
 			this.$store.commit("ADD_SINGLE_ITEM_TO_CART", this.cartItem);
@@ -108,7 +108,8 @@ export default {
 
 <style scoped>
 div.cart-item {
-	display: flex;
+	display: grid;
+	grid-template-columns: 1fr 2fr;
 	width: 100%;
 	justify-content: center;
 	padding: 15px 10px;
@@ -120,24 +121,27 @@ div.cart-item-image-container {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	max-width: 150px;
+	max-width: 275px;
 	width: 100%;
 	height: auto;
-	aspect-ratio: 1 / 1;
 	border-top-left-radius: var(--section-border-radius);
 	border-bottom-left-radius: var(--section-border-radius);
+	min-width: 100px;
 }
 
 /* ********** text container ********** */
 div.cart-item-description-container {
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-end;
+	display: grid;
+	grid-template-areas:
+		"item-name"
+		"quantity-price"
+		"item-details";
 	max-width: 35em;
 	width: 100%;
 	padding: 15px;
 	border-bottom: 1px solid var(--dark-color);
 	gap: 15px;
+	justify-content: start;
 }
 
 /* **************************************************************************** */
@@ -147,6 +151,21 @@ div.quantity-price-container {
 	align-items: center;
 	gap: 15px;
 	width: fit-content;
+	grid-area: quantity-price;
+}
+
+div.cart-details-container {
+	grid-area: item-details;
+}
+
+h3 {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+h3 div {
+	min-width: max-content;
 }
 
 h3 span {
@@ -155,13 +174,42 @@ h3 span {
 
 h2 {
 	font-family: var(--loud-font-family);
+	grid-area: item-name;
+	height: fit-content;
+	align-self: top;
 }
 
 div.single-detail-container {
 	display: flex;
+	flex-wrap: wrap;
+	padding-top: 3px;
 }
 
 p span {
 	font-weight: bold;
+}
+
+@media only screen and (min-width: 768px) {
+	div.cart-item {
+		display: flex;
+	}
+
+	div.cart-item-description-container {
+		grid-template-areas:
+			"item-name item-details"
+			"quantity-price quantity-price";
+		grid-template-columns: 1fr 1fr;
+		column-gap: 50px;
+	}
+
+	h2 {
+		min-width: 14rem;
+		padding-top: 0.5rem;
+	}
+
+	div.cart-item-image-container {
+		max-width: 250px;
+		aspect-ratio: 1 / 1;
+	}
 }
 </style>

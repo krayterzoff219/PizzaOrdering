@@ -50,7 +50,10 @@ export default {
 			alertText: "",
 		};
 	},
-	created() {
+	beforeCreate() {
+		if (Object.keys(this.$store.state.cart).length) {
+			this.$store.commit("CLEAR_CART");
+		}
 		menuService.getPizzaOptions(); // TODO: .catch alert if error
 		menuService.getMenuItems(); // TODO: .catch alert if error
 	},

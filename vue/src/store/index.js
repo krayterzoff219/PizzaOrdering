@@ -100,6 +100,9 @@ export default new Vuex.Store({
 			state.crusts = [];
 			state.toppings = [];
 		},
+		CLEAR_CART(state) {
+			state.cart = {};
+		},
 		LOAD_PENDING_ORDERS(state, payload) {
 			state.pendingOrders = payload;
 		},

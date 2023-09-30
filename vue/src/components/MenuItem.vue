@@ -6,7 +6,7 @@
 		<div class="customer-menu-item-description-container">
 			<div class="name-price-container">
 				<h2>{{ name }}</h2>
-				<h3>$ {{ price.toFixed(2) }}</h3>
+				<h3>${{ price.toFixed(2) }}</h3>
 			</div>
 			<small-button
 				buttonText="Add to Order"
