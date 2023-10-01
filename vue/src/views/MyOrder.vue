@@ -66,7 +66,7 @@ export default {
 
 <style scoped>
 section.customer-section#order-section {
-	width: 97%;
+	width: var(--section-width);
 	margin-bottom: var(--header-footer-inside-margin);
 	max-width: 60rem;
 }

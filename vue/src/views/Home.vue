@@ -20,7 +20,7 @@ export default {
 
 <style>
 section.home {
-	width: 97%;
+	width: var(--section-width);
 	background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826");
 	background-position: center;
 	background-repeat: no-repeat;

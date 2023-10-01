@@ -179,7 +179,7 @@ export default {
 
 <style scoped>
 section.customer-section#checkout-section {
-	width: 97%;
+	width: var(--section-width);
 	margin-bottom: var(--header-footer-inside-margin);
 }
 

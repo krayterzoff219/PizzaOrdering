@@ -1,0 +1,7 @@
+html {
+	--section-border-radius: 25px;
+	--header-footer-inside-margin: min(1.5vw, 20px);
+	--header-height: calc(10vh + var(--header-footer-inside-margin));
+	--header-footer-width: 97%;
+	--section-width: var(--header-footer-width);
+}

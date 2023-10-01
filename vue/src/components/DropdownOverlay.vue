@@ -50,10 +50,10 @@ div#page-cover {
 div#drop-down-menu {
 	position: fixed;
 	top: 0;
-	right: 1.5%;
+	right: 1.5%; /* because the header is 97% of viewport width and centered */
 	z-index: 1001;
 	max-width: 745px; /* 97% of 768px */
-	width: 97%;
+	width: var(--header-footer-width);
 	background-color: var(--dark-color);
 	border-bottom-left-radius: var(--section-border-radius);
 	border-bottom-right-radius: var(--section-border-radius);

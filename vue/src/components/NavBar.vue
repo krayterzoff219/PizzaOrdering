@@ -109,8 +109,8 @@ export default {
 
 <style scoped>
 div#nav-wrapper {
-	height: calc(10% + var(--header-footer-inside-margin));
-	width: 97%;
+	height: var(--header-height);
+	width: var(--header-footer-width);
 	padding-bottom: var(--header-footer-inside-margin);
 	background-color: var(--dark-color);
 	position: fixed;

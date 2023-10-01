@@ -29,8 +29,8 @@ div.social-icons {
 	align-items: center;
 	padding: 5px 20px;
 	background-color: transparent;
-	border-top-right-radius: 25px;
-	border-top-left-radius: 25px;
+	border-top-right-radius: var(--section-border-radius);
+	border-top-left-radius: var(--section-border-radius);
 	gap: 10px;
 	background-color: var(--white-color);
 }
@@ -39,7 +39,7 @@ div.social-icons {
 	div.social-icons {
 		border-top-left-radius: 0;
 		align-self: flex-end;
-		border-bottom-left-radius: 25px;
+		border-bottom-left-radius: var(--section-border-radius);
 		position: absolute;
 	}
 }

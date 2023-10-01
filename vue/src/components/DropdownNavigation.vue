@@ -97,10 +97,10 @@ li {
 }
 
 ul {
-	padding: var(--list-item-horizontal-padding);
 	text-align: center;
 	--list-item-between-padding: 25px;
 	--list-item-horizontal-padding: 25px;
+	padding: var(--list-item-horizontal-padding);
 }
 
 li {

@@ -33,7 +33,7 @@ footer {
 		align-items: center;
 		font-size: 0.75rem;
 		padding: 0 15px;
-		width: 97%;
+		width: var(--header-footer-width);
 		font-weight: bold;
 	}
 

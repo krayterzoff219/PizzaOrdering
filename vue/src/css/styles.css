@@ -1,4 +1,5 @@
-@import url(variables.css);
+@import url(brand-variables.css);
+@import url(spacing-variables.css);
 @import url(css-reset.css);
 
 * {
