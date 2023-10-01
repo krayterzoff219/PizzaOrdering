@@ -84,7 +84,6 @@ i.icon-hide {
 	transition: transform 0.125s ease-out;
 }
 
-.grow:hover,
 .grow:focus {
 	transform: scale(1.05);
 }
@@ -93,7 +92,13 @@ i.icon-hide {
 	transform: scale(0.9);
 }
 
-.jump:hover {
-	transform: translateY(-2px);
-	transition: transform 0.125s ease-out;
+@media (hover: hover) {
+	.grow:hover {
+		transform: scale(1.05);
+	}
+
+	.jump:hover {
+		transform: translateY(-2px);
+		transition: transform 0.125s ease-out;
+	}
 }
