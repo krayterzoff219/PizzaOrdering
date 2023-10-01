@@ -39,11 +39,8 @@ export default {
 	},
 	methods: {
 		addToOrder() {
-			this.$store.dispatch("addItemsToCart", this.menuItem);
-		
+			this.$store.dispatch("addItemToCart", this.menuItem);
 		},
-
-
 	},
 	computed: {
 		isMenuItemAvailable() {

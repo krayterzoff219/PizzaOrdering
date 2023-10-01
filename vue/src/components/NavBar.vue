@@ -167,6 +167,7 @@ nav a.push-left {
 nav img {
 	height: 100%;
 	display: block;
+	max-width: 100%;
 }
 
 nav a.hide-when-small-screen {
@@ -187,13 +188,6 @@ nav i {
 	}
 	nav i.show-when-small-screen {
 		display: none;
-	}
-}
-
-@media only screen and (max-width: 375px) {
-	a.push-left {
-		padding-right: 10px;
-		padding-left: 10px !important;
 	}
 }
 </style>

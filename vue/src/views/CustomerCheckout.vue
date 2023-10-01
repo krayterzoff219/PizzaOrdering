@@ -1,123 +1,121 @@
 <template>
 	<section
-		class="input-section"
+		class="customer-section"
 		id="checkout-section">
 		<horizontal-hero></horizontal-hero>
 		<div class="checkout-inputs">
 			<h1>Checkout</h1>
-			<div class="checkout-wrapper">
+			<form
+				class="checkout-wrapper"
+				@submit.prevent="placeOrder">
 				<user-input
-					label="Cardholder name: "
-					inputId="Cardholder-name"
+					label="Cardholder Name"
+					inputId="cardholder-name"
 					inputType="text"
+					:isRequired="true"
 					v-model="cardholderName" />
 
 				<user-input
-					label="Card Number:"
-					inputId="Card-Number"
+					:isRequired="true"
+					label="Card Number"
+					inputId="card-number"
 					inputType="number"
 					v-model="cardNumber" />
 
 				<user-input
-					label="Exp Date:"
+					:isRequired="true"
+					label="Expiration Date"
 					inputId="exp-date"
-					inputType="number"
+					inputType="text"
 					v-model="expDate" />
 
 				<user-input
-					label="CVC"
-					inputId="CVC"
+					:isRequired="true"
+					label="Security Code (CVC)"
+					inputId="cvc"
 					inputType="number"
 					v-model="cvc" />
 
 				<user-input
+					:isRequired="true"
 					label="Address"
-					inputId="Address"
+					inputId="address"
 					inputType="text"
 					v-model="address" />
 
 				<user-input
+					:isRequired="true"
 					label="City"
-					inputId="City"
+					inputId="city"
 					inputType="text"
 					v-model="city" />
 
 				<user-input
-					label="State:"
-					inputId="State"
+					:isRequired="true"
+					label="State"
+					inputId="state"
 					inputType="text"
 					v-model="state" />
 
 				<user-input
-					label="Zip-Code"
-					inputId="Zip-Code"
+					:isRequired="true"
+					label="ZIP Code"
+					inputId="zip-code"
 					inputType="number"
 					v-model="zipCode" />
 
-                <user-input
-					label="Phone number:"
-					inputId="Phone-number"
+				<user-input
+					:isRequired="true"
+					label="Phone Number"
+					inputId="phone-number"
 					inputType="number"
 					v-model="phoneNumber" />
 
-                    <user-input
+				<user-input
+					:isRequired="true"
 					label="Email"
 					inputId="email"
-					inputType="text"
+					inputType="email"
 					v-model="email" />
 
-                    
-
-				<!-- <user-input label="Date:"
-                                inputId="Date"
-                                inputType="datetime-local"
-                                /> -->
-
 				<div class="delivery">
-					<!-- <user-input label="Date:"
-                                inputId="Date"
-                                inputType="datetime-local"/> -->
-
 					<p>How would you like to receive your pizza?</p>
-					<form>
+					<div>
 						<input
 							type="radio"
-							id="Pick-up" />
-						<label for="Pick-up">Pick-up</label>
+							id="pick-up"
+							namd="delivery"
+							v-model="isDelivery"
+							:value="false" />
+						<label for="pick-up">Pick-up</label>
+					</div>
+					<div>
 						<input
 							type="radio"
-							id="Delivery" />
-						<label for="Delivery">Delivery</label>
-					</form>
+							id="delivery"
+							namd="delivery"
+							v-model="isDelivery"
+							:value="true" />
+						<label for="delivery">Delivery</label>
+					</div>
 				</div>
-			</div>
-			<checkout-amount/>
 
-			<div class="place-order-button" >
-				<small-button	
-                    buttonText="place order"
-                    :clickHandler="placeOrder"
-                    />
-			</div>
+				<checkout-amount
+					buttonText="Place Order"
+					buttonType="submit" />
+			</form>
 		</div>
-
-		
-
 	</section>
 </template>
 
 <script>
 import UserInput from "../components/UserInput.vue";
 import HorizontalHero from "../components/HorizontalHero.vue";
-import orderService from "../services/OrderService.js"
-import SmallButton from '../components/SmallButton.vue';
-
-import CheckoutAmount from '../components/CheckoutAmount.vue';
-
-
+import orderService from "../services/OrderService.js";
+import CheckoutAmount from "../components/CheckoutAmount.vue";
 
 export default {
-	components: { UserInput, HorizontalHero, SmallButton, CheckoutAmount },
+	components: { UserInput, HorizontalHero, CheckoutAmount },
 	data() {
 		return {
 			cardholderName: "",
@@ -129,39 +127,34 @@ export default {
 			state: "",
 			zipCode: "",
 			isDelivery: false,
-            email: "",
-            phoneNumber: ""
-        }
-    },
+			email: "",
+			phoneNumber: "",
+		};
+	},
 
-    methods: {
+	methods: {
+		placeOrder() {
+			const order = {};
 
-        placeOrder(){
+			order.isDelivery = this.isDelivery;
+			order.address = this.address;
+			order.phoneNumber = this.phoneNumber;
+			order.email = this.email;
+			order.menuItems = [];
 
-            const order = {}
+			order.customPizzas = [];
 
-            order.isDelivery = this.isDelivery;
-            order.address = this.address;
-            order.phoneNumber = this.phoneNumber;
-            order.email = this.email;
-            order.menuItems = [];
+			const pizzas = Object.values(this.$store.state.cart);
+			for (const pizza of pizzas) {
+				order.menuItems.push({
+					itemId: pizza.id,
+					quantity: pizza.quantity,
+				});
+			}
 
-            order.customPizzas = [];
-
-            const pizzas = Object.values(this.$store.state.cart)
-            for(const pizza of pizzas){
-                order.menuItems.push({
-                    itemId: pizza.id, 
-                    quantity: pizza.quantity
-
-                })
-            }
-
-            orderService.createPendingOrder(order);
-
-        }
-    
-    },        
+			orderService.createPendingOrder(order);
+		},
+	},
 
 	computed: {
 		total() {
@@ -172,26 +165,28 @@ export default {
 			return this.$store.state.subtotal * 0.08;
 		},
 	},
+	beforeCreate() {
+		if (!Object.keys(this.$store.state.cart).length) {
+			this.$router.push({ name: "customer-menu" });
+		}
+	},
 };
 </script>
 
 <style scoped>
-section.input-section#checkout-section {
+section.customer-section#checkout-section {
 	width: 97%;
 	margin-bottom: var(--header-footer-inside-margin);
 }
 
 @media only screen and (min-width: 600px) {
-	section.input-section#checkout-section {
+	section.customer-section#checkout-section {
 		max-width: min(80%, 60rem);
 	}
 }
 
-
-
-
-.delivery > form {
-	text-align: center;
+.delivery > div {
+	padding-top: 5px;
 }
 
 .checkout-wrapper .form-input-group {
@@ -199,7 +194,7 @@ section.input-section#checkout-section {
 	padding-left: 20px;
 }
 
-.place-order-button{
+.place-order-button {
 	display: block;
 	text-align: right;
 	margin-right: 195px;
@@ -216,7 +211,6 @@ section.input-section#checkout-section {
 	height: 100px;
 	width: 300px;
 }
-
 
 .delivery {
 	display: flex;

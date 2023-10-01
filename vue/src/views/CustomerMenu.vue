@@ -59,11 +59,12 @@ section.customer-section#menu-section {
 	background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826");
 }
 
-div.menu-wrapper {
+section.customer-section#menu-section div.menu-wrapper {
 	display: flex;
 	flex-direction: column;
 	max-width: 50rem;
 	border: 5px solid var(--dark-color);
+	margin-bottom: 75px;
 }
 /*    ^ about this border
       ^ 

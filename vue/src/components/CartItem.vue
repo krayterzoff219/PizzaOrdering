@@ -97,10 +97,10 @@ export default {
 	},
 	methods: {
 		incrementQuantity() {
-			this.$store.dispatch("addItemsToCart", this.cartItem);
+			this.$store.dispatch("addItemToCart", this.cartItem);
 		},
 		decrementQuantity() {
-			this.$store.dispatch("removeItemsFromCart", this.cartItem);
+			this.$store.dispatch("removeItemFromCart", this.cartItem);
 		},
 	},
 };
