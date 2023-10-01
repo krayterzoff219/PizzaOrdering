@@ -31,9 +31,14 @@
 					!isEmployeePage &&
 					!isOrderPage &&
 					Object.keys($store.state.cart).length
-				"
-				><small-button buttonText="My Order"></small-button
-			></router-link>
+				">
+				<!-- <small-button
+					:buttonText="`My Order (${cartItemQuantity})`"></small-button> -->
+				<small-button
+					:buttonText="`My Order ($${$store.state.subtotal.toFixed(
+						2
+					)})`"></small-button>
+			</router-link>
 			<router-link
 				class="hide-when-small-screen"
 				:to="{ name: 'checkout' }"
@@ -98,6 +103,15 @@ export default {
 		isLoggedIn() {
 			return this.$store.state.token != "";
 		},
+		// cartItemQuantity() {
+		// 	return Object.values(this.$store.state.cart).reduce(
+		// 		(accumulator, item) => {
+		// 			console.log(item);
+		// 			return accumulator + item.quantity;
+		// 		},
+		// 		0
+		// 	);
+		// },
 	},
 	methods: {
 		showDropDownMenu() {

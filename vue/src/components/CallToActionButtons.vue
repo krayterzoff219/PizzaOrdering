@@ -17,7 +17,7 @@
 				routeName="home" />
 			<cta-button
 				v-if="isMenuPage && !isCartEmpty"
-				buttonText="My Order"
+				:buttonText="`My Order (${cartItemQuantity})`"
 				routeName="my-order" />
 			<!-- ********************* BUTTONS ON MY ORDER ********************* -->
 			<cta-button
@@ -31,7 +31,7 @@
 			<!-- ********************* BUTTONS ON CHECKOUT ********************* -->
 			<cta-button
 				v-if="isCheckoutPage"
-				buttonText="My Order"
+				:buttonText="`My Order (${cartItemQuantity})`"
 				routeName="my-order" />
 			<cta-button
 				v-if="isCheckoutPage"
@@ -78,6 +78,15 @@ export default {
 		isCartEmpty() {
 			return !Object.keys(this.$store.state.cart).length;
 		},
+		cartItemQuantity() {
+			return Object.values(this.$store.state.cart).reduce(
+				(accumulator, item) => {
+					console.log(item);
+					return accumulator + item.quantity;
+				},
+				0
+			);
+		},
 	},
 };
 </script>
@@ -115,18 +124,5 @@ div#cta-buttons {
 	padding: var(--button-gap-top) var(--button-gap-horizontal-outer)
 		var(--button-gap-bottom) var(--button-gap-horizontal-outer);
 	gap: var(--button-gap-horizontal-inner);
-}
-
-button.cta-button {
-	width: 100%;
-	height: 100%;
-	border-radius: var(--section-border-radius);
-	background-color: var(--primary-color);
-	cursor: pointer;
-	border-color: var(--primary-color);
-	color: var(--white-color);
-	font-size: 1.5rem;
-	/* font-family: var(--loud-font-family); */
-	font-weight: bold;
 }
 </style>
