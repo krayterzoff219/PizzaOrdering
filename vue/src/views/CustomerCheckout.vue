@@ -103,6 +103,7 @@
 				<checkout-amount
 					buttonText="Place Order"
 					buttonType="submit" />
+				<call-to-action-buttons :formSubmissionButton="true" />
 			</form>
 		</div>
 	</section>
@@ -113,9 +114,15 @@ import UserInput from "../components/UserInput.vue";
 import HorizontalHero from "../components/HorizontalHero.vue";
 import orderService from "../services/OrderService.js";
 import CheckoutAmount from "../components/CheckoutAmount.vue";
+import CallToActionButtons from "../components/CallToActionButtons.vue";
 
 export default {
-	components: { UserInput, HorizontalHero, CheckoutAmount },
+	components: {
+		UserInput,
+		HorizontalHero,
+		CheckoutAmount,
+		CallToActionButtons,
+	},
 	data() {
 		return {
 			cardholderName: "",

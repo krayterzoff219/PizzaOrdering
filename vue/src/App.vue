@@ -3,7 +3,7 @@
 		<nav-bar />
 		<dropdown-overlay />
 		<router-view />
-		<call-to-action-button />
+		<call-to-action-buttons v-if="$route.name !== 'checkout'" />
 		<the-footer />
 	</div>
 </template>
@@ -12,9 +12,14 @@
 import TheFooter from "./components/TheFooter.vue";
 import NavBar from "./components/NavBar.vue";
 import DropdownOverlay from "./components/DropdownOverlay.vue";
-import CallToActionButton from "./components/CallToActionButton.vue";
+import CallToActionButtons from "./components/CallToActionButtons.vue";
 export default {
-	components: { NavBar, TheFooter, DropdownOverlay, CallToActionButton },
+	components: {
+		NavBar,
+		TheFooter,
+		DropdownOverlay,
+		CallToActionButtons,
+	},
 };
 </script>
 

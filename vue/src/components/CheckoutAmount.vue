@@ -51,4 +51,14 @@ div.checkout-amount #total {
 p span {
 	font-weight: bold;
 }
+
+div.checkout-amount button {
+	display: none;
+}
+
+@media only screen and (min-width: 768px) {
+	div.checkout-amount button {
+		display: inline-block;
+	}
+}
 </style>
