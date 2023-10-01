@@ -103,8 +103,9 @@ div.testimonial-carousel {
 	border: 5px solid var(--dark-color);
 	padding: 10px 30px;
 	text-align: justify;
-	min-height: 45%;
+	/* min-height: 45%; */
 	color: var(--dark-color);
+	flex: 1;
 }
 
 div#quotation-marks {

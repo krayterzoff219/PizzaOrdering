@@ -1,9 +1,10 @@
 <template>
 	<div id="app">
-		<nav-bar></nav-bar>
-		<dropdown-overlay></dropdown-overlay>
+		<nav-bar />
+		<dropdown-overlay />
 		<router-view />
-		<the-footer></the-footer>
+		<call-to-action-button />
+		<the-footer />
 	</div>
 </template>
 
@@ -11,8 +12,9 @@
 import TheFooter from "./components/TheFooter.vue";
 import NavBar from "./components/NavBar.vue";
 import DropdownOverlay from "./components/DropdownOverlay.vue";
+import CallToActionButton from "./components/CallToActionButton.vue";
 export default {
-	components: { NavBar, TheFooter, DropdownOverlay },
+	components: { NavBar, TheFooter, DropdownOverlay, CallToActionButton },
 };
 </script>
 

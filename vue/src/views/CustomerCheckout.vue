@@ -178,11 +178,6 @@ export default {
 </script>
 
 <style scoped>
-section.customer-section#checkout-section {
-	width: var(--section-width);
-	margin-bottom: var(--header-footer-inside-margin);
-}
-
 @media only screen and (min-width: 600px) {
 	section.customer-section#checkout-section {
 		max-width: min(80%, 60rem);

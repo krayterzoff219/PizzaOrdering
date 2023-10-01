@@ -42,9 +42,3 @@ export default {
 	},
 };
 </script>
-
-<style scoped>
-section.employee-section#pizza-options {
-	margin-bottom: var(--header-footer-inside-margin);
-}
-</style>

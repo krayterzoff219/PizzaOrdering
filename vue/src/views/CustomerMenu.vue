@@ -53,9 +53,6 @@ export default {
 
 <style scoped>
 section.customer-section#menu-section {
-	width: var(--section-width);
-	margin-bottom: var(--header-footer-inside-margin);
-	max-width: 60rem;
 	background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826");
 }
 

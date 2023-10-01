@@ -20,17 +20,17 @@ export default {
 
 <style>
 section.home {
-	width: var(--section-width);
 	background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	margin-bottom: var(--header-footer-inside-margin);
 	margin-left: auto;
 	margin-right: auto;
 	flex-grow: 1;
 	flex-shrink: 1;
 	max-width: 1400px;
+	display: flex;
+	flex-direction: column;
 }
 .home-body {
 	display: flex;
@@ -38,6 +38,7 @@ section.home {
 	border-radius: var(--section-border-radius);
 	background-color: transparent;
 	height: 100%;
+	flex: 1;
 }
 
 div#home-hero {
@@ -45,9 +46,8 @@ div#home-hero {
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	height: 100px;
-	flex-grow: 1;
-	flex-shrink: 1;
+	flex-basis: 100px;
+	flex: 2;
 	border-bottom: 10px solid var(--dark-color);
 }
 

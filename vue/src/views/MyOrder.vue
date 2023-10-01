@@ -63,11 +63,3 @@ export default {
 	},
 };
 </script>
-
-<style scoped>
-section.customer-section#order-section {
-	width: var(--section-width);
-	margin-bottom: var(--header-footer-inside-margin);
-	max-width: 60rem;
-}
-</style>
