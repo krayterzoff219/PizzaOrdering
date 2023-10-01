@@ -13,7 +13,22 @@
 				:key="item.id"
 				:cartItem="item"
 				:quantity="item.quantity"></cart-item>
+
+				<checkout-amount/>
+
+			<div class="checkout-button">
+				<router-link to="/checkout">
+				<small-button
+				id="buttonText"
+				buttonText="Checkout"/>
+				</router-link>
+			</div>
+			
 		</div>
+
+		
+
+		
 	</section>
 </template>
 
@@ -21,12 +36,22 @@
 import AnAlert from "../components/AnAlert.vue";
 import CartItem from "../components/CartItem.vue";
 import HorizontalHero from "../components/HorizontalHero.vue";
+import CheckoutAmount from "../components/CheckoutAmount.vue"
+import SmallButton from '../components/SmallButton.vue';
+
+
 
 export default {
+
+
+
 	components: {
 		AnAlert,
 		HorizontalHero,
 		CartItem,
+		CheckoutAmount,
+		SmallButton
+		
 	},
 	name: "my-order",
 	data() {
@@ -66,4 +91,12 @@ section.customer-section#order-section {
 	max-width: 60rem;
 	/* background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826"); */
 }
+
+.checkout-button{
+	display: block;
+	text-align: right;
+	margin-right: 200px;
+}
+
+
 </style>
