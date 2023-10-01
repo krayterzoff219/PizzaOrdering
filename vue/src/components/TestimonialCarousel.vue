@@ -139,14 +139,15 @@ div.carousel-buttons {
 }
 
 div.carousel-buttons i {
-	cursor: pointer;
 	color: var(--dark-color);
 }
 
 div.carousel-buttons i:first-child {
+	cursor: pointer;
 	padding-right: var(--arrow-button-padding);
 }
 div.carousel-buttons i:last-child {
+	cursor: pointer;
 	padding-left: var(--arrow-button-padding);
 }
 

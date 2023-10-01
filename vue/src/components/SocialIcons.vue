@@ -1,10 +1,18 @@
 <template>
 	<div class="social-icons">
-		<a href="https://twitter.com/"><i class="fa-brands fa-x-twitter"></i></a>
-		<a href="https://www.instagram.com/"
+		<a
+			class="jump"
+			href="https://twitter.com/"
+			><i class="fa-brands fa-x-twitter"></i
+		></a>
+		<a
+			class="jump"
+			href="https://www.instagram.com/"
 			><i class="fa-brands fa-instagram"></i
 		></a>
-		<a href="https://www.facebook.com/"
+		<a
+			class="jump"
+			href="https://www.facebook.com/"
 			><i class="fa-brands fa-facebook-f"></i
 		></a>
 	</div>
