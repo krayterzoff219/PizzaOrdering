@@ -2,12 +2,16 @@
 	<div class="testimonial-carousel">
 		<div id="quotation-marks"><i class="fa-solid fa-quote-left"></i></div>
 		<template v-for="(testimonial, index) in testimonials">
-			<p
-				:key="`${index}-text`"
-				v-show="index === currentIndex"
-				class="testimonial-text">
-				{{ testimonial.text }}
-			</p>
+			<div
+				class="testimonial-text-wrapper"
+				:key="`${index}-text-wrapper`"
+				v-show="index === currentIndex">
+				<p
+					:key="`${index}-text`"
+					class="testimonial-text">
+					{{ testimonial.text }}
+				</p>
+			</div>
 			<p
 				:key="`${index}-author`"
 				v-show="index === currentIndex"
@@ -114,9 +118,16 @@ div#quotation-marks {
 	padding-bottom: 10px;
 }
 
-p.testimonial-text {
-	max-width: 40em;
+div.testimonial-text-wrapper {
 	height: 85px;
+	max-width: 40em;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	overflow: hidden;
+}
+
+p.testimonial-text {
 	overflow: hidden;
 	display: -webkit-box;
 	-webkit-line-clamp: 4;
@@ -168,6 +179,16 @@ div.carousel-buttons i.carousel-dot {
 		border: 0;
 		border-top: 10px solid var(--dark-color);
 		margin-bottom: 0;
+	}
+}
+
+@media only screen and (min-height: 768px) and (max-width: 500px) {
+	div.testimonial-text-wrapper {
+		height: 200px;
+	}
+
+	p.testimonial-text {
+		-webkit-line-clamp: 9;
 	}
 }
 </style>
