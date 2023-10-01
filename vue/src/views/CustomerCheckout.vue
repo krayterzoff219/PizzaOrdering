@@ -5,13 +5,10 @@
 		<horizontal-hero></horizontal-hero>
 		<div class="checkout-inputs">
 			<h1>Checkout</h1>
-			<form
-				class="checkout-wrapper"
-				@submit.prevent="placeOrder">
+			<div class="checkout-wrapper">
 				<user-input
 					label="Cardholder name: "
 					inputId="Cardholder-name"
-					:isRequired="true"
 					inputType="text"
 					v-model="cardholderName" />
 
@@ -19,40 +16,34 @@
 					label="Card Number:"
 					inputId="Card-Number"
 					inputType="number"
-					:isRequired="true"
 					v-model="cardNumber" />
 
 				<user-input
 					label="Exp Date:"
 					inputId="exp-date"
 					inputType="number"
-					:isRequired="true"
 					v-model="expDate" />
 
 				<user-input
 					label="CVC"
 					inputId="CVC"
 					inputType="number"
-					:isRequired="true"
 					v-model="cvc" />
 
 				<user-input
 					label="Address"
 					inputId="Address"
-					:isRequired="true"
 					inputType="text"
 					v-model="address" />
 
 				<user-input
-					inputType="text"
 					label="City"
 					inputId="City"
-					:isRequired="true"
+					inputType="text"
 					v-model="city" />
 
 				<user-input
 					label="State:"
-					:isRequired="true"
 					inputId="State"
 					inputType="text"
 					v-model="state" />
@@ -60,64 +51,73 @@
 				<user-input
 					label="Zip-Code"
 					inputId="Zip-Code"
-					:isRequired="true"
 					inputType="number"
 					v-model="zipCode" />
 
-				<user-input
+                <user-input
 					label="Phone number:"
 					inputId="Phone-number"
 					inputType="number"
-					v-model="phoneNumber"
-					:isRequired="true" />
+					v-model="phoneNumber" />
 
-				<user-input
+                    <user-input
 					label="Email"
 					inputId="email"
 					inputType="text"
-					v-model="email"
-					:isRequired="true" />
+					v-model="email" />
+
+                    
+
+				<!-- <user-input label="Date:"
+                                inputId="Date"
+                                inputType="datetime-local"
+                                /> -->
 
 				<div class="delivery">
+					<!-- <user-input label="Date:"
+                                inputId="Date"
+                                inputType="datetime-local"/> -->
+
 					<p>How would you like to receive your pizza?</p>
-					<div>
+					<form>
 						<input
 							type="radio"
-							v-model="isDelivery"
-							:value="false"
 							id="Pick-up" />
 						<label for="Pick-up">Pick-up</label>
 						<input
 							type="radio"
-							v-model="isDelivery"
-							:value="true"
 							id="Delivery" />
 						<label for="Delivery">Delivery</label>
-					</div>
+					</form>
 				</div>
-			</form>
-			<div class="total-payment">
-				<p id="subtotal">
-					<span>Subtotal:</span>&nbsp; ${{ $store.state.subtotal.toFixed(2) }}
-				</p>
-				<p id="tax"><span>Tax:</span>&nbsp; ${{ tax.toFixed(2) }}</p>
-				<p id="total"><span>Total: </span>&nbsp; ${{ total.toFixed(2) }}</p>
-				<small-button
-					buttonText="place order"
-					buttonType="submit" />
+			</div>
+			<checkout-amount/>
+
+			<div class="place-order-button" >
+				<small-button	
+                    buttonText="place order"
+                    :clickHandler="placeOrder"
+                    />
 			</div>
 		</div>
+
+		
+
 	</section>
 </template>
 
 <script>
 import UserInput from "../components/UserInput.vue";
 import HorizontalHero from "../components/HorizontalHero.vue";
-import orderService from "../services/OrderService.js";
-import SmallButton from "../components/SmallButton.vue";
+import orderService from "../services/OrderService.js"
+import SmallButton from '../components/SmallButton.vue';
+
+import CheckoutAmount from '../components/CheckoutAmount.vue';
+
+
 
 export default {
-	components: { UserInput, HorizontalHero, SmallButton },
+	components: { UserInput, HorizontalHero, SmallButton, CheckoutAmount },
 	data() {
 		return {
 			cardholderName: "",
@@ -129,40 +129,39 @@ export default {
 			state: "",
 			zipCode: "",
 			isDelivery: false,
-			email: "",
-			phoneNumber: "",
-		};
-	},
+            email: "",
+            phoneNumber: ""
+        }
+    },
 
-	methods: {
-		validateInputs() {},
-		placeOrder() {
-			const order = {};
+    methods: {
 
-			order.isDelivery = this.isDelivery;
-			order.address = this.address;
-			order.phoneNumber = this.phoneNumber;
-			order.email = this.email;
-			order.menuItems = [];
+        placeOrder(){
 
-			order.customPizzas = [];
+            const order = {}
 
-			const pizzas = Object.values(this.$store.state.cart);
-			for (const pizza of pizzas) {
-				order.menuItems.push({
-					itemId: pizza.id,
-					quantity: pizza.quantity,
-				});
-			}
+            order.isDelivery = this.isDelivery;
+            order.address = this.address;
+            order.phoneNumber = this.phoneNumber;
+            order.email = this.email;
+            order.menuItems = [];
 
-			orderService.createPendingOrder(order);
-		},
-	},
-	beforeCreate() {
-		if (!Object.keys(this.$store.state.cart).length) {
-			this.$router.push({ name: "customer-menu" });
-		}
-	},
+            order.customPizzas = [];
+
+            const pizzas = Object.values(this.$store.state.cart)
+            for(const pizza of pizzas){
+                order.menuItems.push({
+                    itemId: pizza.id, 
+                    quantity: pizza.quantity
+
+                })
+            }
+
+            orderService.createPendingOrder(order);
+
+        }
+    
+    },        
 
 	computed: {
 		total() {
@@ -188,13 +187,22 @@ section.input-section#checkout-section {
 	}
 }
 
-.delivery > div {
+
+
+
+.delivery > form {
 	text-align: center;
 }
 
 .checkout-wrapper .form-input-group {
 	padding-right: 20px;
 	padding-left: 20px;
+}
+
+.place-order-button{
+	display: block;
+	text-align: right;
+	margin-right: 195px;
 }
 
 .checkout-wrapper {
@@ -209,35 +217,11 @@ section.input-section#checkout-section {
 	width: 300px;
 }
 
-.total-payment {
-	display: flex;
-	align-items: flex-end;
-	flex-direction: column;
-	text-align: right;
-	margin-right: 10%;
-	margin-bottom: 20px;
-	padding-top: 30px;
-}
 
 .delivery {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
 	text-align: center;
-}
-
-div.delivery > div {
-	padding-top: 5px;
-}
-
-.total-payment #tax {
-	padding: 3px 0;
-}
-.total-payment #total {
-	padding-bottom: 15px;
-}
-
-p span {
-	font-weight: bold;
 }
 </style>
