@@ -181,7 +181,7 @@ nav i {
 	cursor: pointer;
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 768px) {
 	nav a.hide-when-small-screen {
 		display: inline;
 	}

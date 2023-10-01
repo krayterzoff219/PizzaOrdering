@@ -5,10 +5,13 @@
 		<horizontal-hero></horizontal-hero>
 		<div class="checkout-inputs">
 			<h1>Checkout</h1>
-			<div class="checkout-wrapper">
+			<form
+				class="checkout-wrapper"
+				@submit.prevent="placeOrder">
 				<user-input
 					label="Cardholder name: "
 					inputId="Cardholder-name"
+					:isRequired="true"
 					inputType="text"
 					v-model="cardholderName" />
 
@@ -16,34 +19,40 @@
 					label="Card Number:"
 					inputId="Card-Number"
 					inputType="number"
+					:isRequired="true"
 					v-model="cardNumber" />
 
 				<user-input
 					label="Exp Date:"
 					inputId="exp-date"
 					inputType="number"
+					:isRequired="true"
 					v-model="expDate" />
 
 				<user-input
 					label="CVC"
 					inputId="CVC"
 					inputType="number"
+					:isRequired="true"
 					v-model="cvc" />
 
 				<user-input
 					label="Address"
 					inputId="Address"
+					:isRequired="true"
 					inputType="text"
 					v-model="address" />
 
 				<user-input
+					inputType="text"
 					label="City"
 					inputId="City"
-					inputType="text"
+					:isRequired="true"
 					v-model="city" />
 
 				<user-input
 					label="State:"
+					:isRequired="true"
 					inputId="State"
 					inputType="text"
 					v-model="state" />
@@ -51,53 +60,51 @@
 				<user-input
 					label="Zip-Code"
 					inputId="Zip-Code"
+					:isRequired="true"
 					inputType="number"
 					v-model="zipCode" />
 
-                <user-input
+				<user-input
 					label="Phone number:"
 					inputId="Phone-number"
 					inputType="number"
-					v-model="phoneNumber" />
+					v-model="phoneNumber"
+					:isRequired="true" />
 
-                    <user-input
+				<user-input
 					label="Email"
 					inputId="email"
 					inputType="text"
-					v-model="email" />
-
-                    <small-button
-                    buttonText="place order"
-                    :clickHandler="placeOrder"
-                    />
-
-				<!-- <user-input label="Date:"
-                                inputId="Date"
-                                inputType="datetime-local"
-                                /> -->
+					v-model="email"
+					:isRequired="true" />
 
 				<div class="delivery">
-					<!-- <user-input label="Date:"
-                                inputId="Date"
-                                inputType="datetime-local"/> -->
-
 					<p>How would you like to receive your pizza?</p>
-					<form>
+					<div>
 						<input
 							type="radio"
+							v-model="isDelivery"
+							:value="false"
 							id="Pick-up" />
 						<label for="Pick-up">Pick-up</label>
 						<input
 							type="radio"
+							v-model="isDelivery"
+							:value="true"
 							id="Delivery" />
 						<label for="Delivery">Delivery</label>
-					</form>
+					</div>
 				</div>
-			</div>
+			</form>
 			<div class="total-payment">
-				<p id="subtotal">Subtotal: ${{ $store.state.subtotal.toFixed(2) }}</p>
-				<p id="tax">Tax: ${{ tax.toFixed(2) }}</p>
-				<p id="total">Total: ${{ total.toFixed(2) }}</p>
+				<p id="subtotal">
+					<span>Subtotal:</span>&nbsp; ${{ $store.state.subtotal.toFixed(2) }}
+				</p>
+				<p id="tax"><span>Tax:</span>&nbsp; ${{ tax.toFixed(2) }}</p>
+				<p id="total"><span>Total: </span>&nbsp; ${{ total.toFixed(2) }}</p>
+				<small-button
+					buttonText="place order"
+					buttonType="submit" />
 			</div>
 		</div>
 	</section>
@@ -106,10 +113,8 @@
 <script>
 import UserInput from "../components/UserInput.vue";
 import HorizontalHero from "../components/HorizontalHero.vue";
-import orderService from "../services/OrderService.js"
-import SmallButton from '../components/SmallButton.vue';
-
-
+import orderService from "../services/OrderService.js";
+import SmallButton from "../components/SmallButton.vue";
 
 export default {
 	components: { UserInput, HorizontalHero, SmallButton },
@@ -124,39 +129,40 @@ export default {
 			state: "",
 			zipCode: "",
 			isDelivery: false,
-            email: "",
-            phoneNumber: ""
-        }
-    },
+			email: "",
+			phoneNumber: "",
+		};
+	},
 
-    methods: {
+	methods: {
+		validateInputs() {},
+		placeOrder() {
+			const order = {};
 
-        placeOrder(){
+			order.isDelivery = this.isDelivery;
+			order.address = this.address;
+			order.phoneNumber = this.phoneNumber;
+			order.email = this.email;
+			order.menuItems = [];
 
-            const order = {}
+			order.customPizzas = [];
 
-            order.isDelivery = this.isDelivery;
-            order.address = this.address;
-            order.phoneNumber = this.phoneNumber;
-            order.email = this.email;
-            order.menuItems = [];
+			const pizzas = Object.values(this.$store.state.cart);
+			for (const pizza of pizzas) {
+				order.menuItems.push({
+					itemId: pizza.id,
+					quantity: pizza.quantity,
+				});
+			}
 
-            order.customPizzas = [];
-
-            const pizzas = Object.values(this.$store.state.cart)
-            for(const pizza of pizzas){
-                order.menuItems.push({
-                    itemId: pizza.id, 
-                    quantity: pizza.quantity
-
-                })
-            }
-
-            orderService.createPendingOrder(order);
-
-        }
-    
-    },        
+			orderService.createPendingOrder(order);
+		},
+	},
+	beforeCreate() {
+		if (!Object.keys(this.$store.state.cart).length) {
+			this.$router.push({ name: "customer-menu" });
+		}
+	},
 
 	computed: {
 		total() {
@@ -182,7 +188,7 @@ section.input-section#checkout-section {
 	}
 }
 
-.delivery > form {
+.delivery > div {
 	text-align: center;
 }
 
@@ -205,11 +211,12 @@ section.input-section#checkout-section {
 
 .total-payment {
 	display: flex;
-	justify-content: flex-end;
+	align-items: flex-end;
 	flex-direction: column;
 	text-align: right;
-	margin-right: 200px;
+	margin-right: 10%;
 	margin-bottom: 20px;
+	padding-top: 30px;
 }
 
 .delivery {
@@ -217,5 +224,20 @@ section.input-section#checkout-section {
 	flex-direction: column;
 	width: 100%;
 	text-align: center;
+}
+
+div.delivery > div {
+	padding-top: 5px;
+}
+
+.total-payment #tax {
+	padding: 3px 0;
+}
+.total-payment #total {
+	padding-bottom: 15px;
+}
+
+p span {
+	font-weight: bold;
 }
 </style>

@@ -208,7 +208,7 @@ p span {
 	}
 
 	div.cart-item-image-container {
-		max-width: 250px;
+		max-width: 175px;
 		aspect-ratio: 1 / 1;
 	}
 }
