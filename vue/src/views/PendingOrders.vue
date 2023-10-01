@@ -1,5 +1,9 @@
 <template>
-	<section id="pending-orders">Pending Orders</section>
+	<section
+		id="pending-orders"
+		class="employee-section">
+		Pending Orders
+	</section>
 </template>
 
 <script>

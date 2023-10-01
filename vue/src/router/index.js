@@ -10,7 +10,8 @@ import SpecialtyPizzas from "../views/SpecialtyPizzas.vue";
 import store from "../store/index";
 import CustomerMenu from "../views/CustomerMenu.vue";
 import MyOrder from "../views/MyOrder.vue";
-import CustomerCheckout from "../views/CustomerCheckout.vue"
+import CustomerCheckout from "../views/CustomerCheckout.vue";
+import OrderConfirmation from "../views/OrderConfirmation.vue";
 
 Vue.use(Router);
 
@@ -55,6 +56,14 @@ const router = new Router({
 			path: "/checkout",
 			name: "checkout",
 			component: CustomerCheckout,
+			meta: {
+				requiresAuth: false,
+			},
+		},
+		{
+			path: "/confirmation",
+			name: "confirmation",
+			component: OrderConfirmation,
 			meta: {
 				requiresAuth: false,
 			},

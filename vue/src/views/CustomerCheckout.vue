@@ -152,7 +152,11 @@ export default {
 				});
 			}
 
-			orderService.createPendingOrder(order);
+			orderService.createPendingOrder(order).then((res) => {
+				if (res.status === 200) {
+					this.$router.push({ name: "confirmation" });
+				}
+			});
 		},
 	},
 
