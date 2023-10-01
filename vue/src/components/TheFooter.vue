@@ -22,7 +22,7 @@ footer {
 	display: none;
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 768px) {
 	footer {
 		display: block;
 		border-top-left-radius: var(--section-border-radius);

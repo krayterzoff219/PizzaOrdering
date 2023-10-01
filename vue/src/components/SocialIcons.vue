@@ -19,7 +19,7 @@ div.social-icons {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
-	padding: 10px 20px;
+	padding: 5px 20px;
 	background-color: transparent;
 	border-top-right-radius: 25px;
 	border-top-left-radius: 25px;

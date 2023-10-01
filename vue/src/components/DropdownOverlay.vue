@@ -52,7 +52,7 @@ div#drop-down-menu {
 	top: 0;
 	right: 1.5%;
 	z-index: 1001;
-	max-width: 582px; /* 97% of 600px */
+	max-width: 745px; /* 97% of 768px */
 	width: 97%;
 	background-color: var(--dark-color);
 	border-bottom-left-radius: var(--section-border-radius);
@@ -61,6 +61,12 @@ div#drop-down-menu {
 	max-height: 0;
 	transition: max-height 0.5s cubic-bezier(0, 0, 1, 1);
 	overflow: hidden;
+}
+
+@media only screen and (min-width: 768px) {
+	div#drop-down-menu {
+		max-width: 48.5%;
+	}
 }
 
 div#drop-down-menu.open {
