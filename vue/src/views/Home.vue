@@ -1,29 +1,30 @@
 <template>
 	<section class="home">
 		<div class="home-body">
-			<img
+			<social-icons></social-icons>
+			<div id="home-hero"></div>
+			<testimonial-carousel />
+			<div class="maps-image"></div>
+
+			<!-- <img
 				class="hero-image1"
 				src="https://cdn.pixabay.com/photo/2017/08/06/06/43/pizza-2589575_1280.jpg"
 				alt="HeroPic1" />
 			<img
 				class="hero-image2"
-				src="https://img.freepik.com/free-photo/tasty-homemade-traditional-pizza-italian-recipe_24972-2141.jpg?w=740&t=st=1695856922~exp=1695857522~hmac=1c71cb6434d5c84e5cda3473660a59b26ba0f64d28ed01c66de178805903c96a" />
+				src="https://img.freepik.com/free-photo/tasty-homemade-traditional-pizza-italian-recipe_24972-2141.jpg?w=740&t=st=1695856922~exp=1695857522~hmac=1c71cb6434d5c84e5cda3473660a59b26ba0f64d28ed01c66de178805903c96a" /> -->
 
-			<div class="page-filler">
-				<div class="social-links">
-					<social-icons></social-icons>
-				</div>
+			<!-- <div class="page-filler"> -->
 
-				<div class="carousel">
-					<testimonial-carousel />
-				</div>
+			<!-- <div class="carousel"> -->
+			<!-- </div> -->
 
-				<div class="maps-image">
+			<!-- <div class="maps-image">
 					<img
 						src="https://www.google.com/maps/d/thumbnail?mid=1E3bwSOJUVCAcZRerfL9Jpp8vWTM&hl=en_US"
 						alt="mapsPic" />
-				</div>
-			</div>
+				</div> -->
+			<!-- </div> -->
 		</div>
 	</section>
 </template>
@@ -31,25 +32,54 @@
 <script>
 import TestimonialCarousel from "../components/TestimonialCarousel.vue";
 import SocialIcons from "../components/SocialIcons.vue";
-// import SmallButton from "../components/SmallButton.vue";
 export default {
-	// components: { SmallButton},
 	components: { TestimonialCarousel, SocialIcons },
 	name: "home",
-
-	// SocialIcons, TestimonialCarousel,
 };
 </script>
 
 <style>
-.home {
-	display: block;
+section.home {
 	width: 97%;
-	background-color: white;
-	border-radius: 25px;
+	background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
 	margin-bottom: var(--header-footer-inside-margin);
 	margin-left: auto;
 	margin-right: auto;
+	flex-grow: 1;
+	flex-shrink: 1;
+}
+.home-body {
+	display: flex;
+	/* grid-template-areas:
+		"heroPic socials"
+		"heroPic description1"
+		"heroPic mapsImg"; */
+	flex-direction: column;
+	/* margin: var(--section-border-radius) auto; */
+	border-radius: var(--section-border-radius);
+	background-color: transparent;
+	height: 100%;
+}
+
+div#home-hero {
+	background-image: url("https://img.freepik.com/free-photo/tasty-homemade-traditional-pizza-italian-recipe_24972-2141.jpg?w=740&t=st=1695856922~exp=1695857522~hmac=1c71cb6434d5c84e5cda3473660a59b26ba0f64d28ed01c66de178805903c96a");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 100px;
+	flex-grow: 1;
+	/* margin: 0 20px; */
+	border-bottom: 10px solid var(--dark-color);
+}
+
+@media only screen and (min-width: 600px) {
+	div#home-hero {
+		border-top-right-radius: var(--section-border-radius);
+		border-top-left-radius: var(--section-border-radius);
+	}
 }
 
 .page-filler {
@@ -58,30 +88,7 @@ export default {
 	text-align: center;
 }
 
-/* .login-section {
-	display: flex;
-	background-color: white;
-	width: 99%;
-	border-radius: 25px;
-	margin-bottom: 10px;
-	margin-right: auto;
-	margin-left: auto;
-} */
-
-.home-body {
-	background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826");
-	border-radius: 25px 25px;
-	display: grid;
-	/* margin-top: 120px; */
-	grid-template-columns: 1fr 1fr;
-	grid-template-rows: repeat(3 1fr);
-	grid-template-areas:
-		"heroPic socials"
-		"heroPic description1"
-		"heroPic mapsImg";
-}
-
-.hero-image1 {
+/* .hero-image1 {
 	grid-area: heroPic;
 	margin: 10px;
 	margin-bottom: 10px;
@@ -92,7 +99,7 @@ export default {
 
 .hero-image2 {
 	display: none;
-}
+} */
 
 .social-links {
 	grid-area: socials;
@@ -106,40 +113,39 @@ export default {
 	padding: 10px;
 }
 
-.home-body .testimonial-carousel {
+/* .home-body .testimonial-carousel {
 	grid-area: description1;
 	background-color: white;
 	margin: 100px auto;
 	padding: 15px;
 	border: #124948 solid 10px;
 	border-radius: 25px;
-	
-}
+} */
 
-.carousel {
+/* .carousel {
 	box-sizing: border-box;
 	max-height: 500px;
 	max-width: 100%;
-}
+} */
 
-.maps-image > img {
-	/* margin: 25px; */ 
+/* .maps-image > img {
+	margin: 25px;
 	grid-area: mapsImg;
 	border-radius: 10%;
 	border: #124948 solid 10px;
-}
+} */
 
-@media screen and (max-width: 820px) {
-	.page-filler {
+/* @media screen and (max-width: 820px) { */
+/* .page-filler {
 		padding-top: 30px;
 		margin-right: auto;
 		margin-left: auto;
 		text-align: center;
-	}
+	} */
 
-	.home-body {
-		background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826");
-		border-radius: 25px 25px;
+.home-body {
+	/* background-image: url("https://img.freepik.com/premium-vector/pizza-seamless-pattern_373337-10.jpg?w=826"); */
+	/* border-radius: 25px 25px;
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-template-rows: repeat(6 1fr);
@@ -149,10 +155,10 @@ export default {
 			"description1"
 			"mapsImg";
 		justify-content: center;
-		align-items: center;
-	}
+		align-items: center; */
+}
 
-	.hero-image1 {
+/* .hero-image1 {
 		display: none;
 		grid-area: heroPic;
 		margin-right: auto;
@@ -169,13 +175,11 @@ export default {
 		margin-left: auto;
 		margin-right: auto;
 		margin-top: 15px;
-		/* border-top-left-radius: 25px;
-border-top-right-radius: 25px; */
+		border-top-left-radius: 25px;
+border-top-right-radius: 25px;
 		border-radius: 25px;
 		border: #124948 solid 5px;
 		width: 92%;
-	}
-
-	
-}
+	} */
+/* } */
 </style>

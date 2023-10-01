@@ -17,49 +17,49 @@
 <script>
 export default {};
 </script>
-
 <style scoped>
-@media only screen and (max-width: 600px) {
-	footer {
-		display: none !important;
-	}
-}
-
 footer {
-	border-top-left-radius: var(--section-border-radius);
-	border-top-right-radius: var(--section-border-radius);
-	background-color: var(--white-color);
-	margin-top: auto;
-	display: flex;
-	align-items: center;
-	font-size: 0.75rem;
-	padding: 0 15px;
-	width: 97%;
-	font-weight: bold;
+	display: none;
 }
 
-footer div#footer-text {
-	text-align: center;
-	padding: 10px;
-}
+@media only screen and (min-width: 600px) {
+	footer {
+		display: block;
+		border-top-left-radius: var(--section-border-radius);
+		border-top-right-radius: var(--section-border-radius);
+		background-color: var(--white-color);
+		margin-top: auto;
+		display: flex;
+		align-items: center;
+		font-size: 0.75rem;
+		padding: 0 15px;
+		width: 97%;
+		font-weight: bold;
+	}
 
-footer div#footer-text span {
-	color: var(--primary-color);
-}
+	footer div#footer-text {
+		text-align: center;
+		padding: 10px;
+	}
 
-footer div#footer-spacer,
-footer div#employees-portal-link {
-	flex-grow: 1;
-	flex-shrink: 1;
-	flex-basis: 4.5rem;
-}
+	footer div#footer-text span {
+		color: var(--primary-color);
+	}
 
-footer div#employees-portal-link {
-	text-align: right;
-}
+	footer div#footer-spacer,
+	footer div#employees-portal-link {
+		flex-grow: 1;
+		flex-shrink: 1;
+		flex-basis: 4.5rem;
+	}
 
-footer div#employees-portal-link a {
-	color: var(--secondary-color);
-	text-decoration: none;
+	footer div#employees-portal-link {
+		text-align: right;
+	}
+
+	footer div#employees-portal-link a {
+		color: var(--secondary-color);
+		text-decoration: none;
+	}
 }
 </style>

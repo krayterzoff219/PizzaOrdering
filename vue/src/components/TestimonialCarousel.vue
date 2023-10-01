@@ -1,31 +1,46 @@
 <template>
 	<div class="testimonial-carousel">
-		<div
-			v-for="(testimonial, index) in testimonials"
-			:key="index"
-			v-show="index === currentIndex"
-			class="testimonial">
-			<p>{{ testimonial.text }}</p>
-			<p class="author">{{ testimonial.author }}</p>
+		<div id="quotation-marks"><i class="fa-solid fa-quote-left"></i></div>
+		<template v-for="(testimonial, index) in testimonials">
+			<p
+				:key="`${index}-text`"
+				v-show="index === currentIndex"
+				class="testimonial-text">
+				{{ testimonial.text }}
+			</p>
+			<p
+				:key="`${index}-author`"
+				v-show="index === currentIndex"
+				class="testimonial-author">
+				- {{ testimonial.author }} -
+			</p>
+		</template>
+		<div class="carousel-buttons">
+			<i
+				@click="prev"
+				class="fa-solid fa-angle-left"></i>
+
+			<i
+				class="fa-circle carousel-dot"
+				:class="{
+					'fa-solid': index === currentIndex,
+					'fa-regular': index !== currentIndex,
+				}"
+				v-for="(testimonial, index) in testimonials"
+				:key="index"></i>
+
+			<i
+				@click="next"
+				class="fa-solid fa-angle-right"></i>
 		</div>
-        <div class="carousel-buttons">
-            <button @click="prev">Previous</button>
-            <button @click="next">Next</button>
-        </div>
-        <!-- <section id="carousel-button">
-		<button @click="prev">Previous</button>
-		<button @click="next">Next</button>
-        </section> -->
 	</div>
 </template>
 
 <script>
 export default {
-
-	name: "Slider",
+	name: "testimonial-carousel",
 
 	data() {
-		
 		return {
 			currentIndex: 0,
 			testimonials: [
@@ -35,7 +50,7 @@ export default {
 				},
 				{
 					text: "The best pizza I've tried here in Texas! 10/10. The service was amazing, the cashier was friendly & gave us suggestions to our liking. Family friendly, they have games all over the establishment so you can play and hang out with your loved ones.",
-					author: "Dean Mcneil",
+					author: "Dean McNeil",
 				},
 				{
 					text: "This place is amazing the atmosphere always great the food is great. We love their mushroom pizza and fennel arugula salad.",
@@ -43,21 +58,21 @@ export default {
 				},
 			],
 			timer: null,
-			
 		};
 	},
 
-	mounted: function(){
+	mounted() {
 		this.startSlide();
 	},
 
 	methods: {
-
-		startSlide: function(){
-			this.timer = setInterval(this.next, 4000)
+		startSlide() {
+			clearInterval(this.timer);
+			this.timer = setInterval(this.next, 5000);
 		},
 
 		prev() {
+			this.startSlide();
 			if (this.currentIndex === 0) {
 				this.currentIndex = this.testimonials.length - 1;
 			} else {
@@ -65,7 +80,7 @@ export default {
 			}
 		},
 		next() {
-			console.log();
+			this.startSlide();
 			if (this.currentIndex === this.testimonials.length - 1) {
 				this.currentIndex = 0;
 			} else {
@@ -78,63 +93,66 @@ export default {
 
 <style scoped>
 .testimonial-carousel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding-top: 200px;
-	margin: 0 auto;
-	text-align: center;
-	max-width: 600px;
-    min-height: 200px;
-    
-}
-
-.testimoial {
-	
+	background-color: var(--white-color);
 	display: flex;
-	transition: all 0.9s ease-in;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 25px;
+	border-radius: var(--section-border-radius);
+	border: 5px solid var(--dark-color);
+	padding: 10px 30px;
+	text-align: justify;
+	min-height: 45%;
+	color: var(--dark-color);
 }
 
-.testimonial.active {
-	display: block;
+div#quotation-marks {
+	font-size: 2rem;
+	color: var(--dark-color);
+	padding-bottom: 10px;
 }
 
-.author {
+p.testimonial-text {
+	max-width: 40em;
+	height: 85px;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	line-height: 1.3;
+}
+
+p.testimonial-author {
+	padding: 15px 0;
 	font-style: italic;
-	padding-top: 15px;
-}
-.carousel-buttons {
-	margin: 10px 10px 5px;
-    display: flex;
-    flex-grow: 1;
-	align-items: flex-end;
+	font-weight: bold;
 }
 
-button{
-    display: flex;
-    margin-left: 20px;
-    margin-right: 30px;
-    width: 80px;
-    justify-content: center;
-    
+div.carousel-buttons {
+	font-size: 1.5rem;
+	--arrow-button-padding: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-bottom: 5px;
 }
 
-@media screen and (max-width: 820px){
-    
-.testimonial-carousel{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
+div.carousel-buttons i {
+	cursor: pointer;
+	color: var(--dark-color);
 }
 
-.carousel{
-    display: flex;
-    justify-content: center;
+div.carousel-buttons i:first-child {
+	padding-right: var(--arrow-button-padding);
+}
+div.carousel-buttons i:last-child {
+	padding-left: var(--arrow-button-padding);
 }
 
-
+div.carousel-buttons i.carousel-dot {
+	font-size: 0.5rem;
+	color: var(--dark-color);
+	padding: 0 3px;
 }
-
 </style>

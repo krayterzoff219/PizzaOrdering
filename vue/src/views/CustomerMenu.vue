@@ -52,9 +52,6 @@ export default {
 </script>
 
 <style scoped>
-
-
-
 section.customer-section#menu-section {
 	width: 97%;
 	margin-bottom: var(--header-footer-inside-margin);
@@ -67,7 +64,6 @@ div.menu-wrapper {
 	flex-direction: column;
 	max-width: 50rem;
 	border: #124948 solid 5px;
-	
 }
 
 p.hero-text {
