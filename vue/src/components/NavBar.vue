@@ -189,4 +189,11 @@ nav i {
 		display: none;
 	}
 }
+
+@media only screen and (max-width: 375px) {
+	a.push-left {
+		padding-right: 10px;
+		padding-left: 10px !important;
+	}
+}
 </style>

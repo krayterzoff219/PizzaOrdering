@@ -35,6 +35,12 @@ div.social-icons {
 		position: absolute;
 	}
 }
+@media only screen and (min-width: 768px) {
+	div.social-icons {
+		border-bottom-left-radius: 0;
+		position: relative;
+	}
+}
 
 div.social-icons i {
 	color: var(--white-color);

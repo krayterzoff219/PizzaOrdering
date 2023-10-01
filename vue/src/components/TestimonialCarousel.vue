@@ -92,7 +92,7 @@ export default {
 </script>
 
 <style scoped>
-.testimonial-carousel {
+div.testimonial-carousel {
 	background-color: var(--white-color);
 	display: flex;
 	flex-direction: column;
@@ -154,5 +154,18 @@ div.carousel-buttons i.carousel-dot {
 	font-size: 0.5rem;
 	color: var(--dark-color);
 	padding: 0 3px;
+}
+
+@media only screen and (min-width: 768px) {
+	div.testimonial-carousel {
+		margin-top: 0;
+		margin-left: 0;
+		margin-right: 0;
+		border-radius: 0;
+		border-bottom-right-radius: var(--section-border-radius);
+		border: 0;
+		border-top: 10px solid var(--dark-color);
+		margin-bottom: 0;
+	}
 }
 </style>

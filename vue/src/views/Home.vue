@@ -50,15 +50,11 @@ section.home {
 	margin-right: auto;
 	flex-grow: 1;
 	flex-shrink: 1;
+	max-width: 1400px;
 }
 .home-body {
 	display: flex;
-	/* grid-template-areas:
-		"heroPic socials"
-		"heroPic description1"
-		"heroPic mapsImg"; */
 	flex-direction: column;
-	/* margin: var(--section-border-radius) auto; */
 	border-radius: var(--section-border-radius);
 	background-color: transparent;
 	height: 100%;
@@ -71,8 +67,12 @@ div#home-hero {
 	background-size: cover;
 	height: 100px;
 	flex-grow: 1;
-	/* margin: 0 20px; */
+	flex-shrink: 1;
 	border-bottom: 10px solid var(--dark-color);
+}
+
+div.maps-image {
+	display: none;
 }
 
 @media only screen and (min-width: 600px) {
@@ -82,11 +82,59 @@ div#home-hero {
 	}
 }
 
-.page-filler {
+@media only screen and (min-width: 768px) {
+	div#home-hero {
+		grid-area: hero;
+		height: 100%;
+		border-bottom: none;
+		border-top-right-radius: 0;
+		border-right: 10px solid var(--dark-color);
+		background-position: bottom;
+		border-bottom-left-radius: var(--section-border-radius);
+		background-image: url("https://cdn.pixabay.com/photo/2017/08/06/06/43/pizza-2589575_1280.jpg");
+	}
+
+	div.home-body {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto 1fr auto;
+		grid-template-areas:
+			"hero social-icons"
+			"hero map"
+			"hero carousel";
+		background-size: contain;
+		/* background-image: none;
+		background-color: var(--primary-color); */
+	}
+
+	div.testimonial-carousel {
+		grid-area: carousel;
+	}
+
+	section.home > div.home-body div.social-icons {
+		grid-area: social-icons;
+		align-self: start;
+		justify-self: start;
+	}
+
+	div.maps-image {
+		display: block;
+		grid-area: map;
+		height: 100%;
+		width: 100%;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-image: url("https://www.google.com/maps/d/thumbnail?mid=1E3bwSOJUVCAcZRerfL9Jpp8vWTM&hl=en_US");
+		border-top: 10px solid var(--dark-color);
+	}
+}
+
+/* .page-filler {
 	padding-top: 10px;
 	margin-right: 100px;
 	text-align: center;
-}
+} */
 
 /* .hero-image1 {
 	grid-area: heroPic;
@@ -101,7 +149,7 @@ div#home-hero {
 	display: none;
 } */
 
-.social-links {
+/* .social-links {
 	grid-area: socials;
 	border: #124948 solid 10px;
 	border-radius: 25px;
@@ -111,7 +159,7 @@ div#home-hero {
 	justify-content: center;
 	align-items: center;
 	padding: 10px;
-}
+} */
 
 /* .home-body .testimonial-carousel {
 	grid-area: description1;

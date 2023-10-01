@@ -63,7 +63,23 @@ div.menu-wrapper {
 	display: flex;
 	flex-direction: column;
 	max-width: 50rem;
-	border: #124948 solid 5px;
+	border: 5px solid var(--dark-color);
+}
+/*    ^ about this border
+      ^ 
+The the element ends up being 800px wide exactly with the borders included,
+and when the side borders touch the outer margin of the page it looks a little
+clunky. Because the element's width is maxed out at 97% of the screen,
+a screen width of 825px is where the element's side borders meet the 
+outer margin (800 / .97 = 825). The borders are dropped on the sides when
+the screen is smaller than 825 and kept when the screen is larger than 825. 
+*/
+@media only screen and (max-width: 825px) {
+	section.customer-section#menu-section div.menu-wrapper {
+		border-right: none;
+		border-left: none;
+		border-radius: 15px;
+	}
 }
 
 p.hero-text {
