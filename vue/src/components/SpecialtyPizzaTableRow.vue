@@ -1,6 +1,10 @@
 <template>
 	<tr>
-		<td class="table-cell-pizza-name"><input v-model="name" /></td>
+		<td class="table-cell-pizza-name">
+			<input
+				v-model="name"
+				placeholder="New Specialty Pizza" />
+		</td>
 		<td class="table-cell-pizza-price">
 			<input
 				v-model="price"
@@ -10,7 +14,17 @@
 				placeholder="Price" />
 		</td>
 		<td class="table-cell-pizza-size">
-			<select v-model="sizeId">
+			<select
+				v-model="sizeId"
+				:class="{ 'no-option-selected': sizeId === -1 }">
+				<option
+					class="placeholder"
+					v-if="sizeId === -1"
+					value="-1"
+					selected
+					disabled>
+					Size
+				</option>
 				<option
 					v-for="size of $store.state.sizes"
 					:key="size.id"
@@ -20,7 +34,17 @@
 			</select>
 		</td>
 		<td class="table-cell-pizza-crust">
-			<select v-model="crustId">
+			<select
+				v-model="crustId"
+				:class="{ 'no-option-selected': crustId === -1 }">
+				<option
+					class="placeholder"
+					v-if="crustId === -1"
+					value="-1"
+					selected
+					disabled>
+					Crust
+				</option>
 				<option
 					v-for="crust of $store.state.crusts"
 					:key="crust.id"
@@ -43,7 +67,17 @@
 			</select>
 		</td>
 		<td class="table-cell-pizza-sauce">
-			<select v-model="sauceId">
+			<select
+				v-model="sauceId"
+				:class="{ 'no-option-selected': sauceId === -1 }">
+				<option
+					class="placeholder"
+					v-if="sauceId === -1"
+					value="-1"
+					selected
+					disabled>
+					Sauce
+				</option>
 				<option
 					v-for="sauce of $store.state.sauces"
 					:key="sauce.id"
@@ -338,6 +372,10 @@ td.table-button-wrapper button {
 	display: block;
 	min-width: 4rem;
 	width: 100%;
+}
+
+select.no-option-selected {
+	color: rgb(170, 170, 170);
 }
 
 /************************* PRICE CELL STYLE *************************/
