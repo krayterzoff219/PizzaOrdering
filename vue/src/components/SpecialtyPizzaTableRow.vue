@@ -116,10 +116,14 @@
 				class="fa-trash fa-solid grow employee-button-icon row-delete-button icon-hide"></i>
 		</div>
 		<div class="table-cell-pizza-description">
-			<textarea placeholder="Pizza Description"></textarea>
+			<textarea
+				placeholder="Pizza Description"
+				v-model="description"></textarea>
 		</div>
 		<div class="table-cell-pizza-url">
-			<textarea placeholder="Picture Url"></textarea>
+			<textarea
+				placeholder="Picture Url"
+				v-model="imageURL"></textarea>
 		</div>
 	</div>
 </template>
@@ -142,6 +146,8 @@ export default {
 			toppingIds: [],
 			sauceId: -1,
 			isAvailable: true,
+			imageURL: "",
+			description: "",
 		};
 	},
 	computed: {
@@ -149,8 +155,17 @@ export default {
 			if (!this.pizza) {
 				return false;
 			}
-			const { name, price, size, crust, toppings, sauce, isAvailable } =
-				this.pizza;
+			const {
+				name,
+				price,
+				size,
+				crust,
+				toppings,
+				sauce,
+				isAvailable,
+				imageURL,
+				description,
+			} = this.pizza;
 
 			// Check that each topping in the original topping list accounted for in the local topping list
 			let areToppingsDifferent = false;
@@ -167,6 +182,8 @@ export default {
 				this.crustId !== crust.id ||
 				this.sauceId !== sauce.id ||
 				this.isAvailable !== isAvailable ||
+				this.description !== description ||
+				this.imageURL !== imageURL ||
 				this.toppingIds.length !== toppings.length ||
 				areToppingsDifferent
 			);
@@ -187,10 +204,22 @@ export default {
 			this.toppingIds = [];
 			this.sauceId = -1;
 			this.isAvailable = true;
+			this.imageURL = "";
+			this.description = "";
 		},
 		initializeRow() {
-			const { id, name, price, size, crust, toppings, sauce, isAvailable } =
-				this.pizza;
+			const {
+				id,
+				name,
+				price,
+				size,
+				crust,
+				toppings,
+				sauce,
+				isAvailable,
+				imageURL,
+				description,
+			} = this.pizza;
 			this.pizzaId = id;
 			this.name = name;
 			this.price = `$${price.toFixed(2)}`;
@@ -199,6 +228,8 @@ export default {
 			this.toppingIds = toppings;
 			this.sauceId = sauce.id;
 			this.isAvailable = isAvailable;
+			this.imageURL = imageURL;
+			this.description = description;
 		},
 		formatAsMoney(event) {
 			const price = event.target.value
@@ -235,10 +266,17 @@ export default {
 				sauceId,
 				isAvailable,
 				resetRow,
+				imageURL,
+				description,
 			} = this;
 			if (areInputsValid()) {
 				// ***** BUILD THE SPECIALTY PIZZA THAT WILL BE USED IN THE REQUEST IN CORRECT FORMAT *****
-				const specialtyPizza = { name, price: price.replace("$", "") };
+				const specialtyPizza = {
+					name,
+					price: price.replace("$", ""),
+					imageURL,
+					description,
+				};
 				const pizza = {};
 				pizza.size = { id: sizeId };
 				pizza.crust = { id: crustId };
@@ -262,6 +300,8 @@ export default {
 								crust: pizza.crust,
 								sauce: pizza.sauce,
 								toppings: toppingIds,
+								imageURL,
+								description,
 							});
 							resetRow();
 						}
@@ -275,7 +315,16 @@ export default {
 			}
 		},
 		areInputsValid() {
-			const { name, price, sizeId, crustId, toppingIds, sauceId } = this;
+			const {
+				name,
+				price,
+				sizeId,
+				crustId,
+				toppingIds,
+				sauceId,
+				imageURL,
+				description,
+			} = this;
 			if (!name) {
 				alert("New specialty pizza must have a name.");
 				return false;
@@ -306,6 +355,14 @@ export default {
 			}
 			if (!toppingIds.length) {
 				alert("New specialty pizza must have at least 1 topping selected");
+				return false;
+			}
+			if (!description) {
+				alert("New specialty pizza must have a description.");
+				return false;
+			}
+			if (!imageURL) {
+				alert("New specialty pizza must have an image URL.");
 				return false;
 			}
 			return true;

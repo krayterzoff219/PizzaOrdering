@@ -8,10 +8,20 @@ export default {
 				const specialtyPizzas = res.data
 					.filter((menuItem) => menuItem.pizza)
 					.map((pizzaMenuItem) => {
-						const { itemId, available, name, price, pizza } = pizzaMenuItem;
+						const {
+							itemId,
+							available,
+							name,
+							price,
+							pizza,
+							imageURL,
+							description,
+						} = pizzaMenuItem;
 						const { crust, sauce, size, toppings } = pizza;
 						return {
 							name,
+							imageURL,
+							description,
 							price,
 							crust,
 							sauce,
