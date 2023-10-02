@@ -118,7 +118,7 @@ export default {
 				);
 				return false;
 			}
-			if (price < 0.01) {
+			if (Number.parseFloat(price.replace("$", "")) < 0.01) {
 				alert(
 					`New ${optionsCategory} must have a price that is greater than $0.00.`
 				);

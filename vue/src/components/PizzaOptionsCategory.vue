@@ -9,7 +9,6 @@
 			:option="option"
 			:optionsCategory="optionsCategory"></pizza-option-row>
 		<!-- new option row--><pizza-option-row
-			key="new"
 			:optionsCategory="optionsCategory"></pizza-option-row>
 	</div>
 </template>

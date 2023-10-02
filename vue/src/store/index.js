@@ -57,9 +57,9 @@ export default new Vuex.Store({
 		ADD_SPECIALTY_PIZZA(state, payload) {
 			state.specialtyPizzas.push(payload);
 		},
-		ADD_PENDING_ORDER(state, payload) {
-			state.sizes.pendingOrders.push(payload);
-		},
+		// ADD_PENDING_ORDER(state, payload) {
+		// 	state.sizes.pendingOrders.push(payload);
+		// },
 		ADD_SINGLE_ITEM_TO_CART(state, payload) {
 			if (!([payload.id] in state.cart)) {
 				state.cart = {
