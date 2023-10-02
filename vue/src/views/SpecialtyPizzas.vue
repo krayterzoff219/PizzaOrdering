@@ -8,30 +8,32 @@
 			<an-alert
 				v-if="alertText"
 				:message="alertText"></an-alert>
-			<table>
-				<thead>
-					<tr>
-						<td class="table-cell-pizza-name">Specialty Pizza Name</td>
-						<td class="table-cell-pizza-price">Price</td>
-						<td class="table-cell-pizza-size">Size</td>
-						<td class="table-cell-pizza-crust">Crust</td>
-						<td class="table-cell-pizza-toppings">Toppings</td>
-						<td class="table-cell-pizza-sauce">Sauce</td>
-						<td class="table-cell-pizza-available">Availability</td>
-						<td class="table-cell-buttons"></td>
-					</tr>
-				</thead>
-				<tbody>
-					<specialty-pizza-table-row
-						v-for="pizza of $store.state.specialtyPizzas"
-						:key="pizza.id"
-						:pizza="pizza"></specialty-pizza-table-row>
-				</tbody>
-				<tfoot>
-					<!-- new option row--><specialty-pizza-table-row
-					></specialty-pizza-table-row>
-				</tfoot>
-			</table>
+			<div id="specialty-pizzas-table">
+				<!-- <thead> -->
+				<div
+					class="table-row"
+					id="header-row">
+					<div class="table-cell-pizza-name">Specialty Pizza Name</div>
+					<div class="table-cell-pizza-price">Price</div>
+					<div class="table-cell-pizza-size">Size</div>
+					<div class="table-cell-pizza-crust">Crust</div>
+					<div class="table-cell-pizza-toppings">Toppings</div>
+					<div class="table-cell-pizza-sauce">Sauce</div>
+					<div class="table-cell-pizza-available">Availability</div>
+					<div class="table-cell-buttons"></div>
+				</div>
+				<!-- </thead> -->
+				<!-- <tbody> -->
+				<specialty-pizza-table-row
+					v-for="pizza of $store.state.specialtyPizzas"
+					:key="pizza.id"
+					:pizza="pizza"></specialty-pizza-table-row>
+				<!-- </tbody> -->
+				<!-- <tfoot> -->
+				<!-- new option row--><specialty-pizza-table-row
+				></specialty-pizza-table-row>
+				<!-- </tfoot> -->
+			</div>
 		</div>
 	</section>
 </template>
@@ -69,7 +71,7 @@ section.employee-section#specialty-pizzas {
 	margin-bottom: var(--header-footer-inside-margin);
 }
 
-table {
+div#specialty-pizzas-table {
 	width: 100%;
 	max-width: 100rem;
 	text-align: left;

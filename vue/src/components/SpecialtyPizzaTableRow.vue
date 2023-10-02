@@ -1,19 +1,19 @@
 <template>
-	<tr>
-		<td class="table-cell-pizza-name">
+	<div class="table-row">
+		<div class="table-cell-pizza-name">
 			<input
 				v-model="name"
 				placeholder="New Specialty Pizza" />
-		</td>
-		<td class="table-cell-pizza-price">
+		</div>
+		<div class="table-cell-pizza-price">
 			<input
 				v-model="price"
 				type="text"
 				@focus="formatAsNumber"
 				@blur="formatAsMoney"
 				placeholder="Price" />
-		</td>
-		<td class="table-cell-pizza-size">
+		</div>
+		<div class="table-cell-pizza-size">
 			<select
 				v-model="sizeId"
 				:class="{ 'no-option-selected': sizeId === -1 }">
@@ -32,8 +32,8 @@
 					{{ size.name }}
 				</option>
 			</select>
-		</td>
-		<td class="table-cell-pizza-crust">
+		</div>
+		<div class="table-cell-pizza-crust">
 			<select
 				v-model="crustId"
 				:class="{ 'no-option-selected': crustId === -1 }">
@@ -52,8 +52,8 @@
 					{{ crust.name }}
 				</option>
 			</select>
-		</td>
-		<td class="table-cell-pizza-toppings">
+		</div>
+		<div class="table-cell-pizza-toppings">
 			<select
 				multiple
 				size="5"
@@ -65,8 +65,8 @@
 					{{ topping.name }}
 				</option>
 			</select>
-		</td>
-		<td class="table-cell-pizza-sauce">
+		</div>
+		<div class="table-cell-pizza-sauce">
 			<select
 				v-model="sauceId"
 				:class="{ 'no-option-selected': sauceId === -1 }">
@@ -85,21 +85,21 @@
 					{{ sauce.name }}
 				</option>
 			</select>
-		</td>
-		<td class="table-cell-pizza-available">
+		</div>
+		<div class="table-cell-pizza-available">
 			<select v-model="isAvailable">
 				<option value="true">Available</option>
 				<option value="false">Not Available</option>
 			</select>
-		</td>
-		<td
+		</div>
+		<div
 			v-if="!pizza"
 			class="table-cell-buttons table-icon-wrapper">
 			<i
 				class="fa-floppy-disk fa-solid grow employee-button-icon"
 				@click="addNewSpecialtyPizza"></i>
-		</td>
-		<td
+		</div>
+		<div
 			v-else-if="areUnsavedChanges"
 			class="table-cell-buttons table-button-wrapper">
 			<small-button
@@ -108,14 +108,20 @@
 			<small-button
 				buttonText="Discard Changes"
 				:clickHandler="discardChanges"></small-button>
-		</td>
-		<td
+		</div>
+		<div
 			v-else
 			class="table-cell-buttons table-icon-wrapper">
 			<i
 				class="fa-trash fa-solid grow employee-button-icon row-delete-button icon-hide"></i>
-		</td>
-	</tr>
+		</div>
+		<div class="table-cell-pizza-description">
+			<textarea placeholder="Pizza Description"></textarea>
+		</div>
+		<div class="table-cell-pizza-url">
+			<textarea placeholder="Picture Url"></textarea>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -309,69 +315,82 @@ export default {
 </script>
 
 <style>
-tr {
-	display: flex;
-	width: 100%;
-	justify-content: space-evenly;
-	align-items: flex-start;
-	gap: 10px;
+div.table-row {
+	display: grid;
+	grid-template-columns: 2fr 0.75fr 0.75fr 1fr 1.25fr 1fr 1fr 6rem;
+	grid-template-areas: "name price size crust toppings sauce available buttons";
+	grid-template-rows: auto auto;
+	gap: 5px;
 }
 
-tbody tr:first-child {
-	margin-top: 10px;
+div.table-row:not(#header-row) {
+	grid-template-areas:
+		"name price size crust toppings sauce available buttons"
+		"description description description description toppings url url buttons";
 }
 
-tbody tr:not(:first-child),
-tfoot tr {
-	margin-top: 20px;
-}
-
-thead tr {
+div.table-row#header-row {
 	text-align: center;
 }
 
-td.table-cell-pizza-price {
-	flex-basis: 4rem;
-	flex-grow: 0;
-	flex-shrink: 0;
+div.table-row:not(#header-row):not(:nth-child(2)) {
+	margin-top: 40px;
 }
 
-td.table-cell-pizza-available,
-td.table-cell-pizza-crust,
-td.table-cell-pizza-sauce,
-td.table-cell-pizza-size {
-	flex-basis: 6rem;
-	flex-grow: 1;
-	flex-shrink: 1;
+div.table-row:nth-child(2) {
+	margin-top: 5px;
 }
 
-td.table-cell-pizza-name {
-	flex-basis: 15rem;
-	flex-grow: 2;
-	flex-shrink: 1;
-}
-
-td.table-cell-pizza-toppings,
-td.table-cell-buttons {
-	flex-basis: 9rem;
-	flex-grow: 1;
-	flex-shrink: 1;
-}
-
-td input,
-td select {
+div.table-row > div {
 	width: 100%;
+}
+
+div.table-row textarea,
+div.table-row input,
+div.table-row select {
+	width: 100%;
+	height: 100%;
 	padding: 3px;
 }
 
-td.table-cell-buttons {
-	min-width: 4rem;
+div.table-row textarea {
+	resize: none;
+	padding: 5px;
 }
 
-td.table-button-wrapper button {
-	display: block;
-	min-width: 4rem;
-	width: 100%;
+div.table-cell-pizza-name {
+	grid-area: name;
+}
+div.table-cell-pizza-price {
+	grid-area: price;
+}
+div.table-cell-pizza-size {
+	grid-area: size;
+}
+div.table-cell-pizza-crust {
+	grid-area: crust;
+}
+div.table-cell-pizza-toppings {
+	grid-area: toppings;
+}
+div.table-cell-pizza-available {
+	grid-area: available;
+}
+div.table-cell-buttons {
+	grid-area: buttons;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+}
+div.table-row:not(#header-row) {
+	height: 6.5rem;
+}
+div.table-cell-pizza-description {
+	grid-area: description;
+}
+div.table-cell-pizza-url {
+	grid-area: url;
 }
 
 select.no-option-selected {
@@ -392,18 +411,22 @@ input[type="number"] {
 }
 
 /************************* FINAL CELL STYLE *************************/
-td.table-button-wrapper button:first-child {
+div.table-button-wrapper button:first-child {
 	margin-bottom: 5px;
 }
-td.table-button-wrapper button:last-child {
+div.table-button-wrapper button:last-child {
 	background-color: var(--primary-color);
 	border-color: var(--primary-color);
 }
-td.table-icon-wrapper {
+div.table-icon-wrapper {
 	color: var(--primary-color);
 	padding-left: 20px;
 }
-td:last-child i.row-delete-button {
+div.table-icon-wrapper i {
+	padding: 8px;
+	font-size: 1.25rem;
+}
+div:last-child i.row-delete-button {
 	background-color: var(--primary-color);
 }
 </style>
