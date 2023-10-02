@@ -81,7 +81,6 @@ export default {
 		cartItemQuantity() {
 			return Object.values(this.$store.state.cart).reduce(
 				(accumulator, item) => {
-					console.log(item);
 					return accumulator + item.quantity;
 				},
 				0

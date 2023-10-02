@@ -45,7 +45,17 @@ public class JdbcMenuItemDao implements MenuItemDao {
 
     @Override
     public MenuItem getMenuItemById(int id) {
-        return null;
+        String sql = "SELECT * FROM menu_items Where item_id = ?;";
+        MenuItem menuItem = new MenuItem();
+        try {
+            SqlRowSet row = jdbcTemplate.queryForRowSet(sql, id);
+            while(row.next()){
+                menuItem = mapRowToMenuItem(row);
+            }
+        } catch (ResourceAccessException | DataAccessException e){
+            System.out.println(e.getMessage());
+        }
+        return menuItem;
     }
 
     @Override

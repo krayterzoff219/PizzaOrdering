@@ -4,8 +4,10 @@
 		<td class="table-cell-pizza-price">
 			<input
 				v-model="price"
-				type="number"
-				max="999.99" />
+				type="text"
+				@focus="formatAsNumber"
+				@blur="formatAsMoney"
+				placeholder="Price" />
 		</td>
 		<td class="table-cell-pizza-size">
 			<select v-model="sizeId">
@@ -120,7 +122,7 @@ export default {
 
 			return (
 				this.name !== name ||
-				this.price !== price ||
+				this.price !== `$${price.toFixed(2)}` ||
 				this.sizeId !== size.id ||
 				this.crustId !== crust.id ||
 				this.sauceId !== sauce.id ||
@@ -151,12 +153,26 @@ export default {
 				this.pizza;
 			this.pizzaId = id;
 			this.name = name;
-			this.price = price;
+			this.price = `$${price.toFixed(2)}`;
 			this.sizeId = size.id;
 			this.crustId = crust.id;
 			this.toppingIds = toppings;
 			this.sauceId = sauce.id;
 			this.isAvailable = isAvailable;
+		},
+		formatAsMoney(event) {
+			const price = event.target.value
+				? event.target.value >= 1000
+					? "999.99"
+					: event.target.value
+				: "0";
+			event.target.setAttribute("type", "text");
+			event.target.value = `$${Number.parseFloat(price).toFixed(2)}`;
+			this.price = event.target.value;
+		},
+		formatAsNumber(event) {
+			event.target.value = event.target.value.replace("$", "");
+			event.target.setAttribute("type", "number");
 		},
 		discardChanges() {
 			if (
@@ -182,7 +198,7 @@ export default {
 			} = this;
 			if (areInputsValid()) {
 				// ***** BUILD THE SPECIALTY PIZZA THAT WILL BE USED IN THE REQUEST IN CORRECT FORMAT *****
-				const specialtyPizza = { name, price };
+				const specialtyPizza = { name, price: price.replace("$", "") };
 				const pizza = {};
 				pizza.size = { id: sizeId };
 				pizza.crust = { id: crustId };
@@ -200,7 +216,7 @@ export default {
 							this.$store.commit("ADD_SPECIALTY_PIZZA", {
 								id: res.data,
 								name,
-								price,
+								price: Number.parseFloat(price.replace("$", "")),
 								isAvailable,
 								size: pizza.size,
 								crust: pizza.crust,
@@ -230,7 +246,7 @@ export default {
 				);
 				return false;
 			}
-			if (price < 0.01) {
+			if (Number.parseFloat(price.replace("$", "")) < 0.01) {
 				alert(
 					"New specialty pizza must have a price that is greater than $0.00."
 				);
