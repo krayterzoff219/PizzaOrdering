@@ -6,7 +6,7 @@
 		<div class="pending-order-wrapper">
 			<h1>Pending Orders</h1>
 			<order-item
-			v-for="order of pendingOrders"
+			v-for="order of this.$store.state.pendingOrders"
 			:key="order.id"
 			:order="order"
 			/>
@@ -27,14 +27,16 @@ export default {
 
 	name: "pending-orders",
 	
+	// computed: {
+	// 	pendingOrders() {
+	// 		return Object.values(this.$store.state.pendingOrders);
+	// 	},
+	// },
 	beforeCreate() {
 		if (Object.keys(this.$store.state.cart).length) {
 			this.$store.commit("CLEAR_CART");
 		}
-		OrderService.getPendingOrders()
-	},
-	destroyed(){
-		this.$store.commit("LOAD_PENDING_ORDERS")
+		OrderService.getPendingOrders();
 	}
 
 
