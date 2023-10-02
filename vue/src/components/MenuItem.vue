@@ -2,7 +2,9 @@
 	<div
 		class="customer-menu-item"
 		v-if="isMenuItemAvailable">
-		<div class="customer-menu-item-image-container"></div>
+		<div
+			class="customer-menu-item-image-container"
+			:style="{ 'background-image': `url('${imageURL}')` }"></div>
 		<div class="customer-menu-item-description-container">
 			<div class="name-price-container">
 				<h2>{{ name }}</h2>
@@ -12,10 +14,11 @@
 				buttonText="Add to Order"
 				:clickHandler="addToOrder"></small-button>
 			<p>
-				"Savor the irresistible allure of our Pepperoni Perfection, a culinary
+				{{ description }}
+				<!-- Savor the irresistible allure of our Pepperoni Perfection, a culinary
 				masterpiece that has stood the test of time. This iconic pizza is a
 				testament to the beauty of simplicity, showcasing the finest ingredients
-				and expert craftsmanship that our kitchen takes immense pride in."
+				and expert craftsmanship that our kitchen takes immense pride in. -->
 			</p>
 		</div>
 	</div>
@@ -27,13 +30,25 @@ export default {
 	components: { SmallButton },
 	props: ["menuItem"],
 	data() {
-		const { id, name, price, size, sauce, crust, toppings, isAvailable } =
-			this.menuItem;
+		const {
+			id,
+			name,
+			price,
+			size,
+			sauce,
+			crust,
+			toppings,
+			isAvailable,
+			description,
+			imageURL,
+		} = this.menuItem;
 		return {
 			id,
 			name,
 			price,
 			isAvailable,
+			description,
+			imageURL,
 			details: { size, sauce, crust, toppings },
 		};
 	},
@@ -79,7 +94,7 @@ div.customer-menu-item {
 
 /* ********** image container ********** */
 div.customer-menu-item-image-container {
-	background-image: url("https://img.freepik.com/free-photo/delicious-neapolitan-meat-pizza-pizzeria-delicious-food_78826-2833.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais");
+	/* background-image: url("https://img.freepik.com/free-photo/delicious-neapolitan-meat-pizza-pizzeria-delicious-food_78826-2833.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais"); */
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
