@@ -80,11 +80,12 @@ export default new Vuex.Store({
 				}
 			}
 		},
-
 		UPDATE_SUBTOTAL(state, payload) {
 			state.subtotal += payload;
 		},
-
+		RESET_SUBTOTAL(state) {
+			state.subtotal = 0;
+		},
 		LOAD_TOPPINGS(state, payload) {
 			state.toppings = sortArrayByName(payload);
 		},

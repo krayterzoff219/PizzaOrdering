@@ -2,11 +2,16 @@
 	<div class="pizza-option-row">
 		<input
 			v-model="name"
-			class="pizza-option-cell-name" />
+			class="pizza-option-cell-name"
+			:placeholder="`New ${
+				optionsCategory.charAt(0).toUpperCase() + optionsCategory.slice(1, -1)
+			}`" />
 		<input
 			v-model="price"
-			type="number"
-			max="999.99"
+			type="text"
+			@focus="formatAsNumber"
+			@blur="formatAsMoney"
+			placeholder="Price"
 			class="pizza-option-cell-price" />
 		<select
 			v-model="isAvailable"
@@ -42,7 +47,7 @@ export default {
 			const { id, name, price, isAvailable } = this.option;
 			this.id = id;
 			this.name = name;
-			this.price = price;
+			this.price = `$${price.toFixed(2)}`;
 			this.isAvailable = isAvailable;
 		},
 		resetRow() {
@@ -55,6 +60,20 @@ export default {
 				this.saveChanges();
 			}
 		},
+		formatAsMoney(event) {
+			const price = event.target.value
+				? event.target.value >= 1000
+					? "999.99"
+					: event.target.value
+				: "0";
+			event.target.setAttribute("type", "text");
+			event.target.value = `$${Number.parseFloat(price).toFixed(2)}`;
+			this.price = event.target.value;
+		},
+		formatAsNumber(event) {
+			event.target.value = event.target.value.replace("$", "");
+			event.target.setAttribute("type", "number");
+		},
 		saveChanges() {},
 		addNewOption() {
 			const { name, price, isAvailable, areInputsValid, optionsCategory } =
@@ -63,7 +82,7 @@ export default {
 				optionService
 					.createOption(optionsCategory, {
 						name,
-						price,
+						price: price.replace("$", ""),
 						available: isAvailable,
 					})
 					.then((res) => {

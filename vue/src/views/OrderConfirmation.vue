@@ -16,6 +16,7 @@ export default {
 	},
 	created() {
 		this.$store.commit("CLEAR_CART");
+		this.$store.commit("RESET_SUBTOTAL");
 	},
 };
 </script>
