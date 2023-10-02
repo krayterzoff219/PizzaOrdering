@@ -3,8 +3,9 @@ package com.techelevator.controller;
 import com.techelevator.dao.login.UserDao;
 import com.techelevator.dao.login.UserDataDao;
 import com.techelevator.dao.orders.OrderDao;
+import com.techelevator.model.menu.MenuItem;
 import com.techelevator.model.orders.Order;
-import com.techelevator.model.pizzaOptions.Topping;
+import com.techelevator.model.orders.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 //@PreAuthorize("isAuthenticated()")
@@ -37,5 +39,28 @@ public class OrdersController {
             order.setDataId(userDataDao.getUserData(userDao.findIdByUsername(principal.getName())).getDataId());
         }
         return orderDao.create(order);
+    }
+
+    @RequestMapping(path = "/orders", method = RequestMethod.GET)
+    public List<Order> getAllOrders(){
+        return orderDao.getAllOrders();
+    }
+
+    @RequestMapping(path = "/orders/status", method = RequestMethod.GET)
+    public List<Order> getAllOrdersByStatus(@RequestParam(value = "status") String status){
+        return orderDao.getAllOrdersByStatus(status);
+    }
+
+    @RequestMapping(path = "/orders/{id}", method = RequestMethod.GET)
+    public Order getOrderById(@PathVariable int id){
+        return orderDao.getOrderById(id);
+    }
+
+    @RequestMapping(path = "/orders", method = RequestMethod.PUT)
+    public void updateMenuItems(@RequestBody OrderStatus orderStatus){
+        boolean updated = orderDao.updateStatus(orderStatus);
+        if(!updated){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Could not update");
+        }
     }
 }
