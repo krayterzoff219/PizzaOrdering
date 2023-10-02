@@ -9,7 +9,6 @@
 				v-if="alertText"
 				:message="alertText"></an-alert>
 			<div id="specialty-pizzas-table">
-				<!-- <thead> -->
 				<div
 					class="table-row"
 					id="header-row">
@@ -22,17 +21,12 @@
 					<div class="table-cell-pizza-available">Availability</div>
 					<div class="table-cell-buttons"></div>
 				</div>
-				<!-- </thead> -->
-				<!-- <tbody> -->
 				<specialty-pizza-table-row
 					v-for="pizza of $store.state.specialtyPizzas"
 					:key="pizza.id"
 					:pizza="pizza"></specialty-pizza-table-row>
-				<!-- </tbody> -->
-				<!-- <tfoot> -->
 				<!-- new option row--><specialty-pizza-table-row
 				></specialty-pizza-table-row>
-				<!-- </tfoot> -->
 			</div>
 		</div>
 	</section>

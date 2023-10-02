@@ -25,7 +25,9 @@
 					disabled>
 					Size
 				</option>
+				<!-- TODO: allow PUT request to edit size and then remove the disabled binding below -->
 				<option
+					:disabled="pizza"
 					v-for="size of $store.state.sizes"
 					:key="size.id"
 					:value="size.id">
@@ -45,7 +47,9 @@
 					disabled>
 					Crust
 				</option>
+				<!-- TODO: allow PUT request to edit crust and then remove the disabled binding below -->
 				<option
+					:disabled="pizza"
 					v-for="crust of $store.state.crusts"
 					:key="crust.id"
 					:value="crust.id">
@@ -58,7 +62,9 @@
 				multiple
 				size="5"
 				v-model="toppingIds">
+				<!-- TODO: allow PUT request to edit toppings and then remove the disabled binding below -->
 				<option
+					:disabled="pizza"
 					v-for="topping of $store.state.toppings"
 					:key="topping.id"
 					:value="topping.id">
@@ -78,7 +84,9 @@
 					disabled>
 					Sauce
 				</option>
+				<!-- TODO: allow PUT request to edit sauce and then remove the disabled binding below -->
 				<option
+					:disabled="pizza"
 					v-for="sauce of $store.state.sauces"
 					:key="sauce.id"
 					:value="sauce.id">
@@ -148,6 +156,7 @@ export default {
 			isAvailable: true,
 			imageURL: "",
 			description: "",
+			currentPizza: {},
 		};
 	},
 	computed: {
@@ -165,7 +174,7 @@ export default {
 				isAvailable,
 				imageURL,
 				description,
-			} = this.pizza;
+			} = this.currentPizza;
 
 			// Check that each topping in the original topping list accounted for in the local topping list
 			let areToppingsDifferent = false;
@@ -191,6 +200,7 @@ export default {
 	},
 	created() {
 		if (this.pizza) {
+			this.currentPizza = this.pizza;
 			this.initializeRow();
 		}
 	},
@@ -219,7 +229,7 @@ export default {
 				isAvailable,
 				imageURL,
 				description,
-			} = this.pizza;
+			} = this.currentPizza;
 			this.pizzaId = id;
 			this.name = name;
 			this.price = `$${price.toFixed(2)}`;
@@ -248,16 +258,43 @@ export default {
 		discardChanges() {
 			if (
 				confirm(
-					`Are you sure you want to discard the changes to ${this.pizza.name}`
+					`Are you sure you want to discard the changes to ${this.currentPizza.name}`
 				)
 			) {
 				this.initializeRow();
 			}
 		},
-		saveChanges() {},
-		addNewSpecialtyPizza() {
+		saveChanges() {
+			const { areInputsValid, buildSpecialtyPizza, pizzaId } = this;
+			let updatedSpecialtyPizza;
+
+			if (areInputsValid()) {
+				updatedSpecialtyPizza = buildSpecialtyPizza(pizzaId);
+				specialtyPizzaService
+					.updateSpecialtyPizza(updatedSpecialtyPizza)
+					.then((res) => {
+						if (res.status === 200) {
+							this.currentPizza = {
+								crust: updatedSpecialtyPizza.pizza.crust,
+								description: updatedSpecialtyPizza.description,
+								id: updatedSpecialtyPizza.itemId,
+								imageURL: updatedSpecialtyPizza.imageURL,
+								isAvailable: updatedSpecialtyPizza.available,
+								name: updatedSpecialtyPizza.name,
+								price: Number.parseFloat(updatedSpecialtyPizza.price),
+								sauce: updatedSpecialtyPizza.pizza.sauce,
+								size: updatedSpecialtyPizza.pizza.size,
+								toppings: updatedSpecialtyPizza.pizza.toppings.map(
+									(topping) => topping.id
+								),
+							};
+						}
+					});
+			}
+		},
+		buildSpecialtyPizza(id) {
+			// ***** BUILD THE SPECIALTY PIZZA THAT WILL BE USED IN THE REQUEST IN CORRECT FORMAT *****
 			const {
-				areInputsValid,
 				name,
 				price,
 				sizeId,
@@ -265,27 +302,39 @@ export default {
 				toppingIds,
 				sauceId,
 				isAvailable,
-				resetRow,
 				imageURL,
 				description,
 			} = this;
+			const specialtyPizza = {
+				name,
+				price: price.replace("$", ""),
+				imageURL,
+				description,
+			};
+			if (id) specialtyPizza.itemId = id;
+			const pizza = {};
+			pizza.size = { id: sizeId };
+			pizza.crust = { id: crustId };
+			pizza.sauce = { id: sauceId };
+			pizza.toppings = toppingIds.map((id) => ({ id }));
+			specialtyPizza.available = isAvailable;
+			specialtyPizza.pizza = pizza;
+			return specialtyPizza;
+		},
+		addNewSpecialtyPizza() {
+			const {
+				areInputsValid,
+				name,
+				price,
+				toppingIds,
+				isAvailable,
+				resetRow,
+				imageURL,
+				description,
+				buildSpecialtyPizza,
+			} = this;
 			if (areInputsValid()) {
-				// ***** BUILD THE SPECIALTY PIZZA THAT WILL BE USED IN THE REQUEST IN CORRECT FORMAT *****
-				const specialtyPizza = {
-					name,
-					price: price.replace("$", ""),
-					imageURL,
-					description,
-				};
-				const pizza = {};
-				pizza.size = { id: sizeId };
-				pizza.crust = { id: crustId };
-				pizza.sauce = { id: sauceId };
-				pizza.toppings = toppingIds.map((id) => ({ id }));
-				specialtyPizza.available = isAvailable;
-				specialtyPizza.pizza = pizza;
-				// ****************************************************************************************
-
+				const specialtyPizza = buildSpecialtyPizza();
 				specialtyPizzaService
 					.createSpecialtyPizza(specialtyPizza)
 					.then((res) => {
@@ -296,9 +345,9 @@ export default {
 								name,
 								price: Number.parseFloat(price.replace("$", "")),
 								isAvailable,
-								size: pizza.size,
-								crust: pizza.crust,
-								sauce: pizza.sauce,
+								size: specialtyPizza.pizza.size,
+								crust: specialtyPizza.pizza.crust,
+								sauce: specialtyPizza.pizza.sauce,
 								toppings: toppingIds,
 								imageURL,
 								description,

@@ -57,6 +57,33 @@ export default new Vuex.Store({
 		ADD_SPECIALTY_PIZZA(state, payload) {
 			state.specialtyPizzas.push(payload);
 		},
+		UPDATE_SPECIALTY_PIZZA(state, payload) {
+			const pizza = state.specialtyPizzas.find(
+				(specialtyPizza) => specialtyPizza.id === payload.id
+			);
+			const {
+				crust,
+				description,
+				id,
+				imageURL,
+				isAvailable,
+				name,
+				price,
+				sauce,
+				size,
+				toppings,
+			} = payload;
+			pizza.crust = crust;
+			pizza.description = description;
+			pizza.id = id;
+			pizza.imageURL = imageURL;
+			pizza.isAvailable = isAvailable;
+			pizza.name = name;
+			pizza.price = price;
+			pizza.sauce = sauce;
+			pizza.size = size;
+			pizza.toppings = toppings;
+		},
 		// ADD_PENDING_ORDER(state, payload) {
 		// 	state.sizes.pendingOrders.push(payload);
 		// },
