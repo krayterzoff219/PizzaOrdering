@@ -116,8 +116,35 @@ public class JdbcOrderDao implements OrderDao{
         } catch (ResourceAccessException | DataAccessException e){
             System.out.println(e.getMessage());
         }
-        
-        
+        return orderList;
+    }
+
+    @Override
+    public List<Order> getAllOrdersByStatus(String status) {
+        String sql = "SELECT * FROM orders JOIN user_data ON orders.data_id = user_data.data_id WHERE status = ?;";
+        List<Order> orderList = new ArrayList<>();
+        try {
+            Order order = new Order();
+            SqlRowSet row = jdbcTemplate.queryForRowSet(sql, status);
+            while(row.next()){
+                order = mapRowToOrder(row);
+                List<Integer> itemIds = getItemsByOrderId(order.getOrderId());
+                List<MenuItem> menuItems = new ArrayList<>();
+                List<Pizza> pizzas = new ArrayList<>();
+                for(int id : itemIds){
+                    if(id >= 1001){
+                        pizzas.add(pizzaDao.getPizzaById(id));
+                    }else if(id > 0){
+                        menuItems.add(menuItemDao.getMenuItemById(id));
+                    }
+                }
+                order.setCustomPizzas(pizzas);
+                order.setMenuItems(menuItems);
+                orderList.add(order);
+            }
+        } catch (ResourceAccessException | DataAccessException e){
+            System.out.println(e.getMessage());
+        }
         return orderList;
     }
 

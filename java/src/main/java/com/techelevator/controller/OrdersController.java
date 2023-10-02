@@ -46,6 +46,11 @@ public class OrdersController {
         return orderDao.getAllOrders();
     }
 
+    @RequestMapping(path = "/orders/status", method = RequestMethod.GET)
+    public List<Order> getAllOrdersByStatus(@RequestParam(value = "status") String status){
+        return orderDao.getAllOrdersByStatus(status);
+    }
+
     @RequestMapping(path = "/orders/{id}", method = RequestMethod.GET)
     public Order getOrderById(@PathVariable int id){
         return orderDao.getOrderById(id);
