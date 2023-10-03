@@ -3,9 +3,9 @@
         <div class="pendingList" >
             
             <div> 
-                <span>{{currentOrder.orderId}}</span>
+                <span>Order #{{currentOrder.orderId}}</span>
                 <br>
-                <span>{{currentOrder.isDelivery}}</span>
+                <span>{{currentOrder.isDelivery ? "Delivery" : "Pick-up"}}</span>
                 <br>
                 
             </div>
@@ -72,8 +72,8 @@ export default{
     
     methods: {
         initializeOrder() {
+            console.log(this.$store.state.pendingOrders);
 			const { orderId, status, email, address, phone, isDelivery, menuItems, customPizzas} = this.order;
-
 			this.currentOrder.orderId = orderId;
             this.currentOrder.status = status;
             this.currentOrder.email = email;
