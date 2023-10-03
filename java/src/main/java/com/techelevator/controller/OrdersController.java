@@ -8,6 +8,7 @@ import com.techelevator.model.orders.Order;
 import com.techelevator.model.orders.OrderStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @RestController
 //@PreAuthorize("isAuthenticated()")
-@PreAuthorize("permitAll()")
+//@PreAuthorize("permitAll()")
 @CrossOrigin
 public class OrdersController {
 
@@ -31,6 +32,7 @@ public class OrdersController {
     private UserDao userDao;
 
 
+
     @RequestMapping(path = "/orders", method = RequestMethod.POST)
     public int addOrder(@RequestBody Order order, Principal principal){
         if(principal == null){
@@ -41,11 +43,13 @@ public class OrdersController {
         return orderDao.create(order);
     }
 
+    @Secured({"ROLE_EMPLOYEE", "ROLE_ADMIN" })
     @RequestMapping(path = "/orders", method = RequestMethod.GET)
     public List<Order> getAllOrders(){
         return orderDao.getAllOrders();
     }
 
+    @Secured({"ROLE_EMPLOYEE", "ROLE_ADMIN" })
     @RequestMapping(path = "/orders/status", method = RequestMethod.GET)
     public List<Order> getAllOrdersByStatus(@RequestParam(value = "status") String status){
         return orderDao.getAllOrdersByStatus(status);
@@ -56,6 +60,8 @@ public class OrdersController {
         return orderDao.getOrderById(id);
     }
 
+
+    @Secured({"ROLE_EMPLOYEE", "ROLE_ADMIN" })
     @RequestMapping(path = "/orders", method = RequestMethod.PUT)
     public void updateMenuItems(@RequestBody OrderStatus orderStatus){
         boolean updated = orderDao.updateStatus(orderStatus);
