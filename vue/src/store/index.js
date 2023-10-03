@@ -40,10 +40,11 @@ export default new Vuex.Store({
 		cart: {},
 		subtotal: 0,
 		isDropDownMenuVisible: false,
+		isDropDownLoginActivated: true,
 		nextCustomPizzaId: -1,
 	},
 	mutations: {
-		GO_TO_NEXT_CUSTOM_PIZZA(state) {
+		GO_TO_NEXT_CUSTOM_PIZZA_ID(state) {
 			state.nextCustomPizzaId--;
 		},
 		ADD_TOPPING(state, payload) {
