@@ -16,7 +16,8 @@ public class Order {
     private String address;
     private boolean isDelivery;
 
-    private BigDecimal total = new BigDecimal(0);
+    private BigDecimal subtotal = new BigDecimal(0);
+    private BigDecimal tax = new BigDecimal(0);
     private List<MenuItem> menuItems;
     private List<Pizza> customPizzas;
 
@@ -76,13 +77,6 @@ public class Order {
         isDelivery = delivery;
     }
 
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
 
     public List<MenuItem> getMenuItems() {
         return menuItems;
@@ -98,5 +92,21 @@ public class Order {
 
     public void setCustomPizzas(List<Pizza> customPizzas) {
         this.customPizzas = customPizzas;
+    }
+
+    public BigDecimal getSubtotal() {
+        return subtotal;
+    }
+
+    public void setSubtotal(BigDecimal subtotal) {
+        this.subtotal = subtotal;
+    }
+
+    public BigDecimal getTax() {
+        return tax;
+    }
+
+    public void setTax(BigDecimal tax) {
+        this.tax = tax;
     }
 }

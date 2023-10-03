@@ -90,7 +90,8 @@ CREATE TABLE orders (
     status varchar(40) NOT NULL,
     data_id int NOT NULL,
     delivery boolean NOT NULL,
-    total numeric(10,2) NOT NULL,
+    subtotal numeric(10,2) NOT NULL,
+    tax numeric(10,2) NOT NULL,
 
     CONSTRAINT PK_order_id PRIMARY KEY (order_id),
     CONSTRAINT fk_user_data_orders FOREIGN Key (data_id) REFERENCES user_data(data_id)
