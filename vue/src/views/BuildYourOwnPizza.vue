@@ -6,7 +6,7 @@
 		<h1>Build Your Own Pizza</h1>
 		<form
 			id="build-your-own-pizza-form"
-			@submit.prevent="">
+			@submit.prevent="submitForm">
 			<build-your-own-pizza-category
 				optionsCategory="sizes"
 				v-model="sizeId" />
@@ -20,10 +20,12 @@
 				optionsCategory="toppings"
 				v-model="toppingIds"
 				isMultiple="true" />
+			<p id="total"><span>Total: </span>&nbsp; ${{ totalPrice.toFixed(2) }}</p>
 			<small-button
 				v-if="isNewPizza"
 				buttonType="submit"
 				buttonText="Add to Order" />
+
 			<small-button
 				v-else
 				buttonType="submit"
@@ -71,7 +73,44 @@ export default {
 		}
 	},
 	methods: {
-		submitForm() {},
+		submitForm() {
+			const {
+				isNewPizza,
+				crustId,
+				sauceId,
+				sizeId,
+				toppingIds,
+				id,
+				totalPrice,
+				$store,
+				$router,
+			} = this;
+			const {
+				crusts,
+				// toppings,
+				sauces,
+				sizes,
+			} = $store.state;
+			const crustName = crusts.find((crust) => crust.id === crustId).name;
+			const sizeName = sizes.find((size) => size.id === sizeId).name;
+			const sauceName = sauces.find((sauce) => sauce.id === sauceId).name;
+			if (isNewPizza) {
+				const pizza = {};
+				pizza.id = id;
+				pizza.price = totalPrice;
+				pizza.quantity = 1;
+				pizza.name = "Build Your Own Pizza";
+				pizza.crust = { id: crustId, name: crustName };
+				pizza.sauce = { id: sauceId, name: sauceName };
+				pizza.size = { id: sizeId, name: sizeName };
+				pizza.imageURL =
+					"https://img.freepik.com/free-photo/delicious-neapolitan-meat-pizza-pizzeria-delicious-food_78826-2833.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais";
+				pizza.toppings = toppingIds;
+				$store.dispatch("addItemToCart", pizza);
+				$router.push({ name: "customer-menu" });
+				$store.commit("GO_TO_NEXT_CUSTOM_PIZZA_ID");
+			}
+		},
 	},
 	computed: {
 		totalPrice() {
@@ -165,5 +204,9 @@ form > button:nth-child(5) {
 
 h1 {
 	margin-top: var(--section-border-radius);
+}
+
+p {
+	text-align: right;
 }
 </style>
