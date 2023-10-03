@@ -1,6 +1,8 @@
 <template>
 	<div class="cart-item">
-		<div class="cart-item-image-container"></div>
+		<div
+			class="cart-item-image-container"
+			:style="{ 'background-image': `url('${imageURL}')` }"></div>
 		<div class="cart-item-description-container">
 			<h2>{{ name }}</h2>
 			<div class="quantity-price-container">
@@ -18,6 +20,16 @@
 						<span>{{ `$${(price * quantity).toFixed(2)}` }}</span>
 					</div>
 				</h3>
+				<small-button
+					v-if="id < 0"
+					buttonText="Edit Pizza"
+					:clickHandler="
+						() =>
+							$router.push({
+								name: 'build-your-own-pizza',
+								params: { id: -id },
+							})
+					" />
 			</div>
 			<div class="cart-details-container">
 				<!-- FOR EVERY DETAIL THAT IS NOT AN ARRAY (I.E., SAUCE, SIZE, AND CRUST) -->
@@ -78,15 +90,18 @@
 
 <script>
 import QuantityCounter from "./QuantityCounter.vue";
+import SmallButton from "./SmallButton.vue";
 export default {
-	components: { QuantityCounter },
+	components: { QuantityCounter, SmallButton },
 	props: ["cartItem", "quantity"],
 	data() {
-		const { id, name, price, size, sauce, crust, toppings } = this.cartItem;
+		const { id, name, price, size, sauce, crust, toppings, imageURL } =
+			this.cartItem;
 		return {
 			id,
 			name,
 			price,
+			imageURL,
 			details: {
 				size,
 				sauce,
@@ -117,7 +132,7 @@ div.cart-item {
 
 /* ********** image container ********** */
 div.cart-item-image-container {
-	background-image: url("https://img.freepik.com/free-photo/delicious-neapolitan-meat-pizza-pizzeria-delicious-food_78826-2833.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais");
+	/* background-image: url("https://img.freepik.com/free-photo/delicious-neapolitan-meat-pizza-pizzeria-delicious-food_78826-2833.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais"); */
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
@@ -152,10 +167,16 @@ div.quantity-price-container {
 	gap: 15px;
 	width: fit-content;
 	grid-area: quantity-price;
+	flex-wrap: wrap;
 }
 
 div.cart-details-container {
 	grid-area: item-details;
+}
+
+div.cart-item-description-container button {
+	background-color: var(--primary-color);
+	border-color: var(--primary-color);
 }
 
 h3 {

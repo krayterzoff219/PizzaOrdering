@@ -8,9 +8,6 @@ export default {
 		return axios.post("/menuitems/specialty", specialtyPizza);
 	},
 	updateSpecialtyPizza(specialtyPizza) {
-		return axios.put(
-			`/menuitems/specialty/${specialtyPizza.id}`,
-			specialtyPizza
-		);
+		return axios.put(`/menuitems`, specialtyPizza);
 	},
 };

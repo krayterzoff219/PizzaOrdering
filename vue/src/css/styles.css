@@ -51,13 +51,18 @@ section.customer-section#menu-section {
 	max-width: 60rem;
 }
 
+
+section#employee-order-view-section,
+div#order-confirmation,
+section div.pending-order-wrapper,
 section.employee-section#employee-login form,
 section.employee-section#employee-register form,
 section.employee-section#specialty-pizzas div.table-wrapper,
 section.employee-section#pizza-options div.pizza-options-wrapper,
 section.customer-section#menu-section div.menu-wrapper,
 section.customer-section#order-section div.order-wrapper,
-section.customer-section#checkout-section div.checkout-inputs {
+section.customer-section#checkout-section div.checkout-inputs,
+section.customer-section#build-your-own-pizza-section form {
 	margin: var(--section-border-radius) auto;
 	background-color: var(--white-color);
 	border-radius: var(--section-border-radius);

@@ -3,7 +3,10 @@
 		<nav-bar />
 		<dropdown-overlay />
 		<router-view />
-		<call-to-action-buttons v-if="$route.name !== 'checkout'" />
+		<call-to-action-buttons
+			v-if="
+				$route.name !== 'checkout' && !$route.path.includes('customize-pizza')
+			" />
 		<the-footer />
 	</div>
 </template>

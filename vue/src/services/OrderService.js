@@ -1,14 +1,21 @@
 import axios from "axios";
+import store from "../store/index.js";
 
 export default {
 	getPendingOrders() {
-		return axios.get("/pending-orders");
+		return axios.get("/orders/status?status=pending").then(
+			(res) => {
+				if (res.status == 200){
+					store.commit("LOAD_PENDING_ORDERS", res.data)
+				}
+			}
+		);
 	},
 	createPendingOrder(order) {
 
 		return axios.post("/orders", order);
 	},
-	updatePendingOrder(order) {
-		return axios.put(`/pending-orders/${order.id}`, order);
+	updatePendingOrder(orderStatus) {
+		return axios.put("/orders", orderStatus);
 	},
 };

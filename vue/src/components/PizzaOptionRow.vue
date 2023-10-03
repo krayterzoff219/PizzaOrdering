@@ -2,6 +2,7 @@
 	<div class="pizza-option-row">
 		<input
 			v-model="name"
+			@change="saveChanges"
 			class="pizza-option-cell-name"
 			:placeholder="`New ${
 				optionsCategory.charAt(0).toUpperCase() + optionsCategory.slice(1, -1)
@@ -11,11 +12,13 @@
 			type="text"
 			@focus="formatAsNumber"
 			@blur="formatAsMoney"
+			@change="saveChanges"
 			placeholder="Price"
 			class="pizza-option-cell-price" />
 		<select
 			v-model="isAvailable"
-			class="pizza-option-cell-available">
+			class="pizza-option-cell-available"
+			@change="saveChanges">
 			<option value="true">Available</option>
 			<option value="false">Not Available</option>
 		</select>
@@ -74,7 +77,18 @@ export default {
 			event.target.value = event.target.value.replace("$", "");
 			event.target.setAttribute("type", "number");
 		},
-		saveChanges() {},
+		saveChanges() {
+			const { areInputsValid, optionsCategory, id, price, name, isAvailable } =
+				this;
+			if (areInputsValid()) {
+				optionService.updateOption(optionsCategory, {
+					name,
+					price: price.replace("$", ""),
+					available: isAvailable,
+					id,
+				});
+			}
+		},
 		addNewOption() {
 			const { name, price, isAvailable, areInputsValid, optionsCategory } =
 				this;

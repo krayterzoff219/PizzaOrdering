@@ -12,6 +12,8 @@ import CustomerMenu from "../views/CustomerMenu.vue";
 import MyOrder from "../views/MyOrder.vue";
 import CustomerCheckout from "../views/CustomerCheckout.vue";
 import OrderConfirmation from "../views/OrderConfirmation.vue";
+import BuildYourOwnPizza from "../views/BuildYourOwnPizza.vue";
+import EmployeeViewOrderPage from "../views/EmployeeViewOrderPage.vue";
 
 Vue.use(Router);
 
@@ -48,6 +50,14 @@ const router = new Router({
 			path: "/menu",
 			name: "customer-menu",
 			component: CustomerMenu,
+			meta: {
+				requiresAuth: false,
+			},
+		},
+		{
+			path: "/customize-pizza/:id",
+			name: "build-your-own-pizza",
+			component: BuildYourOwnPizza,
 			meta: {
 				requiresAuth: false,
 			},
@@ -91,6 +101,14 @@ const router = new Router({
 			meta: {
 				requiresAuth: true,
 			},
+		},
+		{
+			path: "/employees/orders/:id",
+			name: "employee-order-view",
+			component: EmployeeViewOrderPage,
+			meta: {
+				requiresAuth: true,
+			}
 		},
 		{
 			path: "/employees/specialty-pizzas",
