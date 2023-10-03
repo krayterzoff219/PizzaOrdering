@@ -18,6 +18,7 @@
 			<small-button
 				v-else
 				buttonText="Build Your Own"
+				id="button-build-your-own"
 				:clickHandler="
 					() =>
 						$router.push({
@@ -201,5 +202,10 @@ button {
 
 div.customer-menu-item:nth-child(2n-1) button {
 	align-self: flex-end;
+}
+
+button#button-build-your-own {
+	background-color: var(--primary-color);
+	border-color: var(--primary-color);
 }
 </style>
