@@ -9,19 +9,19 @@
 			@submit.prevent="">
 			<build-your-own-pizza-category
 				optionsCategory="sizes"
-				v-model="size" />
+				v-model="sizeId" />
 			<build-your-own-pizza-category
 				optionsCategory="crusts"
-				v-model="crust" />
+				v-model="crustId" />
 			<build-your-own-pizza-category
 				optionsCategory="sauces"
-				v-model="sauce" />
+				v-model="sauceId" />
 			<build-your-own-pizza-category
 				optionsCategory="toppings"
-				v-model="toppings"
+				v-model="toppingIds"
 				isMultiple="true" />
 			<small-button
-				v-if="newPizza"
+				v-if="isNewPizza"
 				buttonType="submit"
 				buttonText="Add to Order" />
 			<small-button
@@ -53,22 +53,51 @@ export default {
 	data() {
 		return {
 			id: -this.$route.params.id,
-			crust: -1,
-			size: -1,
-			toppings: [],
-			sauce: -1,
-			newPizza: true,
+			crustId: -1,
+			sizeId: -1,
+			toppingIds: [],
+			sauceId: -1,
+			isNewPizza: true,
 			buttonText: "Add to Order",
 		};
 	},
 	beforeCreate() {
 		menuService.getPizzaOptions(); // TODO: .catch alert if error
-		if (this.$store.state.cart[this.id]) this.newPizza = false;
+		if (this.$store.state.cart[this.id]) this.isNewPizza = false;
 	},
 	created() {
-		if (!this.newPizza) {
+		if (!this.isNewPizza) {
 			this.buttonText = "Update Order";
 		}
+	},
+	methods: {
+		submitForm() {},
+	},
+	computed: {
+		totalPrice() {
+			let price = 0;
+			const { crustId, sizeId, toppingIds, sauceId } = this;
+			const { crusts, sizes, toppings, sauces } = this.$store.state;
+
+			toppingIds.forEach((toppingId) => {
+				const topping = toppings.find((topping) => topping.id === toppingId);
+				price += topping.price;
+			});
+
+			if (crustId > 0) {
+				const crust = crusts.find((crust) => crust.id === crustId);
+				price += crust.price;
+			}
+			if (sizeId > 0) {
+				const size = sizes.find((size) => size.id === sizeId);
+				price += size.price;
+			}
+			if (sauceId > 0) {
+				const sauce = sauces.find((sauce) => sauce.id === sauceId);
+				price += sauce.price;
+			}
+			return price;
+		},
 	},
 };
 </script>

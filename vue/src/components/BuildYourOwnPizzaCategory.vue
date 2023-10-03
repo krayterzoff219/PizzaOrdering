@@ -14,12 +14,21 @@
 				v-for="option of $store.state[optionsCategory]"
 				:key="option.id">
 				<input
+					:id="`${option.name
+						.replace(' ', '-')
+						.toLowerCase()}-${optionsCategory}`"
+					:required="!isMultiple"
 					:type="isMultiple ? 'checkbox' : 'radio'"
 					:name="optionsCategory"
 					:value="option.id"
 					v-model="userOption" />
 
-				<label :for="option.name">{{ option.name }}</label>
+				<label
+					:for="`${option.name
+						.replace(' ', '-')
+						.toLowerCase()}-${optionsCategory}`"
+					>{{ option.name }} (${{ option.price.toFixed(2) }})</label
+				>
 			</div>
 		</div>
 	</div>
@@ -51,14 +60,7 @@ div.pizza-option-inputs-wrapper {
 	justify-content: flex-start;
 }
 
-/* @media only screen and (min-width: 768px) {
-	div.pizza-option-inputs-wrapper {
-		max-width: 50%;
-	}
-} */
-
 div.pizza-option-single-input-wrapper {
-	/* padding-bottom: 10px; */
 	padding-right: 20px;
 	flex: 1;
 	flex-basis: 8rem;
