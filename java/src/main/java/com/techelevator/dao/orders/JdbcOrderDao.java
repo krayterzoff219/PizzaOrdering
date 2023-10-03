@@ -31,12 +31,12 @@ public class JdbcOrderDao implements OrderDao{
     @Override
     public int create(Order order) {
 
-        String sql = "INSERT INTO orders (status, data_id, delivery, total) VALUES (?, ?, ?, ?) RETURNING order_id;";
+        String sql = "INSERT INTO orders (status, data_id, delivery, subtotal, tax) VALUES (?, ?, ?, ?, ?) RETURNING order_id;";
         String sql2 = "INSERT INTO orders_to_menu_items (order_id, item_id, quantity) VALUES (?, ?, ?);";
         int newId = -1;
         try{
             order.setStatus("pending");
-            newId = jdbcTemplate.queryForObject(sql, Integer.class, order.getStatus(), order.getDataId(), order.isIsDelivery(), order.getTotal());
+            newId = jdbcTemplate.queryForObject(sql, Integer.class, order.getStatus(), order.getDataId(), order.isIsDelivery(), order.getSubtotal(), order.getTax());
             if(newId == -1){throw new Exception();}
             System.out.println(order.getCustomPizzas());
             System.out.println(order.getMenuItems());
@@ -172,7 +172,8 @@ public class JdbcOrderDao implements OrderDao{
         order.setStatus(row.getString("status"));
         order.setAddress(row.getString("address"));
         order.setPhone(row.getString("phone"));
-        order.setTotal(row.getBigDecimal("total"));
+        order.setSubtotal(row.getBigDecimal("subtotal"));
+        order.setTax(row.getBigDecimal("tax"));
         order.setEmail(row.getString("email"));
         order.setIsDelivery(row.getBoolean("delivery"));
 
