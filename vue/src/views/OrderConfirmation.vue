@@ -7,8 +7,10 @@
 </template>
 
 <script>
+
 export default {
 	name: "order-confirmation",
+	
 	beforeCreate() {
 		if (!Object.keys(this.$store.state.cart).length) {
 			this.$router.push({ name: "home" });
@@ -18,5 +20,6 @@ export default {
 		this.$store.commit("CLEAR_CART");
 		this.$store.commit("RESET_SUBTOTAL");
 	},
+	
 };
 </script>
