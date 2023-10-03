@@ -72,7 +72,6 @@ export default{
     
     methods: {
         initializeOrder() {
-            console.log(this.$store.state.pendingOrders);
 			const { orderId, status, email, address, phone, isDelivery, menuItems, customPizzas} = this.order;
 			this.currentOrder.orderId = orderId;
             this.currentOrder.status = status;
