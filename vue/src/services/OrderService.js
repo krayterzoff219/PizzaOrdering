@@ -15,7 +15,7 @@ export default {
 
 		return axios.post("/orders", order);
 	},
-	updatePendingOrder(order) {
-		return axios.put(`/pending-orders/${order.id}`, order);
+	updatePendingOrder(orderStatus) {
+		return axios.put("/orders", orderStatus);
 	},
 };

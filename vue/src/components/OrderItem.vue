@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import OrderService from '../services/OrderService'
 import SmallButton from './SmallButton.vue'
 
 export default{
@@ -79,7 +80,11 @@ export default{
             this.currentOrder.isDelivery = isDelivery;
             this.currentOrder.menuItems = menuItems;
             this.currentOrder.customPizzas = customPizzas;
-		}
+		},
+
+        saveChanges(){
+            
+        }
     }
 
 }
