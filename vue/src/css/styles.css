@@ -51,6 +51,8 @@ section.customer-section#menu-section {
 	max-width: 60rem;
 }
 
+
+section#employee-order-view-section,
 section div.pending-order-wrapper,
 section.employee-section#employee-login form,
 section.employee-section#employee-register form,

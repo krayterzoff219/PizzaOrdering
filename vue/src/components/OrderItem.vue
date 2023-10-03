@@ -7,13 +7,14 @@
                 <br>
                 <span>{{currentOrder.status}}</span>
                 <br>
-                <span>Pickup</span>
+                
             </div>
 
-
-            <small-button buttonText="View">
-            </small-button>
-
+            <router-link to="/employee-order-view">
+            <small-button buttonText="View"/>
+            </router-link>
+                
+           
            
 
             <select v-if="isLoaded" v-model="currentOrder.status" >
@@ -81,10 +82,13 @@ export default{
             this.currentOrder.menuItems = menuItems;
             this.currentOrder.customPizzas = customPizzas;
 		},
+<<<<<<< HEAD
 
         saveChanges(){
             
         }
+=======
+>>>>>>> brock
     }
 
 }
@@ -99,7 +103,8 @@ div.pendingList {
 	width: 100%;
 	justify-content: center;
 	padding: 15px 10px;
-    margin: 10px;
+    margin: 10px auto;
+    border-bottom: black solid 3px;
 }
 
 </style>
