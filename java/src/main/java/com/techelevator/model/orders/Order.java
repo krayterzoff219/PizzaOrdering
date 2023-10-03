@@ -68,11 +68,11 @@ public class Order {
         this.address = address;
     }
 
-    public boolean isDelivery() {
+    public boolean isIsDelivery() {
         return isDelivery;
     }
 
-    public void setDelivery(boolean delivery) {
+    public void setIsDelivery(boolean delivery) {
         isDelivery = delivery;
     }
 
