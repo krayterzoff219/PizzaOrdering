@@ -36,7 +36,7 @@ public class JdbcOrderDao implements OrderDao{
         int newId = -1;
         try{
             order.setStatus("pending");
-            newId = jdbcTemplate.queryForObject(sql, Integer.class, order.getStatus(), order.getDataId(), order.isDelivery(), order.getTotal());
+            newId = jdbcTemplate.queryForObject(sql, Integer.class, order.getStatus(), order.getDataId(), order.isIsDelivery(), order.getTotal());
             if(newId == -1){throw new Exception();}
             System.out.println(order.getCustomPizzas());
             System.out.println(order.getMenuItems());
@@ -174,7 +174,7 @@ public class JdbcOrderDao implements OrderDao{
         order.setPhone(row.getString("phone"));
         order.setTotal(row.getBigDecimal("total"));
         order.setEmail(row.getString("email"));
-        order.setDelivery(row.getBoolean("delivery"));
+        order.setIsDelivery(row.getBoolean("delivery"));
 
         return order;
     }
