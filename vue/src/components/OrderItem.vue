@@ -19,7 +19,7 @@
             <select v-if="isLoaded" v-model="currentOrder.status" >
                 <option v-for="stat in possibleStatus" 
                 :key="stat"
-                :value="stat">{{stat}}
+                :value="stat.toLowerCase()">{{stat}}
                 </option>
             </select>
 
