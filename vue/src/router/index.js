@@ -13,6 +13,7 @@ import MyOrder from "../views/MyOrder.vue";
 import CustomerCheckout from "../views/CustomerCheckout.vue";
 import OrderConfirmation from "../views/OrderConfirmation.vue";
 import BuildYourOwnPizza from "../views/BuildYourOwnPizza.vue";
+import EmployeeViewOrderPage from "../views/EmployeeViewOrderPage.vue";
 
 Vue.use(Router);
 
@@ -100,6 +101,14 @@ const router = new Router({
 			meta: {
 				requiresAuth: true,
 			},
+		},
+		{
+			path: "/orders/:id",
+			name: "employee-order-view",
+			component: EmployeeViewOrderPage,
+			meta: {
+				requiresAuth: true,
+			}
 		},
 		{
 			path: "/employees/specialty-pizzas",

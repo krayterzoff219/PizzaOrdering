@@ -7,13 +7,14 @@
                 <br>
                 <span>{{currentOrder.status}}</span>
                 <br>
-                <span>Pickup</span>
+                
             </div>
 
-
-            <small-button buttonText="View">
-            </small-button>
-
+            <router-link v-bind:to= "{name: 'employee-order-view', params: {id: currentOrder.orderId}}">
+                <small-button buttonText="View"/>
+            </router-link>
+                
+           
            
 
             <select v-if="isLoaded" v-model="currentOrder.status" >
@@ -31,7 +32,7 @@
 </template>
 
 <script>
-import OrderService from '../services/OrderService'
+// import OrderService from '../services/OrderService'
 import SmallButton from './SmallButton.vue'
 
 export default{
@@ -99,7 +100,8 @@ div.pendingList {
 	width: 100%;
 	justify-content: center;
 	padding: 15px 10px;
-    margin: 10px;
+    margin: 10px auto;
+    border-bottom: black solid 3px;
 }
 
 </style>
