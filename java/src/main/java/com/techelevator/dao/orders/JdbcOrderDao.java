@@ -14,7 +14,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.ResourceAccessException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class JdbcOrderDao implements OrderDao{
@@ -71,14 +73,18 @@ public class JdbcOrderDao implements OrderDao{
             SqlRowSet row = jdbcTemplate.queryForRowSet(sql, orderId);
             while(row.next()){
                 order = mapRowToOrder(row);
-                List<Integer> itemIds = getItemsByOrderId(order.getOrderId());
+                Map<Integer, Integer> items = getItemsByOrderId(order.getOrderId());
                 List<MenuItem> menuItems = new ArrayList<>();
                 List<Pizza> pizzas = new ArrayList<>();
-                for(int id : itemIds){
-                    if(id >= 1001){
-                        pizzas.add(pizzaDao.getPizzaById(id));
-                    }else if(id > 0){
-                        menuItems.add(menuItemDao.getMenuItemById(id));
+                for(Map.Entry<Integer, Integer> currentItem : items.entrySet()){
+                    if(currentItem.getKey() >= 1001){
+                        Pizza pizza = pizzaDao.getPizzaById(currentItem.getKey());
+                        pizza.setQuantity(currentItem.getValue());
+                        pizzas.add(pizza);
+                    }else if(currentItem.getKey() > 0){
+                        MenuItem menuItem = menuItemDao.getMenuItemById(currentItem.getKey());
+                        menuItem.setQuantity(currentItem.getValue());
+                        menuItems.add(menuItem);
                     }
                 }
                 order.setCustomPizzas(pizzas);
@@ -99,14 +105,18 @@ public class JdbcOrderDao implements OrderDao{
             SqlRowSet row = jdbcTemplate.queryForRowSet(sql);
             while(row.next()){
                 order = mapRowToOrder(row);
-                List<Integer> itemIds = getItemsByOrderId(order.getOrderId());
+                Map<Integer, Integer> items = getItemsByOrderId(order.getOrderId());
                 List<MenuItem> menuItems = new ArrayList<>();
                 List<Pizza> pizzas = new ArrayList<>();
-                for(int id : itemIds){
-                    if(id >= 1001){
-                        pizzas.add(pizzaDao.getPizzaById(id));
-                    }else if(id > 0){
-                        menuItems.add(menuItemDao.getMenuItemById(id));
+                for(Map.Entry<Integer, Integer> currentItem : items.entrySet()){
+                    if(currentItem.getKey() >= 1001){
+                        Pizza pizza = pizzaDao.getPizzaById(currentItem.getKey());
+                        pizza.setQuantity(currentItem.getValue());
+                        pizzas.add(pizza);
+                    }else if(currentItem.getKey() > 0){
+                        MenuItem menuItem = menuItemDao.getMenuItemById(currentItem.getKey());
+                        menuItem.setQuantity(currentItem.getValue());
+                        menuItems.add(menuItem);
                     }
                 }
                 order.setCustomPizzas(pizzas);
@@ -128,14 +138,18 @@ public class JdbcOrderDao implements OrderDao{
             SqlRowSet row = jdbcTemplate.queryForRowSet(sql, status);
             while(row.next()){
                 order = mapRowToOrder(row);
-                List<Integer> itemIds = getItemsByOrderId(order.getOrderId());
+                Map<Integer, Integer> items = getItemsByOrderId(order.getOrderId());
                 List<MenuItem> menuItems = new ArrayList<>();
                 List<Pizza> pizzas = new ArrayList<>();
-                for(int id : itemIds){
-                    if(id >= 1001){
-                        pizzas.add(pizzaDao.getPizzaById(id));
-                    }else if(id > 0){
-                        menuItems.add(menuItemDao.getMenuItemById(id));
+                for(Map.Entry<Integer, Integer> currentItem : items.entrySet()){
+                    if(currentItem.getKey() >= 1001){
+                        Pizza pizza = pizzaDao.getPizzaById(currentItem.getKey());
+                        pizza.setQuantity(currentItem.getValue());
+                        pizzas.add(pizza);
+                    }else if(currentItem.getKey() > 0){
+                        MenuItem menuItem = menuItemDao.getMenuItemById(currentItem.getKey());
+                        menuItem.setQuantity(currentItem.getValue());
+                        menuItems.add(menuItem);
                     }
                 }
                 order.setCustomPizzas(pizzas);
@@ -180,13 +194,13 @@ public class JdbcOrderDao implements OrderDao{
         return order;
     }
 
-    private List<Integer> getItemsByOrderId(int orderId){
-        List<Integer> itemIds = new ArrayList<>();
-        String sql = "SELECT item_id FROM orders_to_menu_items WHERE order_id = ?;";
+    private Map<Integer, Integer> getItemsByOrderId(int orderId){
+        Map<Integer, Integer> itemIds = new HashMap<>();
+        String sql = "SELECT item_id, quantity FROM orders_to_menu_items WHERE order_id = ?;";
         try {
             SqlRowSet row = jdbcTemplate.queryForRowSet(sql, orderId);
             while(row.next()){
-                itemIds.add(row.getInt("item_id"));
+                itemIds.put(row.getInt("item_id"), row.getInt("quantity"));
             }
         }catch (ResourceAccessException | DataAccessException e){
             System.out.println(e.getMessage());
