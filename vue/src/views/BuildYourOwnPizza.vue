@@ -9,23 +9,26 @@
 			@submit.prevent="submitForm">
 			<build-your-own-pizza-category
 				optionsCategory="sizes"
-				v-model="sizeId" />
+				v-model="sizeId"
+				:defaultValue="sizeId" />
 			<build-your-own-pizza-category
 				optionsCategory="crusts"
+				:defaultValue="crustId"
 				v-model="crustId" />
 			<build-your-own-pizza-category
 				optionsCategory="sauces"
+				:defaultValue="sauceId"
 				v-model="sauceId" />
 			<build-your-own-pizza-category
 				optionsCategory="toppings"
 				v-model="toppingIds"
+				:defaultValue="toppingIds"
 				isMultiple="true" />
 			<p id="total"><span>Total: </span>&nbsp; ${{ totalPrice.toFixed(2) }}</p>
 			<small-button
 				v-if="isNewPizza"
 				buttonType="submit"
 				buttonText="Add to Order" />
-
 			<small-button
 				v-else
 				buttonType="submit"
@@ -65,11 +68,17 @@ export default {
 	},
 	beforeCreate() {
 		menuService.getPizzaOptions(); // TODO: .catch alert if error
-		if (this.$store.state.cart[this.id]) this.isNewPizza = false;
 	},
 	created() {
-		if (!this.isNewPizza) {
+		// if the item is already in the cart
+		if (this.$store.state.cart[this.id]) {
+			this.isNewPizza = false;
 			this.buttonText = "Update Order";
+			const pizza = this.$store.state.cart[this.id];
+			this.crustId = pizza.crust.id;
+			this.sizeId = pizza.size.id;
+			this.sauceId = pizza.sauce.id;
+			this.toppingIds = pizza.toppings;
 		}
 	},
 	methods: {
@@ -85,30 +94,33 @@ export default {
 				$store,
 				$router,
 			} = this;
-			const {
-				crusts,
-				// toppings,
-				sauces,
-				sizes,
-			} = $store.state;
+			const { crusts, sauces, sizes } = $store.state;
 			const crustName = crusts.find((crust) => crust.id === crustId).name;
 			const sizeName = sizes.find((size) => size.id === sizeId).name;
 			const sauceName = sauces.find((sauce) => sauce.id === sauceId).name;
+			const pizza = { id };
+			pizza.crust = { id: crustId, name: crustName };
+			pizza.sauce = { id: sauceId, name: sauceName };
+			pizza.size = { id: sizeId, name: sizeName };
+			pizza.toppings = toppingIds;
+			pizza.price = totalPrice;
+
 			if (isNewPizza) {
-				const pizza = {};
-				pizza.id = id;
-				pizza.price = totalPrice;
 				pizza.quantity = 1;
 				pizza.name = "Build Your Own Pizza";
-				pizza.crust = { id: crustId, name: crustName };
-				pizza.sauce = { id: sauceId, name: sauceName };
-				pizza.size = { id: sizeId, name: sizeName };
 				pizza.imageURL =
 					"https://img.freepik.com/free-photo/delicious-neapolitan-meat-pizza-pizzeria-delicious-food_78826-2833.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais";
-				pizza.toppings = toppingIds;
 				$store.dispatch("addItemToCart", pizza);
 				$router.push({ name: "customer-menu" });
 				$store.commit("GO_TO_NEXT_CUSTOM_PIZZA_ID");
+			} else {
+				const originalPizza = this.$store.state.cart[this.id];
+				const priceDifference = totalPrice - originalPizza.price;
+				$store.dispatch("updateExistingCustomPizza", {
+					pizza,
+					priceDifference,
+				});
+				$router.push({ name: "my-order" });
 			}
 		},
 	},

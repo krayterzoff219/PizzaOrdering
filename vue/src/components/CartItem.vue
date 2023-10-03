@@ -20,6 +20,16 @@
 						<span>{{ `$${(price * quantity).toFixed(2)}` }}</span>
 					</div>
 				</h3>
+				<small-button
+					v-if="id < 0"
+					buttonText="Edit Pizza"
+					:clickHandler="
+						() =>
+							$router.push({
+								name: 'build-your-own-pizza',
+								params: { id: -id },
+							})
+					" />
 			</div>
 			<div class="cart-details-container">
 				<!-- FOR EVERY DETAIL THAT IS NOT AN ARRAY (I.E., SAUCE, SIZE, AND CRUST) -->
@@ -80,8 +90,9 @@
 
 <script>
 import QuantityCounter from "./QuantityCounter.vue";
+import SmallButton from "./SmallButton.vue";
 export default {
-	components: { QuantityCounter },
+	components: { QuantityCounter, SmallButton },
 	props: ["cartItem", "quantity"],
 	data() {
 		const { id, name, price, size, sauce, crust, toppings, imageURL } =
@@ -156,6 +167,7 @@ div.quantity-price-container {
 	gap: 15px;
 	width: fit-content;
 	grid-area: quantity-price;
+	flex-wrap: wrap;
 }
 
 div.cart-details-container {
