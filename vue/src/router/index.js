@@ -103,7 +103,7 @@ const router = new Router({
 			},
 		},
 		{
-			path: "/orders/:id",
+			path: "/employees/orders/:id",
 			name: "employee-order-view",
 			component: EmployeeViewOrderPage,
 			meta: {
