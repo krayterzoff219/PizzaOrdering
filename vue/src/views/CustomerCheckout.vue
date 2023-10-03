@@ -84,7 +84,7 @@
 						<input
 							type="radio"
 							id="pick-up"
-							namd="delivery"
+							name="delivery"
 							v-model="isDelivery"
 							:value="false" />
 						<label for="pick-up">Pick-up</label>
@@ -93,7 +93,7 @@
 						<input
 							type="radio"
 							id="delivery"
-							namd="delivery"
+							name="delivery"
 							v-model="isDelivery"
 							:value="true" />
 						<label for="delivery">Delivery</label>
