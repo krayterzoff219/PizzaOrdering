@@ -10,8 +10,8 @@
                 
             </div>
 
-            <router-link to="/employee-order-view">
-            <small-button buttonText="View"/>
+            <router-link v-bind:to= "{name: 'employee-order-view', params: {id: currentOrder.orderId}}">
+                <small-button buttonText="View"/>
             </router-link>
                 
            
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import OrderService from '../services/OrderService'
+// import OrderService from '../services/OrderService'
 import SmallButton from './SmallButton.vue'
 
 export default{
@@ -82,13 +82,10 @@ export default{
             this.currentOrder.menuItems = menuItems;
             this.currentOrder.customPizzas = customPizzas;
 		},
-<<<<<<< HEAD
 
         saveChanges(){
             
         }
-=======
->>>>>>> brock
     }
 
 }
