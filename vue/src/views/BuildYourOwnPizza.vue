@@ -82,7 +82,32 @@ export default {
 		}
 	},
 	methods: {
+		areInputsValid() {
+			const { crustId, sauceId, toppingIds, sizeId } = this;
+			if (sizeId < 0) {
+				alert("Custom pizza must have a size.");
+				return false;
+			}
+			if (crustId < 0) {
+				alert("Custom pizza must have a crust.");
+				return false;
+			}
+			if (sauceId < 0) {
+				alert("Custom pizza must have a sauce.");
+				return false;
+			}
+			if (!toppingIds.length) {
+				alert("Custom pizza must have at least one topping.");
+				return false;
+			}
+
+			return true;
+		},
 		submitForm() {
+			if (!this.areInputsValid()) {
+				return;
+			}
+
 			const {
 				isNewPizza,
 				crustId,
@@ -194,12 +219,14 @@ div.build-your-own-pizza-category-wrapper:nth-child(3) {
 	padding-bottom: 1.25rem;
 }
 
-form > button:nth-child(5) {
+form > button:nth-child(6) {
+	background-color: var(--primary-color);
+	border-color: var(--primary-color);
 	display: none;
 }
 
 @media only screen and (min-width: 768px) {
-	form > button:nth-child(5) {
+	form > button:nth-child(6) {
 		display: block;
 		max-width: 24rem;
 		width: 100%;
@@ -220,5 +247,11 @@ h1 {
 
 p {
 	text-align: right;
+	padding-right: 10%;
+	font-size: 1.25rem;
+}
+
+p span {
+	font-weight: bold;
 }
 </style>

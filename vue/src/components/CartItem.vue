@@ -174,6 +174,11 @@ div.cart-details-container {
 	grid-area: item-details;
 }
 
+div.cart-item-description-container button {
+	background-color: var(--primary-color);
+	border-color: var(--primary-color);
+}
+
 h3 {
 	display: flex;
 	flex-wrap: wrap;
