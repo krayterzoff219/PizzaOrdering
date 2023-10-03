@@ -15,12 +15,14 @@
 			/></router-link>
 
 			<i class="fa-solid fa-x"></i>
-			<dropdown-navigation></dropdown-navigation>
+			<dropdown-login v-if="$store.isDropDownLoginActivated" />
+			<dropdown-navigation v-else />
 		</div>
 	</div>
 </template>
 
 <script>
+import DropdownLogin from "./DropdownLogin.vue";
 import DropdownNavigation from "./DropdownNavigation.vue";
 export default {
 	name: "dropdown-overlay",
@@ -29,7 +31,10 @@ export default {
 			this.$store.commit("TOGGLE_DROP_DOWN_MENU");
 		},
 	},
-	components: { DropdownNavigation },
+	components: {
+		DropdownNavigation,
+		DropdownLogin,
+	},
 };
 </script>
 

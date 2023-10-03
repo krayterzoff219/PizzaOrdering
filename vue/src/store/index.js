@@ -40,8 +40,13 @@ export default new Vuex.Store({
 		cart: {},
 		subtotal: 0,
 		isDropDownMenuVisible: false,
+		isDropDownLoginActivated: true,
+		nextCustomPizzaId: -1,
 	},
 	mutations: {
+		GO_TO_NEXT_CUSTOM_PIZZA_ID(state) {
+			state.nextCustomPizzaId--;
+		},
 		ADD_TOPPING(state, payload) {
 			state.toppings.push(payload);
 		},
@@ -57,9 +62,42 @@ export default new Vuex.Store({
 		ADD_SPECIALTY_PIZZA(state, payload) {
 			state.specialtyPizzas.push(payload);
 		},
-		// ADD_PENDING_ORDER(state, payload) {
-		// 	state.sizes.pendingOrders.push(payload);
-		// },
+		UPDATE_SPECIALTY_PIZZA(state, payload) {
+			const pizza = state.specialtyPizzas.find(
+				(specialtyPizza) => specialtyPizza.id === payload.id
+			);
+			const {
+				crust,
+				description,
+				id,
+				imageURL,
+				isAvailable,
+				name,
+				price,
+				sauce,
+				size,
+				toppings,
+			} = payload;
+			pizza.crust = crust;
+			pizza.description = description;
+			pizza.id = id;
+			pizza.imageURL = imageURL;
+			pizza.isAvailable = isAvailable;
+			pizza.name = name;
+			pizza.price = price;
+			pizza.sauce = sauce;
+			pizza.size = size;
+			pizza.toppings = toppings;
+		},
+		UPDATE_CUSTOM_PIZZA(state, payload) {
+			const pizza = state.cart[payload.id];
+			const { toppings, crust, sauce, size, price } = payload;
+			pizza.toppings = toppings;
+			pizza.crust = crust;
+			pizza.sauce = sauce;
+			pizza.size = size;
+			pizza.price = price;
+		},
 		ADD_SINGLE_ITEM_TO_CART(state, payload) {
 			if (!([payload.id] in state.cart)) {
 				state.cart = {
@@ -144,6 +182,11 @@ export default new Vuex.Store({
 		removeItemFromCart(context, item) {
 			context.commit("REMOVE_SINGLE_ITEM_FROM_CART", item);
 			context.commit("UPDATE_SUBTOTAL", -item.price);
+		},
+
+		updateExistingCustomPizza(context, payload) {
+			context.commit("UPDATE_CUSTOM_PIZZA", payload.pizza);
+			context.commit("UPDATE_SUBTOTAL", payload.priceDifference);
 		},
 	},
 });

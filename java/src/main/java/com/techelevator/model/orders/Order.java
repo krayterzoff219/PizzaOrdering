@@ -1,5 +1,6 @@
 package com.techelevator.model.orders;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.techelevator.model.menu.MenuItem;
 import com.techelevator.model.menu.Pizza;
 

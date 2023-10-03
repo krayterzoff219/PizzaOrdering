@@ -2,7 +2,7 @@
 	<section
 		id="menu-section"
 		class="customer-section">
-		<horizontal-hero :transparentBackground="true"></horizontal-hero>
+		<horizontal-hero :transparentBackground="true" />
 		<div class="menu-wrapper">
 			<h1>Menu</h1>
 			<p class="hero-text">
@@ -14,14 +14,13 @@
 			</p>
 			<an-alert
 				v-if="alertText"
-				:message="alertText"></an-alert>
+				:message="alertText" />
+			<menu-item />
+			<!-- Build your own pizza option -->
 			<menu-item
 				v-for="pizza of $store.state.specialtyPizzas"
 				:key="pizza.id"
-				:menuItem="pizza"></menu-item>
-			<!-- <menu-item
-				:menuItem="$store.state.specialtyPizzas[3]"
-				v-if="$store.state.specialtyPizzas[3]"></menu-item> -->
+				:menuItem="pizza" />
 		</div>
 	</section>
 </template>

@@ -84,7 +84,7 @@
 						<input
 							type="radio"
 							id="pick-up"
-							namd="delivery"
+							name="delivery"
 							v-model="isDelivery"
 							:value="false" />
 						<label for="pick-up">Pick-up</label>
@@ -93,7 +93,7 @@
 						<input
 							type="radio"
 							id="delivery"
-							namd="delivery"
+							name="delivery"
 							v-model="isDelivery"
 							:value="true" />
 						<label for="delivery">Delivery</label>
@@ -115,6 +115,7 @@ import HorizontalHero from "../components/HorizontalHero.vue";
 import orderService from "../services/OrderService.js";
 import CheckoutAmount from "../components/CheckoutAmount.vue";
 import CallToActionButtons from "../components/CallToActionButtons.vue";
+// import emailjs from "emailjs-com";
 
 export default {
 	components: {
@@ -147,23 +148,58 @@ export default {
 			order.address = this.address;
 			order.phoneNumber = this.phoneNumber;
 			order.email = this.email;
+
 			order.menuItems = [];
+			const menuItems = Object.values(this.$store.state.cart).filter(
+				(menuItem) => menuItem.id > 0
+			);
+			for (const menuItem of menuItems) {
+				order.menuItems.push({
+					itemId: menuItem.id,
+					quantity: menuItem.quantity,
+				});
+			}
 
 			order.customPizzas = [];
+			const customPizzas = Object.values(this.$store.state.cart).filter(
+				(customPizza) => customPizza.id < 0
+			);
+			for (const customPizza of customPizzas) {
+				const { quantity, toppings, size, sauce, crust } = customPizza;
 
-			const pizzas = Object.values(this.$store.state.cart);
-			for (const pizza of pizzas) {
-				order.menuItems.push({
-					itemId: pizza.id,
-					quantity: pizza.quantity,
+				order.customPizzas.push({
+					quantity,
+					sauce: { id: sauce.id },
+					crust: { id: crust.id },
+					size: { id: size.id },
+					toppings: toppings.map((toppingId) => ({ id: toppingId })),
 				});
 			}
 
 			orderService.createPendingOrder(order).then((res) => {
 				if (res.status === 200) {
 					this.$router.push({ name: "confirmation" });
+					this.sendEmail();
 				}
 			});
+		},
+
+		sendEmail() {
+			try {
+				// emailjs.send(
+				// 	"service_tw939hk",
+				// 	"template_j8669nl",
+				// 	{
+				// 		name: this.cardholderName,
+				// 		email: this.email,
+				// 		from_name: "UpperCrust Pizza",
+				// 		message: "Your order will be ready in 20-30 minutes.",
+				// 	},
+				// 	"COvpBZtnSKRZEtL4R"
+				// );
+			} catch (error) {
+				console.log({ error });
+			}
 		},
 	},
 
