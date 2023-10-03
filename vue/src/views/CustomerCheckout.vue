@@ -148,6 +148,8 @@ export default {
 			order.address = this.address;
 			order.phoneNumber = this.phoneNumber;
 			order.email = this.email;
+			order.subtotal = this.$store.state.subtotal;
+			order.tax = this.tax;
 
 			order.menuItems = [];
 			const menuItems = Object.values(this.$store.state.cart).filter(
