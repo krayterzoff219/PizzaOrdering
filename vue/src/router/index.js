@@ -12,6 +12,7 @@ import CustomerMenu from "../views/CustomerMenu.vue";
 import MyOrder from "../views/MyOrder.vue";
 import CustomerCheckout from "../views/CustomerCheckout.vue";
 import OrderConfirmation from "../views/OrderConfirmation.vue";
+import BuildYourOwnPizza from "../views/BuildYourOwnPizza.vue";
 
 Vue.use(Router);
 
@@ -48,6 +49,14 @@ const router = new Router({
 			path: "/menu",
 			name: "customer-menu",
 			component: CustomerMenu,
+			meta: {
+				requiresAuth: false,
+			},
+		},
+		{
+			path: "/customize-pizza/:id",
+			name: "build-your-own-pizza",
+			component: BuildYourOwnPizza,
 			meta: {
 				requiresAuth: false,
 			},

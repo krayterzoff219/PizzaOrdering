@@ -73,7 +73,7 @@ export default {
 			return this.$route.name === "confirmation";
 		},
 		isEmployeePage() {
-			return this.$route.name.includes("employees");
+			return this.$route.path.includes("employees");
 		},
 		isCartEmpty() {
 			return !Object.keys(this.$store.state.cart).length;

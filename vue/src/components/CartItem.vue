@@ -1,6 +1,8 @@
 <template>
 	<div class="cart-item">
-		<div class="cart-item-image-container"></div>
+		<div
+			class="cart-item-image-container"
+			:style="{ 'background-image': `url('${imageURL}')` }"></div>
 		<div class="cart-item-description-container">
 			<h2>{{ name }}</h2>
 			<div class="quantity-price-container">
@@ -82,11 +84,13 @@ export default {
 	components: { QuantityCounter },
 	props: ["cartItem", "quantity"],
 	data() {
-		const { id, name, price, size, sauce, crust, toppings } = this.cartItem;
+		const { id, name, price, size, sauce, crust, toppings, imageURL } =
+			this.cartItem;
 		return {
 			id,
 			name,
 			price,
+			imageURL,
 			details: {
 				size,
 				sauce,
@@ -117,7 +121,7 @@ div.cart-item {
 
 /* ********** image container ********** */
 div.cart-item-image-container {
-	background-image: url("https://img.freepik.com/free-photo/delicious-neapolitan-meat-pizza-pizzeria-delicious-food_78826-2833.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais");
+	/* background-image: url("https://img.freepik.com/free-photo/delicious-neapolitan-meat-pizza-pizzeria-delicious-food_78826-2833.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais"); */
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;

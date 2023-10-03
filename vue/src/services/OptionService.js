@@ -8,6 +8,6 @@ export default {
 		return axios.post(`/${path}`, option);
 	},
 	updateOption(path, option) {
-		return axios.put(`/${path}/${option.id}`, option);
+		return axios.put(`/${path}`, option);
 	},
 };

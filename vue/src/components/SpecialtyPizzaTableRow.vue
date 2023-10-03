@@ -1,71 +1,113 @@
 <template>
-	<tr>
-		<td class="table-cell-pizza-name"><input v-model="name" /></td>
-		<td class="table-cell-pizza-price">
+	<div class="table-row">
+		<div class="table-cell-pizza-name">
+			<input
+				v-model="name"
+				placeholder="New Specialty Pizza" />
+		</div>
+		<div class="table-cell-pizza-price">
 			<input
 				v-model="price"
 				type="text"
 				@focus="formatAsNumber"
 				@blur="formatAsMoney"
 				placeholder="Price" />
-		</td>
-		<td class="table-cell-pizza-size">
-			<select v-model="sizeId">
+		</div>
+		<div class="table-cell-pizza-size">
+			<select
+				v-model="sizeId"
+				:class="{ 'no-option-selected': sizeId === -1 }">
 				<option
+					class="placeholder"
+					v-if="sizeId === -1"
+					value="-1"
+					selected
+					disabled>
+					Size
+				</option>
+				<!-- TODO: allow PUT request to edit size and then remove the disabled binding below -->
+				<option
+					:disabled="pizza"
 					v-for="size of $store.state.sizes"
 					:key="size.id"
 					:value="size.id">
 					{{ size.name }}
 				</option>
 			</select>
-		</td>
-		<td class="table-cell-pizza-crust">
-			<select v-model="crustId">
+		</div>
+		<div class="table-cell-pizza-crust">
+			<select
+				v-model="crustId"
+				:class="{ 'no-option-selected': crustId === -1 }">
 				<option
+					class="placeholder"
+					v-if="crustId === -1"
+					value="-1"
+					selected
+					disabled>
+					Crust
+				</option>
+				<!-- TODO: allow PUT request to edit crust and then remove the disabled binding below -->
+				<option
+					:disabled="pizza"
 					v-for="crust of $store.state.crusts"
 					:key="crust.id"
 					:value="crust.id">
 					{{ crust.name }}
 				</option>
 			</select>
-		</td>
-		<td class="table-cell-pizza-toppings">
+		</div>
+		<div class="table-cell-pizza-toppings">
 			<select
 				multiple
 				size="5"
 				v-model="toppingIds">
+				<!-- TODO: allow PUT request to edit toppings and then remove the disabled binding below -->
 				<option
+					:disabled="pizza"
 					v-for="topping of $store.state.toppings"
 					:key="topping.id"
 					:value="topping.id">
 					{{ topping.name }}
 				</option>
 			</select>
-		</td>
-		<td class="table-cell-pizza-sauce">
-			<select v-model="sauceId">
+		</div>
+		<div class="table-cell-pizza-sauce">
+			<select
+				v-model="sauceId"
+				:class="{ 'no-option-selected': sauceId === -1 }">
 				<option
+					class="placeholder"
+					v-if="sauceId === -1"
+					value="-1"
+					selected
+					disabled>
+					Sauce
+				</option>
+				<!-- TODO: allow PUT request to edit sauce and then remove the disabled binding below -->
+				<option
+					:disabled="pizza"
 					v-for="sauce of $store.state.sauces"
 					:key="sauce.id"
 					:value="sauce.id">
 					{{ sauce.name }}
 				</option>
 			</select>
-		</td>
-		<td class="table-cell-pizza-available">
+		</div>
+		<div class="table-cell-pizza-available">
 			<select v-model="isAvailable">
 				<option value="true">Available</option>
 				<option value="false">Not Available</option>
 			</select>
-		</td>
-		<td
+		</div>
+		<div
 			v-if="!pizza"
 			class="table-cell-buttons table-icon-wrapper">
 			<i
 				class="fa-floppy-disk fa-solid grow employee-button-icon"
 				@click="addNewSpecialtyPizza"></i>
-		</td>
-		<td
+		</div>
+		<div
 			v-else-if="areUnsavedChanges"
 			class="table-cell-buttons table-button-wrapper">
 			<small-button
@@ -74,14 +116,24 @@
 			<small-button
 				buttonText="Discard Changes"
 				:clickHandler="discardChanges"></small-button>
-		</td>
-		<td
+		</div>
+		<div
 			v-else
 			class="table-cell-buttons table-icon-wrapper">
 			<i
 				class="fa-trash fa-solid grow employee-button-icon row-delete-button icon-hide"></i>
-		</td>
-	</tr>
+		</div>
+		<div class="table-cell-pizza-description">
+			<textarea
+				placeholder="Pizza Description"
+				v-model="description"></textarea>
+		</div>
+		<div class="table-cell-pizza-url">
+			<textarea
+				placeholder="Picture Url"
+				v-model="imageURL"></textarea>
+		</div>
+	</div>
 </template>
 
 <script>
@@ -102,6 +154,9 @@ export default {
 			toppingIds: [],
 			sauceId: -1,
 			isAvailable: true,
+			imageURL: "",
+			description: "",
+			currentPizza: {},
 		};
 	},
 	computed: {
@@ -109,8 +164,17 @@ export default {
 			if (!this.pizza) {
 				return false;
 			}
-			const { name, price, size, crust, toppings, sauce, isAvailable } =
-				this.pizza;
+			const {
+				name,
+				price,
+				size,
+				crust,
+				toppings,
+				sauce,
+				isAvailable,
+				imageURL,
+				description,
+			} = this.currentPizza;
 
 			// Check that each topping in the original topping list accounted for in the local topping list
 			let areToppingsDifferent = false;
@@ -127,6 +191,8 @@ export default {
 				this.crustId !== crust.id ||
 				this.sauceId !== sauce.id ||
 				this.isAvailable !== isAvailable ||
+				this.description !== description ||
+				this.imageURL !== imageURL ||
 				this.toppingIds.length !== toppings.length ||
 				areToppingsDifferent
 			);
@@ -134,6 +200,7 @@ export default {
 	},
 	created() {
 		if (this.pizza) {
+			this.currentPizza = this.pizza;
 			this.initializeRow();
 		}
 	},
@@ -147,10 +214,22 @@ export default {
 			this.toppingIds = [];
 			this.sauceId = -1;
 			this.isAvailable = true;
+			this.imageURL = "";
+			this.description = "";
 		},
 		initializeRow() {
-			const { id, name, price, size, crust, toppings, sauce, isAvailable } =
-				this.pizza;
+			const {
+				id,
+				name,
+				price,
+				size,
+				crust,
+				toppings,
+				sauce,
+				isAvailable,
+				imageURL,
+				description,
+			} = this.currentPizza;
 			this.pizzaId = id;
 			this.name = name;
 			this.price = `$${price.toFixed(2)}`;
@@ -159,6 +238,8 @@ export default {
 			this.toppingIds = toppings;
 			this.sauceId = sauce.id;
 			this.isAvailable = isAvailable;
+			this.imageURL = imageURL;
+			this.description = description;
 		},
 		formatAsMoney(event) {
 			const price = event.target.value
@@ -177,16 +258,43 @@ export default {
 		discardChanges() {
 			if (
 				confirm(
-					`Are you sure you want to discard the changes to ${this.pizza.name}`
+					`Are you sure you want to discard the changes to ${this.currentPizza.name}`
 				)
 			) {
 				this.initializeRow();
 			}
 		},
-		saveChanges() {},
-		addNewSpecialtyPizza() {
+		saveChanges() {
+			const { areInputsValid, buildSpecialtyPizza, pizzaId } = this;
+			let updatedSpecialtyPizza;
+
+			if (areInputsValid()) {
+				updatedSpecialtyPizza = buildSpecialtyPizza(pizzaId);
+				specialtyPizzaService
+					.updateSpecialtyPizza(updatedSpecialtyPizza)
+					.then((res) => {
+						if (res.status === 200) {
+							this.currentPizza = {
+								crust: updatedSpecialtyPizza.pizza.crust,
+								description: updatedSpecialtyPizza.description,
+								id: updatedSpecialtyPizza.itemId,
+								imageURL: updatedSpecialtyPizza.imageURL,
+								isAvailable: updatedSpecialtyPizza.available,
+								name: updatedSpecialtyPizza.name,
+								price: Number.parseFloat(updatedSpecialtyPizza.price),
+								sauce: updatedSpecialtyPizza.pizza.sauce,
+								size: updatedSpecialtyPizza.pizza.size,
+								toppings: updatedSpecialtyPizza.pizza.toppings.map(
+									(topping) => topping.id
+								),
+							};
+						}
+					});
+			}
+		},
+		buildSpecialtyPizza(id) {
+			// ***** BUILD THE SPECIALTY PIZZA THAT WILL BE USED IN THE REQUEST IN CORRECT FORMAT *****
 			const {
-				areInputsValid,
 				name,
 				price,
 				sizeId,
@@ -194,20 +302,39 @@ export default {
 				toppingIds,
 				sauceId,
 				isAvailable,
+				imageURL,
+				description,
+			} = this;
+			const specialtyPizza = {
+				name,
+				price: price.replace("$", ""),
+				imageURL,
+				description,
+			};
+			if (id) specialtyPizza.itemId = id;
+			const pizza = {};
+			pizza.size = { id: sizeId };
+			pizza.crust = { id: crustId };
+			pizza.sauce = { id: sauceId };
+			pizza.toppings = toppingIds.map((id) => ({ id }));
+			specialtyPizza.available = isAvailable;
+			specialtyPizza.pizza = pizza;
+			return specialtyPizza;
+		},
+		addNewSpecialtyPizza() {
+			const {
+				areInputsValid,
+				name,
+				price,
+				toppingIds,
+				isAvailable,
 				resetRow,
+				imageURL,
+				description,
+				buildSpecialtyPizza,
 			} = this;
 			if (areInputsValid()) {
-				// ***** BUILD THE SPECIALTY PIZZA THAT WILL BE USED IN THE REQUEST IN CORRECT FORMAT *****
-				const specialtyPizza = { name, price: price.replace("$", "") };
-				const pizza = {};
-				pizza.size = { id: sizeId };
-				pizza.crust = { id: crustId };
-				pizza.sauce = { id: sauceId };
-				pizza.toppings = toppingIds.map((id) => ({ id }));
-				specialtyPizza.available = isAvailable;
-				specialtyPizza.pizza = pizza;
-				// ****************************************************************************************
-
+				const specialtyPizza = buildSpecialtyPizza();
 				specialtyPizzaService
 					.createSpecialtyPizza(specialtyPizza)
 					.then((res) => {
@@ -218,10 +345,12 @@ export default {
 								name,
 								price: Number.parseFloat(price.replace("$", "")),
 								isAvailable,
-								size: pizza.size,
-								crust: pizza.crust,
-								sauce: pizza.sauce,
+								size: specialtyPizza.pizza.size,
+								crust: specialtyPizza.pizza.crust,
+								sauce: specialtyPizza.pizza.sauce,
 								toppings: toppingIds,
+								imageURL,
+								description,
 							});
 							resetRow();
 						}
@@ -235,7 +364,16 @@ export default {
 			}
 		},
 		areInputsValid() {
-			const { name, price, sizeId, crustId, toppingIds, sauceId } = this;
+			const {
+				name,
+				price,
+				sizeId,
+				crustId,
+				toppingIds,
+				sauceId,
+				imageURL,
+				description,
+			} = this;
 			if (!name) {
 				alert("New specialty pizza must have a name.");
 				return false;
@@ -268,6 +406,14 @@ export default {
 				alert("New specialty pizza must have at least 1 topping selected");
 				return false;
 			}
+			if (!description) {
+				alert("New specialty pizza must have a description.");
+				return false;
+			}
+			if (!imageURL) {
+				alert("New specialty pizza must have an image URL.");
+				return false;
+			}
 			return true;
 		},
 	},
@@ -275,69 +421,86 @@ export default {
 </script>
 
 <style>
-tr {
-	display: flex;
-	width: 100%;
-	justify-content: space-evenly;
-	align-items: flex-start;
-	gap: 10px;
+div.table-row {
+	display: grid;
+	grid-template-columns: 2fr 0.75fr 0.75fr 1fr 1.25fr 1fr 1fr 6rem;
+	grid-template-areas: "name price size crust toppings sauce available buttons";
+	grid-template-rows: auto auto;
+	gap: 5px;
 }
 
-tbody tr:first-child {
-	margin-top: 10px;
+div.table-row:not(#header-row) {
+	grid-template-areas:
+		"name price size crust toppings sauce available buttons"
+		"description description description description toppings url url buttons";
 }
 
-tbody tr:not(:first-child),
-tfoot tr {
-	margin-top: 20px;
-}
-
-thead tr {
+div.table-row#header-row {
 	text-align: center;
 }
 
-td.table-cell-pizza-price {
-	flex-basis: 4rem;
-	flex-grow: 0;
-	flex-shrink: 0;
+div.table-row:not(#header-row):not(:nth-child(2)) {
+	margin-top: 40px;
 }
 
-td.table-cell-pizza-available,
-td.table-cell-pizza-crust,
-td.table-cell-pizza-sauce,
-td.table-cell-pizza-size {
-	flex-basis: 6rem;
-	flex-grow: 1;
-	flex-shrink: 1;
+div.table-row:nth-child(2) {
+	margin-top: 5px;
 }
 
-td.table-cell-pizza-name {
-	flex-basis: 15rem;
-	flex-grow: 2;
-	flex-shrink: 1;
-}
-
-td.table-cell-pizza-toppings,
-td.table-cell-buttons {
-	flex-basis: 9rem;
-	flex-grow: 1;
-	flex-shrink: 1;
-}
-
-td input,
-td select {
+div.table-row > div {
 	width: 100%;
+}
+
+div.table-row textarea,
+div.table-row input,
+div.table-row select {
+	width: 100%;
+	height: 100%;
 	padding: 3px;
 }
 
-td.table-cell-buttons {
-	min-width: 4rem;
+div.table-row textarea {
+	resize: none;
+	padding: 5px;
 }
 
-td.table-button-wrapper button {
-	display: block;
-	min-width: 4rem;
-	width: 100%;
+div.table-cell-pizza-name {
+	grid-area: name;
+}
+div.table-cell-pizza-price {
+	grid-area: price;
+}
+div.table-cell-pizza-size {
+	grid-area: size;
+}
+div.table-cell-pizza-crust {
+	grid-area: crust;
+}
+div.table-cell-pizza-toppings {
+	grid-area: toppings;
+}
+div.table-cell-pizza-available {
+	grid-area: available;
+}
+div.table-cell-buttons {
+	grid-area: buttons;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+}
+div.table-row:not(#header-row) {
+	height: 6.5rem;
+}
+div.table-cell-pizza-description {
+	grid-area: description;
+}
+div.table-cell-pizza-url {
+	grid-area: url;
+}
+
+select.no-option-selected {
+	color: rgb(170, 170, 170);
 }
 
 /************************* PRICE CELL STYLE *************************/
@@ -354,18 +517,22 @@ input[type="number"] {
 }
 
 /************************* FINAL CELL STYLE *************************/
-td.table-button-wrapper button:first-child {
+div.table-button-wrapper button:first-child {
 	margin-bottom: 5px;
 }
-td.table-button-wrapper button:last-child {
+div.table-button-wrapper button:last-child {
 	background-color: var(--primary-color);
 	border-color: var(--primary-color);
 }
-td.table-icon-wrapper {
+div.table-icon-wrapper {
 	color: var(--primary-color);
 	padding-left: 20px;
 }
-td:last-child i.row-delete-button {
+div.table-icon-wrapper i {
+	padding: 8px;
+	font-size: 1.25rem;
+}
+div:last-child i.row-delete-button {
 	background-color: var(--primary-color);
 }
 </style>
