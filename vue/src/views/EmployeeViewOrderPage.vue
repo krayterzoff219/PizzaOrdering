@@ -45,7 +45,7 @@ export default{
     created(){
         console.log(this.$store.state.pendingOrders);
         const order = this.$store.state.pendingOrders.filter(
-            (myOrder) => myOrder.orderId == 1
+            (myOrder) => myOrder.orderId == this.$route.params.id
         );
         console.log(order);
         this.currentOrder.orderId = order[0].orderId;

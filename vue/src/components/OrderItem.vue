@@ -5,7 +5,7 @@
             <div> 
                 <span>{{currentOrder.orderId}}</span>
                 <br>
-                <span>{{currentOrder.status}}</span>
+                <span>{{currentOrder.isDelivery}}</span>
                 <br>
                 
             </div>
@@ -17,7 +17,7 @@
            
            
 
-            <select v-if="isLoaded" v-model="currentOrder.status" >
+            <select v-if="isLoaded" v-model="currentOrder.status" @change="saveChanges">
                 <option v-for="stat in possibleStatus" 
                 :key="stat"
                 :value="stat.toLowerCase()">{{stat}}
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import OrderService from '../services/OrderService';
 // import OrderService from '../services/OrderService'
 import SmallButton from './SmallButton.vue'
 
@@ -84,7 +85,9 @@ export default{
 		},
 
         saveChanges(){
-            
+            const orderId = this.currentOrder.orderId;
+            const status = this.currentOrder.status;
+            OrderService.updatePendingOrder({orderId, status});
         }
     }
 
