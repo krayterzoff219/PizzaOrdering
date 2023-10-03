@@ -38,6 +38,16 @@
 				buttonText="Place Order"
 				:formSubmissionButton="true"
 				routeName="doNotPushToNewRoute" />
+			<!-- ********************* BUTTONS ON CUSTOMIZE PIZZA ********************* -->
+			<cta-button
+				v-if="isCustomizePizzaPage"
+				buttonText="Menu"
+				routeName="customer-menu" />
+			<cta-button
+				v-if="isCustomizePizzaPage"
+				:buttonText="dynamicButtonText"
+				:formSubmissionButton="true"
+				routeName="doNotPushToNewRoute" />
 			<!-- ********************* BUTTONS ON CONFIRMATION AND EMPLOYEE PAGES ********************* -->
 			<cta-button
 				v-if="isConfirmationPage || isEmployeePage"
@@ -55,7 +65,7 @@
 import CtaButton from "./CtaButton.vue";
 export default {
 	components: { CtaButton },
-	props: ["formSubmissionButton"],
+	props: ["formSubmissionButton", "dynamicButtonText"],
 	computed: {
 		isHomePage() {
 			return this.$route.name === "home";
@@ -68,6 +78,9 @@ export default {
 		},
 		isCheckoutPage() {
 			return this.$route.name === "checkout";
+		},
+		isCustomizePizzaPage() {
+			return this.$route.path.includes("customize-pizza");
 		},
 		isConfirmationPage() {
 			return this.$route.name === "confirmation";
