@@ -9,38 +9,47 @@
             )
         }}</span>:</h2>
 		<div class="pizza-option-inputs-wrapper">
-			<div
-				class="pizza-option-single-input-wrapper"
-				v-for="option of $store.state[optionsCategory]"
-				:key="option.id">
-				<input
-					:id="`${option.name
-						.replace(' ', '-')
-						.toLowerCase()}-${optionsCategory}`"
-					:required="!isMultiple"
-					:type="isMultiple ? 'checkbox' : 'radio'"
-					:name="optionsCategory"
-					:value="option.id"
-					v-model="userOption" />
+			<template v-for="option of $store.state[optionsCategory]">
+				<div
+					class="pizza-option-single-input-wrapper"
+					v-if="option.isAvailable"
+					:key="option.id">
+					<input
+						:id="`${option.name
+							.replace(' ', '-')
+							.toLowerCase()}-${optionsCategory}`"
+						:required="!isMultiple"
+						:type="isMultiple ? 'checkbox' : 'radio'"
+						:name="optionsCategory"
+						:value="option.id"
+						v-model="userOption"
+						:selected="userOption === option.id"
+						:checked="userOption === option.id" />
 
-				<label
-					:for="`${option.name
-						.replace(' ', '-')
-						.toLowerCase()}-${optionsCategory}`"
-					>{{ option.name }} (${{ option.price.toFixed(2) }})</label
-				>
-			</div>
+					<label
+						:for="`${option.name
+							.replace(' ', '-')
+							.toLowerCase()}-${optionsCategory}`"
+						>{{ option.name }} (${{ option.price.toFixed(2) }})</label
+					>
+				</div>
+			</template>
 		</div>
 	</div>
 </template>
 
 <script>
 export default {
-	props: ["optionsCategory", "isMultiple"],
+	props: ["optionsCategory", "isMultiple", "defaultValue"],
 	data() {
 		return {
 			userOption: [],
 		};
+	},
+	created() {
+		if (this.defaultValue) {
+			this.userOption = this.defaultValue;
+		}
 	},
 	watch: {
 		userOption(newValue) {

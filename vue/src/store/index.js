@@ -89,9 +89,15 @@ export default new Vuex.Store({
 			pizza.size = size;
 			pizza.toppings = toppings;
 		},
-		// ADD_PENDING_ORDER(state, payload) {
-		// 	state.sizes.pendingOrders.push(payload);
-		// },
+		UPDATE_CUSTOM_PIZZA(state, payload) {
+			const pizza = state.cart[payload.id];
+			const { toppings, crust, sauce, size, price } = payload;
+			pizza.toppings = toppings;
+			pizza.crust = crust;
+			pizza.sauce = sauce;
+			pizza.size = size;
+			pizza.price = price;
+		},
 		ADD_SINGLE_ITEM_TO_CART(state, payload) {
 			if (!([payload.id] in state.cart)) {
 				state.cart = {
@@ -176,6 +182,11 @@ export default new Vuex.Store({
 		removeItemFromCart(context, item) {
 			context.commit("REMOVE_SINGLE_ITEM_FROM_CART", item);
 			context.commit("UPDATE_SUBTOTAL", -item.price);
+		},
+
+		updateExistingCustomPizza(context, payload) {
+			context.commit("UPDATE_CUSTOM_PIZZA", payload.pizza);
+			context.commit("UPDATE_SUBTOTAL", payload.priceDifference);
 		},
 	},
 });
