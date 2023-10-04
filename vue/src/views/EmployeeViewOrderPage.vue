@@ -22,6 +22,12 @@
             :key="Item.id"
             :menuItem = "Item"
             />
+            <view-details-custom-pizza
+            id="details-section"
+            v-for="pizza of currentOrder.customPizzas"
+            :key="pizza.id"
+            :pizza="pizza"
+            />
             
 
 
@@ -35,6 +41,7 @@
 
 <script>
 import HorizontalHero from '../components/HorizontalHero.vue'
+import ViewDetailsCustomPizza from '../components/ViewDetailsCustomPizza.vue'
 import ViewDetailsItem from '../components/ViewDetailsItem.vue'
 
 
@@ -42,7 +49,8 @@ import ViewDetailsItem from '../components/ViewDetailsItem.vue'
 export default{
 
     components: {
-        HorizontalHero, ViewDetailsItem
+        HorizontalHero, ViewDetailsItem,
+        ViewDetailsCustomPizza
     },
 
     data(){
@@ -81,7 +89,7 @@ export default{
 <style scoped>
 
 
-#details-section{
+.details-section{
     
 }
 

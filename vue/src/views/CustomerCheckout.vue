@@ -145,7 +145,7 @@ export default {
 			const order = {};
 
 			order.isDelivery = this.isDelivery;
-			order.address = this.address;
+			order.address = this.address + ", " + this.city + ", " + this.state + "  " + this.zipCode;
 			order.phone = this.phoneNumber;
 			order.email = this.email;
 			order.subtotal = this.$store.state.subtotal;
