@@ -37,19 +37,12 @@ section {
 		margin-bottom: var(--header-footer-inside-margin);
 	}
 }
-<<<<<<< HEAD
 
-#employee-order-view-section{
-	max-width: 30rem;
-}
-
-=======
-section#employee-order-view-section {
-	max-width: 30rem;
+div#order-details-wrapper, section#employee-order-view-section{
+	max-width: 70rem;
 }
 
 section.customer-section#my-account,
->>>>>>> 79d5d7c46913cbf647ee4f60ae53c55fc4cfda92
 section.employee-section:not(#specialty-pizzas) {
 	max-width: 40rem;
 }
@@ -59,12 +52,7 @@ section.customer-section#menu-section {
 	max-width: 60rem;
 }
 
-<<<<<<< HEAD
 
-
-=======
-section#employee-order-view-section,
->>>>>>> 79d5d7c46913cbf647ee4f60ae53c55fc4cfda92
 div#order-confirmation,
 section div.pending-order-wrapper,
 section.employee-section#employee-login form,

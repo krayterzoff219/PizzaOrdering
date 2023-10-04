@@ -22,7 +22,7 @@
                     <br/>
                 </div>
                
-                <hr/>
+             
 
                 <div class = "order-info">
                     <view-details-item
@@ -39,6 +39,10 @@
                     />
                     <br>
                     <br>
+                    
+                </div>
+
+                <div id="view-order-total">
                     <p>Subtotal: ${{currentOrder.subtotal.toFixed(2)}}</p>
                     <p>Tax: ${{currentOrder.tax.toFixed(2)}}</p>
                     <br>
@@ -120,9 +124,10 @@ h2{
 .information-section{
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
+    grid-template-rows: 8fr 1fr;
     grid-template-areas:
-    "customerInfo orderInfo";
+    "customerInfo orderInfo"
+    "total total";
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 10px;
@@ -147,9 +152,11 @@ hr{
 }
 
 
-#employee-order-view-section, #order-details-wrapper{
-    
+#view-order-total{
+    display: flex;
+    flex-direction: column;
+    grid-area: total;
+    align-items: end;
 }
-
 
 </style>
