@@ -39,8 +39,11 @@ export default new Vuex.Store({
 		pendingOrders: [],
 		cart: {},
 		subtotal: 0,
-		isDropDownMenuVisible: false,
-		isDropDownLoginActivated: true,
+		dropdownMenu: {
+			isDropDownMenuVisible: false,
+			isDropDownLoginActivated: false,
+			isDropDownRegisterActivated: false,
+		},
 		nextCustomPizzaId: -1,
 	},
 	mutations: {
@@ -152,9 +155,6 @@ export default new Vuex.Store({
 		LOAD_PENDING_ORDERS(state, payload) {
 			state.pendingOrders = payload;
 		},
-		TOGGLE_DROP_DOWN_MENU(state) {
-			state.isDropDownMenuVisible = !state.isDropDownMenuVisible;
-		},
 		SET_AUTH_TOKEN(state, token) {
 			state.token = token;
 			localStorage.setItem("token", token);
@@ -170,6 +170,23 @@ export default new Vuex.Store({
 			state.token = "";
 			state.user = {};
 			axios.defaults.headers.common = {};
+		},
+		TOGGLE_DROP_DOWN_CUSTOMER_LOGIN(state) {
+			state.dropdownMenu.isDropDownLoginActivated =
+				!state.dropdownMenu.isDropDownLoginActivated;
+		},
+		TOGGLE_DROP_DOWN_CUSTOMER_REGISTER(state) {
+			state.dropdownMenu.isDropDownRegisterActivated =
+				!state.dropdownMenu.isDropDownRegisterActivated;
+		},
+		SET_IS_DROP_DOWN_MENU_ACTIVE(state, payload) {
+			state.dropdownMenu.isDropDownMenuVisible = payload;
+		},
+		SET_IS_DROP_DOWN_CUSTOMER_LOGIN_ACTIVE(state, payload) {
+			state.dropdownMenu.isDropDownLoginActivated = payload;
+		},
+		SET_IS_DROP_DOWN_CUSTOMER_REGISTER_ACTIVE(state, payload) {
+			state.dropdownMenu.isDropDownRegisterActivated = payload;
 		},
 	},
 
@@ -187,6 +204,27 @@ export default new Vuex.Store({
 		updateExistingCustomPizza(context, payload) {
 			context.commit("UPDATE_CUSTOM_PIZZA", payload.pizza);
 			context.commit("UPDATE_SUBTOTAL", payload.priceDifference);
+		},
+		switchCustomerBetweenLoginAndRegisterDropDown(context) {
+			context.commit("TOGGLE_DROP_DOWN_CUSTOMER_LOGIN");
+			context.commit("TOGGLE_DROP_DOWN_CUSTOMER_REGISTER");
+		},
+		hideDropDownMenu(context) {
+			context.commit("SET_IS_DROP_DOWN_MENU_ACTIVE", false);
+			setTimeout(() => {
+				context.commit("SET_IS_DROP_DOWN_CUSTOMER_LOGIN_ACTIVE", false);
+				context.commit("SET_IS_DROP_DOWN_CUSTOMER_REGISTER_ACTIVE", false);
+			}, 500);
+		},
+		openDropDownLogin(context) {
+			context.commit("SET_IS_DROP_DOWN_MENU_ACTIVE", true);
+			context.commit("SET_IS_DROP_DOWN_CUSTOMER_LOGIN_ACTIVE", true);
+			context.commit("SET_IS_DROP_DOWN_CUSTOMER_REGISTER_ACTIVE", false);
+		},
+		openDropDownNavigation(context) {
+			context.commit("SET_IS_DROP_DOWN_MENU_ACTIVE", true);
+			context.commit("SET_IS_DROP_DOWN_CUSTOMER_LOGIN_ACTIVE", false);
+			context.commit("SET_IS_DROP_DOWN_CUSTOMER_REGISTER_ACTIVE", false);
 		},
 	},
 });

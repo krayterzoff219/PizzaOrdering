@@ -1,5 +1,7 @@
 <template>
-	<div class="form-input-group">
+	<div
+		class="form-input-group"
+		@click="(event) => event.stopPropagation()">
 		<div class="form-input-label-wrapper">
 			<label :for="inputId">{{ label }}</label>
 		</div>

@@ -115,7 +115,7 @@ export default {
 	},
 	methods: {
 		showDropDownMenu() {
-			this.$store.commit("TOGGLE_DROP_DOWN_MENU");
+			this.$store.dispatch("openDropDownNavigation");
 		},
 	},
 };
