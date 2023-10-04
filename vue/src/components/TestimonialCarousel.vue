@@ -49,15 +49,23 @@ export default {
 			currentIndex: 0,
 			testimonials: [
 				{
-					text: "OMG, this pizza was sooo good! I got the mushroom pizza. I added Italian sausage and the hot honey drizzle- don't sleep on the hot honey drizzle! It was such a nice addition to my pizza that I've never had before. It added a sweet spiciness to the already rich and flavorful pizza.",
+					text: "Wow, I can't get enough of the mouthwatering pizzas from UpperCrust Pizza. Each slice is a slice of heaven! The quality of ingredients and the perfect crust make this place my go-to for pizza night.",
 					author: "Brock Lavergne",
 				},
 				{
-					text: "The best pizza I've tried here in Texas! 10/10. The service was amazing, the cashier was friendly & gave us suggestions to our liking. Family friendly, they have games all over the establishment so you can play and hang out with your loved ones.",
+					text: "I recently discovered UpperCrust Pizza, and it's been a delightful surprise since they opened! The flavors are always on point, and their creative toppings keep me coming back for more. It's quickly become the best pizza in town, hands down!",
 					author: "Dean McNeil",
 				},
 				{
-					text: "This place is amazing the atmosphere always great the food is great. We love their mushroom pizza and fennel arugula salad.",
+					text: "I recently tried the pizza from UpperCrust Pizza, and it was love at first bite! The combination of fresh ingredients and the perfect blend of cheeses made for a truly memorable pizza experience. I can't wait to order again!",
+					author: "Timothy Buchak",
+				},
+				{
+					text: "I've traveled far and wide in search of the perfect pizza, and I finally found it at UpperCrust Pizza. Their pizzas are consistently delicious, and the friendly staff adds to the overall great dining experience. Highly recommended!",
+					author: "Richard Davis",
+				},
+				{
+					text: "As a pizza enthusiast, I'm thrilled to have discovered UpperCrust Pizza. The authenticity and flavor in every pie are unmatched. I've introduced all my friends to this hidden gem, and we can't get enough of their incredible pizzas. Thank you for satisfying our pizza cravings!",
 					author: "Daniel Commins",
 				},
 			],
