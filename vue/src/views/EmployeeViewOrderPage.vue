@@ -7,55 +7,6 @@
          <horizontal-hero></horizontal-hero>
             <h2>Order Description</h2>
        
-<<<<<<< HEAD
-       <div id="order-details-wrapper">
-            <horizontal-hero></horizontal-hero>
-            <h2>Order View</h2>
-            <div class = "information-section">
-
-                <div class = "customer-info">
-                    <p>Order status: {{currentOrder.status.charAt(0).toUpperCase() + currentOrder.status.slice(1)}}</p>
-                    <br/>
-                    <p>{{currentOrder.isDelivery ? "Delivery" : "Pick-up"}}</p>
-                    <br/>
-                    <p>Customer name: {{currentOrder.name}}</p>
-                    <br/>
-                    <p>Customer phone number: {{currentOrder.phone}}</p>
-                    <br/>
-                    <p>Customer address: {{currentOrder.address}}</p>
-                    <br/>
-                </div>
-               
-             
-
-                <div class = "order-info">
-                    <view-details-item
-                    id="details-section"
-                    v-for="Item of currentOrder.menuItems"
-                    :key="Item.id"
-                    :menuItem = "Item"
-                    />
-                    <view-details-custom-pizza
-                    id="details-section"
-                    v-for="pizza of currentOrder.customPizzas"
-                    :key="pizza.id"
-                    :pizza="pizza"
-                    />
-                    <br>
-                    <br>
-                    
-                </div>
-
-                <div id="view-order-total">
-                    <p>Subtotal: ${{currentOrder.subtotal.toFixed(2)}}</p>
-                    <p>Tax: ${{currentOrder.tax.toFixed(2)}}</p>
-                    <br>
-                    <p>Total: ${{(currentOrder.tax + currentOrder.subtotal).toFixed(2)}}</p>
-                </div>
-
-               
-            </div>
-=======
        <div class="title-section">
            
             <div class = "information-section-title">
@@ -79,7 +30,7 @@
                     <br/>
                     <p>{{currentOrder.isDelivery ? "Delivery" : "Pick-up"}}</p>
                     <br/>
-                    <p>*Name goes here*{{currentOrder.name}}</p>
+                    <p>{{currentOrder.name}}</p>
                     <br/>
                     <p>{{currentOrder.phone}}</p>
                     <br/>
@@ -112,7 +63,6 @@
                 <p>   Total: ${{(currentOrder.tax + currentOrder.subtotal).toFixed(2)}}   </p>
                 </div>
            
->>>>>>> brock
             
             
                
@@ -146,7 +96,7 @@ export default{
                 name: "",
                 status: "Pending",
                 email: "",
-                address: "test add",
+                address: "",
                 phone: -1,
                 isDelivery: false,
                 menuItems: {},
@@ -164,7 +114,6 @@ export default{
         this.currentOrder.orderId = order[0].orderId;
         this.currentOrder.status = order[0].status;
         this.currentOrder.email = order[0].email;
-        this.currentOrder.address = order[0].address;
         this.currentOrder.phone = order[0].phone;
         this.currentOrder.isDelivery = order[0].isDelivery;
         this.currentOrder.menuItems = order[0].menuItems;
@@ -172,6 +121,18 @@ export default{
         this.currentOrder.subtotal = order[0].subtotal;
         this.currentOrder.tax = order[0].tax;
         this.currentOrder.name= order[0].name;
+
+        let string = order[0].address.split("|||");
+        for(let i = 0; i < string.length; i++){
+            if(i==0){
+                this.currentOrder.address = this.currentOrder.address + string[i];
+            } else if (i == string.length - 1){
+                this.currentOrder.address = this.currentOrder.address + "\t" + string[i];
+            } else {
+                this.currentOrder.address = this.currentOrder.address + ", " + string[i];
+            }
+        }
+        
 
     }
 
@@ -193,17 +154,7 @@ h2{
     padding: 50px 40px ;
 }
 
-<<<<<<< HEAD
-.information-section{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 8fr 1fr;
-    grid-template-areas:
-    "customerInfo orderInfo"
-    "total total";
-=======
 .information-section-title{
->>>>>>> brock
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 10px;

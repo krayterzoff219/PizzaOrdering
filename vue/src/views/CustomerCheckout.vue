@@ -165,6 +165,7 @@ export default {
 		placeOrder() {
 			const order = {};
 
+			order.name = this.cardholderName;
 			order.isDelivery = this.isDelivery;
 			order.address =
 				this.address +
