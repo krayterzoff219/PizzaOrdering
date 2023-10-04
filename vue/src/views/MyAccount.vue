@@ -1,48 +1,39 @@
 <template>
 	<section
-		id="employee-register"
-		class="employee-section">
+		id="my-account"
+		class="customer-section">
 		<horizontal-hero />
 		<form @submit.prevent="updateUserInfo">
-			<h1>Create Account</h1>
+			<h1>Update Account Info</h1>
 			<an-alert
-				v-if="registrationErrors"
-				:message="registrationErrorMsg" />
+				v-if="alertText"
+				:message="alertText" />
 			<user-input
-				label="Address: "
+				label="Address"
 				inputId="my-account-address-input"
 				inputType="text"
-				v-model="userData.address"
+				v-model="address"
+				:defaultValue="address"
 				:isRequired="true" />
 			<!-- <user-input
-				label="Card Number: "
+				label="Credit Card Number"
 				inputId="my-account-card-number-input"
-				inputType="text"
-				v-model="userData.cardNumber"
+				inputType="number"
+				v-model="cardNumber"
 				:isRequired="true" /> -->
 			<user-input
-				label="address: "
-				inputId="my-account-address-input"
-				inputType="text"
-				v-model="userData.address"
+				label="Email"
+				inputId="my-account-email-input"
+				inputType="email"
+				v-model="email"
+				:defaultValue="email"
 				:isRequired="true" />
 			<user-input
-				label="address: "
-				inputId="my-account-address-input"
-				inputType="text"
-				v-model="userData.address"
-				:isRequired="true" />
-			<user-input
-				label="address: "
-				inputId="my-account-address-input"
-				inputType="text"
-				v-model="userData.address"
-				:isRequired="true" />
-			<user-input
-				label="address: "
-				inputId="my-account-address-input"
-				inputType="text"
-				v-model="userData.address"
+				label="Phone Number"
+				inputId="my-account-phone-input"
+				inputType="number"
+				v-model="phone"
+				:defaultValue="phone"
 				:isRequired="true" />
 			<small-button
 				buttonText="Save Changes"
@@ -61,27 +52,42 @@ import userDataService from "../services/UserDataService.js";
 export default {
 	data() {
 		return {
-			userData: {
-				address: null,
-				cardNumber: 0,
-				dataId: -1,
-				email: null,
-				phone: 0,
-				userId: -1,
-			},
+			address: null,
+			cardNumber: "",
+			dataId: -1,
+			email: null,
+			phone: 0,
+			userId: -1,
+			alertText: "",
 		};
 	},
 	created() {
-		// const { address, cardNumber, dataId, email, phone, userId} = this.$store.state.user.userData;
-		this.userData = { ...this.$store.state.user.userData };
+		const { address, cardNumber, dataId, email, phone, userId } =
+			this.$store.state.user.userData;
+		this.address = address;
+		this.cardNumber = cardNumber;
+		this.dataId = dataId;
+		this.email = email;
+		this.phone = phone;
+		this.userId = userId;
 	},
 	methods: {
 		updateUserInfo() {
-			userDataService.update();
+			const { address, cardNumber, dataId, email, phone, userId } = this;
+			const userData = { address, cardNumber, dataId, email, phone, userId };
+			userDataService.update(userData).then((res) => {
+				if (res.status === 200) {
+					this.$router.push({ name: "home" });
+				}
+			});
 		},
 	},
 	components: { UserInput, SmallButton, HorizontalHero, AnAlert },
 };
 </script>
 
-<style></style>
+<style>
+section.customer-section#my-account label {
+	font-weight: bold;
+}
+</style>

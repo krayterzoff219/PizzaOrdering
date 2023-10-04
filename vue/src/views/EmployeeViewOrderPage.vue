@@ -4,39 +4,48 @@
 
     <section id="employee-order-view-section">
        
-       <div>
+       <div id="order-details-wrapper">
             <horizontal-hero></horizontal-hero>
             <h2>Order View</h2>
             <div class = "information-section">
-                <p>Order status: {{currentOrder.status.charAt(0).toUpperCase() + currentOrder.status.slice(1)}}</p>
-                <br/>
-                <p>{{currentOrder.isDelivery ? "Delivery" : "Pick-up"}}</p>
-                <br/>
-                <p>Customer phone number: {{currentOrder.phone}}</p>
-                <br/>
-                <p>Customer address: {{currentOrder.address}}</p>
-                <br/>
 
+                <div class = "customer-info">
+                    <p>Order status: {{currentOrder.status.charAt(0).toUpperCase() + currentOrder.status.slice(1)}}</p>
+                    <br/>
+                    <p>{{currentOrder.isDelivery ? "Delivery" : "Pick-up"}}</p>
+                    <br/>
+                    <p>Customer name: {{currentOrder.name}}</p>
+                    <br/>
+                    <p>Customer phone number: {{currentOrder.phone}}</p>
+                    <br/>
+                    <p>Customer address: {{currentOrder.address}}</p>
+                    <br/>
+                </div>
+               
                 <hr/>
 
-                <view-details-item
-                id="details-section"
-                v-for="Item of currentOrder.menuItems"
-                :key="Item.id"
-                :menuItem = "Item"
-                />
-                <view-details-custom-pizza
-                id="details-section"
-                v-for="pizza of currentOrder.customPizzas"
-                :key="pizza.id"
-                :pizza="pizza"
-                />
-                <br>
-                <br>
-                <p>Subtotal: ${{currentOrder.subtotal.toFixed(2)}}</p>
-                <p>Tax: ${{currentOrder.tax.toFixed(2)}}</p>
-                <br>
-                <p>Total: ${{(currentOrder.tax + currentOrder.subtotal).toFixed(2)}}</p>
+                <div class = "order-info">
+                    <view-details-item
+                    id="details-section"
+                    v-for="Item of currentOrder.menuItems"
+                    :key="Item.id"
+                    :menuItem = "Item"
+                    />
+                    <view-details-custom-pizza
+                    id="details-section"
+                    v-for="pizza of currentOrder.customPizzas"
+                    :key="pizza.id"
+                    :pizza="pizza"
+                    />
+                    <br>
+                    <br>
+                    <p>Subtotal: ${{currentOrder.subtotal.toFixed(2)}}</p>
+                    <p>Tax: ${{currentOrder.tax.toFixed(2)}}</p>
+                    <br>
+                    <p>Total: ${{(currentOrder.tax + currentOrder.subtotal).toFixed(2)}}</p>
+                </div>
+
+               
             </div>
             
             
@@ -109,9 +118,22 @@ h2{
 }
 
 .information-section{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+    "customerInfo orderInfo";
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 10px;
+}
+
+.customer-info{
+    grid-area: customerInfo;
+}
+
+.order-info{
+    grid-area: orderInfo;
 }
 
 hr{
@@ -122,6 +144,11 @@ hr{
 
 #details-section {
     border-bottom: black solid 1px;
+}
+
+
+#employee-order-view-section, #order-details-wrapper{
+    
 }
 
 

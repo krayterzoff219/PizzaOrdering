@@ -16,11 +16,23 @@
 
 <script>
 export default {
-	props: ["label", "inputId", "inputType", "isAutofocus", "isRequired"],
+	props: [
+		"label",
+		"inputId",
+		"inputType",
+		"isAutofocus",
+		"isRequired",
+		"defaultValue",
+	],
 	data() {
 		return {
 			localValue: "",
 		};
+	},
+	created() {
+		if (this.defaultValue) {
+			this.localValue = this.defaultValue;
+		}
 	},
 	watch: {
 		localValue(newValue) {
