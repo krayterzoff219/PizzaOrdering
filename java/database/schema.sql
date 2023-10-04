@@ -78,6 +78,7 @@ CREATE TABLE user_data (
     data_id SERIAL,
     user_id integer DEFAULT -1,
     email varchar(200) DEFAULT '',
+    name varchar(200) DEFAULT '',
     address varchar(200) DEFAULT '',
     phone varchar(15) DEFAULT '',
     credit_card varchar(16) DEFAULT '',
