@@ -24,7 +24,8 @@
 			:isRequired="true" />
 		<small-button
 			buttonType="submit"
-			buttonText="Create Account" />
+			buttonText="Create Account"
+			:shouldStopPropagation="true" />
 		<p @click="(event) => event.stopPropagation()">
 			Already have an account? &nbsp;<span
 				class="jump"
@@ -83,7 +84,7 @@ export default {
 						}
 					});
 			}
-		}
+		},
 	},
 };
 </script>

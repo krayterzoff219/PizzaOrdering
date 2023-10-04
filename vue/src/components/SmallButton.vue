@@ -4,17 +4,19 @@
 		:type="buttonType ? buttonType : 'button'"
 		@click="
 			(event) => {
+				if (shouldStopPropagation) {
+					event.stopPropagation();
+				}
 				handleClick();
 			}
 		">
 		{{ buttonText }}
 	</button>
-	<!-- event.stopPropagation(); -->
 </template>
 
 <script>
 export default {
-	props: ["buttonText", "buttonType", "clickHandler"],
+	props: ["buttonText", "buttonType", "clickHandler", "shouldStopPropagation"],
 	methods: {
 		handleClick() {
 			if (this.clickHandler) this.clickHandler();
