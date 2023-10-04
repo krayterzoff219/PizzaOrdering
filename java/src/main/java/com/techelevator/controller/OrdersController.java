@@ -41,11 +41,11 @@ public class OrdersController {
 
     @RequestMapping(path = "/orders", method = RequestMethod.POST)
     public int addOrder(@RequestBody Order order, Principal principal){
-        if(principal == null){
+//        if(principal == null){
             order.setDataId(userDataDao.createGuestData(order));
-        }else{
-            order.setDataId(userDataDao.getUserData(userDao.findIdByUsername(principal.getName())).getDataId());
-        }
+//        }else{
+//            order.setDataId(userDataDao.getUserData(userDao.findIdByUsername(principal.getName())).getDataId());
+//        }
         return orderDao.create(order);
     }
 
