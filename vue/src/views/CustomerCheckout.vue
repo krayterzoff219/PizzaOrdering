@@ -147,17 +147,19 @@ export default {
 		};
 	},
 	created() {
-		if (this.$store.state.token) {
+		if (this.$store.state.token && this.$store.state.user.userData) {
 			const { phone, email, address, name } = this.$store.state.user.userData;
 			this.phoneNumber = phone;
 			this.email = email;
 			this.cardholderName = name;
 			if (address) {
 				const addressArray = address.split("|||");
-				this.address = addressArray[0];
-				this.city = addressArray[1];
-				this.state = addressArray[2];
-				this.zipCode = addressArray[3];
+				if (addressArray.length === 4) {
+					this.address = addressArray[0];
+					this.city = addressArray[1];
+					this.state = addressArray[2];
+					this.zipCode = addressArray[3];
+				}
 			}
 		}
 	},

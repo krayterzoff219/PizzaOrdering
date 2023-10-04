@@ -58,9 +58,24 @@ export default {
 				.login(this.user)
 				.then((response) => {
 					if (response.status == 200) {
+						let user = {
+							...response.data.user,
+							userData: response.data.userData,
+						};
 						this.$store.commit("SET_AUTH_TOKEN", response.data.token);
-						this.$store.commit("SET_USER", response.data.user);
-						this.$router.push({ name: "pending-orders" });
+						this.$store.commit("SET_USER", user);
+
+						const roles = response.data.user.authorities.map((role) =>
+							role.name.toLowerCase().replace("role_", "")
+						);
+						const isAdmin = (roles) => roles.indexOf("admin") > -1;
+						const isEmployee = (roles) => roles.indexOf("employee") > -1;
+
+						if (isAdmin(roles) || isEmployee(roles)) {
+							this.$router.push({ name: "pending-orders" });
+						} else {
+							this.$router.push({ name: "home" });
+						}
 					}
 				})
 				.catch((error) => {

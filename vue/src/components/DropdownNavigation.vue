@@ -51,15 +51,21 @@
 			@click.stop="hideDropDownMenu"
 			><li>Options</li></router-link
 		>
-		<router-link
+		<!-- <router-link
 			:to="{ name: 'employee-login' }"
 			v-if="isEmployeePage && !isLoggedIn && $route.path.includes('register')"
 			@click.stop="hideDropDownMenu"
 			><li>Login</li></router-link
-		>
+		> -->
 		<router-link
 			:to="{ name: 'employee-register' }"
-			v-if="isEmployeePage && !isLoggedIn && $route.path.includes('login')"
+			v-if="
+				isEmployeePage &&
+				isLoggedIn &&
+				$store.state.user.authorities
+					.map((role) => role.name.toLowerCase().replace('role_', ''))
+					.indexOf('admin') > -1
+			"
 			><li>Register</li></router-link
 		>
 

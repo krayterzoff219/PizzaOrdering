@@ -99,22 +99,25 @@ export default {
 		};
 	},
 	created() {
-		const { address, cardNumber, dataId, email, phone, userId, name } =
-			this.$store.state.user.userData;
-		// this.address = address;
-		if (address) {
-			const addressArray = address.split("|||");
-			this.address = addressArray[0];
-			this.city = addressArray[1];
-			this.state = addressArray[2];
-			this.zipCode = addressArray[3];
+		if (this.$store.state.user.userData) {
+			const { address, cardNumber, dataId, email, phone, userId, name } =
+				this.$store.state.user.userData;
+			if (address) {
+				const addressArray = address.split("|||");
+				if (addressArray.length === 4) {
+					this.address = addressArray[0];
+					this.city = addressArray[1];
+					this.state = addressArray[2];
+					this.zipCode = addressArray[3];
+				}
+			}
+			this.cardNumber = cardNumber;
+			this.dataId = dataId;
+			this.email = email;
+			this.phone = phone;
+			this.userId = userId;
+			this.name = name;
 		}
-		this.cardNumber = cardNumber;
-		this.dataId = dataId;
-		this.email = email;
-		this.phone = phone;
-		this.userId = userId;
-		this.name = name;
 	},
 	methods: {
 		updateUserInfo() {

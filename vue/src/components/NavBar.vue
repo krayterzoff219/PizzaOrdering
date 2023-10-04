@@ -70,16 +70,22 @@
 				class="jump hide-when-small-screen"
 				>Options</router-link
 			>
-			<router-link
+			<!-- <router-link
 				:to="{ name: 'employee-login' }"
 				class="hide-when-small-screen"
 				v-if="isEmployeePage && !isLoggedIn && $route.path.includes('register')"
 				><small-button buttonText="Login"></small-button
-			></router-link>
+			></router-link> -->
 			<router-link
 				:to="{ name: 'employee-register' }"
 				class="hide-when-small-screen"
-				v-if="isEmployeePage && !isLoggedIn && $route.path.includes('login')"
+				v-if="
+					isEmployeePage &&
+					isLoggedIn &&
+					$store.state.user.authorities
+						.map((role) => role.name.toLowerCase().replace('role_', ''))
+						.indexOf('admin') > -1
+				"
 				><small-button buttonText="Register"></small-button
 			></router-link>
 			<!-- ********************************** LOGOUT FOR BOTH PAGES ********************************** -->

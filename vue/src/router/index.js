@@ -100,7 +100,7 @@ const router = new Router({
 			name: "employee-register",
 			component: EmployeeRegister,
 			meta: {
-				requiresAuth: false,
+				requiresAuth: true,
 			},
 		},
 		{
@@ -146,38 +146,56 @@ const router = new Router({
 	],
 });
 
+const sendToCorrectLoginScreen = (to, next) => {
+	if (to.path.includes("employees")) {
+		next("/employees/login");
+	} else {
+		next("/");
+	}
+};
+
+const getRoles = () =>
+	store.state.user.authorities.map((role) =>
+		role.name.toLowerCase().replace("role_", "")
+	);
+
+const isAdmin = (roles) => roles.indexOf("admin") > -1;
+const isEmployee = (roles) => roles.indexOf("employee") > -1;
+
 router.beforeEach((to, from, next) => {
 	// Determine if the route requires Authentication
 	const requiresAuth = to.matched.some((x) => x.meta.requiresAuth);
 
-	// If it does and they are not logged in, send the user to "/employees/login"
-	// if (requiresAuth && store.state.token === "") {
-	// 	next("/employees/login");
-	// } else {
-	// 	// Else let them go to their next destination
-	// 	next();
-	// }
-
 	if (!requiresAuth) {
 		next(); // Let them go to their next destination
 	} else if (requiresAuth && store.state.token === "") {
-		if (to.path.includes("employees")) {
-			next("/employees/login");
-		} else {
-			next("/");
-		}
+		sendToCorrectLoginScreen(to, next);
 	} else {
-		const roles = store.state.user.authorities.map((role) =>
-			role.name.toLowerCase().replace("role_", "")
-		);
+		const roles = getRoles();
 
+		// Only admins can register new employees
+		if (to.name === "employee-register") {
+			console.log(isAdmin(roles));
+			if (isAdmin(roles)) {
+				next();
+			} else if (isEmployee(roles)) {
+				next("/employees/pending-orders");
+			} else {
+				next("/");
+			}
+		}
+
+		// Only admins and employees can access routes with "employees" in them
 		if (to.path.includes("employees")) {
-			if (roles.indexOf("employee") > -1 || roles.indexOf("admin") > -1) {
+			if (isEmployee(roles) || isAdmin(roles)) {
 				next();
 			} else {
 				next("/");
 			}
-		} else {
+		}
+
+		// Everyone can access the 'my-account' route if they are logged in
+		else {
 			next();
 		}
 	}
