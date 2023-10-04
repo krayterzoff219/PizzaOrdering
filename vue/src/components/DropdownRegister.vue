@@ -3,7 +3,8 @@
 		<h1>Create Account</h1>
 		<an-alert
 			v-if="registrationErrors"
-			:message="registrationErrorMsg"></an-alert
+			:message="registrationErrorMsg"
+			id="customer-registration-error-message"></an-alert
 		><user-input
 			label="Username: "
 			inputId="customer-register-username-input"
@@ -45,9 +46,11 @@
 import SmallButton from "./SmallButton.vue";
 import UserInput from "./UserInput.vue";
 import authService from "../services/AuthService";
+import AnAlert from "../components/AnAlert.vue";
+
 export default {
 	name: "customer-register",
-	components: { UserInput, SmallButton },
+	components: { UserInput, SmallButton, AnAlert },
 	data() {
 		return {
 			user: {
@@ -88,6 +91,13 @@ export default {
 	},
 };
 </script>
+
+<style>
+#customer-registration-error-message {
+	font-weight: bold;
+	text-align: center;
+}
+</style>
 
 <style scoped>
 form {

@@ -3,7 +3,8 @@
 		<h1>Please Sign In</h1>
 		<an-alert
 			v-if="invalidCredentials"
-			message="Invalid username and password!"></an-alert
+			message="Invalid username and password!"
+			id="customer-login-error-message"></an-alert
 		><user-input
 			label="Username: "
 			inputId="customer-login-username-input"
@@ -39,9 +40,11 @@
 import SmallButton from "./SmallButton.vue";
 import UserInput from "./UserInput.vue";
 import authService from "../services/AuthService";
+import AnAlert from "../components/AnAlert.vue";
+
 export default {
 	name: "customer-login",
-	components: { UserInput, SmallButton },
+	components: { UserInput, SmallButton, AnAlert },
 	data() {
 		return {
 			user: {
@@ -80,6 +83,13 @@ export default {
 	},
 };
 </script>
+
+<style>
+#customer-login-error-message {
+	font-weight: bold;
+	text-align: center;
+}
+</style>
 
 <style scoped>
 form {
