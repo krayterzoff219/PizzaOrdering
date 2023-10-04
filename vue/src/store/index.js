@@ -124,9 +124,6 @@ export default new Vuex.Store({
 		UPDATE_SUBTOTAL(state, payload) {
 			state.subtotal += payload;
 		},
-		RESET_SUBTOTAL(state) {
-			state.subtotal = 0;
-		},
 		LOAD_TOPPINGS(state, payload) {
 			state.toppings = sortArrayByName(payload);
 		},
@@ -151,6 +148,7 @@ export default new Vuex.Store({
 		},
 		CLEAR_CART(state) {
 			state.cart = {};
+			state.subtotal = 0;
 		},
 		LOAD_PENDING_ORDERS(state, payload) {
 			state.pendingOrders = payload;

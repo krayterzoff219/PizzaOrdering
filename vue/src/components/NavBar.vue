@@ -25,6 +25,12 @@
 				>Menu</router-link
 			>
 			<router-link
+				:to="{ name: 'my-account' }"
+				v-if="!isEmployeePage && $store.state.token"
+				class="jump hide-when-small-screen"
+				>My Account</router-link
+			>
+			<router-link
 				class="hide-when-small-screen"
 				:to="{ name: 'my-order' }"
 				v-if="
