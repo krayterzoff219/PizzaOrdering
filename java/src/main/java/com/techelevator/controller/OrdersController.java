@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.login.UserDao;
 import com.techelevator.dao.login.UserDataDao;
 import com.techelevator.dao.orders.OrderDao;
+import com.techelevator.model.login.UserData;
 import com.techelevator.model.menu.MenuItem;
 import com.techelevator.model.orders.Order;
 import com.techelevator.model.orders.OrderStatus;
@@ -10,11 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.security.Principal;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 //@PreAuthorize("isAuthenticated()")
@@ -55,9 +61,23 @@ public class OrdersController {
         return orderDao.getAllOrdersByStatus(status);
     }
 
+    @Secured({"ROLE_EMPLOYEE", "ROLE_ADMIN", "ROLE_USER" })
     @RequestMapping(path = "/orders/{id}", method = RequestMethod.GET)
-    public Order getOrderById(@PathVariable int id){
-        return orderDao.getOrderById(id);
+    public Order getOrderById(@PathVariable int id, Authentication authentication, Principal principal){
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        Set<String> roles = new HashSet<>();
+        for(GrantedAuthority eachAuthority : authorities){
+            if(eachAuthority.getAuthority().equals("ROLE_EMPLOYEE") || eachAuthority.getAuthority().equals("ROLE_ADMIN")){
+                return orderDao.getOrderById(id);
+            }
+        }
+        Order order = orderDao.getOrderById(id);
+        UserData userData = userDataDao.getUserData(userDao.findIdByUsername(principal.getName()));
+        if(userData.getDataId() == order.getDataId()){
+            return orderDao.getOrderById(id);
+        }
+
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Not Authorized");
     }
 
 

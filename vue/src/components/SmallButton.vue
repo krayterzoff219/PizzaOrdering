@@ -2,7 +2,11 @@
 	<button
 		class="grow"
 		:type="buttonType ? buttonType : 'button'"
-		@click="handleClick">
+		@click="(event) =>{
+			handleClick();
+			event.stopPropagation();
+		}
+		">
 		{{ buttonText }}
 	</button>
 </template>
