@@ -2,6 +2,7 @@ package com.techelevator.model.login;
 
 public class UserData {
     private String email;
+    private String name;
     private String phone;
     private String cardNumber;
     private String address;
@@ -55,5 +56,13 @@ public class UserData {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

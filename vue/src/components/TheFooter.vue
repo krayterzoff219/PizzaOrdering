@@ -6,7 +6,7 @@
 		</div>
 		<div id="employees-portal-link">
 			<router-link
-				v-if="!$route.path.includes('employees')"
+				v-if="!$route.path.includes('employees') && !isCustomerLoggedIn"
 				:to="{ name: 'employee-login' }"
 				>Employees</router-link
 			>
@@ -15,7 +15,26 @@
 </template>
 
 <script>
-export default {};
+export default {
+	computed: {
+		isCustomerLoggedIn() {
+			const { token, user } = this.$store.state;
+			if (!token) {
+				return false;
+			}
+
+			const roles = user.authorities.map((role) =>
+				role.name.toLowerCase().replace("role_", "")
+			);
+
+			if (roles.indexOf("employee") > -1 || roles.indexOf("admin") > -1) {
+				return false;
+			} else {
+				return true;
+			}
+		},
+	},
+};
 </script>
 <style scoped>
 footer {

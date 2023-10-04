@@ -12,6 +12,7 @@ public class Order {
     private int dataId;
     private String status;
     private String email;
+    private String name;
     private String phone;
     private String address;
     private boolean isDelivery;
@@ -108,5 +109,13 @@ public class Order {
 
     public void setTax(BigDecimal tax) {
         this.tax = tax;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

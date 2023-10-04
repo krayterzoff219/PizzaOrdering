@@ -2,10 +2,10 @@
 	<div
 		id="page-cover"
 		@click.stop="hideDropDownMenu"
-		:class="{ open: $store.state.isDropDownMenuVisible }">
+		:class="{ open: $store.state.dropdownMenu.isDropDownMenuVisible }">
 		<div
 			id="drop-down-menu"
-			:class="{ open: $store.state.isDropDownMenuVisible }">
+			:class="{ open: $store.state.dropdownMenu.isDropDownMenuVisible }">
 			<router-link
 				@click.stop="hideDropDownMenu"
 				:to="{ name: 'home' }">
@@ -15,7 +15,10 @@
 			/></router-link>
 
 			<i class="fa-solid fa-x"></i>
-			<dropdown-login v-if="$store.isDropDownLoginActivated" />
+			<dropdown-register
+				v-if="$store.state.dropdownMenu.isDropDownRegisterActivated" />
+			<dropdown-login
+				v-else-if="$store.state.dropdownMenu.isDropDownLoginActivated" />
 			<dropdown-navigation v-else />
 		</div>
 	</div>
@@ -23,17 +26,19 @@
 
 <script>
 import DropdownLogin from "./DropdownLogin.vue";
+import DropdownRegister from "./DropdownRegister.vue";
 import DropdownNavigation from "./DropdownNavigation.vue";
 export default {
 	name: "dropdown-overlay",
 	methods: {
 		hideDropDownMenu() {
-			this.$store.commit("TOGGLE_DROP_DOWN_MENU");
+			this.$store.dispatch("hideDropDownMenu");
 		},
 	},
 	components: {
 		DropdownNavigation,
 		DropdownLogin,
+		DropdownRegister,
 	},
 };
 </script>

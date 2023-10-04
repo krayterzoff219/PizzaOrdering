@@ -14,6 +14,7 @@ import CustomerCheckout from "../views/CustomerCheckout.vue";
 import OrderConfirmation from "../views/OrderConfirmation.vue";
 import BuildYourOwnPizza from "../views/BuildYourOwnPizza.vue";
 import EmployeeViewOrderPage from "../views/EmployeeViewOrderPage.vue";
+import MyAccount from "../views/MyAccount.vue";
 
 Vue.use(Router);
 
@@ -44,6 +45,14 @@ const router = new Router({
 			component: MyOrder,
 			meta: {
 				requiresAuth: false,
+			},
+		},
+		{
+			path: "/my-account",
+			name: "my-account",
+			component: MyAccount,
+			meta: {
+				requiresAuth: true,
 			},
 		},
 		{
@@ -108,7 +117,7 @@ const router = new Router({
 			component: EmployeeViewOrderPage,
 			meta: {
 				requiresAuth: true,
-			}
+			},
 		},
 		{
 			path: "/employees/specialty-pizzas",
@@ -142,11 +151,35 @@ router.beforeEach((to, from, next) => {
 	const requiresAuth = to.matched.some((x) => x.meta.requiresAuth);
 
 	// If it does and they are not logged in, send the user to "/employees/login"
-	if (requiresAuth && store.state.token === "") {
-		next("/employees/login");
+	// if (requiresAuth && store.state.token === "") {
+	// 	next("/employees/login");
+	// } else {
+	// 	// Else let them go to their next destination
+	// 	next();
+	// }
+
+	if (!requiresAuth) {
+		next(); // Let them go to their next destination
+	} else if (requiresAuth && store.state.token === "") {
+		if (to.path.includes("employees")) {
+			next("/employees/login");
+		} else {
+			next("/");
+		}
 	} else {
-		// Else let them go to their next destination
-		next();
+		const roles = store.state.user.authorities.map((role) =>
+			role.name.toLowerCase().replace("role_", "")
+		);
+
+		if (to.path.includes("employees")) {
+			if (roles.indexOf("employee") > -1 || roles.indexOf("admin") > -1) {
+				next();
+			} else {
+				next("/");
+			}
+		} else {
+			next();
+		}
 	}
 });
 

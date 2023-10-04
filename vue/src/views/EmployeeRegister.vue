@@ -7,7 +7,7 @@
 			<h1>Create Account</h1>
 			<an-alert
 				v-if="registrationErrors"
-				:message="registrationErrorMsg"></an-alert>
+				:message="registrationErrorMsg" />
 
 			<user-input
 				label="Username: "

@@ -1,5 +1,7 @@
 <template>
-	<div class="form-input-group">
+	<div
+		class="form-input-group"
+		@click="(event) => event.stopPropagation()">
 		<div class="form-input-label-wrapper">
 			<label :for="inputId">{{ label }}</label>
 		</div>
@@ -14,11 +16,23 @@
 
 <script>
 export default {
-	props: ["label", "inputId", "inputType", "isAutofocus", "isRequired"],
+	props: [
+		"label",
+		"inputId",
+		"inputType",
+		"isAutofocus",
+		"isRequired",
+		"defaultValue",
+	],
 	data() {
 		return {
 			localValue: "",
 		};
+	},
+	created() {
+		if (this.defaultValue) {
+			this.localValue = this.defaultValue;
+		}
 	},
 	watch: {
 		localValue(newValue) {

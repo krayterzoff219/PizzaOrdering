@@ -9,6 +9,7 @@
 				class="checkout-wrapper"
 				@submit.prevent="placeOrder">
 				<user-input
+					:defaultValue="cardholderName"
 					label="Cardholder Name"
 					inputId="cardholder-name"
 					inputType="text"
@@ -37,20 +38,23 @@
 					v-model="cvc" />
 
 				<user-input
+					:defaultValue="address"
 					:isRequired="true"
-					label="Address"
+					label="Delivery Address"
 					inputId="address"
 					inputType="text"
 					v-model="address" />
 
 				<user-input
 					:isRequired="true"
+					:defaultValue="city"
 					label="City"
 					inputId="city"
 					inputType="text"
 					v-model="city" />
 
 				<user-input
+					:defaultValue="state"
 					:isRequired="true"
 					label="State"
 					inputId="state"
@@ -58,6 +62,7 @@
 					v-model="state" />
 
 				<user-input
+					:defaultValue="zipCode"
 					:isRequired="true"
 					label="ZIP Code"
 					inputId="zip-code"
@@ -65,6 +70,7 @@
 					v-model="zipCode" />
 
 				<user-input
+					:defaultValue="phoneNumber"
 					:isRequired="true"
 					label="Phone Number"
 					inputId="phone-number"
@@ -72,6 +78,7 @@
 					v-model="phoneNumber" />
 
 				<user-input
+					:defaultValue="email"
 					:isRequired="true"
 					label="Email"
 					inputId="email"
@@ -139,13 +146,34 @@ export default {
 			phoneNumber: "",
 		};
 	},
-
+	created() {
+		if (this.$store.state.token) {
+			const { phone, email, address, name } = this.$store.state.user.userData;
+			this.phoneNumber = phone;
+			this.email = email;
+			this.cardholderName = name;
+			if (address) {
+				const addressArray = address.split("|||");
+				this.address = addressArray[0];
+				this.city = addressArray[1];
+				this.state = addressArray[2];
+				this.zipCode = addressArray[3];
+			}
+		}
+	},
 	methods: {
 		placeOrder() {
 			const order = {};
 
 			order.isDelivery = this.isDelivery;
-			order.address = this.address + ", " + this.city + ", " + this.state + "  " + this.zipCode;
+			order.address =
+				this.address +
+				"|||" +
+				this.city +
+				"|||" +
+				this.state +
+				"|||" +
+				this.zipCode;
 			order.phone = this.phoneNumber;
 			order.email = this.email;
 			order.subtotal = this.$store.state.subtotal;
