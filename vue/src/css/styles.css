@@ -43,7 +43,7 @@ section {
 }
 
 #employee-order-view-section{
-	max-width: 30rem;
+	max-width: 40rem;
 }
 
 section.employee-section:not(#specialty-pizzas) {
