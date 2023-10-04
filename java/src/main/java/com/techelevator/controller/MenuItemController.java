@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 //@PreAuthorize("isAuthenticated()")
-@PreAuthorize("permitAll()")
+//@PreAuthorize("permitAll()")
 @CrossOrigin
 public class MenuItemController {
 
