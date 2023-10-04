@@ -7,33 +7,38 @@
        <div>
             <horizontal-hero></horizontal-hero>
             <h2>Order View</h2>
+            <div class = "information-section">
+                <p>Order status: {{currentOrder.status.charAt(0).toUpperCase() + currentOrder.status.slice(1)}}</p>
+                <br/>
+                <p>{{currentOrder.isDelivery ? "Delivery" : "Pick-up"}}</p>
+                <br/>
+                <p>Customer phone number: {{currentOrder.phone}}</p>
+                <br/>
+                <p>Customer address: {{currentOrder.address}}</p>
+                <br/>
 
-            <p>Order status: {{currentOrder.status.charAt(0).toUpperCase() + currentOrder.status.slice(1)}}</p>
-            <br/>
-            <p>{{currentOrder.isDelivery ? "Delivery" : "Pick-up"}}</p>
-            <br/>
-            <p>Customer phone number: {{currentOrder.phone}}</p>
-            <br/>
-            <p>Customer address: {{currentOrder.address}}</p>
-            <br/>
-            <view-details-item
-            id="details-section"
-            v-for="Item of currentOrder.menuItems"
-            :key="Item.id"
-            :menuItem = "Item"
-            />
-            <view-details-custom-pizza
-            id="details-section"
-            v-for="pizza of currentOrder.customPizzas"
-            :key="pizza.id"
-            :pizza="pizza"
-            />
-            <br>
-            <br>
-            <p>Subtotal: ${{currentOrder.subtotal.toFixed(2)}}</p>
-            <p>Tax: ${{currentOrder.tax.toFixed(2)}}</p>
-            <br>
-            <p>Total: ${{(currentOrder.tax + currentOrder.subtotal).toFixed(2)}}</p>
+                <hr/>
+
+                <view-details-item
+                id="details-section"
+                v-for="Item of currentOrder.menuItems"
+                :key="Item.id"
+                :menuItem = "Item"
+                />
+                <view-details-custom-pizza
+                id="details-section"
+                v-for="pizza of currentOrder.customPizzas"
+                :key="pizza.id"
+                :pizza="pizza"
+                />
+                <br>
+                <br>
+                <p>Subtotal: ${{currentOrder.subtotal.toFixed(2)}}</p>
+                <p>Tax: ${{currentOrder.tax.toFixed(2)}}</p>
+                <br>
+                <p>Total: ${{(currentOrder.tax + currentOrder.subtotal).toFixed(2)}}</p>
+            </div>
+            
             
 
 
@@ -106,7 +111,7 @@ h2{
 .information-section{
     padding-left: 30px;
     padding-right: 30px;
-    
+    padding-bottom: 10px;
 }
 
 hr{
