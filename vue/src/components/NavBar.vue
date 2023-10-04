@@ -160,11 +160,21 @@ nav {
 	border-bottom-right-radius: var(--section-border-radius);
 }
 
+@media only screen and (max-width: 950px) {
+	nav {
+		--between-padding: 20px;
+	}
+}
+
 nav a {
 	padding-right: var(--between-padding);
 	color: var(--dark-color);
 	text-decoration: none;
 	font-family: var(--loud-font-family);
+}
+
+nav a:not(.push-left) {
+	min-width: fit-content;
 }
 
 nav a.router-link-exact-active {
@@ -179,6 +189,9 @@ nav a.router-link-exact-active button {
 nav a:first-child {
 	padding-left: var(--edge-padding);
 	height: 100%;
+	flex-shrink: 1;
+	height: 100%;
+	display: flex;
 }
 
 nav a:last-child,
@@ -191,9 +204,11 @@ nav a.push-left {
 }
 
 nav img {
-	height: 100%;
 	display: block;
-	max-width: 100%;
+	max-height: 100%;
+	width: 100%;
+	margin-top: auto;
+	margin-bottom: auto;
 }
 
 nav a.hide-when-small-screen {
