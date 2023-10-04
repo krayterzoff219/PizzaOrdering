@@ -3,9 +3,9 @@
         <div class="pendingList" >
             
             <div> 
-                <span>{{currentOrder.orderId}}</span>
+                <span>Order #{{currentOrder.orderId}}</span>
                 <br>
-                <span>{{currentOrder.status}}</span>
+                <span>{{currentOrder.isDelivery ? "Delivery" : "Pick-up"}}</span>
                 <br>
                 
             </div>
@@ -17,7 +17,7 @@
            
            
 
-            <select v-if="isLoaded" v-model="currentOrder.status" >
+            <select v-if="isLoaded" v-model="currentOrder.status" @change="saveChanges">
                 <option v-for="stat in possibleStatus" 
                 :key="stat"
                 :value="stat.toLowerCase()">{{stat}}
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import OrderService from '../services/OrderService';
 // import OrderService from '../services/OrderService'
 import SmallButton from './SmallButton.vue'
 
@@ -72,7 +73,6 @@ export default{
     methods: {
         initializeOrder() {
 			const { orderId, status, email, address, phone, isDelivery, menuItems, customPizzas} = this.order;
-
 			this.currentOrder.orderId = orderId;
             this.currentOrder.status = status;
             this.currentOrder.email = email;
@@ -84,7 +84,9 @@ export default{
 		},
 
         saveChanges(){
-            
+            const orderId = this.currentOrder.orderId;
+            const status = this.currentOrder.status;
+            OrderService.updatePendingOrder({orderId, status});
         }
     }
 

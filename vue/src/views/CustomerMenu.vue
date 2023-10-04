@@ -99,4 +99,22 @@ p.hero-text span {
 h1 {
 	padding-top: 10px;
 }
+
+h1 {
+	width: 100%;
+}
+
+@media only screen and (min-width: 550px) {
+	section.customer-section#menu-section div.menu-wrapper {
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	section.customer-section#menu-section div.menu-wrapper {
+		flex-direction: column;
+	}
+}
 </style>
