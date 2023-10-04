@@ -165,6 +165,7 @@ export default {
 		placeOrder() {
 			const order = {};
 
+			order.name = this.cardholderName;
 			order.isDelivery = this.isDelivery;
 			order.address =
 				this.address +
@@ -215,21 +216,21 @@ export default {
 		},
 
 		sendEmail() {
-			try {
-				// emailjs.send(
-				// 	"service_tw939hk",
-				// 	"template_j8669nl",
-				// 	{
-				// 		name: this.cardholderName,
-				// 		email: this.email,
-				// 		from_name: "UpperCrust Pizza",
-				// 		message: "Your order will be ready in 20-30 minutes.",
-				// 	},
-				// 	"COvpBZtnSKRZEtL4R"
-				// );
-			} catch (error) {
-				console.log({ error });
-			}
+			// try {
+			// 	emailjs.send(
+			// 		"service_tw939hk",
+			// 		"template_j8669nl",
+			// 		{
+			// 			name: this.cardholderName,
+			// 			email: this.email,
+			// 			from_name: "UpperCrust Pizza",
+			// 			message: "Your order will be ready in 20-30 minutes.",
+			// 		},
+			// 		"COvpBZtnSKRZEtL4R"
+			// 	);
+			// } catch (error) {
+			// 	console.log({ error });
+			// }
 		},
 	},
 
