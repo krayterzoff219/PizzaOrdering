@@ -1,5 +1,5 @@
 <template>
-	<form @submit.prevent="register">
+	<form @submit.prevent="login">
 		<h1>Please Sign In</h1>
 		<an-alert
 			v-if="invalidCredentials"
@@ -37,6 +37,7 @@
 <script>
 import SmallButton from "./SmallButton.vue";
 import UserInput from "./UserInput.vue";
+import authService from "../services/AuthService";
 export default {
 	name: "customer-login",
 	components: { UserInput, SmallButton },
@@ -53,7 +54,29 @@ export default {
 		sendUserToRegister() {
 			this.$store.dispatch("switchCustomerBetweenLoginAndRegisterDropDown");
 		},
-	},
+		login() {
+			authService
+				.login(this.user)
+				.then((response) => {
+					if (response.status == 200) {
+						let user = {
+							...response.data.user, userData: response.data.userData
+						};
+						this.$store.commit("SET_AUTH_TOKEN", response.data.token);
+						this.$store.commit("SET_USER", user);
+						this.$store.dispatch("hideDropDownMenu");
+
+					}
+				})
+				.catch((error) => {
+					const response = error.response;
+
+					if (response.status === 401) {
+						this.invalidCredentials = true;
+					}
+				});
+		},
+	}
 };
 </script>
 

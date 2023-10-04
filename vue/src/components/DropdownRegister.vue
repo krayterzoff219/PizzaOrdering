@@ -43,6 +43,7 @@
 <script>
 import SmallButton from "./SmallButton.vue";
 import UserInput from "./UserInput.vue";
+import authService from "../services/AuthService";
 export default {
 	name: "customer-register",
 	components: { UserInput, SmallButton },
@@ -62,6 +63,27 @@ export default {
 		sendUserToLogin() {
 			this.$store.dispatch("switchCustomerBetweenLoginAndRegisterDropDown");
 		},
+		register() {
+			if (this.user.password != this.user.confirmPassword) {
+				this.registrationErrors = true;
+				this.registrationErrorMsg = "Password & Confirm Password do not match.";
+			} else {
+				authService
+					.register(this.user)
+					.then((response) => {
+						if (response.status == 201) {
+							this.sendUserToLogin();
+						}
+					})
+					.catch((error) => {
+						const response = error.response;
+						this.registrationErrors = true;
+						if (response.status === 400) {
+							this.registrationErrorMsg = "Bad Request: Validation Errors";
+						}
+					});
+			}
+		}
 	},
 };
 </script>
