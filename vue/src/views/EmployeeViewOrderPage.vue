@@ -28,6 +28,12 @@
             :key="pizza.id"
             :pizza="pizza"
             />
+            <br>
+            <br>
+            <p>Subtotal: ${{currentOrder.subtotal.toFixed(2)}}</p>
+            <p>Tax: ${{currentOrder.tax.toFixed(2)}}</p>
+            <br>
+            <p>Total: ${{(currentOrder.tax + currentOrder.subtotal).toFixed(2)}}</p>
             
 
 
@@ -63,7 +69,9 @@ export default{
                 phone: -1,
                 isDelivery: false,
                 menuItems: {},
-                customPizzas: {}
+                customPizzas: {},
+                subtotal: 0,
+                tax: 0
             }
         }
     },
@@ -80,6 +88,8 @@ export default{
         this.currentOrder.isDelivery = order[0].isDelivery;
         this.currentOrder.menuItems = order[0].menuItems;
         this.currentOrder.customPizzas = order[0].customPizzas;
+        this.currentOrder.subtotal = order[0].subtotal;
+        this.currentOrder.tax = order[0].tax;
 
     }
 
