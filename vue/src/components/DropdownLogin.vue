@@ -18,7 +18,8 @@
 			:isRequired="true" />
 		<small-button
 			buttonType="submit"
-			buttonText="Sign In" />
+			buttonText="Sign In"
+			:shouldStopPropagation="true" />
 		<p @click="(event) => event.stopPropagation()">
 			Don't have an account? &nbsp;<span
 				class="jump"
@@ -60,12 +61,12 @@ export default {
 				.then((response) => {
 					if (response.status == 200) {
 						let user = {
-							...response.data.user, userData: response.data.userData
+							...response.data.user,
+							userData: response.data.userData,
 						};
 						this.$store.commit("SET_AUTH_TOKEN", response.data.token);
 						this.$store.commit("SET_USER", user);
 						this.$store.dispatch("hideDropDownMenu");
-
 					}
 				})
 				.catch((error) => {
@@ -76,7 +77,7 @@ export default {
 					}
 				});
 		},
-	}
+	},
 };
 </script>
 

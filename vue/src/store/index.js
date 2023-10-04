@@ -164,6 +164,11 @@ export default new Vuex.Store({
 			state.user = user;
 			localStorage.setItem("user", JSON.stringify(user));
 		},
+		UPDATE_USER(state, updatedInfoObject) {
+			const user = { ...state.user, ...updatedInfoObject };
+			state.user = user;
+			localStorage.setItem("user", JSON.stringify(user));
+		},
 		LOGOUT(state) {
 			localStorage.removeItem("token");
 			localStorage.removeItem("user");
