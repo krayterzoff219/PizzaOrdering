@@ -5,7 +5,11 @@
 			<social-icons />
 			<div id="home-hero"></div>
 			<testimonial-carousel />
-			<div class="maps-image"></div>
+			<!-- <div class="maps-image"></div> -->
+			<iframe
+				loading="lazy"
+				allowfullscreen
+				src="https://www.google.com/maps/embed/v1/view?zoom=18&center=41.5038%2C-81.6387&key=AIzaSyDzMn1MO_Eak_yp8cBJo-ia9WnWtO7_ktE"></iframe>
 		</div>
 	</section>
 </template>
@@ -54,7 +58,8 @@ div#home-hero {
 	border-bottom: 10px solid var(--dark-color);
 }
 
-div.maps-image {
+/* div.maps-image, */
+iframe {
 	display: none;
 }
 
@@ -98,7 +103,8 @@ div.maps-image {
 		justify-self: start;
 	}
 
-	div.maps-image {
+	/* div.maps-image, */
+	iframe {
 		display: block;
 		grid-area: map;
 		height: 100%;
@@ -106,7 +112,8 @@ div.maps-image {
 		background-position: center;
 		background-repeat: no-repeat;
 		background-size: cover;
-		background-image: url("https://www.google.com/maps/d/thumbnail?mid=1E3bwSOJUVCAcZRerfL9Jpp8vWTM&hl=en_US");
+		/* background-image: url("https://www.google.com/maps/d/thumbnail?mid=1E3bwSOJUVCAcZRerfL9Jpp8vWTM&hl=en_US"); */
+		border: none;
 		border-top: 10px solid var(--dark-color);
 	}
 }
