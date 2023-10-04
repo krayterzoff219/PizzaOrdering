@@ -104,7 +104,7 @@ h1 {
 	width: 100%;
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 550px) {
 	section.customer-section#menu-section div.menu-wrapper {
 		display: flex;
 		flex-wrap: wrap;
