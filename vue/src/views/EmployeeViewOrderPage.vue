@@ -3,7 +3,11 @@
 
 
     <section id="employee-order-view-section">
+
+         <horizontal-hero></horizontal-hero>
+            <h2>Order Description</h2>
        
+<<<<<<< HEAD
        <div id="order-details-wrapper">
             <horizontal-hero></horizontal-hero>
             <h2>Order View</h2>
@@ -51,9 +55,67 @@
 
                
             </div>
-            
-            
+=======
+       <div class="title-section">
+           
+            <div class = "information-section-title">
+                
+                <p>Order status: </p>
+                <br/>
+                
+                <p>Delivery or Pickup? </p>
+                <br/>
+                <p>Customer Name: </p>
+                <br/>
+                <p>Customer phone number: </p>
+                <br/>
+                <p>Customer address: </p>
+                <br/>
 
+            </div> 
+                
+            <div class = "information-section-title2">
+                    <p>{{currentOrder.status.charAt(0).toUpperCase() + currentOrder.status.slice(1)}}</p>
+                    <br/>
+                    <p>{{currentOrder.isDelivery ? "Delivery" : "Pick-up"}}</p>
+                    <br/>
+                    <p>*Name goes here*{{currentOrder.name}}</p>
+                    <br/>
+                    <p>{{currentOrder.phone}}</p>
+                    <br/>
+                    <p>{{currentOrder.address}}</p>
+                    <br/>
+            </div>
+       </div>
+       <div class="pizza-detail-section">     
+                <hr/>
+            
+                <view-details-item
+                id="details-section"
+                v-for="Item of currentOrder.menuItems"
+                :key="Item.id"
+                :menuItem = "Item"
+                />
+                <view-details-custom-pizza
+                id="details-section"
+                v-for="pizza of currentOrder.customPizzas"
+                :key="pizza.id"
+                :pizza="pizza"
+                />
+                
+                <br>
+                <div class="subtotal-section">
+                <p>Subtotal: ${{currentOrder.subtotal.toFixed(2)}}</p>
+                <br/>
+                <p id="tax">Tax: ${{currentOrder.tax.toFixed(2)}}</p>
+                <br/>
+                <p>   Total: ${{(currentOrder.tax + currentOrder.subtotal).toFixed(2)}}   </p>
+                </div>
+           
+>>>>>>> brock
+            
+            
+               
 
             
        </div>
@@ -81,6 +143,7 @@ export default{
         return{
             currentOrder: {
                 orderId: -1,
+                name: "",
                 status: "Pending",
                 email: "",
                 address: "test add",
@@ -108,6 +171,7 @@ export default{
         this.currentOrder.customPizzas = order[0].customPizzas;
         this.currentOrder.subtotal = order[0].subtotal;
         this.currentOrder.tax = order[0].tax;
+        this.currentOrder.name= order[0].name;
 
     }
 
@@ -116,11 +180,20 @@ export default{
 
 <style scoped>
 
-h2{
-    text-decoration: underline;
-    padding: 20px;
+.title-section{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 90%;
 }
 
+
+h2{
+    text-decoration: underline;
+    padding: 50px 40px ;
+}
+
+<<<<<<< HEAD
 .information-section{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -128,7 +201,17 @@ h2{
     grid-template-areas:
     "customerInfo orderInfo"
     "total total";
+=======
+.information-section-title{
+>>>>>>> brock
     padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+
+}
+
+.information-section-title2{
+     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 10px;
 }
@@ -142,14 +225,32 @@ h2{
 }
 
 hr{
-    width: 100%;
+    width: 90%;
     height: 3px;
     
 }
 
-#details-section {
-    border-bottom: black solid 1px;
+#tax{
+    text-decoration: underline;
 }
+
+#details-section {
+    
+    border-bottom: black solid 1px;
+    width: 90%;
+    padding-left: 40px;
+    margin: auto;
+}
+
+.subtotal-section{
+    padding-bottom: 15px;
+    margin-right: 100px;
+    text-align: right;
+    /* display: flex;
+    flex-direction: row;
+    justify-content: center; */
+}
+
 
 
 #view-order-total{

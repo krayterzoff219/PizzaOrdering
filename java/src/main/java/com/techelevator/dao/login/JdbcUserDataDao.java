@@ -30,12 +30,12 @@ public class JdbcUserDataDao implements UserDataDao{
 
     @Override
     public UserData updateUserData(UserData updatedUserData) {
-        String sql = "UPDATE user_data SET email = ?, phone = ?, credit_card = ?, address = ? WHERE user_id = ?;";
+        String sql = "UPDATE user_data SET email = ?, phone = ?, credit_card = ?, address = ?, name = ? WHERE user_id = ?;";
         int numOfRows = -1;
 
         try{
             numOfRows = jdbcTemplate.update(sql, updatedUserData.getEmail(), updatedUserData.getPhone(), updatedUserData.getCardNumber(),
-                    updatedUserData.getAddress(), updatedUserData.getUserId());
+                    updatedUserData.getAddress(), updatedUserData.getName(), updatedUserData.getUserId());
 
             if(numOfRows == -1){
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -49,6 +49,7 @@ public class JdbcUserDataDao implements UserDataDao{
     private UserData mapRowToUserData(SqlRowSet rowSet){
         UserData userData = new UserData();
         userData.setEmail(rowSet.getString("email"));
+        userData.setName(rowSet.getString("name"));
         userData.setPhone(rowSet.getString("phone"));
         userData.setCardNumber(rowSet.getString("credit_card"));
         userData.setAddress(rowSet.getString("address"));
@@ -60,8 +61,8 @@ public class JdbcUserDataDao implements UserDataDao{
     public int createGuestData(Order order){
         int id = -1;
         try{
-            String insertUserSql = "insert into user_data (email, address, phone) values (?,?,?) RETURNING data_id;";
-            id = jdbcTemplate.queryForObject(insertUserSql, Integer.class, order.getEmail(), order.getAddress(), order.getPhone());
+            String insertUserSql = "insert into user_data (email, address, phone, name) values (?,?,?,?) RETURNING data_id;";
+            id = jdbcTemplate.queryForObject(insertUserSql, Integer.class, order.getEmail(), order.getAddress(), order.getPhone(), order.getName());
         } catch (ResourceAccessException | DataAccessException e){
             System.out.println(e.getMessage());
         }

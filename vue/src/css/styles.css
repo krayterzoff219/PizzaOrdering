@@ -38,11 +38,19 @@ section {
 	}
 }
 
+<<<<<<< HEAD
 div#order-details-wrapper, section#employee-order-view-section{
 	max-width: 70rem;
 }
+=======
+>>>>>>> brock
 
+#employee-order-view-section,
 section.customer-section#my-account,
+<<<<<<< HEAD
+=======
+
+>>>>>>> brock
 section.employee-section:not(#specialty-pizzas) {
 	max-width: 40rem;
 }
@@ -53,6 +61,11 @@ section.customer-section#menu-section {
 }
 
 
+<<<<<<< HEAD
+=======
+section#employee-order-view-section,
+
+>>>>>>> brock
 div#order-confirmation,
 section div.pending-order-wrapper,
 section.employee-section#employee-login form,

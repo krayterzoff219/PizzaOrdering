@@ -162,8 +162,11 @@ export default new Vuex.Store({
 			state.user = user;
 			localStorage.setItem("user", JSON.stringify(user));
 		},
-		UPDATE_USER(state, updatedInfoObject) {
-			const user = { ...state.user, ...updatedInfoObject };
+		UPDATE_USER(state, updatedUserData) {
+			const user = {
+				...state.user,
+				userData: updatedUserData,
+			};
 			state.user = user;
 			localStorage.setItem("user", JSON.stringify(user));
 		},
