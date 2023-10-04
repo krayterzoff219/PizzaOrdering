@@ -98,9 +98,26 @@ export default{
 
 <style scoped>
 
+h2{
+    text-decoration: underline;
+    padding: 20px;
+}
 
-.details-section{
+.information-section{
+    padding-left: 30px;
+    padding-right: 30px;
     
 }
+
+hr{
+    width: 100%;
+    height: 3px;
+    
+}
+
+#details-section {
+    border-bottom: black solid 1px;
+}
+
 
 </style>

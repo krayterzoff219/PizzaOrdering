@@ -41,13 +41,10 @@ section {
 		margin-bottom: var(--header-footer-inside-margin);
 	}
 }
-section#employee-order-view-section{
+
+#employee-order-view-section{
 	max-width: 30rem;
-	
 }
-
-
-
 
 section.employee-section:not(#specialty-pizzas) {
 	max-width: 40rem;
@@ -60,7 +57,7 @@ section.customer-section#menu-section {
 }
 
 
-section#employee-order-view-section,
+
 div#order-confirmation,
 section div.pending-order-wrapper,
 section.employee-section#employee-login form,
