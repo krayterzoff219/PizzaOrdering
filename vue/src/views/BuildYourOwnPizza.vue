@@ -140,7 +140,8 @@ export default {
 				$store.commit("GO_TO_NEXT_CUSTOM_PIZZA_ID");
 			} else {
 				const originalPizza = this.$store.state.cart[this.id];
-				const priceDifference = totalPrice - originalPizza.price;
+				const priceDifference =
+					(totalPrice - originalPizza.price) * originalPizza.quantity;
 				$store.dispatch("updateExistingCustomPizza", {
 					pizza,
 					priceDifference,

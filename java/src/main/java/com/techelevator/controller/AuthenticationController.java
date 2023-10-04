@@ -2,10 +2,8 @@ package com.techelevator.controller;
 
 import javax.validation.Valid;
 
-import com.techelevator.model.login.LoginDto;
-import com.techelevator.model.login.LoginResponseDto;
-import com.techelevator.model.login.RegisterUserDto;
-import com.techelevator.model.login.User;
+import com.techelevator.dao.login.UserDataDao;
+import com.techelevator.model.login.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,11 +26,13 @@ public class AuthenticationController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private UserDao userDao;
+    private UserDataDao userDataDao;
 
-    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao) {
+    public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao, UserDataDao userDataDao) {
         this.tokenProvider = tokenProvider;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDao = userDao;
+        this.userDataDao = userDataDao;
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -46,10 +46,11 @@ public class AuthenticationController {
         String jwt = tokenProvider.createToken(authentication, false);
         
         User user = userDao.findByUsername(loginDto.getUsername());
+        UserData userData = userDataDao.getUserData(user.getId());
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JWTFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
-        return new ResponseEntity<>(new LoginResponseDto(jwt, user), httpHeaders, HttpStatus.OK);
+        return new ResponseEntity<>(new LoginResponseDto(jwt, user, userData), httpHeaders, HttpStatus.OK);
     }
 
     @ResponseStatus(HttpStatus.CREATED)

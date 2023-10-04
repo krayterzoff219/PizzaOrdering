@@ -6,6 +6,7 @@ import com.techelevator.model.menu.MenuItem;
 import com.techelevator.model.pizzaOptions.Topping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @RestController
 //@PreAuthorize("isAuthenticated()")
-@PreAuthorize("permitAll()")
+//@PreAuthorize("permitAll()")
 @CrossOrigin
 public class MenuItemController {
 
@@ -27,6 +28,7 @@ public class MenuItemController {
         return menuItemDao.getAllMenuItems();
     }
 
+    @Secured({"ROLE_EMPLOYEE", "ROLE_ADMIN" })
     @RequestMapping(path = "/menuitems/other", method = RequestMethod.POST)
     public int addMenuItemToTable(@RequestBody MenuItem menuItem) {
         int menuId = menuItemDao.addMenuItem(menuItem);
@@ -36,6 +38,7 @@ public class MenuItemController {
         return menuId;
     }
 
+    @Secured({"ROLE_EMPLOYEE", "ROLE_ADMIN" })
     @RequestMapping(path = "/menuitems/specialty", method = RequestMethod.POST)
     public int addSpecialtyPizzaToTable(@RequestBody MenuItem menuItem) {
         int menuId = menuItemDao.addSpecialtyPizza(menuItem);
@@ -45,6 +48,7 @@ public class MenuItemController {
         return menuId;
     }
 
+    @Secured({"ROLE_EMPLOYEE", "ROLE_ADMIN" })
     @RequestMapping(path = "/menuitems", method = RequestMethod.PUT)
     public void updateMenuItems(@RequestBody MenuItem menuItem){
         boolean updated = menuItemDao.updateMenuItem(menuItem);

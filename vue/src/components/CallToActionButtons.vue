@@ -10,6 +10,15 @@
 				v-if="isHomePage && !isCartEmpty"
 				buttonText="My Order"
 				routeName="my-order" />
+			<!-- ********************* BUTTONS ON MY ACCOUNT ********************* -->
+			<cta-button
+				v-if="isMyAccountPage"
+				buttonText="Home"
+				routeName="home" />
+			<cta-button
+				v-if="isMyAccountPage"
+				buttonText="Menu"
+				routeName="customer-menu" />
 			<!-- ********************* BUTTONS ON MENU ********************* -->
 			<cta-button
 				v-if="isMenuPage"
@@ -75,6 +84,9 @@ export default {
 		},
 		isOrderPage() {
 			return this.$route.name === "my-order";
+		},
+		isMyAccountPage() {
+			return this.$route.name === "my-account";
 		},
 		isCheckoutPage() {
 			return this.$route.name === "checkout";

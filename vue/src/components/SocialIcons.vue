@@ -32,7 +32,8 @@ div.social-icons {
 	border-top-right-radius: var(--section-border-radius);
 	border-top-left-radius: var(--section-border-radius);
 	gap: 10px;
-	background-color: var(--white-color);
+	background-color: rgba(239, 55, 62, 0.95);
+	border-bottom: 2px solid var(--dark-color);
 }
 
 @media only screen and (min-width: 600px) {
@@ -41,13 +42,17 @@ div.social-icons {
 		align-self: flex-end;
 		border-bottom-left-radius: var(--section-border-radius);
 		position: absolute;
+		border-left: 2px solid var(--dark-color);
 	}
 }
 @media only screen and (min-width: 768px) {
 	div.social-icons {
 		border-bottom-left-radius: 0;
 		position: relative;
-		border-right: 1px solid var(--dark-color);
+		border-right: 2px solid var(--dark-color);
+		width: 100%;
+		justify-content: flex-start;
+		background-color: var(--primary-color);
 	}
 }
 

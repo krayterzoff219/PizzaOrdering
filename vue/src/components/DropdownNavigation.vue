@@ -13,6 +13,12 @@
 			><li>Menu</li></router-link
 		>
 		<router-link
+			:to="{ name: 'my-account' }"
+			v-if="!isEmployeePage && $store.state.token"
+			class="jump hide-when-small-screen"
+			><li>My Account</li></router-link
+		>
+		<router-link
 			:to="{ name: 'my-order' }"
 			v-if="
 				!isEmployeePage && !isOrderPage && Object.keys($store.state.cart).length

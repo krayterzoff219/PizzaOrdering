@@ -2,14 +2,21 @@
 	<button
 		class="grow"
 		:type="buttonType ? buttonType : 'button'"
-		@click="handleClick">
+		@click="
+			(event) => {
+				if (shouldStopPropagation) {
+					event.stopPropagation();
+				}
+				handleClick();
+			}
+		">
 		{{ buttonText }}
 	</button>
 </template>
 
 <script>
 export default {
-	props: ["buttonText", "buttonType", "clickHandler"],
+	props: ["buttonText", "buttonType", "clickHandler", "shouldStopPropagation"],
 	methods: {
 		handleClick() {
 			if (this.clickHandler) this.clickHandler();

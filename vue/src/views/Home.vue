@@ -1,6 +1,7 @@
 <template>
 	<section class="home">
 		<div class="home-body">
+			<customer-login-button />
 			<social-icons />
 			<div id="home-hero"></div>
 			<testimonial-carousel />
@@ -12,8 +13,9 @@
 <script>
 import TestimonialCarousel from "../components/TestimonialCarousel.vue";
 import SocialIcons from "../components/SocialIcons.vue";
+import CustomerLoginButton from "../components/CustomerLoginButton.vue";
 export default {
-	components: { TestimonialCarousel, SocialIcons },
+	components: { TestimonialCarousel, SocialIcons, CustomerLoginButton },
 	name: "home",
 };
 </script>
@@ -39,6 +41,7 @@ section.home {
 	background-color: transparent;
 	height: 100%;
 	flex: 1;
+	position: relative;
 }
 
 div#home-hero {

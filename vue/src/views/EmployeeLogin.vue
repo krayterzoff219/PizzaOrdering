@@ -10,18 +10,7 @@
 				message="Invalid username and password!"></an-alert>
 			<an-alert
 				v-if="this.$route.query.registration"
-				message="Thank you for registering, please sign in."></an-alert>
-			<!-- <div
-				role="alert"
-				v-if="invalidCredentials">
-				Invalid username and password!
-			</div>
-			<div
-				role="alert"
-				v-if="this.$route.query.registration">
-				Thank you for registering, please sign in.
-			</div> -->
-
+				message="Thank you for registering, please sign in." />
 			<user-input
 				label="Username: "
 				inputId="employee-login-username-input"

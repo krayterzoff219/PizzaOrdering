@@ -34,7 +34,6 @@ export default {
 	beforeCreate() {
 		if (Object.keys(this.$store.state.cart).length) {
 			this.$store.commit("CLEAR_CART");
-			this.$store.commit("RESET_SUBTOTAL");
 		}
 		menuService.getPizzaOptions(); // TODO: .catch alert if error
 	},
