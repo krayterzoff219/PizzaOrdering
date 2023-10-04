@@ -47,7 +47,7 @@ div.social-icons {
 	div.social-icons {
 		border-bottom-left-radius: 0;
 		position: relative;
-		border-right: 1px solid var(--dark-color);
+		border-right: 2px solid var(--dark-color);
 	}
 }
 

@@ -1,6 +1,6 @@
 <template>
 	<form @submit.prevent="register">
-		<h1>Sign In</h1>
+		<h1>Please Sign In</h1>
 		<an-alert
 			v-if="invalidCredentials"
 			message="Invalid username and password!"></an-alert
