@@ -7,9 +7,16 @@
        <div>
             <horizontal-hero></horizontal-hero>
             <h2>Order View</h2>
-            <p>{{currentOrder.status}}</p>
-            <p>{{currentOrder.address}}</p>
-            <p>{{currentOrder.menuItems}}</p>
+
+            <view-details-item
+            id="details-section"
+            v-for="Item of currentOrder.menuItems"
+            :key="Item.id"
+            :menuItem = "Item"
+            :order="currentOrder"/>
+
+
+            
        </div>
 
     </section>
@@ -19,12 +26,14 @@
 
 <script>
 import HorizontalHero from '../components/HorizontalHero.vue'
+import ViewDetailsItem from '../components/ViewDetailsItem.vue'
+
 
 
 export default{
 
     components: {
-        HorizontalHero
+        HorizontalHero, ViewDetailsItem
     },
 
     data(){
@@ -63,5 +72,10 @@ export default{
 </script>
 
 <style scoped>
+
+
+#details-section{
+    
+}
 
 </style>

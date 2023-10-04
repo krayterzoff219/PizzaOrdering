@@ -41,10 +41,18 @@ section {
 		margin-bottom: var(--header-footer-inside-margin);
 	}
 }
+section#employee-order-view-section{
+	max-width: 30rem;
+	
+}
+
+
+
 
 section.employee-section:not(#specialty-pizzas) {
 	max-width: 40rem;
 }
+
 
 section.customer-section#order-section,
 section.customer-section#menu-section {
