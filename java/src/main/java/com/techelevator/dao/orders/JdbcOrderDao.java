@@ -189,6 +189,7 @@ public class JdbcOrderDao implements OrderDao{
         order.setSubtotal(row.getBigDecimal("subtotal"));
         order.setTax(row.getBigDecimal("tax"));
         order.setEmail(row.getString("email"));
+        order.setName(row.getString("name"));
         order.setIsDelivery(row.getBoolean("delivery"));
 
         return order;
