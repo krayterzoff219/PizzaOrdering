@@ -8,12 +8,21 @@
             <horizontal-hero></horizontal-hero>
             <h2>Order View</h2>
 
+            <p>Order status: {{currentOrder.status.charAt(0).toUpperCase() + currentOrder.status.slice(1)}}</p>
+            <br/>
+            <p>{{currentOrder.isDelivery ? "Delivery" : "Pick-up"}}</p>
+            <br/>
+            <p>Customer phone number: {{currentOrder.phone}}</p>
+            <br/>
+            <p>Customer address: {{currentOrder.address}}</p>
+            <br/>
             <view-details-item
             id="details-section"
             v-for="Item of currentOrder.menuItems"
             :key="Item.id"
             :menuItem = "Item"
-            :order="currentOrder"/>
+            />
+            
 
 
             
@@ -52,11 +61,9 @@ export default{
     },
 
     created(){
-        console.log(this.$store.state.pendingOrders);
         const order = this.$store.state.pendingOrders.filter(
             (myOrder) => myOrder.orderId == this.$route.params.id
         );
-        console.log(order);
         this.currentOrder.orderId = order[0].orderId;
         this.currentOrder.status = order[0].status;
         this.currentOrder.email = order[0].email;

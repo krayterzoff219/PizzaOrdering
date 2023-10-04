@@ -146,7 +146,7 @@ export default {
 
 			order.isDelivery = this.isDelivery;
 			order.address = this.address;
-			order.phoneNumber = this.phoneNumber;
+			order.phone = this.phoneNumber;
 			order.email = this.email;
 			order.subtotal = this.$store.state.subtotal;
 			order.tax = this.tax;
