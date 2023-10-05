@@ -86,7 +86,11 @@ export default {
 		saveChanges() {
 			const orderId = this.currentOrder.orderId;
 			const status = this.currentOrder.status;
-			OrderService.updatePendingOrder({ orderId, status });
+			OrderService.updatePendingOrder({ orderId, status }).catch(() =>
+				alert(
+					"There was an error updating the status of the order. Please try again later."
+				)
+			);
 		},
 	},
 };

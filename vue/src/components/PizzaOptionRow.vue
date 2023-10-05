@@ -81,12 +81,18 @@ export default {
 			const { areInputsValid, optionsCategory, id, price, name, isAvailable } =
 				this;
 			if (areInputsValid()) {
-				optionService.updateOption(optionsCategory, {
-					name,
-					price: price.replace("$", ""),
-					available: isAvailable,
-					id,
-				});
+				optionService
+					.updateOption(optionsCategory, {
+						name,
+						price: price.replace("$", ""),
+						available: isAvailable,
+						id,
+					})
+					.catch(() =>
+						alert(
+							`There was an error updating the ${name}. Please try again later.`
+						)
+					);
 			}
 		},
 		addNewOption() {

@@ -45,6 +45,7 @@ section.customer-section#pending-orders{
 	max-width: 60rem;
 }
 
+section.customer-section#order-confirmation-section,
 section#employee-order-view-section,
 section.customer-section#my-account,
 section.employee-section:not(#specialty-pizzas) {
