@@ -289,7 +289,12 @@ export default {
 								),
 							};
 						}
-					});
+					})
+					.catch(() =>
+						alert(
+							`There was an error updating the ${this.currentPizza.name}. Please try again later.`
+						)
+					);
 			}
 		},
 		buildSpecialtyPizza(id) {

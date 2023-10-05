@@ -67,7 +67,13 @@ export default {
 		};
 	},
 	beforeCreate() {
-		menuService.getPizzaOptions(); // TODO: .catch alert if error
+		menuService
+			.getPizzaOptions()
+			.catch(() =>
+				alert(
+					"There was an error retrieving the pizza options. Please try again later."
+				)
+			); // TODO: .catch alert if error
 	},
 	created() {
 		// if the item is already in the cart

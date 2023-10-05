@@ -209,16 +209,21 @@ export default {
 				});
 			}
 
-			orderService.createPendingOrder(order).then((res) => {
-				if (res.status === 200) {
-					this.$store.commit(
-						"ADD_CONFIRMED_ORDER_TO_SHOW_ON_ORDER_CONFIRMATION_VIEW",
-						order
-					);
-					this.$router.push({ name: "confirmation" });
-					this.sendEmail();
-				}
-			});
+			orderService
+				.createPendingOrder(order)
+				.then((res) => {
+					if (res.status === 200) {
+						this.$store.commit(
+							"ADD_CONFIRMED_ORDER_TO_SHOW_ON_ORDER_CONFIRMATION_VIEW",
+							order
+						);
+						this.$router.push({ name: "confirmation" });
+						this.sendEmail();
+					}
+				})
+				.catch(() =>
+					alert("There was an error placing the order. Please try again later.")
+				);
 		},
 
 		sendEmail() {

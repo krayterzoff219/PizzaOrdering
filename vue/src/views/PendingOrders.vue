@@ -6,27 +6,23 @@
 		<div class="pending-order-wrapper">
 			<h1>Pending Orders</h1>
 			<order-item
-			v-for="order of this.$store.state.pendingOrders"
-			:key="order.id"
-			:order="order"
-			/>
+				v-for="order of this.$store.state.pendingOrders"
+				:key="order.id"
+				:order="order" />
 		</div>
-		
 	</section>
 </template>
 
 <script>
 import HorizontalHero from "../components/HorizontalHero.vue";
-import OrderService from '../services/OrderService';
-import OrderItem from '../components/OrderItem';
+import OrderService from "../services/OrderService";
+import OrderItem from "../components/OrderItem";
 
-
-export default { 
-
-  components: { HorizontalHero, OrderItem},
+export default {
+	components: { HorizontalHero, OrderItem },
 
 	name: "pending-orders",
-	
+
 	// computed: {
 	// 	pendingOrders() {
 	// 		return Object.values(this.$store.state.pendingOrders);
@@ -36,17 +32,13 @@ export default {
 		if (Object.keys(this.$store.state.cart).length) {
 			this.$store.commit("CLEAR_CART");
 		}
-		OrderService.getPendingOrders();
-	}
-
-
-
-
+		OrderService.getPendingOrders().catch(() =>
+			alert(
+				"There was an error retrieving pending orders. Please try again later."
+			)
+		);
+	},
 };
 </script>
 
-<style>
-
-
-
-</style>
+<style></style>

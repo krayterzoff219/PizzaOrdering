@@ -135,12 +135,19 @@ export default {
 			} = this;
 			const userData = { cardNumber, dataId, email, phone, userId, name };
 			userData.address = [address, city, state, zipCode].join("|||");
-			userDataService.update(userData).then((res) => {
-				if (res.status === 200) {
-					this.$store.commit("UPDATE_USER", userData);
-					this.$router.push({ name: "home" });
-				}
-			});
+			userDataService
+				.update(userData)
+				.then((res) => {
+					if (res.status === 200) {
+						this.$store.commit("UPDATE_USER", userData);
+						this.$router.push({ name: "home" });
+					}
+				})
+				.catch(() =>
+					alert(
+						"There was an error updating user information. Please try again later."
+					)
+				);
 		},
 	},
 	components: { UserInput, SmallButton, HorizontalHero, AnAlert },

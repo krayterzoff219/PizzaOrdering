@@ -45,7 +45,13 @@ export default {
 	},
 	beforeCreate() {
 		menuService.getPizzaOptions(); // TODO: .catch alert if error
-		menuService.getMenuItems(); // TODO: .catch alert if error
+		menuService
+			.getMenuItems()
+			.catch(() =>
+				alert(
+					"There was an error retrieving the menu items. Please try again later."
+				)
+			); // TODO: .catch alert if error
 	},
 };
 </script>

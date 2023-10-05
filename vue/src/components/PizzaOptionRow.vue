@@ -90,7 +90,7 @@ export default {
 					})
 					.catch(() =>
 						alert(
-							`There was an error updating the ${name}. Please try again later.`
+							`There was an error updating the ${name.toLowerCase()}. Please try again later.`
 						)
 					);
 			}

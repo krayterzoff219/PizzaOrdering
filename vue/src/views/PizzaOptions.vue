@@ -35,7 +35,13 @@ export default {
 		if (Object.keys(this.$store.state.cart).length) {
 			this.$store.commit("CLEAR_CART");
 		}
-		menuService.getPizzaOptions(); // TODO: .catch alert if error
+		menuService
+			.getPizzaOptions()
+			.catch(() =>
+				alert(
+					"There was an error retrieving the pizza options. Please try again later."
+				)
+			); // TODO: .catch alert if error
 	},
 	destroyed() {
 		this.$store.commit("UNLOAD_MENU");
