@@ -5,63 +5,54 @@
     <section id="employee-order-view-section">
 
          <horizontal-hero></horizontal-hero>
-            <h2>Order Description</h2>
+         <div id="view-order-page-wrapper">
+            <h1>Order Description</h1>
        
-       <div class="title-section">
+            <div class="title-section">
            
-            <div class = "information-section-title">
+            
                 
                 <p>Order status: </p>
-                <br/>
-                
+                <p>{{currentOrder.status.charAt(0).toUpperCase() + currentOrder.status.slice(1)}}</p>
+                 <p>Customer Name: </p>
+                <p>{{currentOrder.name}}</p>
+                 <p>Customer address: </p>
+                <p>{{currentOrder.address}}</p>
                 <p>Delivery or Pickup? </p>
-                <br/>
-                <p>Customer Name: </p>
-                <br/>
+                <p>{{currentOrder.isDelivery ? "Delivery" : "Pick-up"}}</p>
                 <p>Customer phone number: </p>
-                <br/>
-                <p>Customer address: </p>
-                <br/>
-
-            </div> 
-                
-            <div class = "information-section-title2">
-                    <p>{{currentOrder.status.charAt(0).toUpperCase() + currentOrder.status.slice(1)}}</p>
-                    <br/>
-                    <p>{{currentOrder.isDelivery ? "Delivery" : "Pick-up"}}</p>
-                    <br/>
-                    <p>{{currentOrder.name}}</p>
-                    <br/>
-                    <p>{{currentOrder.phone}}</p>
-                    <br/>
-                    <p>{{currentOrder.address}}</p>
-                    <br/>
+                <p>{{currentOrder.phone}}</p>
+               
+                    
             </div>
-       </div>
+            
+          
+            
+       
        <div class="pizza-detail-section">     
-                <hr/>
+                
+                
             
                 <view-details-item
-                id="details-section"
                 v-for="Item of currentOrder.menuItems"
                 :key="Item.id"
                 :menuItem = "Item"
                 />
+
                 <view-details-custom-pizza
-                id="details-section"
                 v-for="pizza of currentOrder.customPizzas"
                 :key="pizza.id"
                 :pizza="pizza"
                 />
                 
-                <br>
-                <div class="subtotal-section">
-                <p>Subtotal: ${{currentOrder.subtotal.toFixed(2)}}</p>
-                <br/>
-                <p id="tax">Tax: ${{currentOrder.tax.toFixed(2)}}</p>
-                <br/>
-                <p>   Total: ${{(currentOrder.tax + currentOrder.subtotal).toFixed(2)}}   </p>
-                </div>
+                           
+                                <checkout-amount
+                                :omitButton="true"
+                                :givenTotal="`${(currentOrder.tax + currentOrder.subtotal).toFixed(2)}`"
+                                :givenTax="`${(currentOrder.tax).toFixed(2)}`"
+                                :givenSubtotal="`${(currentOrder.subtotal).toFixed(2)}`"/>
+               
+                
            
             
             
@@ -69,13 +60,14 @@
 
             
        </div>
-
+         </div>
     </section>
 
 
 </template>
 
 <script>
+import CheckoutAmount from '../components/CheckoutAmount.vue'
 import HorizontalHero from '../components/HorizontalHero.vue'
 import ViewDetailsCustomPizza from '../components/ViewDetailsCustomPizza.vue'
 import ViewDetailsItem from '../components/ViewDetailsItem.vue'
@@ -86,7 +78,7 @@ export default{
 
     components: {
         HorizontalHero, ViewDetailsItem,
-        ViewDetailsCustomPizza
+        ViewDetailsCustomPizza, CheckoutAmount
     },
 
     data(){
@@ -142,73 +134,60 @@ export default{
 <style scoped>
 
 .title-section{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, 1fr);
     width: 90%;
+    margin: 0px auto;
+    column-gap: 10px;
+    row-gap: 10px;
+    border-bottom: black solid 3px;
+    padding-bottom: 20px;
 }
 
-
-h2{
-    text-decoration: underline;
-    padding: 50px 40px ;
+.title-section p:nth-child(2n - 1){
+    justify-self: end;
+    font-weight: bold;
+    font-family: var(--loud-font-family);
 }
 
-.information-section-title{
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 10px;
-
+.pizza-detail-section{
+    width: 75%;
 }
 
-.information-section-title2{
-     padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 10px;
-}
-
-.customer-info{
-    grid-area: customerInfo;
-}
-
-.order-info{
-    grid-area: orderInfo;
-}
-
-hr{
-    width: 90%;
-    height: 3px;
-    
-}
-
-#tax{
-    text-decoration: underline;
-}
-
-#details-section {
-    
-    border-bottom: black solid 1px;
-    width: 90%;
-    padding-left: 40px;
-    margin: auto;
-}
-
-.subtotal-section{
-    padding-bottom: 15px;
-    margin-right: 100px;
-    text-align: right;
-    /* display: flex;
-    flex-direction: row;
-    justify-content: center; */
-}
-
-
-
-#view-order-total{
+#view-order-page-wrapper{
     display: flex;
     flex-direction: column;
-    grid-area: total;
-    align-items: end;
+    align-items: center;
+
+}
+
+
+</style>
+
+<style>
+
+.order-items-view{
+    
+display: flex;
+flex-direction: column;
+width: 100%;
+margin: 0 auto;
+padding-bottom: 15px;
+padding-top: 15px;
+row-gap: 5px;
+padding-left: 10px;
+padding-right: 10px;
+
+}
+
+.order-items-view:not(:first-child){
+    border-top: black solid 1px;
+
+}
+
+.order-items-view p span{
+    font-weight: bold;
 }
 
 </style>

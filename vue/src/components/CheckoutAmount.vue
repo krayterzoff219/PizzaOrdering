@@ -1,11 +1,13 @@
 <template>
 	<div class="checkout-amount">
 		<p id="subtotal">
-			<span>Subtotal:</span>&nbsp; ${{ $store.state.subtotal.toFixed(2) }}
+
+			<span>Subtotal:</span>&nbsp; ${{ givenSubtotal ? givenSubtotal : $store.state.subtotal.toFixed(2) }}
 		</p>
-		<p id="tax"><span>Tax:</span>&nbsp; ${{ tax.toFixed(2) }}</p>
-		<p id="total"><span>Total: </span>&nbsp; ${{ total.toFixed(2) }}</p>
+		<p id="tax"><span>Tax:</span>&nbsp; ${{ givenTax ? givenTax : tax.toFixed(2) }}</p>
+		<p id="total"><span>Total: </span>&nbsp; ${{ givenTotal ? givenTotal : total.toFixed(2) }}</p>
 		<small-button
+			v-if="!omitButton"
 			:clickHandler="buttonClickHandler"
 			:buttonText="buttonText"
 			:buttonType="buttonType" />
@@ -17,7 +19,7 @@ import SmallButton from "./SmallButton.vue";
 
 export default {
 	components: { SmallButton },
-	props: ["buttonType", "buttonText", "buttonClickHandler"],
+	props: ["buttonType", "buttonText", "buttonClickHandler", "givenSubtotal", "givenTax", "givenTotal", "omitButton"],
 	computed: {
 		tax() {
 			return this.$store.state.subtotal * 0.08;

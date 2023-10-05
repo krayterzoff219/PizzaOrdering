@@ -1,20 +1,19 @@
 <template>
   
-    <div id="order-items-view">
-        <br>
-        <br>
-        <p>Item: {{menuItem.name}}</p>
-        <br/>
-        <p>Quantity: {{menuItem.quantity}}</p>
-        <br/>
-        <p>Size: {{menuItem.pizza.size.name.charAt(0).toUpperCase() + menuItem.pizza.size.name.slice(1)}}</p>
-        <br/>
-        <p>Sauce: {{menuItem.pizza.sauce.name.charAt(0).toUpperCase() + menuItem.pizza.sauce.name.slice(1)}}</p>
-        <br/>
-        <p>Crust: {{menuItem.pizza.crust.name.charAt(0).toUpperCase() + menuItem.pizza.crust.name.slice(1)}}</p>
-        <br/>
-        <p>Toppings: {{itemToppings}}</p>
-        <br/>
+    <div class="order-items-view">
+        
+        <p><span>Item:</span> {{menuItem.name}}</p>
+        
+        <p><span>Quantity:</span> {{menuItem.quantity}}</p>
+        
+        <p><span>Size:</span> {{menuItem.pizza.size.name.charAt(0).toUpperCase() + menuItem.pizza.size.name.slice(1)}}</p>
+        
+        <p><span>Sauce:</span> {{menuItem.pizza.sauce.name.charAt(0).toUpperCase() + menuItem.pizza.sauce.name.slice(1)}}</p>
+        
+        <p><span>Crust:</span> {{menuItem.pizza.crust.name.charAt(0).toUpperCase() + menuItem.pizza.crust.name.slice(1)}}</p>
+        
+        <p><span>Topping{{itemToppings.split(",").length > 1 ? "s" : ""}}:</span> {{itemToppings}}</p>
+        
         
     </div>
 
@@ -49,14 +48,3 @@ computed: {
 
 }
 </script>
-
-<style>
-
-#order-items-view{
-    border-bottom: black solid 3px;
-   display: flex;
-   flex-direction: row;
-}
-    
-
-</style>

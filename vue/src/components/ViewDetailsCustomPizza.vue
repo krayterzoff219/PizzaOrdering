@@ -1,20 +1,20 @@
 <template>
   
-    <div id="order-items-view">
-        <br>
-        <br>
-        <p>Item: Custom Pizza</p>
-        <br/>
-        <p>Quantity: {{pizza.quantity}}</p>
-        <br/>
-        <p>Size: {{pizza.size.name.charAt(0).toUpperCase() + pizza.size.name.slice(1)}}</p>
-        <br/>
-        <p>Sauce: {{pizza.sauce.name.charAt(0).toUpperCase() + pizza.sauce.name.slice(1)}}</p>
-        <br/>
-        <p>Crust: {{pizza.crust.name.charAt(0).toUpperCase() + pizza.crust.name.slice(1)}}</p>
-        <br/>
-        <p>Toppings: {{itemToppings}}</p>
-        <br/>
+    <div class="order-items-view">
+        
+        
+        <p><span>Item:</span> Custom Pizza</p>
+        
+        <p><span>Quantity:</span> {{pizza.quantity}}</p>
+        
+        <p><span>Size:</span> {{pizza.size.name.charAt(0).toUpperCase() + pizza.size.name.slice(1)}}</p>
+        
+        <p><span>Sauce:</span> {{pizza.sauce.name.charAt(0).toUpperCase() + pizza.sauce.name.slice(1)}}</p>
+        
+        <p><span>Crust:</span> {{pizza.crust.name.charAt(0).toUpperCase() + pizza.crust.name.slice(1)}}</p>
+        
+        <p><span>Topping{{itemToppings.split(",").length > 1 ? "s" : ""}}:</span> {{itemToppings}}</p>
+        
         
     </div>
 
@@ -50,13 +50,3 @@ computed: {
 }
 </script>
 
-<style>
-
-#order-items-view{
-    border-bottom: black solid 3px;
-   display: flex;
-   flex-direction: row;
-}
-    
-
-</style>

@@ -42,7 +42,7 @@ section {
 	max-width: 60rem;
 }
 
-
+section#employee-order-view-section,
 section.customer-section#my-account,
 section.employee-section:not(#specialty-pizzas) {
 	max-width: 40rem;
@@ -53,8 +53,7 @@ section.customer-section#menu-section {
 	max-width: 60rem;
 }
 
-
-
+div#view-order-page-wrapper,
 div#title-section,
 div#order-confirmation,
 section div.pending-order-wrapper,
