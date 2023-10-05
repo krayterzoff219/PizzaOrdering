@@ -1,14 +1,16 @@
 <template>
 	<section
-		id="pending-orders"
+		id="order-confirmation-section"
 		class="customer-section">
 		<horizontal-hero></horizontal-hero>
 		<div id="order-confirmation">
-			Thank you for placing your order at UpperCrust Pizza. A confirmation email
-			was sent to the address provided.
-			<br />
-			<br />
-			Please dine with us again soon!
+			<h1>Order Confirmation</h1>
+			<p>
+				Thank you for placing your order at UpperCrust Pizza. A confirmation
+				email was sent to the address provided.
+			</p>
+			<p>Please dine with us again soon!</p>
+			<p />
 		</div>
 	</section>
 </template>
@@ -34,6 +36,19 @@ export default {
 <style scoped>
 #order-confirmation {
 	padding-top: 10px;
-	height: 50vh;
+	width: 80%;
+}
+
+h1 {
+	margin-bottom: 2rem;
+}
+
+p {
+	margin-bottom: 2rem;
+	text-align: justify;
+}
+
+p:last-child {
+	margin-bottom: 3rem;
 }
 </style>
