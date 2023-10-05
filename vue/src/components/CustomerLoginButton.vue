@@ -4,7 +4,14 @@
 			v-if="!$store.state.token"
 			buttonText="Login"
 			:clickHandler="() => $store.dispatch('openDropDownLogin')" />
-		<p v-else>Hello, {{$store.state.user.username}}!</p>
+		<p v-else>
+			Hello,
+			{{
+				$store.state.user.userData && $store.state.user.userData.name
+					? $store.state.user.userData.name
+					: $store.state.user.username
+			}}!
+		</p>
 	</div>
 </template>
 

@@ -134,7 +134,7 @@ export default {
 				pizza.quantity = 1;
 				pizza.name = "Build Your Own Pizza";
 				pizza.imageURL =
-					"https://img.freepik.com/free-photo/delicious-neapolitan-meat-pizza-pizzeria-delicious-food_78826-2833.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais";
+					"https://img.freepik.com/free-photo/freshly-baked-pizza-rustic-wooden-table-generated-by-ai_24640-89764.jpg";
 				$store.dispatch("addItemToCart", pizza);
 				$router.push({ name: "customer-menu" });
 				$store.commit("GO_TO_NEXT_CUSTOM_PIZZA_ID");

@@ -83,7 +83,7 @@ export default {
 				name: undefined,
 				price: undefined,
 				imageURL:
-					"https://img.freepik.com/free-photo/delicious-neapolitan-meat-pizza-pizzeria-delicious-food_78826-2833.jpg?size=626&ext=jpg&ga=GA1.1.481236351.1695826882&semt=ais",
+					"https://img.freepik.com/free-photo/freshly-baked-pizza-rustic-wooden-table-generated-by-ai_24640-89764.jpg",
 				description:
 					"Choose from a wide array of fresh, high-quality ingredients, from mouthwatering toppings to delectable sauces, and create a personalized masterpiece that'll satisfy your unique cravings. It's time to turn your pizza fantasies into reality!",
 			};
