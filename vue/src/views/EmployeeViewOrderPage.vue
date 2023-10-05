@@ -18,7 +18,7 @@
 				<p>{{ currentOrder.address }}</p>
 				<p>Delivery or Pickup?</p>
 				<p>{{ currentOrder.isDelivery ? "Delivery" : "Pick-up" }}</p>
-				<p>Customer phone number:</p>
+				<p>Customer Phone Number:</p>
 				<p>{{ currentOrder.phone }}</p>
 			</div>
 
@@ -160,9 +160,12 @@ export default {
 	padding-right: 10px;
 }
 
-.order-items-view:not(:first-child) {
-	border-top: black solid 1px;
+.order-items-view {
+	border-bottom: black solid 1px;
 }
+/* .order-items-view:not(:first-child) {
+	border-top: black solid 1px;
+} */
 
 .order-items-view p span {
 	font-weight: bold;
