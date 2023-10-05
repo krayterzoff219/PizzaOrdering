@@ -3,10 +3,11 @@ BEGIN TRANSACTION;
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 INSERT INTO users (user_id, username, password_hash, role) VALUES (-1,'Guest','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_GUEST');
-INSERT INTO users (username, password_hash, role) VALUES ('Margaret','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_EMPLOYEE');
-INSERT INTO users (username,password_hash,role) VALUES ('test','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 
-INSERT INTO user_data (user_id, name, email, address, phone, credit_card) VALUES (4, 'test', 'test@email', 'streetaddress|||city|||state|||12345', '1234567890', '123456789');
+
+INSERT INTO user_data (user_id) VALUES (1);
+INSERT INTO user_data (user_id) VALUES (2);
+
 
 INSERT INTO toppings (name, available, price) VALUES ('Mozzarella Cheese', true, 0.50); -- 1 --
 INSERT INTO toppings (name, available, price) VALUES ('Pepperoni', true, 0.50); -- 2 --
