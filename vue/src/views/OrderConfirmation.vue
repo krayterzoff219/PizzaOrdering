@@ -20,6 +20,11 @@ import HorizontalHero from "../components/HorizontalHero.vue";
 
 export default {
 	components: { HorizontalHero },
+	data() {
+		return {
+			confirmedOrder: {},
+		};
+	},
 	name: "order-confirmation",
 
 	beforeCreate() {
@@ -29,6 +34,10 @@ export default {
 	},
 	created() {
 		this.$store.commit("CLEAR_CART");
+		this.confirmedOrder = this.$store.state.confirmedOrder;
+	},
+	destroyed() {
+		this.$store.commit("CLEAR_CONFIRMED_ORDER");
 	},
 };
 </script>

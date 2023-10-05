@@ -45,10 +45,17 @@ export default new Vuex.Store({
 			isDropDownRegisterActivated: false,
 		},
 		nextCustomPizzaId: -1,
+		confirmedOrder: null,
 	},
 	mutations: {
 		GO_TO_NEXT_CUSTOM_PIZZA_ID(state) {
 			state.nextCustomPizzaId--;
+		},
+		ADD_CONFIRMED_ORDER_TO_SHOW_ON_ORDER_CONFIRMATION_VIEW(state, payload) {
+			state.confirmedOrder = payload;
+		},
+		CLEAR_CONFIRMED_ORDER(state) {
+			state.confirmedOrder = null;
 		},
 		ADD_TOPPING(state, payload) {
 			state.toppings.push(payload);
