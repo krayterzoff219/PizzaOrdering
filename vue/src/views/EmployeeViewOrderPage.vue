@@ -78,9 +78,18 @@ export default {
 	},
 
 	created() {
+		if (!this.$store.state.pendingOrders.length) {
+			this.$router.push({ name: "pending-orders" });
+		}
+
 		const order = this.$store.state.pendingOrders.filter(
 			(myOrder) => myOrder.orderId == this.$route.params.id
 		);
+
+		if (!order) {
+			this.$router.push({ name: "pending-orders" });
+		}
+
 		this.currentOrder.orderId = order[0].orderId;
 		this.currentOrder.status = order[0].status;
 		this.currentOrder.email = order[0].email;

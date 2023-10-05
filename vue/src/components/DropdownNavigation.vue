@@ -1,61 +1,53 @@
 <template>
 	<ul>
-		<router-link
-			:to="{ name: 'home' }"
-			@click.stop="hideDropDownMenu"
-			><li>Home</li></router-link
+		<router-link :to="{ name: 'home' }"
+			><li @click.stop="hideDropDownMenu">Home</li></router-link
 		>
 		<!-- ********************************** ROUTES FOR CUSTOMER PAGES ********************************** -->
 		<router-link
 			:to="{ name: 'customer-menu' }"
 			v-if="!isEmployeePage"
-			@click.stop="hideDropDownMenu"
-			><li>Menu</li></router-link
+			><li @click.stop="hideDropDownMenu">Menu</li></router-link
 		>
 		<router-link
 			:to="{ name: 'my-account' }"
 			v-if="!isEmployeePage && $store.state.token"
 			class="jump hide-when-small-screen"
-			><li>My Account</li></router-link
+			><li @click.stop="hideDropDownMenu">My Account</li></router-link
 		>
 		<router-link
 			:to="{ name: 'my-order' }"
 			v-if="
 				!isEmployeePage && !isOrderPage && Object.keys($store.state.cart).length
 			"
-			@click.stop="hideDropDownMenu"
-			><li>My Order</li></router-link
+			><li @click.stop="hideDropDownMenu">My Order</li></router-link
 		>
 		<router-link
 			:to="{ name: 'checkout' }"
 			v-if="isOrderPage"
-			@click.stop="hideDropDownMenu"
-			><li>Checkout</li></router-link
+			><li @click.stop="hideDropDownMenu">Checkout</li></router-link
 		>
 		<!-- ********************************** ROUTES FOR EMPLOYEE PAGES ********************************** -->
 		<router-link
 			:to="{ name: 'pending-orders' }"
 			v-if="isEmployeePage && isLoggedIn"
-			@click.stop="hideDropDownMenu"
-			><li>Orders</li></router-link
+			><li @click.stop="hideDropDownMenu">Orders</li></router-link
 		>
 		<router-link
 			:to="{ name: 'specialty-pizzas' }"
 			v-if="isEmployeePage && isLoggedIn"
-			@click.stop="hideDropDownMenu"
-			><li>Pizzas</li></router-link
+			><li @click.stop="hideDropDownMenu">Pizzas</li></router-link
 		>
 		<router-link
 			:to="{ name: 'pizza-options' }"
 			v-if="isEmployeePage && isLoggedIn"
-			@click.stop="hideDropDownMenu"
-			><li>Options</li></router-link
+			><li @click.stop="hideDropDownMenu">Options</li></router-link
 		>
 		<!-- <router-link
 			:to="{ name: 'employee-login' }"
 			v-if="isEmployeePage && !isLoggedIn && $route.path.includes('register')"
-			@click.stop="hideDropDownMenu"
-			><li>Login</li></router-link
+			
+			><li @click.stop="hideDropDownMenu">Login</li></router-link
 		> -->
 		<router-link
 			:to="{ name: 'employee-register' }"
@@ -66,7 +58,7 @@
 					.map((role) => role.name.toLowerCase().replace('role_', ''))
 					.indexOf('admin') > -1
 			"
-			><li>Register</li></router-link
+			><li @click.stop="hideDropDownMenu">Register</li></router-link
 		>
 
 		<!-- ********************************** LOGOUT FOR BOTH PAGES ********************************** -->
@@ -74,8 +66,7 @@
 			v-bind:to="{ name: 'logout' }"
 			v-if="isLoggedIn"
 			class="hide-when-small-screen"
-			@click.stop="hideDropDownMenu"
-			><li>Logout</li></router-link
+			><li @click.stop="hideDropDownMenu">Logout</li></router-link
 		>
 	</ul>
 </template>

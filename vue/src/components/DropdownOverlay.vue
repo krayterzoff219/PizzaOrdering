@@ -4,17 +4,19 @@
 		@click.stop="hideDropDownMenu"
 		:class="{ open: $store.state.dropdownMenu.isDropDownMenuVisible }">
 		<div
+			@click="(event) => event.stopPropagation()"
 			id="drop-down-menu"
 			:class="{ open: $store.state.dropdownMenu.isDropDownMenuVisible }">
-			<router-link
-				@click.stop="hideDropDownMenu"
-				:to="{ name: 'home' }">
+			<router-link :to="{ name: 'home' }">
 				<img
+					@click="hideDropDownMenu"
 					alt="UpperCrust Pizza Logo"
 					src="../assets/pizza-transparent-white.png"
 			/></router-link>
 
-			<i class="fa-solid fa-x"></i>
+			<i
+				class="fa-solid fa-x"
+				@click.stop="hideDropDownMenu"></i>
 			<dropdown-register
 				v-if="$store.state.dropdownMenu.isDropDownRegisterActivated" />
 			<dropdown-login
