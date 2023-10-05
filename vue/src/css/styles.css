@@ -38,9 +38,8 @@ section {
 	}
 }
 
-section.customer-section#pending-orders{
-	max-width: 50rem;
-}
+
+
 #employee-order-view-section {
 	max-width: 60rem;
 }
