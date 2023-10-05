@@ -88,11 +88,17 @@ public class JdbcMenuItemDao implements MenuItemDao {
 
     @Override
     public boolean updateMenuItem(MenuItem menuItem) {
-        String sql = "UPDATE menu_items SET name = ?, available = ?, price = ?, description = ?, image_url = ? WHERE item_id = ?;";
+        int pizzaId = -1;
+        try{
+            pizzaId = pizzaDao.create(menuItem.getPizza());
+        }catch(NullPointerException e){
+            System.out.println("not a pizza");
+        }
+        String sql = "UPDATE menu_items SET name = ?, available = ?, price = ?, description = ?, image_url = ?, pizza_id = ? WHERE item_id = ?;";
         int numOfRows = 0;
         try {
             numOfRows = jdbcTemplate.update(sql, menuItem.getName(), menuItem.isAvailable(), menuItem.getPrice(), menuItem.getDescription(),
-                    menuItem.getImageURL(), menuItem.getItemId());
+                    menuItem.getImageURL(), pizzaId, menuItem.getItemId());
             if(numOfRows == 0){
                 return false;
             }
