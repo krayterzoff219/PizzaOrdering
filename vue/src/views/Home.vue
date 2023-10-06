@@ -9,7 +9,7 @@
 			<iframe
 				loading="lazy"
 				allowfullscreen
-				src="https://www.google.com/maps/embed/v1/view?zoom=18&center=41.5038%2C-81.6387&key=AIzaSyDzMn1MO_Eak_yp8cBJo-ia9WnWtO7_ktE"></iframe>
+				src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJU4WNAq_7MIgRuEgwoiQh2Mk&key=AIzaSyDzMn1MO_Eak_yp8cBJo-ia9WnWtO7_ktE"></iframe>
 		</div>
 	</section>
 </template>
