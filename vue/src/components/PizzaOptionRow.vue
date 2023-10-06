@@ -38,11 +38,18 @@ export default {
 	name: "pizza-option-row",
 	props: ["option", "optionsCategory"],
 	data() {
-		return { id: -1, name: "", price: "", isAvailable: true };
+		return {
+			id: -1,
+			name: "",
+			price: "",
+			isAvailable: true,
+			currentOption: null,
+		};
 	},
 	created() {
 		if (this.option) {
 			this.initializeRow();
+			this.currentOption = this.option;
 		}
 	},
 	methods: {
@@ -78,6 +85,7 @@ export default {
 			event.target.setAttribute("type", "number");
 		},
 		saveChanges() {
+			if (!this.option) return;
 			const { areInputsValid, optionsCategory, id, price, name, isAvailable } =
 				this;
 			if (areInputsValid()) {
@@ -88,9 +96,12 @@ export default {
 						available: isAvailable,
 						id,
 					})
+					.then(() => {
+						this.currentOption = { name, price, isAvailable };
+					})
 					.catch(() =>
 						alert(
-							`There was an error updating the ${name.toLowerCase()}. Please try again later.`
+							`There was an error updating ${name.toLowerCase()}. Please try again later.`
 						)
 					);
 			}
@@ -127,21 +138,38 @@ export default {
 			}
 		},
 		areInputsValid() {
-			const { name, price, optionsCategory } = this;
+			const { name, price, optionsCategory, option } = this;
 			if (!name) {
-				alert(`New ${optionsCategory} must have a name.`);
+				if (option) {
+					this.name = this.currentOption.name;
+				} else {
+					alert(`New ${optionsCategory} must have a name.`);
+				}
 				return false;
 			}
 			if (name.length > 40) {
 				alert(
 					`New ${optionsCategory} must have a name that is 40 characters or less.`
 				);
+				if (option) {
+					this.name = this.currentOption.name;
+				}
 				return false;
 			}
-			if (Number.parseFloat(price.replace("$", "")) < 0.01) {
-				alert(
-					`New ${optionsCategory} must have a price that is greater than $0.00.`
-				);
+			if (!price || Number.parseFloat(price.replace("$", "")) < 0.01) {
+				if (option) {
+					if (typeof this.currentOption.price === "string") {
+						this.price = Number.parseFloat(
+							this.currentOption.price.replace("$", "")
+						);
+					} else {
+						this.price = this.currentOption.price;
+					}
+				} else {
+					alert(
+						`New ${optionsCategory} must have a price that is greater than $0.00.`
+					);
+				}
 				return false;
 			}
 			return true;
