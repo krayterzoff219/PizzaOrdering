@@ -122,7 +122,7 @@ import HorizontalHero from "../components/HorizontalHero.vue";
 import orderService from "../services/OrderService.js";
 import CheckoutAmount from "../components/CheckoutAmount.vue";
 import CallToActionButtons from "../components/CallToActionButtons.vue";
-// import emailjs from "emailjs-com";
+import emailjs from "emailjs-com";
 
 export default {
 	components: {
@@ -227,21 +227,21 @@ export default {
 		},
 
 		sendEmail() {
-			// try {
-			// 	emailjs.send(
-			// 		"service_tw939hk",
-			// 		"template_j8669nl",
-			// 		{
-			// 			name: this.cardholderName,
-			// 			email: this.email,
-			// 			from_name: "UpperCrust Pizza",
-			// 			message: "Your order will be ready in 20-30 minutes.",
-			// 		},
-			// 		"COvpBZtnSKRZEtL4R"
-			// 	);
-			// } catch (error) {
-			// 	console.log({ error });
-			// }
+			try {
+				emailjs.send(
+					"service_tw939hk",
+					"template_j8669nl",
+					{
+						name: this.cardholderName,
+						email: this.email,
+						from_name: "UpperCrust Pizza",
+						message: "Your order will be ready in 20-30 minutes.",
+					},
+					"COvpBZtnSKRZEtL4R"
+				);
+			} catch (error) {
+				console.log({ error });
+			}
 		},
 	},
 
