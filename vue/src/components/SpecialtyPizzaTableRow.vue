@@ -27,7 +27,7 @@
 				</option>
 				<!-- TODO: allow PUT request to edit size and then remove the disabled binding below -->
 				<option
-					:disabled="pizza"
+					:disabled="false"
 					v-for="size of $store.state.sizes"
 					:key="size.id"
 					:value="size.id">
@@ -49,7 +49,7 @@
 				</option>
 				<!-- TODO: allow PUT request to edit crust and then remove the disabled binding below -->
 				<option
-					:disabled="pizza"
+					:disabled="false"
 					v-for="crust of $store.state.crusts"
 					:key="crust.id"
 					:value="crust.id">
@@ -64,7 +64,7 @@
 				v-model="toppingIds">
 				<!-- TODO: allow PUT request to edit toppings and then remove the disabled binding below -->
 				<option
-					:disabled="pizza"
+					:disabled="false"
 					v-for="topping of $store.state.toppings"
 					:key="topping.id"
 					:value="topping.id">
@@ -86,7 +86,7 @@
 				</option>
 				<!-- TODO: allow PUT request to edit sauce and then remove the disabled binding below -->
 				<option
-					:disabled="pizza"
+					:disabled="false"
 					v-for="sauce of $store.state.sauces"
 					:key="sauce.id"
 					:value="sauce.id">
